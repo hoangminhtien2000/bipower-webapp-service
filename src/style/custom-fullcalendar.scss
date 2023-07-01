@@ -1,0 +1,184 @@
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: white !important;
+
+  .fc-daygrid-day-frame {
+    border: 1px solid #EFC427 !important;
+  }
+}
+
+.fc-event, .fc-event-dot {
+  background-color: white !important;
+  border-radius: 0px !important;
+}
+
+.presence {
+  .presence-status-onsite {
+    color: #DFB002;
+  }
+
+  .presence-status-remote {
+    color: #1B8FC3;
+  }
+
+  .presence-status-ot {
+    color: #8E18C6;
+  }
+
+  .presence-status-leave {
+    color: #DF5245;
+  }
+
+  .presence-status-attendance {
+    color: #85AA75;
+  }
+
+  .presence-time {
+    color: black;
+  }
+
+  position: relative;
+  width: 100% !important;
+  font-size: 13px !important;
+}
+
+.fc-button-primary {
+  background: white !important;
+  color: black !important;
+  border: 0px !important;
+}
+
+.thisMonth {
+  border: 1px solid #ff9b44 !important;
+  color: black !important;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0px !important;
+}
+
+.fc-col-header {
+  a {
+    color: black !important;
+  }
+}
+
+.fc-daygrid-day-top {
+  a {
+    color: black !important;
+  }
+}
+
+.fc-view {
+  margin: 0px;
+  margin-top: 0px !important;
+}
+
+.presence-type {
+  height: 10px;
+  width: 10px;
+  background: red;
+  border-radius: 1px;
+}
+
+.fc-theme-standard .fc-col-header-cell {
+  border-bottom: 0px !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 14px !important;
+  color: #000000a8 !important;
+}
+
+.fc-h-event {
+  border: 0px !important;
+}
+
+.fc .fc-daygrid-event-harness-abs {
+  right: 0px !important;
+  border: 0px !important;
+  position: unset !important;
+  visibility: unset !important;
+  //padding: 5px !important;
+}
+
+.link-presence-detail {
+  position: absolute;
+  bottom: 0px;
+  padding: 5px;
+  padding-bottom: 3px;
+
+  a {
+    font-size: 13px;
+    text-decoration: revert;
+  }
+}
+
+.fc .fc-daygrid-day-bottom {
+  padding: 6px !important;
+
+  a {
+    text-decoration: revert !important;
+    font-size: 13px;
+  }
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  max-height: 6em !important;
+}
+
+.fc .fc-popover {
+  display: none;
+}
+
+.fc .fc-daygrid-day-bottom a {
+  color: #1B8FC3 !important;
+  text-decoration: underline !important;
+}
+
+.fc .fc-daygrid-day-bottom a.title {
+  display: none;
+}
+
+.btn-add-presence {
+  width: 100% !important;
+  background: #85AA75 !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+  font-size: 13px !important;
+}
+
+.presence-status-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  max-height: unset !important;
+}
+
+.fc .fc-scrollgrid-section, .fc .fc-scrollgrid-section > td, .fc .fc-scrollgrid-section table {
+  width: 100% !important;
+}
+
+.fc .fc-daygrid-body {
+  width: 100% !important;
+}
+
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+  margin-bottom: 0px !important;
+}
+
+.pr-1px {
+  padding-right: 1px !important;
+}
+
+.pl-1px {
+  padding-left: 1px !important;
+}

@@ -1,0 +1,53 @@
+<div>
+
+    <div class="page-header">
+        <h3 class="page-title">
+            {{'TEAM.TITLE.TEAM_MANAGEMENT' | translate}}
+        </h3>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active">
+                {{'TEAM.TITLE.TEAM_MANAGEMENT' | translate}}
+            </li>
+        </ul>
+    </div>
+
+    <app-team-filter
+            (search)="onSearch($event)"
+            (create)="onCreate()"
+    ></app-team-filter>
+
+    <app-team-table
+            [page]="pageMeta?.pageNumber"
+            [size]="pageMeta?.pageSize"
+            [summary]="summary"
+            [teamList]="teamList"
+    ></app-team-table>
+
+    <div class="card">
+        <div class="card-body d-flex justify-content-between">
+            <div>
+                <p><b>{{'TEAM.TITLE.TOTAL_EMPLOYEE' | translate}} ({{'TEAM.UNIT.PERSON' | translate}}): {{summary.total_member}}</b></p>
+                <p><b>{{'TEAM.TITLE.TOTAL_SALARY' | translate}} ({{'TEAM.UNIT.VND' | translate}}): {{summary.total_salary | number: '.2-2'}}</b></p>
+            </div>
+            <div>
+                <p><b>{{'TEAM.TITLE.TOTAL_PRODUCTIVITY' | translate}} ({{'TEAM.UNIT.MM_MONTH' | translate}}): {{summary.total_productivity | number: '.2-2'}}</b></p>
+                <p><b>{{'TEAM.TITLE.AVG_PRODUCTIVITY' | translate}} ({{'TEAM.UNIT.MM_PERSON' | translate}}): {{summary.average_effort | number: '.2-2'}}</b></p>
+            </div>
+        </div>
+    </div>
+
+<!--    <ngb-pagination-->
+<!--            [page]="pageMeta.pageNumber + 1"-->
+<!--            [pageSize]="pageMeta.pageSize"-->
+<!--            [collectionSize]="pageMeta.totalItems"-->
+<!--            (pageChange)="changePageData($event, pageMeta.pageSize)">-->
+<!--    </ngb-pagination>-->
+        <app-ta-paginator
+                [page]="pageMeta.pageNumber + 1"
+                [pageSize]="pageMeta.pageSize"
+                [totalElements]="pageMeta.totalItems"
+                (onPageChange)="changePageData($event - 1, pageMeta.pageSize)"
+                (onPageSizeChange)="changePageData(pageMeta.pageNumber, $event)"
+        ></app-ta-paginator>
+
+</div>

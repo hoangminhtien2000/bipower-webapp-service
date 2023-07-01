@@ -1,0 +1,152 @@
+<!-- Page Content -->
+<div class="box-u">
+    <div class="row">
+        <p class="row-title">{{'candidate.model.candidate_code' | translate}}
+            : {{candidateModelDetail.candidate_code}}</p>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <b>{{'candidate.model.create_time' | translate}}: </b>
+            <i>{{candidateModelDetail?.create_time|date:'dd/MM/yyyy HH:mm:ss'}}</i>
+        </div>
+        <div class="col-3">
+            <b>{{'candidate.model.create_user' | translate}}: </b>
+            <i>{{getCreateUser()}}</i>
+        </div>
+        <div class="col-3">
+            <b>{{'candidate.model.hr_in_charge' | translate}}: </b>
+            <i>{{getInChargeUser()}}</i>
+        </div>
+        <div class="col-3">
+            <b>{{'candidate.model.status' | translate}}: </b>
+            <i>{{candidateModelDetail?.status?.name}}</i>
+        </div>
+    </div>
+    <div class="row">
+        <form [formGroup]="candidateInfoForm">
+            <formly-form [model]="candidateInfoModel" [fields]="candidateInfoFields"
+                         [form]="candidateInfoForm"></formly-form>
+        </form>
+    </div>
+
+    <div *ngFor="let contact of canidateContactForms; let i = index">
+        <form [formGroup]="canidateContactForms[i]">
+            <formly-form [model]="canidateContactModels[i]" [fields]="canidateContactFields[i]"
+                         [form]="canidateContactForms[i]"></formly-form>
+        </form>
+    </div>
+    <div class="row" *ngIf="checkExistAddContactChannel()">
+        <div class="col-3">
+            <a class="cursor-pointer text-blue"
+               (click)="onAddCandidateContact()">+ {{'candidate.title.contact_add' | translate}}</a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <app-candidate-file [fileCVs]="fileCVs" [requiredFileCV]="requiredFileCV"
+                            (onChangeFile)="onChangeFile($event)"></app-candidate-file>
+    </div>
+</div>
+<div class="mt-4 box-u">
+    <div class="row">
+        <p class="row-title">{{'candidate.box.work_experience' | translate}}</p>
+        <form [formGroup]="candidateWorkingExperienceForm">
+            <formly-form [model]="workingExperienceModel" [fields]="candidateWorkingExperienceFields"
+                         [form]="candidateWorkingExperienceForm"></formly-form>
+        </form>
+    </div>
+</div>
+<div class="mt-4 box-u">
+    <div class="row">
+        <p class="row-title">{{'candidate.box.educational_information' | translate}}</p>
+        <form [formGroup]="educationalInformationForm">
+            <formly-form [model]="educationalInformationModel" [fields]="educationalInformationFields"
+                         [form]="educationalInformationForm"></formly-form>
+        </form>
+    </div>
+</div>
+<div class="mt-4 box-u">
+    <div class="row">
+        <p class="row-title">{{'candidate.box.school_historys' | translate}}</p>
+        <div *ngFor="let traning of trainingHistoryForms; let i = index">
+            <form [formGroup]="trainingHistoryForms[i]">
+                <formly-form [model]="trainingHistoryModels[i]" [fields]="trainingHistoryFields[i]"
+                             [form]="trainingHistoryForms[i]"></formly-form>
+            </form>
+        </div>
+        <div class="row" *ngIf="checkExistAddTrainingHistory()">
+            <div class="col-3">
+                <a class="cursor-pointer text-blue"
+                   (click)="onAddTrainingHistory()">+ {{'candidate.title.schools_add' | translate}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4 box-u">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-10">
+                    <p class="row-title">{{'candidate.box.contact_historys' | translate}}</p>
+                </div>
+                <div class="col-2">
+                    <button tabindex="0" [disabled]="!isInRecruitmentProcess" (click)="openModal()"
+                            class="align-right btnSave btn btn-primary submit-btn">{{'candidate.btn.add'| translate}}</button>
+                </div>
+            </div>
+            <div class="table-responsive mt-3">
+                <table class="table table-borderless table-striped custom-table datatable mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-center white-space-wrap">{{'common.pagination.no' | translate}}</th>
+                        <th class="text-center white-space-wrap"></th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.contact_time' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.contact_channel' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.contact_user' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.contact_status' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.status_after_contact' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.response' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.note' | translate}}</th>
+                        <th class="text-center white-space-wrap">{{'candidate.contact_history.candidate_status' | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of canidateContactHistories; let i = index">
+                        <td class="white-space-wrap w-2 text-center">{{ 1 + i }}</td>
+                        <td class="white-space-wrap w-2 text-center cursor-pointer">
+                            <button class="btn" [disabled]="isInRecruitmentProcess" (click)="onEditContactHistory(item, i)">
+                                <img src="assets/img/icon/icon-edit.png" height="20"
+                                     [title]="'candidate.box.contact_history_update' | translate"/>
+                            </button>
+                        </td>
+                        <td class="white-space-wrap w-9">{{item.contact_time|date: 'dd/MM/yyyy'}}</td>
+                        <td class="white-space-wrap w-9">{{item.contact?.name}}</td>
+                        <td class="white-space-wrap w-12">{{item.contact_user?.full_name}}</td>
+                        <td class="white-space-wrap w-12">{{item.contact_status?.name}}</td>
+                        <td class="white-space-wrap w-12">{{item.status_after_contact?.name}}</td>
+                        <td class="white-space-wrap w-12">{{item.response?.name}}</td>
+                        <td class="white-space-wrap w-12">{{item.note}}</td>
+                        <td class="white-space-wrap w-18">{{item.candidate_status.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row filter-row align-right button-right">
+    <ng-container>
+        <div>
+            <button class="btn btnCancel btn-primary submit-btn" (click)="comeBackCandidateList()">
+                {{'candidate.btn.come_back' | translate}}
+            </button>
+            <button class="btn btnSave btn-primary submit-btn" (click)="confirmUpdateCandidate()">
+                {{'candidate.btn.save' | translate}}
+            </button>
+        </div>
+    </ng-container>
+</div>
+
+<app-common-dialog #confirmDialogComeBack (confirmAction)="acceptComeback()"></app-common-dialog>
+<app-common-dialog #confirmDialogUpdate (confirmAction)="updateCandidate()"></app-common-dialog>

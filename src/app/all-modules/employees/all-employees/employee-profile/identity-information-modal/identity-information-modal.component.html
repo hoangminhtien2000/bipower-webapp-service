@@ -1,0 +1,145 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"EmployeeProfile.identityCard.titleHeader" | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="objectListForm" novalidate>
+                    <div formArrayName="list" class="form-scroll">
+                        <ng-container *ngFor="let item of listForm.controls; let i = index;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" [formGroup]="item">
+                                        <h3 class="card-title"><a class="delete-icon" (click)="removeIdentity(i)"><i class="fa fa-trash-o"></i></a></h3>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{"EmployeeProfile.identityCard.type"| translate}}<span class="text-danger">*</span></label> 
+                                                <select formControlName="identityCardType" (change)="onChangeIdentityCardType(item)"
+                                                [class.is-invalid]="(item.controls['identityCardType']?.touched 
+                                                    || item.controls['identityCardType']?.dirty) 
+                                                    && item.controls['identityCardType']?.invalid"
+                                                placeholder="Chọn loại" class="form-control form-select" type="text">
+                                                <option value="">{{"EmployeeProfile.identityCard.selectType"|translate}}</option>
+                                                <option *ngFor="let item of EMPLOYEE_IDENTITY_TYPE" [value]="item.code">{{ item.name }}</option>
+                                                </select>
+                                                <div *ngIf="(item.controls['identityCardType']?.touched 
+                                                    ||  item.controls['identityCardType']?.dirty)
+                                                        && item.controls['identityCardType']?.errors?.required">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireType"| translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{"EmployeeProfile.identityCard.code" | translate}} <span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="12" minlength="9" [id]="'identityNumber_' + i"
+                                                placeholder="{{'EmployeeProfile.identityCard.phCode' | translate}}"
+                                                [class.is-invalid]="(item.controls['identityCard']?.touched 
+                                                    || item.controls['identityCard']?.dirty) 
+                                                    && item.controls['identityCard']?.invalid"
+                                                formControlName="identityCard"  (blur)="onBlur('identityCard', i)" class="form-control">
+                                                <div
+                                                    *ngIf="(item.controls['identityCard']?.touched 
+                                                    ||  item.controls['identityCard']?.dirty)
+                                                     && item.controls['identityCard']?.errors?.required">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireCode" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCard']?.touched 
+                                                    ||  item.controls['identityCard']?.dirty)
+                                                     && item.controls['identityCard']?.errors?.maxlength">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireMaxlength" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCard']?.touched 
+                                                    ||  item.controls['identityCard']?.dirty)
+                                                     && item.controls['identityCard']?.errors?.minlength">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireMinlength" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCard']?.touched 
+                                                    ||  item.controls['identityCard']?.dirty)
+                                                     && item.controls['identityCard']?.errors?.pattern">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.pattern" | translate}} </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{"EmployeeProfile.identityCard.dateIssue" | translate}} <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                    <input formControlName="identityCardValidDate" [maxDate]="currentDate"
+                                                    [class.is-invalid]="(item.controls['identityCardValidDate']?.touched 
+                                                    || item.controls['identityCardValidDate']?.dirty) 
+                                                    && item.controls['identityCardValidDate']?.invalid"
+                                                    class="form-control datetimepicker" 
+                                                    type="text" bsDatepicker type="text"
+                                                    placeholder="DD/MM/YYYY"
+                                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true }">
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCardValidDate']?.touched 
+                                                    ||  item.controls['identityCardValidDate']?.dirty)
+                                                     && item.controls['identityCardValidDate']?.errors?.required">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireDateIssue" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCardValidDate']?.touched 
+                                                    ||  item.controls['identityCardValidDate']?.dirty)
+                                                     && item.controls['identityCardValidDate']?.errors?.dateFormat">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireDateIssuePattern" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCardValidDate']?.touched 
+                                                    ||  item.controls['identityCardValidDate']?.dirty)
+                                                     && item.controls['identityCardValidDate']?.errors?.maxDate">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requireDateIssueMaxDate" | translate}} </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{"EmployeeProfile.identityCard.placeIssue" | translate}} <span class="text-danger">*</span></label>
+                                                <input formControlName="identityCardPlace" maxlength="100"
+                                                [class.is-invalid]="(item.controls['identityCardPlace']?.touched 
+                                                    || item.controls['identityCardPlace']?.dirty) 
+                                                    && item.controls['identityCardPlace']?.invalid"
+                                                placeholder="{{'EmployeeProfile.identityCard.phPlaceIssue' | translate}}"
+                                                (blur)="onBlur('identityCardPlace', i)" class="form-control" type="text">
+                                                <div *ngIf="(item.controls['identityCardPlace']?.touched 
+                                                    ||  item.controls['identityCardPlace']?.dirty)
+                                                        && item.controls['identityCardPlace']?.errors?.required">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requirePlaceIssue" | translate}}</small>
+                                                </div>
+                                                <div
+                                                    *ngIf="(item.controls['identityCardPlace']?.touched 
+                                                    ||  item.controls['identityCardPlace']?.dirty)
+                                                        && item.controls['identityCardPlace']?.errors?.maxlength">
+                                                    <small class="text-danger"> {{"EmployeeProfile.identityCard.requirePlaceIssueMaxLength" | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="add-more text-info">
+                            <button class="btn p-0 text-info" [title]="'EmployeeProfile.identityCard.addMore' | translate" tabindex="0" (click)="addIdentity()"><a (mousedown)="addIdentity()"><i class="fa fa-plus"></i> {{"EmployeeProfile.identityCard.addMore" | translate}} </a></button>
+                        </div>
+                    </div>
+                </form>
+                <div class="submit-section mb-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary submit-btn btnCancel" tabindex="0" (click)="onClickCancel()">{{"EmployeeProfile.cancel" | translate}}</button>
+                    <button class="btn btn-primary submit-btn btnSave" tabindex="0" (click)="onSave()">{{"EmployeeProfile.save" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -->

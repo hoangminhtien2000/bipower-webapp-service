@@ -1,0 +1,7 @@
+{
+    "/api": {
+        "target": "https://gw-bipower.biplus.com.vn",
+        "secure": false,
+        "pathRewrite": { "^/api" : "" }
+    }
+}

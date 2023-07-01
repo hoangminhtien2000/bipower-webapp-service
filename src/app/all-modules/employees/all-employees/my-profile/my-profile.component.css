@@ -1,0 +1,32 @@
+.content {
+	padding: 30px;
+}
+
+.page-title{
+	font-weight: bold;
+}
+
+.line{
+	border-bottom: 1px dotted black;
+	line-height: 40px;
+}
+
+.account-btn {
+	width: 100%;
+	font-weight: bold;
+}
+
+.title-profile {
+	color: black;
+	float: left;
+	font-weight: 600;
+	font-family: 'Segoe UI';
+}
+
+.text-profile {
+	color: black;
+	display: block;
+	overflow: hidden;
+	font-weight: normal;
+	font-family: 'Segoe UI';
+}

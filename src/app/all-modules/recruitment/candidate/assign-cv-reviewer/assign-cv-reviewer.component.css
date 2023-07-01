@@ -1,0 +1,27 @@
+.header-bg {
+    background-color: #FAF5E1;
+    height: 60px;
+}
+
+.content-header {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    padding: 19px 0px 14px 0px;
+}
+
+.p-multiselect-label {
+    padding: 0;
+}
+
+.multiselect-item-custom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: .2rem;
+    background-color: #dbc700;
+    padding: 0 .5rem 0 .5rem;
+}
+

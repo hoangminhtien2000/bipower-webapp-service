@@ -1,0 +1,131 @@
+
+.header-bg {
+  background-color: #FAF5E1;
+  height: 60px;
+}
+
+.content-header {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  padding: 19px 0px 14px 0px;
+}
+
+.pb-32 {
+  padding-bottom: 32px;
+}
+
+.popUpTable {
+  background-color: #FFFFFF;
+}
+
+.modal-header {
+  background-color: #faf5e1;
+}
+
+.modal-header button {
+  border-width: 0;
+  background: #faf5e1;
+  font-size: 20px;
+}
+
+.footer {
+  width: 100%;
+  margin: 0px !important;
+}
+
+.p-16 {
+  padding: 16px !important;
+}
+
+.w-100 {
+  width: 100% !important;
+  margin: 0px !important;
+}
+
+.input-icon {
+  background: white;
+  color: #EFC427;
+}
+
+@media only screen and (min-width: 767.98px) {
+  .btnOT {
+    height: 100%;
+  }
+  .add-btn-ot {
+    margin-left: 32px;
+  }
+}
+
+@media only screen and (min-width: 1238.98px) {
+  .btnOT {
+    height: none;
+  }
+  .add-btn-ot {
+    margin-left: unset;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .pb-16 {
+    padding-bottom: 8px;
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+.presence-status-rejected {
+  color: #DF5245 !important;
+}
+
+.presence-status-send-request {
+  color: #FF9153 !important;
+}
+
+.presence-status-leader-approved {
+  color: #FF9153 !important;
+}
+
+.presence-status-approved {
+  color: #85AA75 !important;
+}
+
+.presence-status-pending {
+  color: #85AA75 !important;
+}
+
+.btnSave {
+  margin: 0px !important;
+}
+
+.btnCancel {
+  margin: 0px !important;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.disable-bg {
+  background: #dee2e6;
+}
+
+
+::ng-deep {
+  ngx-daterangepicker-material {
+    & {
+      .md-drppicker {
+        min-width: 500px !important;
+        //top: 45px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,216 @@
+<div class="popUpTable" [ngClass]="getClassOS()">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{ "present.updateOnsiteRemote.detailOnsiteRemote" | translate }}
+        </div>  
+        <span (click)="closeModal()" style="cursor: pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="custom-modal-body">
+        <form [formGroup]="updateOnsiteRemotePresentForm" novalidate>
+            <div class="col-sm-12" *ngIf="osRefModal.employeeCode != undefined">
+                <div class="form-group">
+                    <label class="col-form-label">{{'workingOnleave.list.employee' | translate}}</label>
+                    <div><input disabled type="text" class="form-control" value="{{osRefModal.employeeCode}} - {{osRefModal.fullName}}"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.updateOnsiteRemote.onOnsiteRemoteType" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <select class="form-select form-control" name="workType"
+                            [attr.disabled]="true"
+                            [(ngModel)]="onsiteRemote.workType" (ngModelChange)="onChangeWorkType()"
+                            [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let workTypeOnsiteRemote of workTypesOnsiteRemote"
+                                [selected]="onsiteRemote.workType == workTypeOnsiteRemote.value"
+                                value="{{workTypeOnsiteRemote.value}}">{{workTypeOnsiteRemote.desc | translate}}</option>
+                    </select>
+                    <div *ngIf="updateOnsiteRemotePresentForm.controls['workType'].invalid && (updateOnsiteRemotePresentForm.controls['workType'].dirty || updateOnsiteRemotePresentForm.controls['workType'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['workType'].errors.required">
+                            {{" " | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.onOnsiteRemoteTime" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input type="text" *ngIf="isDisabledCheckBox"
+                               value="{{onsiteRemote.timeRegister.startDate}} - {{onsiteRemote.timeRegister.endDate}}"
+                               class="form-control" disabled/>
+                        <input type="text" *ngIf="!isDisabledCheckBox"
+                               ngxDaterangepickerMd
+                               [timePicker]="true"
+                               [autoApply]="false"
+                               [locale]="{applyLabel: 'Xác nhận', format: 'DD/MM/YYYY, HH:mm'}"
+                               [timePickerSeconds]="false"
+                               [timePickerIncrement]="5"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="onsiteRemote.timeRegister"
+                               (change)="onDateRangePickerChanged()"
+                               formControlName="timeRegister"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].invalid && (updateOnsiteRemotePresentForm.controls['timeRegister'].dirty || updateOnsiteRemotePresentForm.controls['timeRegister'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.endLessThanStart">
+                            {{"present.registerOnsiteRemote.fromDateToDate" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.startLessThanStartWorkingDay">
+                            {{"present.registerOnsiteRemote.fromDateToStartWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.endBiggerThanEndWorkingDay">
+                            {{"present.registerOnsiteRemote.toDateToEndWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.required">
+                            {{"present.registerOnsiteRemote.ontimeRegisterRequired" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.startInLunchTime">
+                            {{"present.registerOnsiteRemote.fromDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.endInLunchTime">
+                            {{"present.registerOnsiteRemote.toDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.startIsNoWorkingDay">
+                            {{"present.registerOnsiteRemote.fromDateToNoWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['timeRegister'].errors.endIsNoWorkingDay">
+                            {{"present.registerOnsiteRemote.toDateToNoWorkingDay" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="canShowAddressProject()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.addressOnsite" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.workingLocation}}"
+                            [attr.disabled]="isDisabledCheckBox ? true: null"
+                            [class.is-invalid]="updateOnsiteRemotePresentForm.controls['workingLocation']?.invalid
+                            && (updateOnsiteRemotePresentForm.controls['workingLocation']?.touched || updateOnsiteRemotePresentForm.controls['workingLocation']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phAddressOnsite' | translate}}"
+                            (blur)="blurAddress()"
+                            formControlName="workingLocation"
+                            [(ngModel)]="onsiteRemote.workingLocation"></textarea>
+                    <div *ngIf="updateOnsiteRemotePresentForm.controls['workingLocation'].invalid && (updateOnsiteRemotePresentForm.controls['workingLocation'].dirty || updateOnsiteRemotePresentForm.controls['workingLocation'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['workingLocation'].errors.required">
+                            {{"present.registerOnsiteRemote.addressOnsiteRequired" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['workingLocation'].hasError('maxlength')">
+                            {{"present.registerOnsiteRemote.addressOnsiteMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="canShowAddressProject()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.projectOnsite" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.projectName}}"
+                            [attr.disabled]="isDisabledCheckBox ? true: null"
+                            [class.is-invalid]="updateOnsiteRemotePresentForm.controls['projectName']?.invalid
+                            && (updateOnsiteRemotePresentForm.controls['project']?.touched || updateOnsiteRemotePresentForm.controls['projectName']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phProjectOnsite' | translate}}"
+                            (blur)="blurProject()"
+                            formControlName="projectName"
+                            [(ngModel)]="onsiteRemote.projectName"></textarea>
+                    <div *ngIf="updateOnsiteRemotePresentForm.controls['projectName'].invalid && (updateOnsiteRemotePresentForm.controls['projectName'].dirty || updateOnsiteRemotePresentForm.controls['projectName'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['projectName'].errors.required">
+                            {{"present.registerOnsiteRemote.projectNameOnsiteRequired" | translate}}
+                        </small>
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['projectName'].hasError('maxlength')">
+                            {{"present.registerOnsiteRemote.projectOnsiteMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12" *ngIf="canShowReason()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.reason" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.reason}}"
+                            [attr.disabled]="isDisabledCheckBox ? true: null"
+                            [class.is-invalid]="updateOnsiteRemotePresentForm.controls['reason']?.invalid
+                            && (updateOnsiteRemotePresentForm.controls['reason']?.touched || updateOnsiteRemotePresentForm.controls['reason']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phReason' | translate}}"
+                            (blur)="blurReason()"
+                            formControlName="reason"
+                            [(ngModel)]="onsiteRemote.reason"></textarea>
+                    <div *ngIf="updateOnsiteRemotePresentForm.controls['reason'].invalid && (updateOnsiteRemotePresentForm.controls['reason'].dirty || updateOnsiteRemotePresentForm.controls['reason'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateOnsiteRemotePresentForm.controls['reason'].errors.required">
+                            {{"present.registerOnsiteRemote.reasonMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--    Footer-->
+    <div class="row footer justify-content-end">
+        <div class="col-md-4 m-0 p-16" [hidden]="isHiddenBtnCloseOrCancel">
+            <button class="btn btnCancel col-md-12 w-100 btnOT" type="button"   [ngClass]="getClassOSCloseModal()"
+                    (click)="closeModal()">{{"contract.btn.cancel" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16" [hidden]="isHiddenBtnSave">
+            <button class="btn btnSave col-md-12 w-100 btnOT" type="button"
+                    (click)="onSave()">{{"present.btn.save" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16"
+             [hidden]="isHiddenBtnSendAprroved">
+            <button class="btn btnSave col-md-12 w-100 add-btn-ot" type="button"
+                    (click)="onSaveAndApprove()">
+                {{"present.btn.saveAndSendApprove" | translate}}
+            </button>
+        </div>
+
+        <div class="col-md-4 m-0 p-16" [hidden]="isHiddenBtnReject">
+            <button class="btn btnCancel col-md-12 w-100 btnOT" type="button"
+                    [ngClass]="getClassOSCloseModal()"
+                    (click)="showUnApprovalModal()">
+                {{"present.btn.reject" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16" [hidden]="isHiddenBtnAprroved">
+            <button class="btn btnSave col-md-12 w-100 add-btn-ot" type="button"
+                    (click)="showApprovalModal()">
+                {{"present.btn.approve" | translate}}
+            </button>
+        </div>
+    </div>
+</div>

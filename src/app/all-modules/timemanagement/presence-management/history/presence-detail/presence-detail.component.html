@@ -1,0 +1,96 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{'timeManager.work_details' | translate}}
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of timeline, let i = index">
+                <div class="presence-time"><i
+                        class='presence-status-{{renderClassByWorkType(item.workType)}} fa fa-square'></i> {{renderTimeCheckinCheckout(item)}}
+                    <div class="collapsed-icon" (click)="clickCollapsed(item.workTimeId)">
+                        <img [src]="isCollapsed[item.workTimeId] ?
+                         '../../../../../../assets/img/icons/plus.png' :
+                          '../../../../../../assets/img/icons/minus.png'">
+                    </div>
+                </div>
+                <div [collapse]="isCollapsed[item.workTimeId]">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.work_form' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{renderNameByWorkType(item.workType)}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.workingLocation">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.location' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{item.workingLocation}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.requestCode">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.request_code' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{item.requestCode}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="canShowHrefLink(item)">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.register_form' | translate}}</div>
+                                <div class="col-md-8 p-0">: <a class="a-link" target="_blank"
+                                                               href="{{renderHrefLinkByWorkType(item.workType, item.workTimeId, item.start)}}">{{'timeManager.register_form' | translate}} {{item.workTimeId}}</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="canShowTimeEdited(item)">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.adjustment_time' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{renderTimeEdited(item)}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.reason">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{renderReasonTitle(item.workType)}}</div>
+                                <div class="col-md-8 p-0">: {{item.reason}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.projectName">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.project' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{item.projectName}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="canShowStatus(item)">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.status' | translate}}</div>
+                                <div class="col-md-8 p-0 {{renderClassByStatus(item.status) ? renderClassByStatus(item.status) : ''}}">
+                                    : {{renderNameByStatus(item.status) ? renderNameByStatus(item.status) : ''}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.rejectedReason">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.reason_reject' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{item.rejectedReason}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="canShowConfirmedBy(item)">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">{{'timeManager.approver' | translate}}</div>
+                                <div class="col-md-8 p-0">: {{item.confirmedBy}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

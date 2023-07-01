@@ -1,0 +1,32 @@
+{
+  "validations": {
+    "afterThan": "{{field}} not over {{target}}",
+    "between": "{{field}} from {{min}} - {{max}}",
+    "email": "Incorrect email format",
+    "max": "{{field}} not over {{value}}",
+    "maxDate": "{{field}} not be greater than {{date}}",
+    "maxDate_v2": "{{field}} must be less than or equal to {{date}}",
+    "maxLength": "{{field}} not over {{value}} characters",
+    "min": "{{field}} must than {{value}}",
+    "minDate": "{{field}} not be smaller than {{date}}",
+    "minLength": "{{field}} at least {{value}} characters",
+    "minValue": "{{field}} not less than {{value}}",
+    "multiple": "{{field}} must be multiple {{step}}",
+    "mustNotSpecial": "Special package disallowed here",
+    "notenoughSerials": "[BCCS3_STOCK_TRANS_00136] Not enough serials for products: {{list}} ",
+    "onlyNumber": "{{field}} only accept Number",
+    "pattern": "{{field}} invalid format",
+    "password_pattern":  "{{field}} Invalid. Password must valid rule: Greater than 8 characters; At least 1 numberic character, 1 uppercase, 1 lowercase and 1 specific character: @$!%*?&#_",
+    "required": "{{field}} cannot be blank!",
+    "special": "[BCCS3_SPECIFIC_ 67]: Only input 0-9, a-z, A-Z,_ ",
+    "maxDateCurrentDay": "{{field}} must not be greater than the current day",
+    "maxDateCurrentMonth": "{{field}} must not be greater than the current month",
+    "maxDateCurrentMonth_v2": "Do not select a month greater than the current month",
+    "equalsPassword" :"{{field1}} and {{field2}} must be the same.",
+    "dateFromTo": "{{field}} word cannot be greater than {{field}} to.",
+    "controlMessage": {
+      "required": "Not be empty",
+      "maxlength": "Not accept input over {{requiredLength}} charactor"
+    }
+  }
+}

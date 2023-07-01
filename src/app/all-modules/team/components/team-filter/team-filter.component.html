@@ -1,0 +1,98 @@
+<form [formGroup]="formSearch" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="card">
+        <div class="row card-body">
+            <div class="col-3">
+                <label for="name">
+                    {{'TEAM.TITLE.NAME' | translate}}
+                </label>
+                <div>
+                    <input type="text"
+                           maxlength="50"
+                           formControlName="name"
+                           pInputText
+                           appAutoTrim
+                           class="form-control"
+                           id="name" placeholder="{{'TEAM.PLACEHOLDER.INPUT_NAME' | translate}}">
+                </div>
+            </div>
+
+            <div class="col-3">
+                <label>
+                    {{'TEAM.TITLE.TYPE' | translate}}
+                </label>
+                <div>
+                    <p-dropdown
+                            [style]="{width: '100%'}"
+                            [showClear]="formSearch.get('type').value"
+                            [options]="teamTypes"
+                            formControlName="type"
+                            optionLabel="name"
+                            [placeholder]="'TEAM.PLACEHOLDER.INPUT_TYPE' | translate"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <label>
+                    {{'TEAM.TITLE.TECH' | translate}}
+                </label>
+                <div>
+                    <p-multiSelect
+                        #techSelect
+                        appChipSelectItem
+                        formControlName="tech"
+                        optionLabel="name"
+                        [options]="techList"
+                        [style]="{width: '100%'}"
+                        [placeholder]="'TEAM.PLACEHOLDER.INPUT_TECH' | translate"
+                        (onPanelHide)="groupTech()">
+                        <ng-template pTemplate="selectedItems" let-value>
+                            <div *ngFor="let option of value" class="multiselect-chip">
+                                {{option.name}}
+                            </div>
+                            <div *ngIf="!value || value.length == 0">
+                                {{techSelect.placeholder}}
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <label>
+                    {{'TEAM.TITLE.DOMAIN' | translate}}
+                </label>
+                <div>
+                    <p-multiSelect
+                        #domainSelect
+                        appChipSelectItem
+                        autofocusFilter
+                        formControlName="domain"
+                        [options]="domainList"
+                        optionLabel="name"
+                        [style]="{width: '100%'}"
+                        (onPanelHide)="groupDomain()"
+                        [placeholder]="'TEAM.PLACEHOLDER.INPUT_DOMAIN' | translate">
+                        <ng-template pTemplate="selectedItems" let-value>
+                            <div *ngFor="let option of value" class="multiselect-chip">
+                                {{option.name}}
+                            </div>
+                            <div *ngIf="!value || value.length == 0">
+                                {{domainSelect.placeholder}}
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </div>
+            </div>
+
+            <div class="col-12 mt-3 d-flex justify-content-end">
+                <button class="btn btn-outline-primary mx-2 hightlight-focus">
+                    {{'TEAM.BUTTON.SEARCH' | translate}}
+                </button>
+                <button *ngIf="canCreateTeam" class="btn btn-primary hightlight-focus" type="button"
+                        (click)="onCreate()">
+                    {{'TEAM.BUTTON.ADD_NEW' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,90 @@
+<div class="row mg-totalbox pb-[30px]" style="padding-bottom: 30px">
+    <div class="col card mlr-box h-100 pointer-event btn-outline-warning d-flex justify-center min-h-[80px]"
+         tabindex="0" style="min-height: 80px; justify-content: center;"
+         (click)="listEmployeeModal(this.workingStatus[0].code)">
+        <div class="row box-total-onleave">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{"timeManager.summary.total_amount_of_staff" | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <span class="font-number">{{this.totalEmployee}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box h-100 pointer-event d-flex btn-outline-warning"
+         style="min-height: 80px; justify-content: center;"
+         tabindex="0"
+         (click)="listEmployeeModal(this.workingStatus[1].code)">
+        <div class="row box-total-onleave">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{"timeManager.summary.in_the_office" | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <span class="font-number">{{this.totalAttendance}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box h-100 pointer-event d-flex btn-outline-warning"
+         tabindex="0" style="min-height: 80px; justify-content: center;"
+         (click)="listEmployeeModal(this.workingStatus[2].code)">
+        <div class="row box-total-onleave">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{"timeManager.summary.remote" | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <span class="font-number">{{this.totalRemote}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box h-100 pointer-event d-flex btn-outline-warning"
+         tabindex="0" style="min-height: 80px; justify-content: center;"
+         (click)="listEmployeeModal(this.workingStatus[3].code)">
+        <div class="row box-total-onleave">
+            <div class="col-8 br-vertical-text-box d-flex items-center">
+                <div>
+                    <span class="font-text">{{"timeManager.summary.onsite" | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <span class="font-number">{{this.totalOnsite}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mlr-box card h-100 pointer-event d-flex btn-outline-warning"
+         tabindex="0" style="min-height: 80px; justify-content: center;"
+         (click)="listEmployeeModal(this.workingStatus[4].code)">
+        <div class="row box-total-onleave">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{"timeManager.summary.off" | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <span class="font-number">{{this.totalLeave}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

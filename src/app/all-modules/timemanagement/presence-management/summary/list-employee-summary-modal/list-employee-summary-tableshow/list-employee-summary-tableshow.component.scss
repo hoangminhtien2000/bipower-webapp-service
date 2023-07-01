@@ -1,0 +1,132 @@
+.p-custom-24 {
+  padding: 0px 24px 0px 24px;
+}
+
+.pb-38 {
+  padding-bottom: 38px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.h-280 {
+  height: 280px;
+}
+
+.pt-38 {
+  padding-top: 38px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.employee-text-left {
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.alg-left {
+  text-align: left;
+}
+
+.alg-center {
+  text-align: center;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+table {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-height: 280px;
+}
+
+table thead {
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+}
+
+table tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+
+table tbody tr {
+  width: 100%;
+}
+
+table {
+  display: flex;
+  flex-flow: column;
+  max-height: 280px;
+  width: 100%;
+}
+
+.inline-table-d {
+  display: inline-table;
+}
+

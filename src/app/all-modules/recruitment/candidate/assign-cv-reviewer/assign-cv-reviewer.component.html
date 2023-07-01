@@ -1,0 +1,74 @@
+<div class="modal-header header-bg">
+    <div class="header-content content-header">
+        {{'recruitment.title.assign_cv_reviewer_title' | translate}}
+    </div>
+    <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+    </span>
+</div>
+<div class="modal-body form-scroll">
+    <form [formGroup]="formAssign" autocomplete="off">
+        <div>
+            <label class="require-label">{{'candidate.assign.assign_review' | translate}}</label>
+            <div>
+                <p-multiSelect #employeeSelect [style]="{width: '100%'}" [showToggleAll]="false"
+                               [filter]="false" [options]="employeeList"
+                               optionLabel="display" formControlName="reviewers"
+                               placeholder="{{'candidate.assign.select_assign_review' | translate}}"
+                               (onPanelShow)="filter.focus()"
+                               baseZIndex="1000"
+                               (onPanelHide)="filterControl.reset()">
+                    <p-header [style]="{width: '100%'}">
+                        <input type="text" #filter pInputText [style]="{width: '100%'}" [formControl]="filterControl">
+                    </p-header>
+                    <ng-template pTemplate="selectedItems" let-selectedEmployees>
+                        <div *ngIf="selectedEmployees && selectedEmployees.length > 0"
+                             class="d-flex flex-row flex-wrap" style="row-gap: .5rem; column-gap: .5rem">
+                            <div *ngFor="let emp of selectedEmployees" class="multiselect-item-custom">
+                                {{emp.display}} &nbsp;
+                                <img style="width: 16px; z-index: 500" src="assets/img/icon/deletex.svg" (click)="removeRow($event, emp.id, employeeSelect)" alt="">
+                            </div>
+                        </div>
+                        <span *ngIf="!selectedEmployees || selectedEmployees.length == 0">
+                            {{employeeSelect.placeholder}}
+                        </span>
+                    </ng-template>
+                </p-multiSelect>
+                <app-control-error-message
+                        *ngIf="formAssign.get('reviewers') as reviewers"
+                        field="{{'candidate.assign.assign_review' | translate}}"
+                        [showError]="reviewers.invalid && reviewers.touched"
+                        [errors]="reviewers.errors"
+                ></app-control-error-message>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label class="require-label">{{'candidate.assign.note' | translate}}</label>
+            <div>
+                <textarea pInputTextarea formControlName="note"
+                          maxlength="1000" rows="5"
+                          placeholder="{{'candidate.assign.enter_note' | translate}}"
+                          [style]="{width: '100%'}"></textarea>
+                <app-control-error-message
+                        *ngIf="formAssign.get('note') as note"
+                        field="{{'candidate.assign.note' | translate}}"
+                        [showError]="note.invalid && note.touched"
+                        [errors]="note.errors"
+                ></app-control-error-message>
+            </div>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-end mt-3">
+        <button class="btn btnCancel btn-primary submit-btn mx-2 hightlight-focus" (click)="closeModal()">
+            {{'recruitment.button.cancel' | translate}}
+        </button>
+        <button class="btn btnSave btn-primary submit-btn hightlight-focus" (click)="submitForm()">
+            {{'recruitment.button.ok' | translate}}
+        </button>
+    </div>
+</div>

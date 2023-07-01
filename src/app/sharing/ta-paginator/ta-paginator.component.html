@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between align-items-center pagination-container">
+  <ngb-pagination [collectionSize]="totalElements"
+                  [page]="page" [maxSize]="5" [rotate]="true" [ellipses]="true" [boundaryLinks]="true"
+                  (pageChange)="pageChange($event)" [pageSize]="pageSize">
+  </ngb-pagination>
+  <div class="d-flex align-items-center">
+    <div class="text-black">
+      {{ 'pagination.display' | translate }}
+      {{ totalElements == 0 ? totalElements : pageSize * (page - 1) + 1 }} -
+      {{ pageSize * page <= totalElements ? pageSize * page : totalElements}}
+      {{ 'pagination.total' | translate }}
+      {{ totalElements}}
+      {{ 'pagination.record' | translate }}
+    </div>
+    <select class="form-control form-select text-black" style="width: auto; margin: 0 5px; min-width: 60px;" #selectPageSize
+            [(ngModel)]="pageSize"
+            (change)="changePageSize(pageSize)">
+      <ng-container *ngIf="pageSizeOptions">
+        <ng-container *ngFor="let opt of pageSizeOptions">
+          <option value="{{opt}}">{{opt}}</option>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!pageSizeOptions">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </ng-container>
+    </select>
+  </div>
+
+</div>

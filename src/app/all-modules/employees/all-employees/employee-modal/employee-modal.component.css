@@ -1,0 +1,13 @@
+@media (min-width: 992px){
+    .modal-lg, .modal-xl {
+        max-width: 1138px;
+    }
+}
+
+.form-scroll {
+    overflow-y: visible;
+}
+
+.modal-body {
+    overflow: visible;
+}

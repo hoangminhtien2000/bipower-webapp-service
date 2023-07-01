@@ -1,0 +1,163 @@
+{
+  "contract": {
+    "title": {
+      "management": "Contract management",
+      "list": "List of contract",
+      "contract_details": "Contract details",
+      "contract_add": "Add new contract"
+    },
+    "search": {
+      "employee_code": "Employee code",
+      "ph_employee_code": "Input employee code",
+      "maxlength_employee_code": "Employee code can only enter up to 50 characters",
+      "employee_name": "Employee name",
+      "ph_employee_name": "Input employee name",
+      "maxlength_employee_name": "Fullname can only enter up to 50 characters",
+      "contract_code": "Contract code",
+      "ph_contract_code": "Input contract code",
+      "maxlength_contract_code": "Contract code can only enter up to 30 characters",
+      "contract_type": "Contract type",
+      "select_contract_type": "Select contract type",
+      "required_data_field": "Data field cannot be empty",
+      "formal_contract": "Formal contract",
+      "probation_contract": "Probation contract",
+      "collaborators_contract": "Collaborators contract",
+      "contract_status": "Contract status",
+      "select_contract_status": "Select contract status",
+      "created_date": "Contract create date",
+      "end_date": "Contract end date",
+      "end_date_created_date": "End date cannot less than created date",
+      "termination_date": "Contract termination date",
+      "create": "Create",
+      "waitingApprove": "Waiting approve",
+      "unapprove": "Unapprove",
+      "effect": "Effect",
+      "expired": "Expired"
+    },
+    "btn": {
+      "search": "Search",
+      "add": "Add",
+      "save": "Save",
+      "save_and_send_approve": "Save and send approve",
+      "reject": "Reject",
+      "approve": "Approve",
+      "cancel": "Cancel",
+      "send": "Send"
+    },
+    "list": {
+      "employee_name": "Employee name",
+      "contract_code": "Contract code",
+      "contract_term": "Contract term (Month)",
+      "contract_status": "Contract status",
+      "created_date": "Contract create date",
+      "end_date": "Contract end date",
+      "termination_date": "Contract termination date",
+      "record_not_found": "Records not found"
+    },
+    "paging": {
+      "display": "Display",
+      "total": "total",
+      "record": "Record"
+    },
+    "modal": {
+      "contract_type": "Contract type",
+      "formal_contract": "Formal contract",
+      "probation_contract": "Probation contract",
+      "collaborators_contract": "Collaborators contract",
+
+      "employees": "Employees",
+      "ph_employees": "Select employee",
+      "required_employee": "Employee cannot be empty",
+
+      "contract_code": "Contract code",
+      "ph_contract_code": "Input contract code",
+      "required_contract_code": "Contract code cannot be empty",
+      "incorrect_format_contract_code": "Contract code incorrect format",
+      "maxlength_contract_code": "Contract code can only enter up to 100 characters",
+
+      "created_date": "Contract create date",
+      "required_created_date": "Create date cannot be empty",
+      "start_date_current_date": "Start date cannot exceed than current date",
+
+      "contract_term": "Contract term (Month)",
+      "select_contract_term": "Select contract term",
+      "month": "month",
+      "required_contract_term": "Contract term cannot be empty",
+
+      "end_date": "Contract end date",
+      "required_end_date": "End date cannot be empty",
+      "end_date_current_date": "End date cannot exceed than current date",
+
+      "negotiable_salary": "Negotiable salary",
+      "input_negotiable_salary": "Input negotiable salary",
+      "required_negotiable_salary": "Negotiable salary cannot be empty",
+      "maxlength_negotiable_salary": "Negotiable salary can only enter up to 10 characters",
+      "number_negotiable_salary": "Negotiable salary can only enter numeric characters",
+
+      "contract_salary": "Contract salary",
+      "input_contract_salary": "Input contract salary",
+      "required_contract_salary": "Contract salary cannot be empty",
+      "maxlength_contract_salary": "Contract salary can only enter up to 20 characters",
+      "text_number_contract_salary": "Contract salary can only enter alphanumeric characters",
+
+      "termination_date":"Contract termination date",
+      "required_termination_date": "Termination date cannot be empty",
+      "termination_date_current_date": "Termination date cannot exceed than current date",
+      "termination_date_created_date": "Termination date cannot less than create date",
+      
+      "upload_file": "Upload file",
+      "required_upload_file": "Upload file cannot be empty",
+      "pdf_file": "Upload file must be .PDF format",
+
+      "result_evaluation": "Result evaluation",
+      "input_result_evaluation": "Input result evaluation",
+      "required_result_evaluation": "Result evaluation cannot be empty",
+      "maxlength_result_evaluation": "Result evaluation can only enter up to 500 characters",
+      "text_number_result_evaluation": "Result evaluation can only enter alphanumeric characters",
+      
+      "insurance_salary": "Insurance salary (VND)",
+      "input_insurance_salary": "Input insurance salary",
+      "required_insurance_salary": "Insurance salary cannot be empty",
+      "maxlength_insurance_salary": "Insurance salary can only enter up to 10 characters",
+      "text_number_insurance_salary": "Insurance salary can only enter alphanumeric characters",
+
+      "net_salary": "Net salary (VND)",
+      "input_net_salary": "Input net salary",
+      "required_net_salary": "Net salary cannot be empty",
+      "maxlength_net_salary": "Net salary can only enter up to 10 characters",
+
+      "gross_salary": "Gross salary (VND)",
+      "input_gross_salary": "Input gross salary",
+      "required_gross_salary": "Gross salary cannot be empty",
+      "maxlength_gross_salary": "Gross salary can only enter up to 10 characters",
+      "text_number_gross_salary": "Gross salary can only enter alphanumeric characters",
+
+      "probational_salary": "Probational salary",
+      "input_probational_salary": "Input probational salary",
+      "required_probational_salary": "Probational salary cannot be empty",
+      "maxlength_probational_salary": "Probational salary can only enter up to 10 characters",
+
+      "official_salary": "Official salary",
+      "input_official_salary": "Input official salary",
+      "required_official_salary": "Official salary cannot be empty",
+      "maxlength_official_salary": "Official salary can only enter up to 20 characters",
+      "text_number_official_salary": "Official salary can only enter alphanumeric characters",
+
+      "reject_approve": "Reject approve",
+
+      "reject_reason": "Reject reason",
+      "required_reject_reason": "Reject reason cannot be empty",
+      "maxlength_reject_reason": "Refusal reason can only enter up to 500 characters"
+    },
+    "month": {
+      "1_month": "1 month",
+      "2_month": "2 months",
+      "3_month": "3 months",
+      "6_month": "6 months",
+      "12_month": "12 months",
+      "24_month": "24 months",
+      "36_month": "36 months",
+      "60_month": "60 months"
+    }
+  }
+}

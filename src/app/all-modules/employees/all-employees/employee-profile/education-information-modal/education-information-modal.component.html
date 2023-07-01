@@ -1,0 +1,109 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin học vấn</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll" >
+                <form [formGroup]="educationFormList" novalidate >
+                    <div formArrayName="list">
+                        <ng-container *ngFor="let item of listForm.controls; let i = index;" >
+                            <div class="row" [formGroup]="item">
+                            <h3 class="card-title"><a class="delete-icon" (click)="removeEducation()"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="col-md-6">
+                                    <div class="form-group" >
+                                        <label>Nhập họ và tên của nhân viên <span class="text-danger">*</span></label>
+                                        <input [id]="'educationForm_institution_' + i" formControlName="firstName" type="text" class="form-control" value="Jonh"
+                                        id="firstNameEditForm" (blur)="onBlur('firstName')" placeholder="Nhập họ và tên đệm nhân viên"
+                                            [class.is-invalid]="(item.controls['firstName']?.dirty 
+                                                    || item.controls['firstName']?.touched) 
+                                                    && item.controls['firstName']?.invalid" />
+                                        <div *ngIf="item.controls['firstName']?.errors?.maxlength" class="text-danger error-info">Chỉ cho phép nhập tối đa 200 ký tự</div>
+                                        <div *ngIf="(item.controls['firstName']?.dirty  
+                                        || item.controls['firstName']?.touched) 
+                                        && item.controls['firstName']?.errors?.required" 
+                                        class="text-danger error-info">Trường dữ liệu không được để trống</div>
+                                        <div *ngIf="(item.controls['firstName']?.dirty 
+                                        || item.controls['firstName']?.touched) 
+                                        && item.controls['firstName']?.errors?.pattern" 
+                                        class="text-danger error-info">Trường dữ liệu không đúng định dạng</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Quan hệ với nhân viên<span class="text-danger">*</span></label>
+                                        <select formControlName="relative" class="form-select form-control"
+                                        [class.is-invalid]="(item.controls['relative']?.dirty 
+                                                    || item.controls['relative']?.touched) 
+                                                    && item.controls['relative']?.invalid">
+                                            <option value="">Chọn thông tin quan hệ với nhân viên</option>
+                                            <option value="wife">Vợ</option>
+                                            <option value="husband">Chồng</option>
+                                            <option value="wife-parents">Bố mẹ vợ</option>
+                                            <option value="husband-parent">Bố mẹ chồng</option>
+                                            <option value="child">Con</option>
+                                        </select>
+                                        <div *ngIf="(item.controls['relative']?.dirty 
+                                        || item.controls['relative']?.touched) 
+                                        && item.controls['relative']?.errors?.required" 
+                                        class="text-danger error-info">Trường dữ liệu không được để trống</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Giới tính<span class="text-danger">*</span></label>
+                                        <select formControlName="gender" class="form-select form-control"
+                                        [class.is-invalid]="(item.controls['gender']?.dirty 
+                                                    || item.controls['gender']?.touched) 
+                                                    && item.controls['gender']?.invalid">
+                                            <option value="">Chọn giới tính</option>
+                                            <option value="male">Nam</option>
+                                            <option value="female">Nữ</option>
+                                        </select>
+                                        <div *ngIf="(item.controls['gender']?.dirty 
+                                        || item.controls['gender']?.touched) 
+                                        && item.controls['gender']?.errors?.required" 
+                                        class="text-danger error-info">Trường dữ liệu không được để trống</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ngày sinh <span class="text-danger">*</span></label>
+                                        <div class="cal-icon">
+                                            <input formControlName="birthday" class="form-control datetimepicker" type="text" bsDatepicker
+                                                type="text"
+                                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                                value="05/06/1985" placeholder="DD/MM/YYYY"
+                                                [class.is-invalid]="(item.controls['birthday']?.dirty 
+                                                    || item.controls['birthday']?.touched) 
+                                                    && item.controls['birthday']?.invalid">
+                                                <div *ngIf="(item.controls['birthday']?.dirty 
+                                                || item.controls['birthday']?.touched) 
+                                                && item.controls['birthday']?.errors?.required" 
+                                                class="text-danger error-info">Trường dữ liệu không được để trống</div>
+                                                <div class="text-danger error-info" *ngIf="item.controls['birthday']?.errors?.maxDate">Ngày sinh không được
+                                                    vượt quá ngày hiện tại.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="add-more">
+                        <a (mousedown)="addEducation()"><i class="fa fa-plus-circle" title="Bổ sung thêm " ></i> Bổ sung thêm </a>
+                    </div>
+                </form>
+               
+            </div>
+            <div class="submit-section mb-3">
+                <button class="btn btn-primary submit-btn" (click)="onSave()">Lưu</button>
+            </div>
+        </div>  
+    </div>
+</div>
+<!-- /Personal Info Modal -->

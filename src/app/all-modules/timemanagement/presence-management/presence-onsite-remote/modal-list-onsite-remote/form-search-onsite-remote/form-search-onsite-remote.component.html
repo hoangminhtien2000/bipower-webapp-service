@@ -1,0 +1,111 @@
+<div class="row bg-white py-3 filter-row mb-0" [formGroup]="searchLeave" novalidate>
+    <div class="col-sm-12">
+        <div class="row">
+            <!--  Nhóm-->
+            <div class="col-sm-4" *ngIf="canSeeGroup() && teams.length > 0  && this.tabCode=='tabManager'">
+                <label>{{'timeManager.search_form.table.team' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <select class="form-select form-control" [(ngModel)]="teamId"
+                                (ngModelChange)="onChangeGroup()" formControlName="teamId"
+                                (keypress)="onKeypress($event)">
+                            <option [value]="null" [selected]="teamId == null">{{'timeManager.search_form.table.choose_group' | translate}}</option>
+                            <option *ngFor="let team of teams" [value]="team.id"
+                                    [selected]="teamId == team.id">{{team.teamName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mã nhân viên   -->
+            <div class="col-sm-4" *ngIf="canSeeEmployeeCode() && this.tabCode=='tabManager'">
+                <label class="focus-label">{{'timeManager.search_form.table.employee_code' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" autofocus
+                           formControlName="employeeCode" class="form-control" maxlength="10"
+                           (keypress)="onKeypress($event)"
+                           [(ngModel)]="employeeCode"
+                           (blur)="blurEmployeeCode()"
+                           value=""
+                           placeholder="{{'timeManager.search_form.placeholder.input_employee_code' | translate}}">
+                </div>
+            </div>
+            <!--   Họ tên nhân viên -->
+            <div class="col-sm-4" *ngIf="canSeeEmployeeName() && this.tabCode=='tabManager'">
+                <label class="focus-label">{{'timeManager.search_form.table.employee_name' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" formControlName="employeeName" class="form-control" maxlength="50"
+                           [(ngModel)]="fullname"
+                           (blur)="blurEmployeeName()"
+                           (keypress)="onKeypress($event)"
+                           value="{{fullname}}"
+                           placeholder="{{'timeManager.search_form.placeholder.input_employee_name' | translate}}">
+                </div>
+            </div>
+            <!--    Hình thức làm việc -->
+            <div class="col-sm-4" *ngIf="canSeeWorkType()">
+                <label class="focus-label">{{'timeManager.search_form.table.work_type' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control" name="workType"
+                            [(ngModel)]="onsiteRemote.workType" (ngModelChange)="onChangeWorkType()"
+                            [ngModelOptions]="{standalone: true}"
+                            (keypress)="onKeypress($event)">
+                        <option *ngFor="let workTypeOnsiteRemote of workTypesOnsiteRemote"
+                                [selected]="workTypeOnsiteRemote.code == onsiteRemote.workType"
+                                value="{{workTypeOnsiteRemote.code}}">{{workTypeOnsiteRemote.workingStatusName | translate}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--    Thời gian onsite/remote-->
+            <div class="col-sm-4" *ngIf="canSeeTimeSearch()">
+                <label>{{'timeManager.list_in_modal.register_date' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <input type="text"
+                               ngxDaterangepickerMd
+                               [timePicker]="false"
+                               [autoApply]="true"
+                               [locale]="{applyLabel: 'ok', format: 'DD/MM/YYYY'}"
+                               (keypress)="onKeypress($event)"
+                               [timePickerSeconds]="false"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="currentDate"
+                               (change)="onDateRangePickerChanged()"
+                               [ngModelOptions]="{standalone: true}"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--    Trạng thái -->
+            <div class="col-sm-4" *ngIf="canSeeStatus()">
+                <label class="focus-label">{{'timeManager.search_form.table.status' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control" name="status"
+                            (keypress)="onKeypress($event)"
+                            [(ngModel)]="status" (ngModelChange)="onChangeStatus()"
+                            [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let status of currentStatusRegistersOS"
+                                [selected]="status.code == status"
+                                value="{{status.code}}">{{status.workingStatusName | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--            div blank create space-->
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+    <div class="col-md-12 pt-4">
+        <div class="col-md-2 offset-md-10">
+            <button class="btn btn-outline-warning w-100" (click)="searchListOnsiteRemote()">
+                {{'timeManager.search_form.table.search' | translate}}</button>
+        </div>
+    </div>
+</div>
+

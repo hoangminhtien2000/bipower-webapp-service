@@ -1,0 +1,106 @@
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"EmployeeProfile.bank.titleHeader" | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form (ngSubmit)="onClickButtonSave()" [formGroup]="bankListForm" novalidate>
+                    <div formArrayName="list">
+                        <ng-container *ngFor="let bankForm of listBankForm.controls; let i = index;">
+                            <div class="card">
+                                <h3 class="card-title m-0"><a class="delete-icon m-t-5 m-r-5" (click)="removeItem(i)"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="card-body row" [formGroup]="bankForm">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{{"EmployeeProfile.bank.bankName" | translate}} <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" maxlength="100" (blur)="onBlur('bankName', i)"
+                                                [class.is-invalid]="bankForm.controls['bankName']?.invalid 
+                                                && (bankForm.controls['bankName']?.touched || bankForm.controls['bankName']?.dirty)"
+                                                placeholder="{{'EmployeeProfile.bank.phBankName' | translate}}"
+                                                formControlName="bankName">
+                                            <div
+                                                *ngIf="(bankForm.controls['bankName']?.touched 
+                                                ||  bankForm.controls['bankName']?.dirty)
+                                                 && bankForm.controls['bankName']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.bank.requireBankName" | translate}}</small>
+                                            </div>
+                                            <div
+                                                *ngIf="bankForm.controls['bankName']?.errors?.pattern">
+                                                <small class="text-danger">{{"EmployeeProfile.bank.requirePatternBankName" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="bankForm.controls['bankName']?.errors?.maxlength">
+                                                <small class="text-danger">{{"EmployeeProfile.bank.requireMaxlengthBankName" | translate}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label" class="col-form-label">{{"EmployeeProfile.bank.bankAccountNumber" | translate}} <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" (blur)="onBlur('accountNo', i)" maxlength="20"
+                                                [class.is-invalid]="(bankForm.controls['accountNo']?.dirty 
+                                                || bankForm.controls['accountNo']?.touched)  
+                                                && bankForm.controls['accountNo']?.invalid"
+                                                placeholder="{{'EmployeeProfile.bank.phBankAccountNumber' | translate}}"
+                                                formControlName="accountNo">
+                                            <div
+                                                *ngIf="(bankForm.controls['accountNo']?.dirty 
+                                                || bankForm.controls['accountNo']?.touched)  
+                                                && bankForm.controls['accountNo']?.errors?.required">
+                                                <small
+                                                    *ngIf="(bankForm.controls['accountNo']?.dirty 
+                                                    || bankForm.controls['accountNo']?.touched) 
+                                                    && bankForm.controls['accountNo']?.errors?.required"
+                                                    class="text-danger"> {{"EmployeeProfile.bank.requireAccountNumber" | translate}}</small>
+                                            </div>
+                                            <div
+                                                *ngIf="bankForm.controls['accountNo']?.errors?.maxlength">
+                                                <small
+                                                    *ngIf="bankForm.controls['accountNo']?.errors?.maxlength"
+                                                    class="text-danger"> {{"EmployeeProfile.bank.requireMaxLenAccountNumber" | translate}}</small>
+                                            </div>
+                                            <div
+                                                *ngIf="bankForm.controls['accountNo']?.errors?.pattern">
+                                                <small
+                                                    *ngIf="bankForm.controls['accountNo']?.errors?.pattern"
+                                                    class="text-danger"> {{"EmployeeProfile.bank.requirePatternAccountNumber" | translate}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label" class="col-form-label"> {{"EmployeeProfile.bank.branchName" | translate}} </label>
+                                            <input class="form-control" type="text" (blur)="onBlur('branchName', i)" maxlength="50"
+                                                [class.is-invalid]="(bankForm.controls['branchName']?.dirty 
+                                                || bankForm.controls['branchName']?.touched)  
+                                                && bankForm.controls['branchName']?.invalid"
+                                                placeholder="{{'EmployeeProfile.bank.phBranchName' | translate}} "
+                                                formControlName="branchName">
+                                            <div
+                                                *ngIf="bankForm.controls['branchName']?.errors?.maxlength">
+                                                <small
+                                                    *ngIf="bankForm.controls['branchName']?.errors?.maxlength"
+                                                    class="text-danger"> {{"EmployeeProfile.bank.requireMaxlengthBranchName" | translate}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="add-more text-info">
+                        <a (mousedown)="addItem()"><i class="fa fa-plus"></i> {{"EmployeeProfile.bank.addMore" | translate}} </a>
+                    </div>
+                    <div class="submit-section mb-3 d-flex justify-content-end">
+                        <button class="btn btn-secondary submit-btn btnCancel" type="button" (click)="onClickCancel()">{{"EmployeeProfile.cancel" | translate}}</button>
+                        <button class="btn btn-primary submit-btn btnSave" type="button" (click)="onClickButtonSave()">{{"EmployeeProfile.save" | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->

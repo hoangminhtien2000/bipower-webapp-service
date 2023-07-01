@@ -1,0 +1,156 @@
+.p-custom-24 {
+  padding: 0px 24px 0px 24px;
+}
+
+.pb-38 {
+  padding-bottom: 38px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.h-280 {
+  height: 280px;
+}
+
+.pt-38 {
+  padding-top: 38px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.employee-text-left {
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.alg-center {
+  text-align: center;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+
+table {
+  display: flex;
+  flex-flow: column;
+  max-height: 280px;
+  width: 100%;
+}
+
+table thead {
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+}
+
+table tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+
+table tbody tr {
+  width: 100%;
+}
+
+//table thead, table tbody tr {
+//  display: table;
+//  table-layout: fixed;
+//}
+
+.inline-table-d {
+  display: inline-table;
+}
+
+.might-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.might-overflow:hover {
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+}
+
+@media only screen and (max-width: 1280px) {
+  .with1 {
+    width: 7% !important;
+  }
+  .with2 {
+    width: 18% !important;
+  }
+  .with3 {
+    width: 25% !important;
+  }
+  .with4 {
+    width: 22% !important;
+  }
+  .with5 {
+    width: 26% !important;
+  }
+}

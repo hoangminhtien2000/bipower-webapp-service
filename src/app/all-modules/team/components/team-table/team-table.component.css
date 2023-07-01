@@ -1,0 +1,10 @@
+.table-responsive {
+    border-top-right-radius: .5rem;
+    border-top-left-radius: .5rem;
+}
+
+.table {
+    border-top-right-radius: .5rem;
+    border-top-left-radius: .5rem;
+    overflow: hidden;
+}

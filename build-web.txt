@@ -1,0 +1,11 @@
+
+npm run build
+
+// chua co nginx: docker pull nginx:alpine
+
+docker build -t 192.168.3.45:8295/webapp-hr:1.0 .
+
+docker push 192.168.3.45:8295/webapp-hr:1.0
+
+// deploy to docker swarm
+docker stack deploy --resolve-image always --compose-file hr-web.yml --with-registry-auth hr

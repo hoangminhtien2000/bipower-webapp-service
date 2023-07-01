@@ -1,0 +1,307 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'employees.profile.address_information' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <span style="margin-right: 8px;">{{'employees.profile.nationality' | translate}}: </span>
+                    <div style="margin-right: 16px;">
+                        <input #radioVietNam id="vietnam" type="radio" [(ngModel)]="nationality" class="form-check-input" name="nationality"  [value]="COUNTRY_DEFAULT">
+                        <label for="vietnam" class="form-check-label">
+                            Việt Nam
+                        </label>
+                    </div>
+                    <div style="margin-right: 16px;">
+                        <input #radioOther type="radio" id="other" [(ngModel)]="nationality" class="form-check-input" name="nationality"  value="OTHER">
+                        <label for="other" class="form-check-label">
+                            {{'employees.profile.foreign' | translate}}
+                        </label>
+                    </div>
+                </div>
+                <form *ngIf="nationality !== COUNTRY_DEFAULT" [formGroup]="addressOtherInformationForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{'employees.profile.country' | translate}}<span class="text-danger">*</span></label>
+                                <p-dropdown class="w-100" [options]="nationalityList"
+                                    [class.is-invalid]="(controls['country']?.dirty 
+                                                || controls['country']?.touched) 
+                                                && controls['country']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="country" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_country' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(addressOtherInformationForm.controls['country']?.dirty 
+                                || addressOtherInformationForm.controls['country']?.touched) 
+                                && addressOtherInformationForm.controls['country']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_country' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>{{'employees.profile.detail_address' | translate}} <span class="text-danger">*</span></label>
+                                <textarea type="text"
+                                placeholder="{{'employees.profile.ph_detail_address' | translate}}"
+                                maxlength="200"
+                                [class.is-invalid]="(addressOtherInformationForm.controls['currentAddress']?.touched 
+                                    || addressOtherInformationForm.controls['currentAddress']?.dirty) 
+                                    && addressOtherInformationForm.controls['currentAddress']?.invalid"
+                                formControlName="currentAddress" (blur)="onBlurOthter('currentAddress')" class="form-control">
+                                </textarea>
+                                <div *ngIf="(addressOtherInformationForm.controls['currentAddress']?.touched 
+                                || addressOtherInformationForm.controls['currentAddress']?.dirty) 
+                                && addressOtherInformationForm.controls['currentAddress']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_detail_address' | translate}}</div>
+                                <div *ngIf="(addressOtherInformationForm.controls['currentAddress']?.dirty 
+                                || addressOtherInformationForm.controls['currentAddress']?.touched) 
+                                && addressOtherInformationForm.controls['currentAddress']?.errors?.maxlength" 
+                                class="text-danger error-info">{{'employees.profile.maxlength_detail_address' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form *ngIf="nationality == COUNTRY_DEFAULT" [formGroup]="addressInformationForm" novalidate>
+                    <h3>{{'employees.profile.domicile' | translate}}</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="w-100">{{'employees.profile.province' | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown (onChange)="onChanggeOriginProvince()" [options]="provinceList"
+                                    [class.is-invalid]="(controls['originProvince']?.dirty 
+                                                || controls['originProvince']?.touched) 
+                                                && controls['originProvince']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="originProvince" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_province' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['originProvince']?.dirty 
+                                || controls['originProvince']?.touched) 
+                                && controls['originProvince']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_province' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{'employees.profile.district' | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown class="w-100" [options]="districtList"
+                                    [class.is-invalid]="(controls['originDistrict']?.dirty 
+                                                || controls['originDistrict']?.touched) 
+                                                && controls['originDistrict']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="originDistrict" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_district' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['originDistrict']?.dirty 
+                                || controls['originDistrict']?.touched) 
+                                && controls['originDistrict']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_district' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>{{'employees.profile.permanent_residence' | translate}}</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{'employees.profile.province' | translate}}<span class="text-danger">*</span></label>
+                                <p-dropdown (onChange)="onChangePermanentResidenceProvince()" class="w-100" [options]="provinceList2"
+                                    [class.is-invalid]="(controls['permanentResidenceProvince']?.dirty 
+                                                || controls['permanentResidenceProvince']?.touched) 
+                                                && controls['permanentResidenceProvince']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="permanentResidenceProvince" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_province' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['permanentResidenceProvince']?.dirty 
+                                || controls['permanentResidenceProvince']?.touched) 
+                                && controls['permanentResidenceProvince']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_province' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{'employees.profile.district' | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown class="w-100" [options]="districtList2"
+                                    [class.is-invalid]="(controls['permanentResidenceDistrict']?.dirty 
+                                                || controls['permanentResidenceDistrict']?.touched) 
+                                                && controls['permanentResidenceDistrict']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="permanentResidenceDistrict" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_district' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['permanentResidenceDistrict']?.dirty 
+                                || controls['permanentResidenceDistrict']?.touched) 
+                                && controls['permanentResidenceDistrict']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_district' | translate}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>{{'employees.profile.detail_address' | translate}}<span class="text-danger">*</span></label>
+                                <input type="text"
+                                maxlength="200"
+                                placeholder="{{'employees.profile.ph_detail_address' | translate}}"
+                                [class.is-invalid]="(controls['permanentResidenceAdrress']?.touched 
+                                    || controls['permanentResidenceAdrress']?.dirty) 
+                                    && controls['permanentResidenceAdrress']?.invalid"
+                                formControlName="permanentResidenceAdrress" (blur)="onBlur('permanentResidenceAdrress')" class="form-control">
+                                <div *ngIf="(controls['permanentResidenceAdrress']?.dirty 
+                                || controls['permanentResidenceAdrress']?.touched) 
+                                && controls['permanentResidenceAdrress']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_detail_address' | translate}}</div>
+                                <div *ngIf="(controls['permanentResidenceAdrress']?.dirty 
+                                || controls['permanentResidenceAdrress']?.touched) 
+                                && controls['permanentResidenceAdrress']?.errors?.maxlength" 
+                                class="text-danger error-info">{{'employees.profile.maxlength_detail_address' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>{{'employees.profile.residence' | translate}}</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.province' | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown (onChange)="onChanggeCurrentProvince()" class="w-100" [options]="provinceList3"
+                                    [class.is-invalid]="(controls['currentProvince']?.dirty 
+                                                || controls['currentProvince']?.touched) 
+                                                && controls['currentProvince']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="currentProvince" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_province' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['currentProvince']?.dirty 
+                                || controls['currentProvince']?.touched) 
+                                && controls['currentProvince']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_province' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.district' | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown (onChange)="onChangeCurrentDistrict()" class="w-100" [options]="districtList3"
+                                    [class.is-invalid]="(controls['currentDistrict']?.dirty 
+                                                || controls['currentDistrict']?.touched) 
+                                                && controls['currentDistrict']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="currentDistrict" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_district' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['currentDistrict']?.dirty 
+                                || controls['currentDistrict']?.touched) 
+                                && controls['currentDistrict']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_district' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.ward' | translate}}<span class="text-danger">*</span></label>
+                                <p-dropdown class="w-100" [options]="wardList3"
+                                    [class.is-invalid]="(controls['currentWard']?.dirty 
+                                                || controls['currentWard']?.touched) 
+                                                && controls['currentWard']?.invalid"
+                                    optionLabel="name" 
+                                    formControlName="currentWard" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="true" placeholder="{{'employees.profile.ph_ward' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <div *ngIf="(controls['currentWard']?.dirty 
+                                || controls['currentWard']?.touched) 
+                                && controls['currentWard']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_ward' | translate}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>{{'employees.profile.detail_address' | translate}}<span class="text-danger">*</span></label>
+                                <input type="text"
+                                maxlength="200"
+                                placeholder="{{'employees.profile.ph_detail_address' | translate}}"
+                                [class.is-invalid]="(controls['currentAddress']?.touched 
+                                    || controls['currentAddress']?.dirty) 
+                                    && controls['currentAddress']?.invalid"
+                                formControlName="currentAddress" (blur)="onBlur('currentAddress')" class="form-control">
+                                <div *ngIf="(controls['currentAddress']?.dirty 
+                                || controls['currentAddress']?.touched) 
+                                && controls['currentAddress']?.errors?.required" 
+                                class="text-danger error-info">{{'employees.profile.required_detail_address' | translate}}</div>
+                                <div *ngIf="(controls['currentAddress']?.dirty 
+                                || controls['currentAddress']?.touched) 
+                                && controls['currentAddress']?.errors?.maxlength" 
+                                class="text-danger error-info">{{'employees.profile.maxlength_detail_address' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="submit-section d-flex justify-content-end">
+                    <button class="btn btn-primary submit-btn btnCancel" (click)="onCancel()">{{'employees.btn.cancel' | translate}}</button>
+                    <button class="btn btn-primary submit-btn btnSave" (click)="onSave()">{{'employees.btn.save' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <p-autoComplete formControlName="district" [suggestions]="districtListFilter" field="province_name" (completeMethod)="filterProvince($event)" [size]="30"
+    [minLength]="1" placeholder="Chọn tỉnh thành phố" [dropdown]="true" [value]="controls['district'].value">
+    <ng-template let-province pTemplate="item">
+        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+            <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{province.province_name}}</div>
+        </div>
+    </ng-template>
+</p-autoComplete> -->
+<!-- /Personal Info Modal -->

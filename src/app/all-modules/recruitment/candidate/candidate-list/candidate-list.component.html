@@ -1,0 +1,105 @@
+<div class="content">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'candidate.title.management' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">{{'candidate.title.management' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="box-u">
+        <div class="row filter-row">
+            <ng-container>
+                <form [formGroup]="searchForm">
+                    <formly-form [model]="canidateSearchModel" [fields]="canidateSearchFields" [form]="searchForm"></formly-form>
+                    <div class="align-right">
+                        <button class="btn btnCancel btn-primary submit-btn" (click)="onClickBtnSearch()">
+                            {{ 'candidate.btn.search' | translate }}
+                        </button>
+                        <button *ngIf="assignHRExists" class="btn btnCancel btn-primary submit-btn" (click)="onAssignHR()">
+                            {{ 'candidate.btn.assign_hr' | translate }}
+                        </button>
+                        <button *ngIf="uploadCVExists" class="btn btnCancel btn-primary submit-btn" (click)="onUploadCV()">
+                            {{ 'candidate.btn.upload_cv' | translate }}
+                        </button>
+                        <button *ngIf="exportExists" class="btn btnCancel btn-primary submit-btn" (click)="onExport()">
+                            {{ 'candidate.btn.export' | translate }}
+                        </button>
+                        <button *ngIf="importExists" class="btn btnCancel btn-primary submit-btn" (click)="onImport()">
+                            {{ 'candidate.btn.import' | translate }}
+                        </button>
+                        <button class="btn btnSave btn-primary submit-btn" (click)="onAddCandidate()">
+                            {{ 'candidate.btn.add_new' | translate }}
+                        </button>
+                    </div>
+                </form>
+            </ng-container>
+        </div>
+    </div>
+    <div class="box-u mt-3">
+        <div class="row">
+            <p><b>{{'candidate.title.list' | translate}}</b></p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card table-responsive">
+                    <table class="table table-bordered table-striped table-hover custom-table datatable" [ngClass]="this.userStorage.isRoleCTV() ? 'table-result':'table-result-over'">
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{'common.pagination.no' | translate}}</th>
+                                <th class="text-center" *ngIf="assignHRExists">
+                                    <input type="checkbox" (click)="onClickCheckBox($event, -1)" [checked]="checkAll">
+                                </th>
+                                <th class="text-center">{{'candidate.model.candidate_code' | translate }}</th>
+                                <th class="text-center">{{'candidate.model.full_name' | translate }}</th>
+                                <th class="text-center">{{'candidate.model.birth_date' | translate }}</th>
+                                <th class="text-center">{{'candidate.model.gender' | translate }}</th>
+                                <th class="text-center">{{'candidate.model.phone' | translate }}</th>
+                                <th class="text-center">{{'candidate.model.email' | translate}}</th>
+                                <th class="text-center">{{'candidate.model.apply_position' | translate}}</th>
+                                <th class="text-center">{{'candidate.model.technology' | translate}}</th>
+                                <th *ngIf="!isRoleCTV" class="text-center">{{'candidate.model.hr_in_charge' | translate}}</th>
+                                <th class="text-center">{{'candidate.model.create_date' | translate }}</th>
+                                <th *ngIf="!isRoleCTV" class="text-center">{{'candidate.model.status' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of candidateModels; let i = index">
+                                <td class="white-space-wrap w-2 text-center" >{{ ((page > 1 ? page - 1 : 0) * pageSize + 1) + i }}</td>
+                                <td class="white-space-wrap w-3 text-center" *ngIf="assignHRExists"><input type="checkbox" (click)="onClickCheckBox($event,i)" [checked]="item.checked"/></td>
+                                <td class="white-space-wrap w-5">{{item.candidate_code}}</td>
+                                <td class="white-space-wrap w-10">
+                                    <a *ngIf="item.can_view_detail" class="cursor-pointer text-blue"(click)="onDetailCandidate(item)">{{item.full_name}}</a>
+                                    <p *ngIf="!item.can_view_detail">{{item.full_name}}</p>
+                                </td>
+                                <td class="white-space-wrap w-5 text-center">{{item.birth_date|date:'dd/MM/yyyy'}}</td>
+                                <td class="white-space-wrap w-5 text-center">{{getNameGender(item.gender)}}</td>
+                                <td class="white-space-wrap w-5 text-end">{{item.phone}}</td>
+                                <td class="white-space-wrap w-10">{{item.email}}</td>
+                                <td class="white-space-wrap w-10">{{item.apply_position?.name}}</td>
+                                <td class="white-space-wrap w-5">{{item.technology?.name}}</td>
+                                <td *ngIf="!isRoleCTV" class="white-space-wrap w-7">{{getNameHRInCharge(item.in_charge_user)}}</td>
+                                <td class="white-space-wrap w-10 text-center">{{item.create_time|date:'dd/MM/yyyy HH:mm:ss':'GMT'}}</td>
+                                <td *ngIf="!isRoleCTV" class="white-space-wrap w-20">{{item.status?.name}}</td>
+                            </tr>
+                            <tr *ngIf="totalRecord<1">
+                                <td colspan="13">
+                                    <div class="text-center">
+                                        <h2 class="text-black">{{'common.searchResultEmpty' | translate}}</h2>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="totalRecord>0" class="mt-3 col-15">
+                    <app-ta-paginator (onPageChange)="onPageChange($event)" [page]="page" [pageSize]="pageSize"
+                                      [totalElements]="totalRecord" [pageSizeOptions]="pageSizeOptions" (onPageSizeChange)="onChangePageSize($event)">
+                    </app-ta-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

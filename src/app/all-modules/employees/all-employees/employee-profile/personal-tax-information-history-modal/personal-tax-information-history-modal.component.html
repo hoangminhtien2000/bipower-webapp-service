@@ -1,0 +1,57 @@
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"employees.history-tax.title"|translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <div class="col-md-12">
+                    <div class="table-hover">
+                        <table class="table table-striped table-hover custom-table datatable dataTable text-center">
+                            <thead>
+                            <tr>
+                                <th>{{"employees.history-tax.daysChange"|translate}}</th>
+                                <th>{{"employees.history-tax.tax"|translate}}</th>
+                                <th>{{"employees.history-tax.days-start-paying-tax"|translate}}</th>
+                                <th>{{"employees.history-tax.days-end-paying-tax"|translate}}</th>
+                                <th>{{"employees.history-tax.taxSalary"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngIf="history?.length == 0">
+                                <td colspan="5"
+                                    class="text-center">{{'employees.list.record_not_found' | translate}}</td>
+                            </tr>
+                            <tr *ngFor="let row of getList();let i = index">
+                                <td>{{ row.createdAt | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{ row.taxCode }}</td>
+                                <td>{{ row.startTimeAt }}</td>
+                                <td>{{ row.endTimeAt }}</td>
+                                <td>{{ row.salaryToTax | customCurrency }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div *ngIf="history?.length > 0" class="d-flex justify-content-between">
+                            <ngb-pagination
+                                    [(page)]="pageIndex"
+                                    [boundaryLinks]="true"
+                                    [maxSize]="5"
+                                    [rotate]="true"
+                                    [pageSize]="pageSize"
+                                    [collectionSize]="history?.length"
+                                    (pageChange)="pageChange($event)"></ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-end">
+                <button class="btn btn-secondary"
+                        (click)="close()">{{"employees.history-tax.btnClose"|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->

@@ -1,0 +1,50 @@
+<div class="content container-fluid p-4">
+    <div class="page-header" *ngIf="showHeader">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title"> {{ "timeManager.presence_management" | translate }}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item back-link" [routerLink]="'/layout/timemanagement/presencemanagement'">{{ "timeManager.summary.working_day" | translate }}</li>
+                    <li class="breadcrumb-item active-link">{{ "timeManager.summary.working_history" | translate }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content container-fluid bg-white">
+        <div class="p-3 pt-4" style="position: relative">
+            <div class="float-left">
+                <button class="currentTime today {{disableCurrentTime() ? ' cursor-not-allowed' : ''}}" [disabled]="disableCurrentTime()" (click)="currentTime()"><span class="current-month-title {{disableCurrentTime() ? '' : 'current-month-title-color'}}">
+                    {{ "timeManager.summary.current_month" | translate }}</span></button>
+            </div>
+            <div class="float-left">
+                <i class="btn fa fa-caret-left float-left" (click)="previousTime()"></i><span class="p-1 header-time float-left {{!disableCurrentTime() ? '' : 'bold-text'}}">{{ "timeManager.summary.month" | translate }} {{renderTime().month}}, {{renderTime().year}}</span><i class="float-left btn fa fa-caret-right {{this.disableNextTime() ? 'disable-next-time' : ''}}" (click)="nextTime()"></i>
+            </div>
+            <div style="position: absolute; right: 0; padding-right: 19px" *ngIf="canSearchByEmployee() && employees.length > 0">
+                <div class="form-group">
+                    <ng-select2
+                            [data]="employees"
+                            [value]="employeeId"
+                            (valueChanged)="searchByEmployee($event)"
+                            [width]="'250'">
+                    </ng-select2>
+                </div>
+            </div>
+        </div>
+        <div class="clear-both pt-3">
+            <div class="list-type-item float-left"><i class='presence-status-attendance fa fa-square'></i> 
+                {{ "timeManager.summary.in_the_office" | translate }}</div>
+            <div class="list-type-item float-left"><i class='presence-status-remote fa fa-square'></i> 
+                {{ "timeManager.summary.remote" | translate }}</div>
+            <div class="list-type-item float-left"><i class='presence-status-onsite fa fa-square'></i>  
+                {{ "timeManager.summary.onsite" | translate }}</div>
+            <div class="list-type-item float-left"><i class='presence-status-ot fa fa-square'></i> 
+                {{ "timeManager.summary.overtime" | translate }}</div>
+            <div class="list-type-item float-left"><i class='presence-status-leave fa fa-square'></i> 
+                {{ "timeManager.summary.off" | translate }}</div>
+        </div>
+        <full-calendar *ngIf="calendarOptions" class="p-3 clear-both pb-4"
+                       #fullcalendar
+                       [options]="calendarOptions">
+        </full-calendar>
+    </div>
+</div>

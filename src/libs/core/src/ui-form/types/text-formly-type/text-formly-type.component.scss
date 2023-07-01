@@ -1,0 +1,115 @@
+::ng-deep span.bold-text {
+    font-weight: bold;
+    color: #212529;
+}
+::ng-deep span.text-bolder{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+::ng-deep span.form-control {
+    border: none;
+    padding-left: 0;
+    color: #212529;
+}
+
+::ng-deep label.form-control-label.control-label {
+    color: #707070;
+}
+
+::ng-deep span.dot-icon {
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display:inline-block;
+}
+
+::ng-deep span.dot-icon.red {
+    background-color: #cc3e35;
+}
+
+::ng-deep span.dot-icon.green {
+    background-color: #4dc033;
+}
+
+::ng-deep span.dot-icon.yellow {
+    background-color: #f29f24;
+}
+
+::ng-deep span.dot-icon.gray {
+    background-color: #b4b4b4;
+}
+
+div.form-control {
+    border: none;
+    padding-left: 0;
+    color: #212529;
+}
+
+div.form-control.labelUp,
+span.form-control.labelUp
+{
+    margin-top: -10px;
+}
+
+span.form-control.labelUp{
+    font-weight:bold;
+}
+
+div.form-control.labelDown,
+span.form-control.labelDown
+{
+    margin-top: 0px;
+}
+
+div.form-control.label-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+:host {
+    .form-control {
+        height: auto;
+        min-height: calc(1.5em + 0.75rem + 2px);
+        background: transparent;
+    }
+
+    span {
+        white-space: pre-line;
+    }
+}
+
+.inform-view {
+    background: #DBE2F3;
+    color: #4674eb;
+    border-radius: 5px;
+}
+
+.inform-icon {
+    color: #2347A5;
+    font-size: 16px;
+}
+
+.warning-view {
+    background: bisque;
+    color: orange;
+    border-radius: 5px;
+}
+
+.warning-icon {
+    // color: #2347A5;
+    font-size: 16px;
+}
+
+.error-view {
+  background: var(--color-accent-red-4);
+  color: var(--color-accent-red-2);
+  border-radius: 5px;
+}
+
+.error-icon {
+   color: var( --color-accent-red-2);
+  font-size: 16px;
+}
+

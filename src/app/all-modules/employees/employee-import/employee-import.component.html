@@ -1,0 +1,106 @@
+<div class="content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'candidate.import.title' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            routerLink="/layout/employees/employeelist">{{'candidate.import.employeeList' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'candidate.import.title' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center">
+            <span class="title_lable">{{'candidate.import.download_template' | translate}}</span>&nbsp;&nbsp;
+            <span class="text-blue cursor-pointer"> <a (click)="downloadTemplate()">{{'candidate.import.in_here'|translate}}</a></span>
+        </div>
+    </div>
+    <div class="dl-content p-3">
+        <ngx-file-drop (onFileDrop)="dropped($event)"
+                       accept="xlsx,xls"
+                       dropZoneLabel="">
+            <ng-template ngx-file-drop-content-tmp>
+                <div class="text-center">
+                    <form action="http://localhost:4200" method="POST" [formGroup]="form"
+                          enctype="application/x-www-form-urlencoded">
+                        <input accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                               style="height: 0; width: 0; position: absolute;top: 1000px;" type="file" #fileInput
+                               (change)="handleFile($event)"/>
+                    </form>
+                    <div class="d-flex align-items-center" *ngIf="!refileView">
+                        <p class="title_lable">{{'candidate.import.drag_and_drop_file'|translate}}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <p class="ml-3 mr-3 title_lable lable-or">{{'candidate.import.or'|translate}}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary p-ml-2" style="margin-top: -15px"
+                                (click)="fileInput.click()">
+                            {{'candidate.import.choose_file'|translate}}
+                        </button>
+                    </div>
+                    <div class="reDown-button" *ngIf="refileView">
+                        <div class="label-file-up d-flex justify-content-center align-items-center"><label
+                                class="name-file-upload">{{fileNameTemplate}}</label></div>
+                        <div class="btn-load-again d-flex justify-content-center align-items-center">
+                            <button class="btn btn-sm btn-primary p-ml-2"
+                                    (click)="fileInput.value = '' ;fileInput.click()">
+                                <i class="fas fa-file-upload"></i>{{'candidate.import.re_up_file'|translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="mt-4 row filter-row">
+            <ng-container>
+                <div class="align-right">
+                    <button class="btn btnCancel btn-primary submit-btn" (click)="comeBackEmployeeList()">
+                        {{'candidate.btn.come_back' | translate}}
+                    </button>
+                    <button class="btn btnSave btn-primary submit-btn" (click)="importFileEmployee()">
+                        {{'candidate.btn.import' | translate}}
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <div class="text-center" *ngIf="isLoadingSpiner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="box-u" *ngIf="resultImport">
+            <div class="mt-4">
+                <span class="tittle_header">{{'candidate.import.result_import' |translate}}</span>
+                <div class="row">
+                    <div class="col-2">
+                        <p class="title-total">{{'candidate.import.total_record'|translate}}: {{totalRows}}</p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-3">
+                        <p class="title-success">{{'candidate.import.total_record_success'|translate}}
+                            : {{totalRowPass}}</p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-3">
+                        <p class="title-failure">{{'candidate.import.total_record_failure'|translate}}
+                            : {{totalRowFail}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <p class="title-total">{{'candidate.import.result'|translate}}: </p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-8">
+                        <a (click)="downloadFileResponse()"
+                           class="name-file-upload cursor-pointer">{{fileName}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-common-dialog #confirmDialog (confirmAction)="confirmImportSuccess()"></app-common-dialog>
+

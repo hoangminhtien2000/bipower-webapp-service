@@ -1,0 +1,33 @@
+{
+  "validations": {
+    "afterThan": "{{field}} không vượt quá {{target}}",
+    "between": "{{field}} từ {{min}} - {{max}}",
+    "email": "Không đúng định dạng email",
+    "max": "{{field}} không vượt quá {{value}}",
+    "maxDate": "{{field}} không được lớn hơn {{date}}",
+    "maxDate_v2": "{{field}} phải nhỏ hơn hoặc bằng {{date}}",
+    "maxLength": "{{field}} không vượt quá {{value}} ký tự",
+    "min": "{{field}} phải lớn hơn {{value}}",
+    "minDate": "{{field}} không được nhỏ hơn {{date}}",
+    "minLength": "{{field}} ít nhất {{value}} ký tự",
+    "minValue": "{{field}} không được nhỏ hơn {{value}}",
+    "multiple": "{{field}} phải bội số của {{step}}",
+    "mustNotSpecial": "Không cho phép gói đặc biệt",
+    "notenoughSerials": "[BCCS3_STOCK_TRANS_00136]: Chưa nhập đủ serial cho mặt hàng: {{list}} ",
+    "onlyNumber": "{{field}} chỉ cho phép nhập số.",
+    "pattern": "{{field}} sai định dạng.",
+    "password_pattern":  "{{field}} không đúng định dạng. Mật khẩu phải thỏa mãn điều kiện: Có độ dài từ 8 ký tự trở lên; Chứa ít nhất một ký tự số, một chữ in hoa, một chữ in thường và một trong các ký tự đặc biệt: @$!%*?&#_",
+    "required": "{{field}} không được để trống.",
+    "special": "[BCCS3_SPECIFIC_ 67]: Chỉ được phép nhập các ký tự 0-9, a-z, A-Z,_ ",
+    "maxDateCurrentDay": "{{field}} không được phép lớn hơn ngày hiện tại",
+    "maxDateCurrentMonth": "{{field}} không được phép lớn hơn tháng hiện tại",
+    "maxDateCurrentMonth_v2": "Không chọn tháng lớn hơn tháng hiện tại",
+    "minTimeCurrent": "Thời gian không được nhỏ hơn {{value}}",
+    "equalsPassword": "{{field1}} và {{field2}} phải giống nhau.",
+    "dateFromTo": "{{field}} từ không được lớn hơn {{field}} đến.",
+    "controlMessage": {
+      "required": "Không được để trống",
+      "maxlength": "Không cho phép nhập quá {{requiredLength}} ký tự"
+    }
+  }
+}

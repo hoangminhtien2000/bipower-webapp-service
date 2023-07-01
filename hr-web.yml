@@ -1,0 +1,10 @@
+version: '3'
+services:
+  webapp-hr:
+    image: 192.168.3.45:8297/webapp-hr:1.0
+    ports:
+      - 8100:8100
+    deploy:
+      restart_policy:
+        condition: none
+      replicas: 1

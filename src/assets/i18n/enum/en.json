@@ -1,0 +1,22 @@
+{
+    "ENUM": {
+        "GENDER": {
+            "MALE": "Female",
+            "FEMALE": "Female",
+            "OTHER": "Other"
+        },
+        "RELATIONSHIP": {
+            "GrandFather":  "Grand Father",
+            "GrandMother":  "Grand Mother",
+            "Father":  "Father",
+            "Mother":  "Mother",
+            "Brother":  "Brother",
+            "Sister":  "Sister"
+        },
+        "IDENTITY_CARD_TYPE":{
+            "CMT": "CMT",
+            "CCCD": "CCCD",
+            "PASSPORT": "PASSPORT"
+        }
+    }
+}

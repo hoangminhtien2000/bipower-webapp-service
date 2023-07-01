@@ -1,0 +1,14 @@
+{
+  "TEAM_FEATURE": {
+    "FIELDS": {
+      "TEAM_NAME": "Tên nhóm",
+      "TEAM_TYPE": "Loại nhóm",
+      "TECH": "Công nghệ",
+      "DOMAIN": "Domain"
+    },
+    "BUTTONS": {
+      "SEARCH": "Tìm kiếm",
+      "CREATE_NEW": "Thêm mới"
+    }
+  }
+}

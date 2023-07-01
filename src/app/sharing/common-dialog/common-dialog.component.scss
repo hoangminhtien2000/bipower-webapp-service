@@ -1,0 +1,272 @@
+@import "~src/style/kit/color";
+
+.close {
+    cursor: pointer;
+}
+
+.warning {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 6px !important;
+    border: none;
+
+    .modal-footer {
+        position: unset;
+        border-top: unset;
+    }
+
+    .box-header {
+        color: #d4820a;
+        font-weight: bold;
+        border-bottom: none;
+
+        span {
+            cursor: pointer;
+            color: #d4820a;
+        }
+
+        .modal-title {
+            font-size: 16px;
+        }
+    }
+
+    .box-body {
+        .icon-left {
+            float: left;
+            padding: 0 20px;
+        }
+
+        p {
+            padding: 10px;
+            margin-bottom: 0;
+        }
+    }
+
+    .btn-warning-cancel {
+        color: black;
+        border-color: #f29f24;
+        &:hover {
+            background: transparent;
+        }
+    }
+
+    .btn-warning-continue {
+        color: #fff;
+        background: #f29f24;
+
+        &:hover {
+            border-color: #d4820a;
+        }
+
+        &:focus {
+            box-shadow: none
+        }
+    }
+}
+
+.info {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 6px !important;
+    border: none;
+
+    .modal-footer {
+        position: unset;
+        border-top: unset;
+    }
+
+    .box-header {
+        background: #ffe8c6;
+        text-transform: uppercase;
+        color: #1a66c3;
+        font-weight: bold;
+        border-bottom: none;
+
+        span {
+            cursor: pointer;
+            color: #1a66c3;
+        }
+
+        .modal-title {
+            font-size: 16px;
+        }
+    }
+
+    .box-body {
+        .icon-left {
+            float: left;
+            padding: 0 20px;
+        }
+
+        p {
+            padding: 10px;
+            margin-bottom: 0;
+        }
+    }
+
+    .btn-info-cancel {
+        color: #1a66c3;
+
+        &:hover {
+            background: transparent;
+            border-color: #1a66c3;
+        }
+    }
+
+    .btn-info-continue {
+        color: #fff;
+        background: #1a66c3;
+
+        &:hover {
+            border-color: #1a66c3;
+        }
+
+        &:focus {
+            box-shadow: none
+        }
+    }
+}
+
+.error {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 6px !important;
+    border: none;
+
+    .modal-footer {
+        position: unset;
+        border-top: unset;
+    }
+
+    .box-header {
+        background: #ffe8c6;
+        text-transform: uppercase;
+        color: #d83636;
+        font-weight: bold;
+        border-bottom: none;
+
+        span {
+            cursor: pointer;
+            color: #d83636;
+        }
+
+        .modal-title {
+            font-size: 16px;
+        }
+    }
+
+    .box-body {
+        .icon-left {
+            float: left;
+            padding: 0 20px;
+        }
+
+        p {
+            padding: 10px;
+            margin-bottom: 0;
+        }
+    }
+
+    .btn-error-cancel {
+        color: #d83636;
+
+        &:hover {
+            background: transparent;
+            border-color: #d83636;
+        }
+    }
+
+    .btn-error-continue {
+        color: #fff;
+        background: #d83636;
+
+        &:hover {
+            border-color: #d83636;
+        }
+
+        &:focus {
+            box-shadow: none
+        }
+    }
+}
+
+.success {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 6px !important;
+    border: none;
+
+    .modal-footer {
+        position: unset;
+        border-top: unset;
+    }
+
+    .box-header {
+        background: #ffe8c6;
+        text-transform: uppercase;
+        color: #0ec254;
+        font-weight: bold;
+        border-bottom: none;
+
+        span {
+            cursor: pointer;
+            color: #0ec254;
+        }
+
+        .modal-title {
+            font-size: 16px;
+        }
+    }
+
+    .box-body {
+        .icon-left {
+            float: left;
+            padding: 0 20px;
+        }
+
+        p {
+            padding: 10px;
+            margin-bottom: 0;
+        }
+    }
+
+    .btn-cancel {
+        color: #0ec254;
+
+        &:hover {
+            background: transparent;
+            border-color: #0ec254;
+        }
+    }
+
+    .btn-continue {
+        color: #fff;
+        background: #0ec254;
+
+        &:hover {
+            border-color: #0ec254;
+        }
+
+        &:focus {
+            box-shadow: none
+        }
+    }
+}
+
+.info, .warning, .success, .error {
+    .header-info {
+        background: $color-primary-7;
+    }
+
+    .header-error {
+        background: $color-accent-red-4;
+    }
+
+    .header-warning {
+        background: $color-accent-orange-4;
+    }
+
+    .header-success {
+        background: $color-accent-green-4;
+    }
+
+}
+.icon-close{
+  font-size: 25px;
+}

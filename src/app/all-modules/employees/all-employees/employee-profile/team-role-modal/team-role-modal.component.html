@@ -1,0 +1,127 @@
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"EmployeeProfile.teamAndRole.title" | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form (ngSubmit)="onClickButtonSave()" [formGroup]="teamRolesForm" novalidate>
+                    <div formArrayName="list">
+                        <ng-container *ngFor="let teamRole of teamRoles.controls; let i = index;">
+                            <div class="card">
+                                <h3 *ngIf="isShow" class="card-title m-0"><a *ngIf="teamRoles.controls?.length > 1" class="delete-icon m-t-5 m-r-5" (click)="removeItem(i)"><i class="fa fa-trash-o"></i></a></h3>
+                                <div class="card-body row" [formGroup]="teamRole">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{{ 'EmployeeProfile.teamAndRole.team' | translate }}<span class="text-danger">*</span></label>
+                                            <select class="form-select form-control" name="teamId" 
+                                            [class.is-invalid]="(teamRole.controls['teamId'].dirty 
+                                                || teamRole.controls['teamId']?.touched) 
+                                                && teamRole.controls['teamId']?.invalid"
+                                                formControlName="teamId">
+                                                <option value="">{{ 'EmployeeProfile.teamAndRole.teamPlaceholder' | translate }}</option>
+                                                <option *ngFor="let team of teams; let i = index;" [value]="team.id">{{ team.teamName }}</option>
+                                            </select>
+                                            <div
+                                                *ngIf="(teamRole.controls['teamId']?.touched 
+                                                ||  teamRole.controls['teamId']?.dirty)
+                                                 && teamRole.controls['teamId']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.teamAndRole.teamRequire" | translate}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{{ 'EmployeeProfile.teamAndRole.role' | translate }}<span class="text-danger">*</span></label>
+                                            <p-multiSelect [options]="oauthRoles" 
+                                                [class.is-invalid]="teamRole.controls['roleId']?.invalid && teamRole.controls['roleId']?.touched"
+                                                [defaultLabel]="'EmployeeProfile.teamAndRole.rolePlaceholder' | translate" [showToggleAll]="false" 
+                                                formControlName="roleIds" [style]="{'width':'100%'}"
+                                                optionLabel="name" [virtualScroll]="false" [filter]="true"
+                                                [itemSize]="30" class="multiselect-custom-virtual-scroll">
+                                                    <ng-template let-item pTemplate="item">
+                                                        <div class="">
+                                                            <div>{{item.value.name}}</div>
+                                                        </div>
+                                                    </ng-template>
+                                            </p-multiSelect>
+                                            <div
+                                                *ngIf="(teamRole.controls['roleIds']?.touched 
+                                                ||  teamRole.controls['roleIds']?.dirty)
+                                                 && teamRole.controls['roleIds']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.teamAndRole.roleRequire" | translate}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="isShow" class="add-more text-info">
+                        <a (mousedown)="addItem()"><i class="fa fa-plus"></i> {{"EmployeeProfile.bank.addMore" | translate}} </a>
+                    </div>
+                    <div class="submit-section mb-3 d-flex justify-content-end">
+                        <button class="btn btn-secondary submit-btn btnCancel" type="button" (click)="onClickCancel()">{{"EmployeeProfile.cancel" | translate}}</button>
+                        <button class="btn btn-primary submit-btn btnSave" type="button" (click)="onClickButtonSave()">{{"EmployeeProfile.save" | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [id]="idModal + 'team_roles_modal_confirm'" style="background: rgba(37, 41, 41, 0.7);" class="modal custom-modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'EmployeeProfile.confirmApproveModal.title' | translate }}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form novalidate>
+                    <h4>{{ 'EmployeeProfile.confirmApproveModal.content' | translate }}</h4>
+                </form>
+                <div class="submit-section mb-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary submit-btn btnCancel" tabindex="0" (click)="onClickCancelConfirm()">{{"EmployeeProfile.cancel" | translate}}</button>
+                    <button class="btn btn-primary submit-btn btnSave" tabindex="0" (click)="onCooConfirm()">{{"EmployeeProfile.confirm" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [id]="idModal + 'team_roles_modal_warning'" style="background: rgba(37, 41, 41, 0.7);" class="modal custom-modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'EmployeeProfile.teamAndRole.warning' | translate }}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="type == 'PO'" class="modal-body">
+                <form novalidate>
+                    <h4>{{ 'EmployeeProfile.teamAndRole.validatePO_PRE' | translate: { 'teamName': teamName } }}
+                        <a class="text-info" [routerLink]="'/layout/teams/' + teamIdSelected" target="_blank" rel="noopener noreferrer">{{ 'EmployeeProfile.teamAndRole.here' | translate }}</a>
+                        {{ 'EmployeeProfile.teamAndRole.validatePO_SUF' | translate }}
+                    </h4>
+                </form>
+            </div>
+            <div *ngIf="type == 'LEADER'" class="modal-body">
+                <form novalidate>
+                    <h4>{{ 'EmployeeProfile.teamAndRole.validateLEADER' | translate: { 'teamName': teamName } }}
+                    </h4>
+                </form>
+                <div class="submit-section mb-3 d-flex justify-content-end">
+                    <button class="btn btn-secondary submit-btn btnCancel" tabindex="0" (click)="onCloseModal()">{{"EmployeeProfile.cancel" | translate}}</button>
+                    <button class="btn btn-primary submit-btn btnSave" tabindex="0" (click)="onConfirmModal()">{{"EmployeeProfile.confirm" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

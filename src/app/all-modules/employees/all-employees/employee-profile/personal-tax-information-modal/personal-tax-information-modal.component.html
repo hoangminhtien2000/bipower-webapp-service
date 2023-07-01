@@ -1,0 +1,172 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'EmployeeProfile.personalTax.title' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="personalTaxInfomationForm" novalidate>
+                    <div class="row">
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'EmployeeProfile.personalTax.taxCode' | translate}} <span class="text-danger">*</span></label>
+                                <input type="text" maxlength="10"
+                                [placeholder]="'EmployeeProfile.personalTax.placholderCode'|translate"
+                                [class.is-invalid]="(controls['taxCode']?.touched 
+                                    || controls['taxCode']?.dirty) 
+                                    && controls['taxCode']?.invalid"
+                                formControlName="taxCode"  (blur)="onBlur('taxCode')" class="form-control">
+                                <div *ngIf="(controls['taxCode']?.touched 
+                                    ||  controls['taxCode']?.dirty)
+                                        && controls['taxCode']?.errors?.required">
+                                    <small class="text-danger"> {{'EmployeeProfile.personalTax.requireTaxCode' | translate}}</small>
+                                </div>
+                                <div *ngIf="(controls['taxCode']?.touched 
+                                    ||  controls['taxCode']?.dirty)
+                                        && controls['taxCode']?.errors?.maxlength">
+                                    <small class="text-danger"> {{'EmployeeProfile.personalTax.requireMaxLenTaxCode' | translate}}</small>
+                                </div>
+                                <div *ngIf="(controls['taxCode']?.touched 
+                                    ||  controls['taxCode']?.dirty)
+                                        && controls['taxCode']?.errors?.pattern">
+                                    <small class="text-danger"> {{'EmployeeProfile.personalTax.requirePatternTaxCode'| translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'EmployeeProfile.personalTax.startTimeAt' | translate}} <span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="startTimeAt" maxlength="7"
+                                    [class.is-invalid]="(controls['startTimeAt']?.touched 
+                                    || controls['startTimeAt']?.dirty) 
+                                    && controls['startTimeAt']?.invalid" 
+                                    (blur)="onBlur('startTimeAt')" 
+                                    class="form-control datetimepicker" 
+                                    [maxDate]="currentDate"
+                                    type="text" bsDatepicker type="text"
+                                    placeholder="MM/YYYY"
+                                        [bsConfig]="{ dateInputFormat: 'MM/YYYY',
+                                        returnFocusToInput: true, 
+                                        minMode: 'month', 
+                                        isAnimated: true }">
+                                </div>
+                                <div *ngIf="(controls['startTimeAt']?.dirty || controls['startTimeAt']?.touched) && controls['startTimeAt']?.errors?.required">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requireStartTime' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['startTimeAt']?.errors?.maxDate">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requireMaxStartTime' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['startTimeAt']?.errors?.dateFormat">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requirePatternStartTime' | translate}}</small>
+                                </div>
+                                <div *ngIf="personalTaxInfomationForm?.errors?.fromToDate">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requireFromToDateStartTime' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'EmployeeProfile.personalTax.endTimeAt' | translate}}</label>
+                                <div class="cal-icon"> 
+                                    <input formControlName="endTimeAt" maxlength="7"
+                                    [class.is-invalid]="(controls['endTimeAt']?.touched 
+                                    || controls['endTimeAt']?.dirty) 
+                                    && controls['endTimeAt']?.invalid" 
+                                    (blur)="onBlur('endTimeAt')" 
+                                    class="form-control datetimepicker" 
+                                    type="text" bsDatepicker type="text"
+                                    [maxDate]="currentDate"
+                                    placeholder="MM/YYYY"
+                                        [bsConfig]="{ dateInputFormat: 'MM/YYYY',  
+                                        returnFocusToInput: true, 
+                                        minMode: 'month', 
+                                        isAnimated: true }">
+                                </div>
+                                <div *ngIf="(controls['endTimeAt']?.dirty || controls['endTimeAt']?.touched) && controls['endTimeAt']?.errors?.required">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.title' | translate}}Tháng kết thúc đóng thuế bắt buộc nhập</small>
+                                </div>
+                                <div *ngIf="controls['endTimeAt']?.errors?.maxDate">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.title' | translate}}Tháng kết thúc đóng thuế không được lớn hơn tháng năm hiện tại</small>
+                                </div>
+                                <div *ngIf="controls['endTimeAt']?.errors?.dateFormat">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.title' | translate}}Tháng kết thúc đóng BHXH không đúng định dạng dd/mm/yyyy.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'EmployeeProfile.personalTax.salaryToTax' | translate}} <span class="text-danger">*</span></label>
+                                <input input-currency formControlName="salaryToTax" maxlength="13"
+                                [class.is-invalid]="(controls['salaryToTax']?.touched 
+                                    || controls['salaryToTax']?.dirty) 
+                                    && controls['salaryToTax']?.invalid"
+                                placeholder="{{'EmployeeProfile.personalTax.phSalaryToTax' | translate}}"
+                                (blur)="onBlur('salaryToTax')" class="form-control" type="text">
+                                <div *ngIf="(controls['salaryToTax']?.dirty || controls['salaryToTax']?.touched) && controls['salaryToTax']?.errors?.required">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requireSalaryToTax' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['salaryToTax']?.errors?.pattern">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requirePatternSalaryToTax' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['salaryToTax']?.errors?.maxlength">
+                                    <small class="text-danger">{{'EmployeeProfile.personalTax.requireMaxLenSalaryToTax' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10">
+                            <div class="d-flex mb-3">
+                                <div class="align-center w-25 pt-2">
+                                    <label class="mr-3 align-items-center">{{'EmployeeProfile.personDepencency.list' | translate}}</label>
+                                </div>
+                                <div class="w-50">
+                                    <p-multiSelect (click)="onClickMutil()" class="w-100" [options]="familyContacts" 
+                                    [defaultLabel]="'EmployeeProfile.personDepencency.placeholderPerson' | translate" [showToggleAll]="false" 
+                                    formControlName="familyContacts"
+                                    optionLabel="name" [virtualScroll]="false" [filter]="true"
+                                    [itemSize]="30" class="multiselect-custom-virtual-scroll">
+                                        <ng-template let-item pTemplate="item">
+                                            <div class="">
+                                                <div>{{item.value.name}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+                            <table class="table custom-table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{{"EmployeeProfile.personDepencency.fullName" | translate}}</th>
+                                        <th>{{"EmployeeProfile.personDepencency.relationship" | translate}}</th>
+                                        <th>{{"EmployeeProfile.personDepencency.birthday" | translate}}</th>
+                                        <th>{{"EmployeeProfile.personDepencency.gender" | translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of controls['familyContacts'].value;let i = index">
+                                        <td class="">{{row.name}}</td>
+                                        <td class="">{{ getRelationship(row.relationship) | translate }}</td>
+                                        <td class="">{{row.birthday | date: 'dd/MM/yyyy'}}</td>
+                                        <td class="">{{ getGender(row.gender) | translate}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="submit-section m-3 d-flex justify-content-end">
+                        <button class="btn btn-secondary submit-btn btnCancel" (click)="onCancel()">{{"EmployeeProfile.cancel" | translate}}</button>
+                        <button class="btn btn-primary submit-btn btnSave" (click)="onSave()">{{"EmployeeProfile.save" | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -->

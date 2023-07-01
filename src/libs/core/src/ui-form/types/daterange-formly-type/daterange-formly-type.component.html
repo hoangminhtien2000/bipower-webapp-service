@@ -1,0 +1,9 @@
+<div class="form-group datePicker {{to.removeFormlyFieldTag? field.className: ''}}" remove-wrapper>
+  <label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+  <div class="cal-icon">
+  <input type="text" [isOpen]="isOpen" placeholder="{{to.placeholder}}" [formlyAttributes]="field"
+    [formControl]="formControl" class="form-control" bsDaterangepicker
+  [bsConfig]="{ rangeInputFormat: 'DD/MM/YYYY', showWeekNumbers:false  }" (blur)="onBlur($event)"
+    [formlyAttributes]="field">
+  </div>
+</div>

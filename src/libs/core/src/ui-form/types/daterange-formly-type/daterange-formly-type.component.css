@@ -1,0 +1,17 @@
+.datePicker {
+    position: relative;
+  }
+  span.icon-date {
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    cursor: pointer;
+  }
+
+  span.icon-date > img {
+    width: 20px;
+    }
+    .ng-invalid.ng-touched {
+    border: 1px solid red;
+    }
+  

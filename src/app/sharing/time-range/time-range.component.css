@@ -1,0 +1,15 @@
+.selector-wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.wrap-range {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.joiner {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

@@ -1,0 +1,61 @@
+<div>
+    <div class="modal-header header-bg">
+        <div class="header-content">
+            <h4>{{'workingOnleave.btn.cancelRegister' | translate}}</h4>
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="formGroup">
+            <label class="col-form-label">{{'workingOnleave.list.onleaveTime' | translate}}<span
+                    class="text-danger">*</span></label>
+            <div class="input-group">
+                <input type="text"
+                       ngxDaterangepickerMd
+                       [minDate]="this.today"
+                       [timePicker]="true"
+                       [autoApply]="false"
+                       [locale]="{applyLabel: 'Xác nhận', format: 'DD/MM/YYYY, HH:mm'}"
+                       [timePickerSeconds]="false"
+                       [timePickerIncrement]="5"
+                       [timePicker24Hour]="true"
+                       [isInvalidDate]=""
+                       [(ngModel)]="leave.leaveTime"
+                       (change)="onDateRangePickerChanged()"
+                       formControlName="leaveTime"
+                       class="form-control"/>
+                <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+            </div>
+            <label class="col-form-label">{{'workingOnleave.list.rejectReason' | translate}}<span
+                    class="text-danger">*</span></label>
+            <textarea class="w-100 form-control"
+                      placeholder="{{'workingOnleave.list.phRejectReason' | translate}}"
+                      type="text" maxlength="500"
+                      formControlName="note"
+                      [(ngModel)]="note"></textarea>
+            <div *ngIf="formGroup.controls['note'].invalid && (formGroup.controls['note'].dirty || formGroup.controls['note'].touched)"
+                 class="text-danger">
+                <small *ngIf="formGroup.controls['note'].errors.required">
+                    {{'workingOnleave.list.rejectReasonRequired' | translate}}
+                </small>
+                <small *ngIf="formGroup.controls['note'].hasError('maxlength')">
+                    {{'workingOnleave.list.rejectReasonMaxlength' | translate}}
+                </small>
+            </div>
+        </form>
+    </div>
+    <div class="text-center d-flex justify-content-end p-3">
+        <button class="btn btn-secondary btnCancel m-r-5" type="button"
+                (click)="closeModal()">{{'workingOnleave.btn.cancel' | translate}}</button>
+        <button class="btn btn-secondary btnSave m-r-5" type="button" [disabled]="!formGroup.valid"
+                (click)="confirm()">{{'workingOnleave.btn.send' | translate}}</button>
+    </div>
+</div>

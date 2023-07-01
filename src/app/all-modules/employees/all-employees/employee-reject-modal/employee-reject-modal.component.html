@@ -1,0 +1,43 @@
+
+<!-- Add Employee Modal -->
+<div [id]="idModal" class="modal custom-modal fade blur_form" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md mt-3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Từ chối xác nhận</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                < (ngSubmit)="onClickButtonSend()" [formGroup]="addEmployeeRejectForm">
+                    <div class="row">
+                        
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Lý do <span class="text-danger">*</span></label>
+                                <textarea class="form-control" type="text" maxlength="200" (blur)="onBlur('reason')" appAutofocus
+                                #inputFristName
+                                placeholder="Nhập lý do từ chối"
+                                    [class.is-invalid]="addEmployeeRejectForm.get('reason')?.invalid 
+                                    && (addEmployeeRejectForm.get('reason')?.touched || addEmployeeRejectForm.get('reason')?.dirty)"
+                                    formControlName="reason"> </textarea>
+                                <div
+                                    *ngIf="(addEmployeeRejectForm.controls['reason']?.touched 
+                                    ||  addEmployeeRejectForm.controls['reason']?.dirty)
+                                     && addEmployeeRejectForm.controls['reason']?.errors?.required">
+                                    <small class="text-danger"> Trường dữ liệu bắt buộc nhập</small>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section mb-3">
+                <a  class="btn btn-secondary submit-btn sm m-3" (click)="onClickButtonCancel()">Hủy</a>
+                <button class="btn btn-primary submit-btn" type="button" (click)="onClickButtonSend()">Gửi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->

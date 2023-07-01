@@ -1,0 +1,56 @@
+.wrapper {
+    height: 10rem;
+    display: flex;
+    flex-direction: row;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.unit-col {
+    height: 100%;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.unit-col::-webkit-scrollbar {
+    display: none;
+}
+
+span {
+    display: block;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.h-col {
+    border-right: 1px solid lightgrey;
+}
+
+span.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+span:hover {
+    background-color: #dbc700;
+    color: white;
+}
+
+.active {
+    background-color: #dbc700;
+    color: white;
+}
+
+label {
+    position: sticky;
+    top: 0;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    background-color: #fff;
+    width: 100%;
+}

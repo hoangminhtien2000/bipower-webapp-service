@@ -1,0 +1,103 @@
+<div class="row bg-white py-3 filter-row mb-3" [formGroup]="searchLeave" novalidate>
+    <div class="col-sm-12">
+        <div class="row">
+            <!--            Ngày đăng ký-->
+            <div class="col-sm-3">
+                <label>{{'workingOnleave.searchform.registerDate' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <input type="text"
+                               ngxDaterangepickerMd
+                               [timePicker]="false"
+                               [autoApply]="true"
+                               [locale]="{applyLabel: 'ok', format: 'DD/MM/YYYY'}"
+                               (keypress)="onKeypress($event)"
+                               [timePickerSeconds]="false"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="currentDate"
+                               (change)="onDateRangePickerChanged()"
+                               [ngModelOptions]="{standalone: true}"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--    Mã nhân viên-->
+            <div class="col-sm-3" *ngIf="canSeeEmployeeCode()">
+                <label class="focus-label">{{'workingOnleave.searchform.employeeCode' | translate}} </label>
+                <div class="form-group focused">
+                    <input type="text" autofocus
+                           formControlName="employeeCode" class="form-control" maxlength="10"
+                           [(ngModel)]="employeeCode"
+                           (keypress)="onKeypress($event)"
+                           (blur)="blurEmployeeCode()"
+                           value=""
+                           placeholder="{{'workingOnleave.searchform.phEmployeeCode' | translate}}">
+                </div>
+            </div>
+            <!--    Họ tên nhân viên -->
+            <div class="col-sm-3" *ngIf="canSeeEmployeeName()">
+                <label class="focus-label">{{'workingOnleave.searchform.employeeName' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" formControlName="employeeName" class="form-control" maxlength="50"
+                           [(ngModel)]="employeeName"
+                           (blur)="blurEmployeeName()"
+                           (keypress)="onKeypress($event)"
+                           value="{{employeeName}}"
+                           placeholder="{{'workingOnleave.searchform.phEmployeeName' | translate}}">
+                </div>
+            </div>
+            <!--    Loại phép -->
+            <div class="col-sm-3">
+                <label class="focus-label">{{'workingOnleave.searchform.onleaveType' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control"
+                            [(ngModel)]="typeLeave" (ngModelChange)="onChangeLeaveType()"
+                            (keypress)="onKeypress($event)"
+                            [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let leaveType of valueLeaveType"
+                                [selected]="leaveType.value === leaveType.value"
+                                value="{{leaveType.value}}">{{leaveType.key | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--    Trạng thái -->
+            <div class="col-sm-3">
+                <label class="focus-label">{{'workingOnleave.searchform.status' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control" name="status"
+                            [(ngModel)]="status" (ngModelChange)="onChangeStatus()"
+                            [ngModelOptions]="{standalone: true}">
+                            (keypress)="onKeypress($event)"
+                        <option *ngFor="let status of leaveStatus"
+                                [selected]="status.value == status"
+                                value="{{status.value}}">{{status.key | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--            div blank create space-->
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <!--    BTN-->
+    <div class="row d-flex justify-content-end mb-3">
+        <div class="col-sm-12 col-md-2 pb-16">
+            <a class="btn btn-success w-100 btnOT" tabindex="0"
+               (click)="searchListLeave()">{{'workingOnleave.btn.search' | translate}}</a>
+        </div>
+        <div class="col-sm-12 col-md-2 pb-16" *ngIf="canSeeLeaveReport()">
+            <a class="btn btn-success w-100" tabindex="0"
+               (click)="onClickTable()">{{'workingOnleave.btn.summaryTable' | translate}} </a>
+        </div>
+        <div class="col-sm-12 col-md-2 add-btn-ot pb-16">
+            <a class="btn add-btn w-100 btnOT" tabindex="0"
+               (click)="onClickAdd()">{{'workingOnleave.btn.register' | translate}}</a>
+        </div>
+    </div>
+    <!--    BTN-->
+</div>

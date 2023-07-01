@@ -1,0 +1,17 @@
+<input type="text" pInputText
+       [value]="display"
+       [placeholder]="placeholder"
+       class="form-control"
+       (click)="overlap.show($event)">
+
+<p-overlayPanel #overlap appendTo="body" baseZIndex="1000">
+    <div class="wrap-range">
+        <app-time-picker [defaultValue]="from"
+                         (change)="updateValue($event, to)"></app-time-picker>
+        <span class="joiner">To</span>
+        <app-time-picker [defaultValue]="to"
+                         [minHour]="from.getHours()"
+                         [minMinute]="from.getMinutes()"
+                         (change)="updateValue(from, $event)"></app-time-picker>
+    </div>
+</p-overlayPanel>

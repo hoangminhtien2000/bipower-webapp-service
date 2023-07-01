@@ -1,0 +1,315 @@
+
+<!-- Add Employee Modal -->
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'employees.modal.employee_information' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form (ngSubmit)="onClickButtonSave()" [formGroup]="addEmployeeForm" novalidate>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="profile-img-wrap edit-img" tabindex="0">
+                                <!-- <img *ngIf="avatarBase64" class="inline-block" [src]="avatarBase64" alt="user"> -->
+                                <div class="fileupload btn w-100 h-100 p-0">
+                                    <span *ngIf="!avatarBase64" class="btn-text"><i class="fa fa-thin fa-camera"></i></span>
+                                    <span *ngIf="!avatarBase64" class="btn-text">300x300px</span>
+                                    <img *ngIf="avatarBase64" [src]="avatarBase64" alt="">
+                                    <input disabled="disabled" formControlName="avatarFile" class="upload" type="file"
+                                    accept="image/*,.pdf" type="file" tabindex="-1"
+                                    (change)="fileChangeAvatar($event.target.files)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.employee_code' | translate}}<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" maxlength="200" 
+                                (blur)="onBlur('employeeCode')"
+                                #inputFristName
+                                disabled="disabled"
+                                placeholder="{{'employees.modal.ph_employee_code' | translate}}"
+                                    [class.is-invalid]="addEmployeeForm.get('employeeCode')?.invalid 
+                                    && (addEmployeeForm.get('employeeCode')?.touched || addEmployeeForm.get('employeeCode')?.dirty)"
+                                    formControlName="employeeCode">
+                                <div
+                                    *ngIf="(addEmployeeForm.controls['employeeCode']?.touched 
+                                    ||  addEmployeeForm.controls['employeeCode']?.dirty)
+                                     && addEmployeeForm.controls['employeeCode']?.errors?.required">
+                                    <small class="text-danger"> {{'employees.modal.required_employee_code' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="addEmployeeForm.controls['employeeCode']?.errors?.pattern">
+                                    <small class="text-danger">{{'employees.modal.incorrect_format_employee_code' | translate}} </small>
+                                </div>
+                                <div *ngIf="addEmployeeForm.controls['employeeCode']?.errors?.maxlength">
+                                    <small class="text-danger"> {{'employees.modal.maxlength_employee_code' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.last_name' | translate}} <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" maxlength="200" (blur)="onBlur('lastName')" 
+                                (change)="onChangeLastName()"
+                                placeholder="{{'employees.modal.ph_last_name' | translate}}"
+                                    [class.is-invalid]="addEmployeeForm.get('lastName')?.invalid 
+                                    && (addEmployeeForm.get('lastName')?.touched || addEmployeeForm.get('lastName')?.dirty)"
+                                    formControlName="lastName">
+                                <div
+                                    *ngIf="(addEmployeeForm.controls['lastName']?.touched 
+                                    ||  addEmployeeForm.controls['lastName']?.dirty)
+                                     && addEmployeeForm.controls['lastName']?.errors?.required">
+                                    <small class="text-danger">{{'employees.modal.required_last_name' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="addEmployeeForm.controls['lastName']?.errors?.pattern">
+                                    <small class="text-danger">{{'employees.modal.text_last_name' | translate}}</small>
+                                </div>
+                                <div *ngIf="addEmployeeForm.controls['lastName']?.errors?.maxlength">
+                                    <small class="text-danger">{{'employees.modal.maxlength_last_name' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.first_name' | translate}} <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" (blur)="onBlur('firstName')"
+                                    (change)="onChangeFirstName()"
+                                    [class.is-invalid]="addEmployeeForm.get('firstName')?.invalid && addEmployeeForm.get('firstName')?.touched"
+                                    maxlength="50" placeholder="{{'employees.modal.ph_first_name' | translate}}"
+                                    formControlName="firstName">
+                                    <div *ngIf="(addEmployeeForm.controls['firstName']?.touched 
+                                        ||  addEmployeeForm.controls['firstName']?.dirty)
+                                        && addEmployeeForm.controls['firstName']?.errors?.required">
+                                        <small class="text-danger"> {{'employees.modal.required_first_name' | translate}} </small>
+                                    </div>
+                                    <div
+                                        *ngIf="addEmployeeForm.controls['firstName']?.errors?.pattern">
+                                        <small class="text-danger">{{'employees.modal.text_first_name' | translate}}</small>
+                                    </div>
+                                    <div *ngIf="addEmployeeForm.controls['firstName']?.errors?.maxlength">
+                                        <small class="text-danger">{{'employees.modal.maxlength_first_name' | translate}}</small>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.gender' | translate}}<span class="text-danger">*</span></label>
+                                <select class="form-select form-control" (blur)="onBlur('gender')"
+                                    [class.is-invalid]="addEmployeeForm.get('gender')?.invalid && addEmployeeForm.get('gender')?.touched"
+                                    formControlName="gender">
+                                    <option value="">{{'employees.modal.select_gender' | translate}}</option>
+                                    <option *ngFor="let gender of GENDER" [value]="gender.code">{{ gender.name }}</option>
+                                </select>
+                                <div
+                                    *ngIf="addEmployeeForm.get('gender')?.invalid && addEmployeeForm.get('gender')?.touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('gender')?.invalid && addEmployeeForm.get('gender')?.touched"
+                                        class="text-danger"> {{'employees.modal.required_gender' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.birthday' | translate}}<span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="birthday" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" [maxDate]="currentDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(addEmployeeForm.controls['birthday']?.dirty 
+                                            || addEmployeeForm.controls['birthday']?.touched) 
+                                            && addEmployeeForm.controls['birthday']?.invalid">
+                                        <div *ngIf="(addEmployeeForm.controls['birthday']?.dirty 
+                                        || addEmployeeForm.controls['birthday']?.touched) 
+                                        && addEmployeeForm.get('birthday')?.errors?.required" 
+                                        class="text-danger error-info">{{'employees.modal.required_birthday' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.get('birthday').errors?.maxDate"> {{'employees.modal.birthday_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.get('birthday').errors?.dateFormat">{{'employees.modal.incorrect_format_birthday' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'employees.modal.phone_number' | translate}}<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" (blur)="onBlur('phone')"
+                                    placeholder="{{'employees.modal.ph_phone_number' | translate}}"
+                                    [class.is-invalid]="addEmployeeForm.get('phone')?.invalid 
+                                    && (addEmployeeForm.get('phone')?.touched 
+                                    || addEmployeeForm.get('phone')?.dirty)" maxlength="10" formControlName="phone">
+                                <div *ngIf="addEmployeeForm.get('phone')?.errors?.maxlength" class="text-danger">
+                                    {{'employees.modal.maxlength_phone_number' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['phone']?.dirty 
+                                || addEmployeeForm.controls['phone']?.touched) 
+                                && addEmployeeForm.get('phone')?.errors?.required" 
+                                class="text-danger">{{'employees.modal.required_phone_number' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['phone']?.dirty 
+                                || addEmployeeForm.controls['phone']?.touched) 
+                                && addEmployeeForm.get('phone')?.errors?.messagePhone" 
+                                class="text-danger">{{ addEmployeeForm.get('phone')?.errors?.messagePhone }}</div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.individual_email' | translate}} <span class="text-danger">*</span></label>
+                                <input [class.is-invalid]="(addEmployeeForm.controls['individualEmail']?.dirty 
+                                    || addEmployeeForm.controls['individualEmail']?.touched) 
+                                    && addEmployeeForm.controls['individualEmail']?.invalid" (blur)="onBlur('individualEmail')"
+                                    placeholder="{{'employees.modal.ph_individual_email' | translate}}" maxlength="100"
+                                formControlName="individualEmail" type="text" class="form-control" value="">
+                                <div *ngIf="(addEmployeeForm.controls['individualEmail']?.dirty 
+                                || addEmployeeForm.controls['individualEmail']?.touched) 
+                                && addEmployeeForm.get('individualEmail')?.errors?.required" 
+                                class="text-danger error-info">{{'employees.modal.required_individual_email' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['individualEmail']?.dirty 
+                                || addEmployeeForm.controls['individualEmail']?.touched) 
+                                && addEmployeeForm.get('individualEmail')?.errors?.pattern" 
+                                class="text-danger error-info">{{'employees.modal.incorrect_format_individual_email' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['individualEmail'].dirty 
+                                || addEmployeeForm.controls['individualEmail'].touched) 
+                                && addEmployeeForm.get('individualEmail')?.errors?.maxlength" class="text-danger error-info">
+                                {{'employees.modal.maxlength_individual_email' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.company_email' | translate}} <span class="text-danger">*</span></label>
+                                <input [class.is-invalid]="(addEmployeeForm.controls['companyEmail']?.dirty
+                                    || addEmployeeForm.controls['companyEmail']?.touched)
+                                    && addEmployeeForm.controls['companyEmail']?.invalid" (blur)="onBlur('companyEmail')"
+                                       placeholder="{{'employees.modal.ph_company_email' | translate}}" maxlength="100"
+                                       formControlName="companyEmail" type="text" class="form-control" value="4487 Snowbird Lane">
+                                <div *ngIf="(addEmployeeForm.controls['companyEmail']?.dirty
+                                || addEmployeeForm.controls['companyEmail']?.touched)
+                                && addEmployeeForm.get('companyEmail')?.errors?.required"
+                                     class="text-danger error-info">{{'employees.modal.required_company_email' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['companyEmail']?.dirty
+                                || addEmployeeForm.controls['companyEmail']?.touched)
+                                && addEmployeeForm.get('companyEmail')?.errors?.pattern"
+                                     class="text-danger error-info">{{'employees.modal.incorrect_format_company_email' | translate}}</div>
+                                <div *ngIf="(addEmployeeForm.controls['companyEmail'].dirty
+                                || addEmployeeForm.controls['companyEmail'].touched)
+                                && addEmployeeForm.get('companyEmail')?.errors?.maxlength" class="text-danger error-info">
+                                    {{'employees.modal.maxlength_company_email' | translate}}</div>
+                            </div>
+                        </div>
+<!--                        Ngày bắt đầu làm việc tại Biplus-->
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.start_working_date_at_BiPlus' | translate}}<span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="onboardDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                           type="text" (blur)="onBlur('startDate')" [maxDate]="currentDate"
+                                           [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                           value="" placeholder="DD/MM/YYYY"
+                                           [class.is-invalid]="(addEmployeeForm.controls['startDate']?.dirty
+                                            || addEmployeeForm.controls['startDate']?.touched)
+                                            && addEmployeeForm.controls['startDate']?.invalid">
+                                    <div *ngIf="(addEmployeeForm.controls['startDate']?.dirty
+                                        || addEmployeeForm.controls['startDate']?.touched)
+                                        && addEmployeeForm.get('startDate')?.errors?.required"
+                                         class="text-danger error-info">{{'employees.modal.required_start_working_date_at_BiPlus' | translate}}</div>
+                                    <div class="text-danger error-info" *ngIf="addEmployeeForm.get('startDate').errors?.maxDate">{{'employees.modal.start_working_date_at_BiPlus_current_date' | translate}}</div>
+                                    <div class="text-danger error-info" *ngIf="addEmployeeForm.get('startDate').errors?.message">{{addEmployeeForm.get('startDate').errors?.message}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.working_time_from' | translate}} <span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="workingTimeFrom" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('workingTimeFrom')" [maxDate]="currentDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: false, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(addEmployeeForm.controls['workingTimeFrom']?.dirty
+                                            || addEmployeeForm.controls['workingTimeFrom']?.touched)
+                                            && addEmployeeForm.controls['workingTimeFrom']?.invalid">
+                                        <div *ngIf="(addEmployeeForm.controls['workingTimeFrom']?.dirty
+                                        || addEmployeeForm.controls['workingTimeFrom']?.touched)
+                                        && addEmployeeForm.controls['workingTimeFrom']?.errors?.required"
+                                        class="text-danger error-info">{{'employees.modal.required_working_time_from' | translate}} </div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.controls['workingTimeFrom']?.errors?.dateFormat">{{'employees.modal.incorrect_format_working_time_from' | translate}} </div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.controls['workingTimeFrom']?.errors?.maxDate">{{'employees.modal.working_time_from_current_date' | translate}} </div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.errors?.workTimeStartToEnd">{{'employees.modal.working_time_from_working_time_with_stack_from' | translate}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="data?.employeeStatus == 'WORKING'" class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.last_working_date_at_BiPlus' | translate}} </label>
+                                <div class="cal-icon">
+                                    <input formControlName="lastWorkingDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('lastWorkingDate')" [maxDate]="currentDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(addEmployeeForm.controls['lastWorkingDate']?.dirty 
+                                            || addEmployeeForm.controls['lastWorkingDate']?.touched) 
+                                            && addEmployeeForm.controls['lastWorkingDate']?.invalid">
+                                        <div *ngIf="(addEmployeeForm.controls['lastWorkingDate']?.dirty 
+                                        || addEmployeeForm.controls['lastWorkingDate']?.touched) 
+                                        && addEmployeeForm.get('lastWorkingDate')?.errors?.required" 
+                                        class="text-danger error-info">{{'employees.modal.required_last_working_date_at_BiPlus' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.get('lastWorkingDate').errors?.dateFormat">{{'employees.modal.incorrect_format_last_working_date_at_BiPlus' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.get('lastWorkingDate').errors?.maxDate">{{'employees.modal.last_working_date_at_BiPlus_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.errors?.startToEnd">{{'employees.modal.last_working_date_at_BiPlus_working_time_from' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="addEmployeeForm.errors?.onboardDateLastWorkingDate">{{'employees.modal.last_working_date_at_BiPlus_start_working_date_at_BiPlus' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section m-3 d-flex justify-content-end">
+                <button class="btn btn-secondary submit-btn btnCancel" type="button" (click)="onCancel()">{{'employees.btn.cancel' | translate}}</button>
+                <button class="btn btn-primary submit-btn btnSave" type="button" (click)="onClickButtonSave()">{{'employees.btn.save' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->
+<!-- Add Position Name Modal -->
+<div [id]="idModal + 'add_position_modal'" class="modal custom-modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xs">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'employees.modal.title_position_name' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form (ngSubmit)="addNewPositionToList()" [formGroup]="addPositionForm" novalidate>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'employees.modal.positionName' | translate}} <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" (blur)="onBlurAddPosition('positionName')"
+                                    [class.is-invalid]="addPositionForm.get('positionName')?.invalid 
+                                    && (addPositionForm.get('positionName')?.touched 
+                                    || addPositionForm.get('positionName')?.dirty)"
+                                    maxlength="100" placeholder="{{'employees.modal.ph_position_name' | translate}}"
+                                    formControlName="positionName">
+                                    <div *ngIf="(addPositionForm.controls['positionName']?.touched 
+                                        ||  addPositionForm.controls['positionName']?.dirty)
+                                        && addPositionForm.controls['positionName']?.errors?.required">
+                                        <small class="text-danger"> {{'employees.modal.required_position_name' | translate}} </small>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section m-3 d-flex justify-content-end">
+                <button class="btn btn-secondary submit-btn btnCancel" type="button" (click)="onCancelAddPosition()">{{'employees.btn.cancel' | translate}}</button>
+                <button class="btn btn-primary submit-btn btnSave" type="button" (click)="addNewPositionToList()">{{'employees.btn.save' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Position Name Modal -->

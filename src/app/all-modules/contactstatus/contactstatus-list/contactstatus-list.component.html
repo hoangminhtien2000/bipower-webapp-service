@@ -1,0 +1,247 @@
+<!-- Page Wrapper -->
+            <div class="page-wrapper">
+			
+				<!-- Page Content -->
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row align-items-center">
+							<div class="col-12">
+								<h3 class="page-title">Contact status</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a routerLink="/layout/dashboard/admin">Dashboard</a></li>
+									<li class="breadcrumb-item">Candidate</li>
+									<li class="breadcrumb-item active">Contact status</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped custom-table mb-0 datatable">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Full Name</th>
+											<th>Contact Type - Last Time - Result</th>
+											<th>Note</th>
+											<th>Contact Person</th>
+											<th class="text-end">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>
+												<h2 class="table-avatar">
+													<a routerLink="/layout/candidate/candidatelist" class="avatar"><img alt="" src="assets/img/employee/avatar-2.jpg"></a>
+													<a routerLink="/layout/candidate/candidatelist">Cong <span>Pham</span></a>
+												</h2>
+											</td>
+											<td><b>Phone - </b>2022/04/02 - <b>Have been connected</b><br><b>Skype - </b>2022/04/03 - <b>Cannot connected</b><br>
+												<b>Zalo - </b>2022/04/04 - <b>Accepted send CV</b><br> </td>
+											<td>Nothing</td>
+											<td><a routerLink="/layout/candidate/candidatelist">Luyen <span>Duong</span></a></td>
+											<td class="text-end">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit_contact_status" ><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_contact_status" ><i class="fa fa-pencil m-r-5"></i> Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+                </div>
+				<!-- /Page Content -->
+				
+				
+				<!-- Edit Job Modal -->
+				<div id="edit_contact_status" class="modal custom-modal fade" role="dialog">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Edit</h5>
+								<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Full name: </label> 
+												<input type="text" disabled class="form-control" value="Cong Pham">
+											</div>
+										</div>
+								
+										<div class="col-md-12">
+											<label>Contact Types: </label> 
+											<div class="form-scroll">
+												<div class="card">
+													<div class="card-body">
+														<a class="delete-icon"><i class="fa fa-trash-o"></i></a>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Type</label>
+																	<select class="form-select form-control">
+																		<option>Phone</option>
+																		<option selected>Skype</option>
+																		<option>Zalo</option>
+																		<option>Email</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Last Time</label>
+																	<div class="cal-icon">
+																		<input type="text" bsDatepicker type="text"
+																			class="form-control floating datetimepicker">
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<label class="focus-label">Result</label>
+																<input type="text" class="form-control" value="Cong Pham">
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												<div class="card">
+													<div class="card-body">
+														<a class="delete-icon"><i class="fa fa-trash-o"></i></a>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Type</label>
+																	<select class="form-select form-control">
+																		<option>Phone</option>
+																		<option selected>Skype</option>
+																		<option>Zalo</option>
+																		<option>Email</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Last Time</label>
+																	<div class="cal-icon">
+																		<input type="text" bsDatepicker type="text"
+																			class="form-control floating datetimepicker">
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<label class="focus-label">Result</label>
+																<input type="text" class="form-control" value="Cong Pham">
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												<div class="card">
+													<div class="card-body">
+														<a class="delete-icon"><i class="fa fa-trash-o"></i></a>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Type</label>
+																	<select class="form-select form-control">
+																		<option>Phone</option>
+																		<option selected>Skype</option>
+																		<option>Zalo</option>
+																		<option>Email</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label class="focus-label">Last Time</label>
+																	<div class="cal-icon">
+																		<input type="text" bsDatepicker type="text"
+																			class="form-control floating datetimepicker">
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<label class="focus-label">Result</label>
+																<input type="text" class="form-control" value="Cong Pham">
+															</div>
+														</div>
+													</div>
+													<div class="add-more">
+														<a ><i class="fa fa-plus-circle"></i> Add More</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Contact Person</label>
+												<select class="form-select form-control">
+													<option>Select Person</option>
+													<option selected>Luyen Duong</option>
+													<option>Quoc Dinh</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Note</label>
+												<textarea class="form-control" rows="3" cols="40">Abcxyz</textarea>
+											</div>
+										</div>
+									</div>
+									
+									<div class="submit-section">
+										<button class="btn btn-primary submit-btn">Save</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Edit Job Modal -->
+
+				<!-- Delete Job Modal -->
+				<div class="modal custom-modal fade" id="delete_job" role="dialog">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="form-header">
+									<h3>Delete</h3>
+									<p>Are you sure want to delete?</p>
+								</div>
+								<div class="modal-btn delete-action">
+									<div class="row">
+										<div class="col-6">
+											<a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+										</div>
+										<div class="col-6">
+											<a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Delete Job Modal -->
+				
+            </div>
+			<!-- /Page Wrapper -->

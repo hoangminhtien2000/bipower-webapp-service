@@ -1,0 +1,124 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'employees.profile.social_insurance_information' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="socialInsuranceForm" novalidate>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.social_insurance_number' | translate}} <span class="text-danger">*</span></label>
+                                <input type="text" maxlength="10"
+                                placeholder="{{'employees.profile.ph_social_insurance_number' | translate}}"
+                                [class.is-invalid]="(controls['socialInsuranceNo']?.touched 
+                                    || controls['socialInsuranceNo']?.dirty) 
+                                    && controls['socialInsuranceNo']?.invalid"
+                                formControlName="socialInsuranceNo"  (blur)="onBlur('socialInsuranceNo')" class="form-control">
+                                <div *ngIf="controls['socialInsuranceNo']?.errors?.required && 
+                                     (controls['socialInsuranceNo']?.touched 
+                                    || controls['socialInsuranceNo']?.dirty)">
+                                    <small class="text-danger">{{'employees.profile.required_social_insurance_number' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['socialInsuranceNo']?.errors?.maxlength">
+                                    <small class="text-danger">{{'employees.profile.maxlength_social_insurance_number' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['socialInsuranceNo']?.errors?.pattern">
+                                    <small class="text-danger">{{'employees.profile.number_social_insurance_number' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.start_time_at_BiPlus' | translate}}<span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="startTimeAt"
+                                    [class.is-invalid]="(controls['startTimeAt']?.touched 
+                                    || controls['startTimeAt']?.dirty) 
+                                    && controls['startTimeAt']?.invalid" 
+                                    (blur)="onBlur('startTimeAt')" 
+                                    class="form-control datetimepicker" 
+                                    type="text" bsDatepicker type="text" [maxDate]="currentDate"
+                                    placeholder="MM/YYYY"
+                                        [bsConfig]="{ dateInputFormat: 'MM/YYYY',  returnFocusToInput: true,
+                                        minMode: 'month', isAnimated: true
+                                    }">
+                                </div>
+                                <div *ngIf="(controls['startTimeAt']?.touched 
+                                || controls['startTimeAt']?.dirty) && controls['startTimeAt']?.errors?.required">
+                                    <small class="text-danger">{{'employees.profile.required_start_time_at_BiPlus' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['startTimeAt']?.errors?.maxDate">
+                                    <small class="text-danger">{{'employees.profile.start_time_at_BiPlus_current_date' | translate}}</small>
+                                </div>
+                                <div *ngIf="socialInsuranceForm?.errors?.fromToEnd">
+                                    <small class="text-danger">{{'employees.profile.start_time_at_BiPlus_end_time_at_BiPlus' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.end_time_at_BiPlus' | translate}}</label>
+                                <div class="cal-icon">
+                                    <input formControlName="endTimeAt"
+                                    [class.is-invalid]="(controls['endTimeAt']?.touched 
+                                    || controls['endTimeAt']?.dirty) 
+                                    && controls['endTimeAt']?.invalid" 
+                                    (blur)="onBlur('endTimeAt')" 
+                                    class="form-control datetimepicker" 
+                                    type="text" bsDatepicker type="text"
+                                    [maxDate]="currentDate"
+                                    placeholder="MM/YYYY" 
+                                        [bsConfig]="{ dateInputFormat: 'MM/YYYY',  returnFocusToInput: true, 
+                                        minMode: 'month', isAnimated: true }">
+                                </div>
+                                <div *ngIf="controls['endTimeAt']?.errors?.required">
+                                    <small class="text-danger">{{'employees.profile.required_end_time_at_BiPlus' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['endTimeAt']?.errors?.maxDate">
+                                    <small class="text-danger">{{'employees.profile.end_time_at_BiPlus_current_date' | translate}}</small>
+                                </div>
+                                <div *ngIf="socialInsuranceForm?.errors?.fromToEnd">
+                                    <small class="text-danger">{{'employees.profile.end_time_at_BiPlus_end_time_at_BiPlus' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>{{'employees.profile.salary_for_social_insurance' | translate}}<span class="text-danger">*</span></label>
+                                <input type="text" input-currency  maxlength="13"
+                                placeholder="{{'employees.profile.ph_salary_for_social_insurance' | translate}}"
+                                [class.is-invalid]="(controls['salaryForSocialInsurance']?.touched 
+                                    || controls['salaryForSocialInsurance']?.dirty) 
+                                    && controls['salaryForSocialInsurance']?.invalid"
+                                formControlName="salaryForSocialInsurance"  (blur)="onBlur('salaryForSocialInsurance')" class="form-control">
+                                <div *ngIf="controls['salaryForSocialInsurance']?.errors?.required &&
+                                    (controls['salaryForSocialInsurance']?.touched 
+                                    || controls['salaryForSocialInsurance']?.dirty)">
+                                    <small class="text-danger">{{'employees.profile.required_salary_for_social_insurance' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['salaryForSocialInsurance']?.errors?.maxlength">
+                                    <small class="text-danger">{{'employees.profile.maxlength_salary_for_social_insurance' | translate}}</small>
+                                </div>
+                                <div *ngIf="controls['salaryForSocialInsurance']?.errors?.pattern">
+                                    <small class="text-danger">{{'employees.profile.number_salary_for_social_insurance' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section d-flex justify-content-end">
+                        <button class="btn btn-primary submit-btn btnCancel" (click)="onCancel()">{{'employees.btn.cancel' | translate}}</button>
+                        <button class="btn btn-primary submit-btn btnSave" (click)="onSave()">{{'employees.btn.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -->

@@ -1,0 +1,9 @@
+@media (min-width: 992px){
+    .modal-lg, .modal-xl {
+        max-width: 850px;
+    }
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+}

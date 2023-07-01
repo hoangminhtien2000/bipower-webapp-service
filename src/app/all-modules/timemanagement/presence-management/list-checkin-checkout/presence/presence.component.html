@@ -1,0 +1,51 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{'timeManager.list_checkin_checkout.register_tuning' | translate}}
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll">
+        <div class="form-group">
+            <label><i>{{'workingOnleave.list.day' | translate}}: {{renderDay()}}</i></label>
+        </div>
+        <div class="form-group" *ngIf="this.presence.employeeCode != undefined">
+            <label>{{'workingOnleave.list.employee' | translate}}</label>
+            <input disabled type="text" class="form-control" value="{{presence.employeeCode}} - {{presence.fullname}}">
+        </div>
+        <div class="form-group">
+            <label>{{'timeManager.list_checkin_checkout.checkin_time' | translate}}</label>
+            <input disabled type="time" class="form-control" value="{{checkinTime}}">
+        </div>
+        <div class="form-group">
+            <label>{{'timeManager.list_checkin_checkout.checkout_time' | translate}}</label>
+            <input disabled type="time" class="form-control" value="{{checkoutTime}}">
+        </div>
+        <div class="form-group">
+            <label>{{"timeManager.list_checkin_checkout.adjustment_reason" | translate}}</label>
+            <textarea disabled type="time" placeholder="Nhập lý do điều chỉnh" class="form-control" value="{{reason}}"></textarea>
+        </div>
+    </div>
+    <!--    Footer-->
+    <div class="footer" *ngIf="canApprovalOrReject()">
+        <div class="row justify-content-end w-100 p-2">
+            <div class="col-4 p-2" tabindex="0">
+                <button class="btn btnCancel w-100" type="button" (click)="reject()">
+                    Từ chối
+                </button>
+            </div>
+            <div class="col-4 p-2" tabindex="0">
+                <button class="btn btnSave w-100" type="button" (click)="approval()">
+                    Phê duyệt
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

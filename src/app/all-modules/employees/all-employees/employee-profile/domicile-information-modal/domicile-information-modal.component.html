@@ -1,0 +1,57 @@
+
+<!-- Personal Info Modal -->
+<div [id]="idModal" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content pb-3">
+            <div class="modal-header">
+                <h5 class="modal-title">Nguyên quán</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="domicileInformationForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tỉnh/TP<span class="text-danger">*</span></label>
+                                <select formControlName="province" class="form-select form-control" maxoption="5"
+                                [class.is-invalid]="(controls['province']?.dirty 
+                                            || controls['province']?.touched) 
+                                            && controls['province']?.invalid">
+                                    <option value="">Chọn Tỉnh/TP</option>
+                                    <option *ngFor="let province of provinceList" [value]="province.province_id">{{province.province_name}}</option>
+                                </select>
+                                <div *ngIf="(controls['province']?.dirty 
+                                || controls['province']?.touched) 
+                                && controls['province']?.errors?.required" 
+                                class="text-danger error-info">Tỉnh/Tp không được để trống</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Huyện/Quận<span class="text-danger">*</span></label>
+                                <select formControlName="district" class="form-select form-control"
+                                [class.is-invalid]="(controls['district']?.dirty 
+                                            || controls['district']?.touched) 
+                                            && controls['district']?.invalid">
+                                    <option value="">Chọn Huyện/Quận</option>
+                                    <option *ngFor="let district of districtList" [value]="district.district_id">{{district.district_name}}</option>
+                                </select>
+                                <div *ngIf="(controls['district']?.dirty 
+                                || controls['district']?.touched) 
+                                && controls['district']?.errors?.required" 
+                                class="text-danger error-info">Huyện/Quận không được để trống</div>
+                            </div>
+                        </div>
+                   
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section">
+                <button class="btn btn-primary submit-btn" (click)="onSave()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Personal Info Modal -->

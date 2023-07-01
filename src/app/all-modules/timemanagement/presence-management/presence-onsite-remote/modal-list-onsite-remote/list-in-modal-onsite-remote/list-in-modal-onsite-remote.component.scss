@@ -1,0 +1,108 @@
+.content {
+  padding: 30px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.employee-text-left {
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.alg-center {
+  text-align: center;
+}
+
+.truncate-custom {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.presence-status-rejected {
+  color: #DF5245 !important;
+}
+
+.presence-status-send-request {
+  color: #FF9153 !important;
+}
+
+.presence-status-leader-approved {
+  color: #FF9153 !important;
+}
+
+.presence-status-approved {
+  color: #85AA75 !important;
+}
+
+.presence-status-pending {
+  color: #85AA75 !important;
+}
+
+.pr-0 {
+  padding-right: 0px !important;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}

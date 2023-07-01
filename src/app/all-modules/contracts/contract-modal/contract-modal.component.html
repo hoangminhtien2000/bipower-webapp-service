@@ -1,0 +1,905 @@
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div *ngIf="value?.laborContractStatus" class="header-content">
+                    {{'contract.title.contract_details' | translate}}
+                </div>
+                <div *ngIf="!value?.laborContractStatus" class="header-content">
+                    {{'contract.title.contract_add' | translate}}
+
+                </div>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="select-title">
+                    <label for="">{{'contract.modal.contract_type' | translate}}<span class="text-danger">*</span></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- comment code disable select option with proccess job:  (employeeId ? false : (isShow || isFirst)) -->
+                        <select [disabled]="false" [(ngModel)]="selectOption" (ngModelChange)="onChangeSelect()" class="form-select form-control">
+                                <option [value]="collaboratorsContractType">{{'contract.modal.collaborators_contract' | translate}}</option>
+                                <option [value]="formalContractType">{{'contract.modal.formal_contract' | translate}}</option>
+                                <option [value]="probationContractType">{{'contract.modal.probation_contract' | translate}}</option>
+                            </select>
+                    </div>
+                </div>
+                <form *ngIf="selectOption == collaboratorsContractType"  [formGroup]="collaboratorsContractInforForm" novalidate>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div *ngIf="!employeeId" class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.employees' | translate}} <span class="text-danger">*</span></label>
+                                    <p-dropdown *ngIf="!value?.id" (onChange)="onChangeEmployee($event.value)" [options]="employees"
+                                        [class.is-invalid]="(collaboratorsContractInforForm.controls['employee']?.dirty 
+                                                    || collaboratorsContractInforForm.controls['employee']?.touched) 
+                                                    && collaboratorsContractInforForm.controls['employee']?.invalid"
+                                        optionLabel="label" 
+                                        formControlName="employee" 
+                                        [filter]="true" filterBy="label"
+                                        [showClear]="false" placeholder="{{'contract.modal.ph_employees' | translate}}">
+                                        <ng-template let-country pTemplate="item">
+                                            <div class="country-item">
+                                                <div>{{country.label}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <span class="form-control" *ngIf="value?.id" disabled="disabled" aria-readonly="true" readonly>
+                                        {{ getEmployeeInfoName }}
+                                    </span>
+                                    <div *ngIf="collaboratorsContractInforForm.controls['employee'].errors?.required 
+                                        && (collaboratorsContractInforForm.controls['employee']?.touched 
+                                        || collaboratorsContractInforForm.controls['employee']?.dirty)">
+                                        <small class="text-danger"> {{'contract.modal.required_employee' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="isShow">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.contract_code' | translate}} <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" maxlength="100" (blur)="onBlur('contractCode')"
+                                        [class.is-invalid]="collaboratorsContractInforForm.controls['contractCode']?.invalid 
+                                        && (collaboratorsContractInforForm.controls['contractCode']?.touched || collaboratorsContractInforForm.controls['contractCode']?.dirty)"
+                                        placeholder="{{'contract.modal.ph_contract_code' | translate}}"
+                                        formControlName="contractCode">
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['contractCode']?.touched 
+                                        ||  collaboratorsContractInforForm.controls['contractCode']?.dirty)
+                                            && collaboratorsContractInforForm.controls['contractCode']?.errors?.required">
+                                        <small class="text-danger"> {{'contract.modal.required_contract_code' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="collaboratorsContractInforForm.controls['contractCode']?.errors?.pattern">
+                                        <small class="text-danger"> {{'contract.modal.incorrect_format_contract_code' | translate}}</small>
+                                    </div>
+                                    <div *ngIf="collaboratorsContractInforForm.controls['contractCode']?.errors?.maxlength">
+                                        <small class="text-danger"> {{'contract.modal.maxlength_contract_code' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.created_date' | translate}} <span *ngIf="isRequire('startDate')" class="text-danger">*</span></label>
+                                    <div class="cal-icon">
+                                        <input formControlName="startDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                            type="text" (blur)="onBlur('startDate')" [maxDate]="currentDate"
+                                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                            value="" placeholder="DD/MM/YYYY"
+                                            [class.is-invalid]="(collaboratorsContractInforForm.controls['startDate']?.dirty 
+                                                || collaboratorsContractInforForm.controls['startDate']?.touched) 
+                                                && collaboratorsContractInforForm.controls['startDate']?.invalid">
+                                            <div *ngIf="(collaboratorsContractInforForm.controls['startDate']?.dirty 
+                                            || collaboratorsContractInforForm.controls['startDate']?.touched) 
+                                            && collaboratorsContractInforForm.controls['startDate']?.errors?.required" 
+                                            class="text-danger error-info">{{'contract.modal.required_created_date' | translate}}</div>
+                                            <div class="text-danger error-info" *ngIf="collaboratorsContractInforForm.controls['startDate']?.errors?.maxDate">{{'contract.modal.start_date_current_date' | translate}} </div>
+                                            <div class="text-danger error-info" *ngIf="collaboratorsContractInforForm.controls['startDate']?.errors?.message">{{addEmployeeForm.controls['startDate'].errors?.message}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.contract_term' | translate}}<span *ngIf="isRequire('contractTerm')" class="text-danger">*</span></label>
+                                    <select 
+                                        formControlName="contractTerm"
+                                        class="form-select form-control"
+                                        [class.is-invalid]="collaboratorsContractInforForm.controls['contractTerm']?.invalid 
+                                        && (collaboratorsContractInforForm.controls['contractTerm']?.touched 
+                                        || collaboratorsContractInforForm.controls['contractTerm']?.dirty)">
+                                        <option value="">{{'contract.modal.select_contract_term' | translate}} </option>
+                                        <option *ngFor="let status of listContract"
+                                                [selected]="status.value == status"
+                                                value="{{status.value}}">{{status.key | translate}}</option>
+<!--                                        <option value="1">1 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="2">2 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="3">3 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="6">6 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="12">12 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="24">24 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="36">36 {{'contract.modal.month' | translate}}</option>-->
+<!--                                        <option value="60">60 {{'contract.modal.month' | translate}}</option>-->
+                                    </select>
+                                    <div *ngIf="(collaboratorsContractInforForm.controls['contractTerm']?.dirty 
+                                    || collaboratorsContractInforForm.controls['contractTerm']?.touched) 
+                                    && collaboratorsContractInforForm.controls['contractTerm'].errors?.required">
+                                        <small class="text-danger"> {{'contract.modal.required_contract_term' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="isShow">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.end_date' | translate}} <span *ngIf="isRequire('endDate')" class="text-danger">*</span></label>
+                                    <div class="cal-icon">
+                                        <input formControlName="endDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                            type="text" (blur)="onBlur('endDate')"
+                                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                            value="05/06/1985" placeholder="DD/MM/YYYY"
+                                            [class.is-invalid]="(collaboratorsContractInforForm.controls['endDate']?.dirty 
+                                                || collaboratorsContractInforForm.controls['endDate']?.touched) 
+                                                && collaboratorsContractInforForm.controls['endDate']?.invalid">
+                                            <div *ngIf="(collaboratorsContractInforForm.controls['endDate']?.dirty 
+                                            || collaboratorsContractInforForm.controls['endDate']?.touched) 
+                                            && collaboratorsContractInforForm.controls['endDate']?.errors?.required" 
+                                            class="text-danger error-info">{{'contract.modal.required_end_date' | translate}}</div>
+                                            <div class="text-danger error-info" *ngIf="collaboratorsContractInforForm.controls['endDate'].errors?.maxDate">{{'contract.modal.end_date_current_date' | translate}}</div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" class="col-form-label">{{'contract.modal.negotiable_salary' | translate}} <span *ngIf="isRequire('negotiableSalary')" class="text-danger">*</span></label>
+                                    <input class="form-control" input-currency type="text" (blur)="onBlur('negotiableSalary')" maxlength="13"
+                                        [class.is-invalid]="(collaboratorsContractInforForm.controls['negotiableSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['negotiableSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['negotiableSalary']?.invalid"
+                                        placeholder="{{'contract.modal.input_negotiable_salary' | translate}}"
+                                        formControlName="negotiableSalary">
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['negotiableSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['negotiableSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['negotiableSalary']?.errors?.required">
+                                        <small class="text-danger">{{'contract.modal.required_negotiable_salary' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['negotiableSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['negotiableSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['negotiableSalary']?.errors?.maxlength">
+                                        <small
+                                            class="text-danger"> {{'contract.modal.maxlength_negotiable_salary' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['negotiableSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['negotiableSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['negotiableSalary']?.errors?.pattern">
+                                        <small class="text-danger"> {{'contract.modal.number_negotiable_salary' | translate}} </small>
+                                    </div>
+                                </div>
+                            </div>                               
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label" class="col-form-label">{{'contract.modal.contract_salary' | translate}} <span *ngIf="isRequire('contractSalary')" class="text-danger">*</span></label>
+                                    <input class="form-control" input-currency type="text" (blur)="onBlur('contractSalary')" maxlength="13"
+                                        [class.is-invalid]="(collaboratorsContractInforForm.controls['contractSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['contractSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['contractSalary']?.invalid"
+                                        placeholder="{{'contract.modal.input_contract_salary' | translate}}"
+                                        formControlName="contractSalary">
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['contractSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['contractSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['contractSalary']?.errors?.required">
+                                        <small
+                                            class="text-danger">{{'contract.modal.required_contract_salary' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['contractSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['contractSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['contractSalary']?.errors?.maxlength">
+                                        <small
+                                            class="text-danger">{{'contract.modal.maxlength_contract_salary' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['contractSalary']?.dirty 
+                                        || collaboratorsContractInforForm.controls['contractSalary']?.touched)  
+                                        && collaboratorsContractInforForm.controls['contractSalary']?.errors?.pattern">
+                                        <small
+                                            class="text-danger"> {{'contract.modal.text_number_contract_salary' | translate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="isShowTerminateDate" class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.termination_date' | translate}}<span *ngIf="isRequire('contractTerminationDate')" class="text-danger">*</span></label>
+                                    <div class="cal-icon">
+                                        <input formControlName="contractTerminationDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                            type="text"
+                                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                            value="" placeholder="DD/MM/YYYY"
+                                            [class.is-invalid]="(collaboratorsContractInforForm.controls['contractTerminationDate']?.dirty 
+                                                || collaboratorsContractInforForm.controls['contractTerminationDate']?.touched) 
+                                                && collaboratorsContractInforForm.controls['contractTerminationDate']?.invalid">
+                                            <div *ngIf="(collaboratorsContractInforForm.controls['contractTerminationDate']?.dirty 
+                                            || collaboratorsContractInforForm.controls['contractTerminationDate']?.touched) 
+                                            && collaboratorsContractInforForm.controls['contractTerminationDate']?.errors?.required" 
+                                            class="text-danger error-info">{{'contract.modal.required_termination_date' | translate}}</div>
+                                            <div class="text-danger error-info" *ngIf="collaboratorsContractInforForm.controls['contractTerminationDate']?.errors?.maxDate">{{'contract.modal.termination_date_current_date' | translate}}</div>
+                                            <div class="text-danger error-info" *ngIf="collaboratorsContractInforForm?.errors?.fromToDate">{{'contract.modal.termination_date_created_date' | translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{'contract.modal.upload_file' | translate}}<span *ngIf="isRequire('laborContractPath')" class="text-danger">*</span></label>
+                                    <div class="position-relative fileuploadcustom">
+                                        <span class="form-control fileupload w-100" type="text"
+                                        [class.is-disabled]="getDisabledFile(collaboratorsContractInforForm)"
+                                        [class.is-invalid]="(collaboratorsContractInforForm.controls['laborContractPath']?.touched 
+                                    || collaboratorsContractInforForm.controls['laborContractPath']?.dirty) 
+                                    && collaboratorsContractInforForm.controls['laborContractPath']?.invalid">
+                                    <span *ngIf="collaboratorsContractInforForm.controls['laborContractPath']?.value">
+                                        {{ collaboratorsContractInforForm.controls['laborContractPath']?.value?.name | substr:maxLength }}
+                                    </span>
+                                    <div *ngIf="!collaboratorsContractInforForm.controls['laborContractPath']?.value">
+                                        <a [href]="imageUrl + value?.laborContractPath" target="_blank" rel="">{{fileUploadName}}</a>
+                                    </div>
+                                    </span>
+                                        <span class="position-absolute file-upload-custom">
+                                            <input single-file class="form-control w-100 h-100 p-0" formControlName="laborContractPath" type="file">
+                                        </span>
+                                    </div>
+                                    <div *ngIf="(collaboratorsContractInforForm.controls['laborContractPath']?.touched 
+                                    || collaboratorsContractInforForm.controls['laborContractPath']?.dirty)">
+                                        <div *ngIf="collaboratorsContractInforForm.controls['laborContractPath']?.errors?.required">
+                                            <small class="text-danger">{{'contract.modal.required_upload_file' | translate}}</small>
+                                        </div>
+                                        <div *ngIf="collaboratorsContractInforForm.controls['laborContractPath']?.errors?.messageMaxSize">
+                                            <small class="text-danger">{{collaboratorsContractInforForm.controls['laborContractPath'].errors.messageMaxSize}}</small>
+                                        </div>
+                                        <div *ngIf="collaboratorsContractInforForm.controls['laborContractPath']?.errors?.messageType">
+                                            <small class="text-danger">{{'contract.modal.pdf_file' | translate}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="col-form-label" class="col-form-label">{{'contract.modal.result_evaluation' | translate}} <span *ngIf="isRequire('resultEvaluation')" class="text-danger">*</span></label>
+                                    <textarea class="form-control" type="text" (blur)="onBlur('resultEvaluation')" maxlength="500"
+                                        [class.is-invalid]="(collaboratorsContractInforForm.controls['resultEvaluation']?.dirty 
+                                        || collaboratorsContractInforForm.controls['resultEvaluation']?.touched)  
+                                        && collaboratorsContractInforForm.controls['resultEvaluation']?.invalid"
+                                        placeholder="{{'contract.modal.input_result_evaluation' | translate}}"
+                                        formControlName="resultEvaluation"></textarea>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['resultEvaluation']?.dirty 
+                                        || collaboratorsContractInforForm.controls['resultEvaluation']?.touched)  
+                                        && collaboratorsContractInforForm.controls['resultEvaluation']?.errors?.required">
+                                        <small
+                                            class="text-danger"> {{'contract.modal.required_result_evaluation' | translate}}</small>
+                                    </div>
+                                    <div
+                                        *ngIf="(collaboratorsContractInforForm.controls['resultEvaluation']?.dirty 
+                                        || collaboratorsContractInforForm.controls['resultEvaluation']?.touched)  
+                                        && collaboratorsContractInforForm.controls['resultEvaluation']?.errors?.maxlength">
+                                        <small
+                                            class="text-danger">{{'contract.modal.maxlength_result_evaluation' | translate}}</small>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                <form *ngIf="selectOption == formalContractType" [formGroup]="formalContractInforForm" novalidate>
+                    <div class="mt-3 row">
+                        <div *ngIf="!employeeId" class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.employees'  | translate}} <span class="text-danger">*</span></label>
+                                <p-dropdown *ngIf="!value?.id" (onChange)="onChangeEmployee($event.value)" [options]="employees"
+                                    [class.is-invalid]="(formalContractInforForm.controls['employee']?.dirty 
+                                                || formalContractInforForm.controls['employee']?.touched) 
+                                                && formalContractInforForm.controls['employee']?.invalid"
+                                    optionLabel="label" 
+                                    formControlName="employee" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="false" placeholder="{{'contract.modal.ph_employees'  | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <span class="form-control" *ngIf="value?.id" disabled="disabled" aria-readonly="true" readonly>
+                                    {{ getEmployeeInfoName }}
+                                </span>
+                                <div *ngIf="(formalContractInforForm.controls['employee']?.touched 
+                                || formalContractInforForm.controls['employee']?.dirty) 
+                                && formalContractInforForm.controls['employee'].errors?.required">
+                                    <small class="text-danger"> {{'contract.modal.required_employee'  | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" *ngIf="isShow">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.contract_code' | translate}} <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" maxlength="100" (blur)="onBlur('contractCode')"
+                                    [class.is-invalid]="formalContractInforForm.controls['contractCode']?.invalid 
+                                    && (formalContractInforForm.controls['contractCode']?.touched || formalContractInforForm.controls['contractCode']?.dirty)"
+                                    placeholder="{{'contract.modal.ph_contract_code' | translate}}"
+                                    formControlName="contractCode">
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['contractCode']?.touched 
+                                    ||  formalContractInforForm.controls['contractCode']?.dirty)
+                                        && formalContractInforForm.controls['contractCode']?.errors?.required">
+                                    <small class="text-danger"> {{'contract.modal.required_contract_code' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="formalContractInforForm.controls['contractCode']?.errors?.pattern">
+                                    <small class="text-danger"> {{'contract.modal.incorrect_format_contract_code' | translate}}</small>
+                                </div>
+                                <div *ngIf="formalContractInforForm.controls['contractCode']?.errors?.maxlength">
+                                    <small class="text-danger"> {{'contract.modal.maxlength_contract_code' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.created_date' | translate}} <span *ngIf="isRequire('startDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="startDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('startDate')" [maxDate]="currentDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(formalContractInforForm.controls['startDate']?.dirty 
+                                            || formalContractInforForm.controls['startDate']?.touched) 
+                                            && formalContractInforForm.controls['startDate']?.invalid">
+                                        <div *ngIf="(formalContractInforForm.controls['startDate']?.dirty 
+                                        || formalContractInforForm.controls['startDate']?.touched) 
+                                        && formalContractInforForm.controls['startDate']?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_created_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="formalContractInforForm.controls['startDate'].errors?.maxDate">{{'contract.modal.start_date_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="formalContractInforForm.controls['startDate'].errors?.message">{{addEmployeeForm.controls['startDate'].errors?.message}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.contract_term' | translate}}<span *ngIf="isRequire('contractTerm')" class="text-danger">*</span></label>
+                                <select formControlName="contractTerm" class="form-select form-control"
+                                    [class.is-invalid]="formalContractInforForm.controls['contractTerm']?.invalid 
+                                    && (formalContractInforForm.controls['contractTerm']?.touched
+                                    || formalContractInforForm.controls['contractTerm']?.dirty)">
+                                    <option value="">{{'contract.modal.select_contract_term' | translate}}</option>
+                                    <option *ngFor="let status of listContract"
+                                            [selected]="status.value == status"
+                                            value="{{status.value}}">{{status.key | translate}}</option>
+                                </select>
+                                <div *ngIf="(formalContractInforForm.controls['contractTerm']?.touched 
+                                    || formalContractInforForm.controls['contractTerm']?.dirty) 
+                                    && formalContractInforForm.controls['contractTerm'].errors?.required">
+                                    <small class="text-danger">{{'contract.modal.required_contract_term' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" *ngIf="isShow">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.end_date' | translate}}<span *ngIf="isRequire('endDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="endDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('endDate')"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(formalContractInforForm.controls['endDate']?.dirty 
+                                            || formalContractInforForm.controls['endDate']?.touched) 
+                                            && formalContractInforForm.controls['endDate']?.invalid">
+                                        <div *ngIf="(formalContractInforForm.controls['endDate']?.dirty 
+                                        || formalContractInforForm.controls['endDate']?.touched) 
+                                        && formalContractInforForm.get('endDate')?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_end_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="formalContractInforForm.get('endDate').errors?.maxDate">{{'contract.modal.end_date_current_date' | translate}}</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.insurance_salary' | translate}} <span *ngIf="isRequire('insuranceSalary')" class="text-danger">*</span></label>
+                                <input class="form-control" input-currency type="text" (blur)="onBlur('insuranceSalary')" maxlength="13"
+                                    [class.is-invalid]="(formalContractInforForm.controls['insuranceSalary']?.dirty 
+                                    || formalContractInforForm.controls['insuranceSalary']?.touched)  
+                                    && formalContractInforForm.controls['insuranceSalary']?.invalid"
+                                    placeholder="{{'contract.modal.input_insurance_salary' | translate}}"
+                                    formControlName="insuranceSalary">
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['insuranceSalary']?.dirty 
+                                    || formalContractInforForm.controls['insuranceSalary']?.touched)  
+                                    && formalContractInforForm.controls['insuranceSalary']?.errors?.required">
+                                    <small class="text-danger"> {{'contract.modal.required_insurance_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['insuranceSalary']?.dirty 
+                                    || formalContractInforForm.controls['insuranceSalary']?.touched)  
+                                    && formalContractInforForm.controls['insuranceSalary']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.maxlength_insurance_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['insuranceSalary']?.dirty 
+                                    || formalContractInforForm.controls['insuranceSalary']?.touched)  
+                                    && formalContractInforForm.controls['insuranceSalary']?.errors?.pattern">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.text_number_insurance_salary' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.net_salary' | translate}}<span *ngIf="isRequire('netSalary')" class="text-danger">*</span></label>
+                                <input class="form-control" input-currency type="text" (blur)="onBlur('netSalary')" maxlength="13"
+                                    [class.is-invalid]="(formalContractInforForm.controls['netSalary']?.dirty 
+                                    || formalContractInforForm.controls['netSalary']?.touched)  
+                                    && formalContractInforForm.controls['netSalary']?.invalid"
+                                    placeholder="{{'contract.modal.input_net_salary' | translate}}"
+                                    formControlName="netSalary">
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['netSalary']?.dirty 
+                                    || formalContractInforForm.controls['netSalary']?.touched)  
+                                    && formalContractInforForm.controls['netSalary']?.errors?.required">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.required_net_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['netSalary']?.dirty 
+                                    || formalContractInforForm.controls['netSalary']?.touched)  
+                                    && formalContractInforForm.controls['netSalary']?.errors?.maxlength">
+                                    <small
+                                    class="text-danger"> {{'contract.modal.maxlength_net_salary' | translate}}</small>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.gross_salary' | translate}} <span *ngIf="isRequire('grossSalary')" class="text-danger">*</span></label>
+                                <input class="form-control" input-currency type="text" (blur)="onBlur('grossSalary')" maxlength="13"
+                                    [class.is-invalid]="(formalContractInforForm.controls['grossSalary']?.dirty 
+                                    || formalContractInforForm.controls['grossSalary']?.touched)  
+                                    && formalContractInforForm.controls['grossSalary']?.invalid"
+                                    placeholder="{{'contract.modal.input_gross_salary' | translate}}"
+                                    formControlName="grossSalary">
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['grossSalary']?.dirty 
+                                    || formalContractInforForm.controls['grossSalary']?.touched)  
+                                    && formalContractInforForm.controls['grossSalary']?.errors?.required">
+                                    <small
+                                        class="text-danger">{{'contract.modal.required_gross_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['grossSalary']?.dirty 
+                                    || formalContractInforForm.controls['grossSalary']?.touched)  
+                                    && formalContractInforForm.controls['grossSalary']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.maxlength_gross_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['grossSalary']?.dirty 
+                                    || formalContractInforForm.controls['grossSalary']?.touched)  
+                                    && formalContractInforForm.controls['grossSalary']?.errors?.pattern">
+                                    <small
+                                        class="text-danger">{{'contract.modal.text_number_gross_salary' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isShowTerminateDate" class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.termination_date' | translate}} <span *ngIf="isRequire('contractTerminationDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="contractTerminationDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(formalContractInforForm.controls['contractTerminationDate']?.dirty 
+                                            || formalContractInforForm.controls['contractTerminationDate']?.touched) 
+                                            && formalContractInforForm.controls['contractTerminationDate']?.invalid">
+                                        <div *ngIf="(formalContractInforForm.controls['contractTerminationDate']?.dirty 
+                                        || formalContractInforForm.controls['contractTerminationDate']?.touched) 
+                                        && formalContractInforForm.controls['contractTerminationDate']?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_termination_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="formalContractInforForm.controls['contractTerminationDate'].errors?.maxDate">{{'contract.modal.termination_date_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="formalContractInforForm?.errors?.fromToDate">{{'contract.modal.termination_date_created_date' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.upload_file' | translate}}<span *ngIf="isRequire('laborContractPath')" class="text-danger">*</span></label>
+                                <div class="position-relative fileuploadcustom">
+                                    <span class="form-control fileupload w-100" type="text"
+                                    [class.is-disabled]="getDisabledFile(formalContractInforForm)"
+                                    [class.is-invalid]="(formalContractInforForm.controls['laborContractPath']?.touched 
+                                || formalContractInforForm.controls['laborContractPath']?.dirty) 
+                                && formalContractInforForm.controls['laborContractPath']?.invalid">
+                                <span *ngIf="formalContractInforForm.controls['laborContractPath']?.value">
+                                    {{ formalContractInforForm.controls['laborContractPath']?.value?.name | substr:maxLength }}
+                                </span>
+                                <div *ngIf="!formalContractInforForm.controls['laborContractPath']?.value">
+                                    <a [href]="imageUrl + value?.laborContractPath" target="_blank" rel="">{{fileUploadName}}</a>
+                                </div>
+                                </span>
+                                    <span class="position-absolute file-upload-custom">
+                                        <input single-file class="form-control w-100 h-100 p-0" formControlName="laborContractPath" type="file">
+                                    </span>
+                                </div>
+                                <div *ngIf="(formalContractInforForm.controls['laborContractPath']?.touched 
+                                || formalContractInforForm.controls['laborContractPath']?.dirty)">
+                                    <div *ngIf="formalContractInforForm.controls['laborContractPath']?.errors?.required">
+                                        <small class="text-danger">{{'contract.modal.required_upload_file' | translate}}</small>
+                                    </div>
+                                    <div *ngIf="formalContractInforForm.controls['laborContractPath']?.errors?.messageMaxSize">
+                                        <small class="text-danger">{{formalContractInforForm.controls['laborContractPath'].errors.messageMaxSize}}</small>
+                                    </div>
+                                    <div *ngIf="formalContractInforForm.controls['laborContractPath']?.errors?.messageType">
+                                        <small class="text-danger">{{'contract.modal.pdf_files' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.result_evaluation' | translate}}<span *ngIf="isRequire('resultEvaluation')" class="text-danger">*</span></label>
+                                <textarea class="form-control" type="text" (blur)="onBlur('resultEvaluation')" maxlength="500"
+                                    [class.is-invalid]="(formalContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || formalContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && formalContractInforForm.controls['resultEvaluation']?.invalid"
+                                    placeholder="{{'contract.modal.input_result_evaluation' | translate}}"
+                                    formControlName="resultEvaluation">
+                                </textarea>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || formalContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && formalContractInforForm.controls['resultEvaluation']?.errors?.required">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.required_result_evaluation' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || formalContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && formalContractInforForm.controls['resultEvaluation']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.maxlength_result_evaluation' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(formalContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || formalContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && formalContractInforForm.controls['resultEvaluation']?.errors?.pattern">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.text_number_result_evaluation' | translate}} </small>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    
+                </form>
+                <form *ngIf="selectOption == probationContractType" [formGroup]="probationContractInforForm" novalidate>
+                    <div class="row mt-3">
+                        <div *ngIf="!employeeId" class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.employees' | translate}}<span class="text-danger">*</span></label>
+                                <p-dropdown *ngIf="!value?.id" (onChange)="onChangeEmployee($event.value)" [options]="employees"
+                                    [class.is-invalid]="(formalContractInforForm.controls['employee']?.dirty 
+                                                || formalContractInforForm.controls['employee']?.touched) 
+                                                && formalContractInforForm.controls['employee']?.invalid"
+                                    optionLabel="label" 
+                                    formControlName="employee" 
+                                    [filter]="true" filterBy="label"
+                                    [showClear]="false" placeholder="{{'contract.modal.ph_employees' | translate}}">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                                <span class="form-control" *ngIf="value?.id" disabled="disabled" aria-readonly="true" readonly>
+                                    {{ getEmployeeInfoName }}
+                                </span>
+                                <div *ngIf="formalContractInforForm.controls['employee'].errors?.required
+                                && (formalContractInforForm.controls['employee']?.touched
+                                ||formalContractInforForm.controls['employee']?.dirty)">
+                                    <small class="text-danger">{{'contract.modal.required_employee' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" *ngIf="isShow">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.contract_code' | translate}} <span class="text-danger">*</span></label>
+                                <input [attr.disabled]="flag ? true: null" class="form-control" type="text" maxlength="100" (blur)="onBlur('contractTerm')"
+                                    [class.is-invalid]="probationContractInforForm.controls['contractCode']?.invalid 
+                                    && (probationContractInforForm.controls['contractCode']?.touched || probationContractInforForm.controls['contractCode']?.dirty)"
+                                    placeholder="{{'contract.modal.ph_contract_code' | translate}}"
+                                    formControlName="contractCode">
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['contractCode']?.touched 
+                                    ||  probationContractInforForm.controls['contractCode']?.dirty)
+                                        && probationContractInforForm.controls['contractCode']?.errors?.required">
+                                    <small class="text-danger"> {{'contract.modal.required_contract_code' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="probationContractInforForm.controls['contractCode']?.errors?.pattern">
+                                    <small class="text-danger"> {{'contract.modal.incorrect_format_contract_code' | translate}}</small>
+                                </div>
+                                <div *ngIf="probationContractInforForm.controls['contractCode']?.errors?.maxlength">
+                                    <small class="text-danger">{{'contract.modal.maxlength_contract_code' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.created_date' | translate}}<span *ngIf="isRequire('startDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="startDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('startDate')" [maxDate]="currentDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(probationContractInforForm.controls['startDate']?.dirty 
+                                            || probationContractInforForm.controls['startDate']?.touched) 
+                                            && probationContractInforForm.controls['startDate']?.invalid">
+                                        <div *ngIf="(probationContractInforForm.controls['startDate']?.dirty 
+                                        || probationContractInforForm.controls['startDate']?.touched) 
+                                        && probationContractInforForm.get('startDate')?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_created_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="probationContractInforForm.get('startDate').errors?.maxDate">{{'contract.modal.start_date_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="probationContractInforForm.get('startDate').errors?.message">{{addEmployeeForm.get('startDate').errors?.message}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.contract_term' | translate}}<span *ngIf="isRequire('contractTerm')" class="text-danger">*</span></label>
+                                <select formControlName="contractTerm" class="form-select form-control"
+                                    [class.is-invalid]="probationContractInforForm.controls['contractTerm']?.invalid
+                                    && (probationContractInforForm.controls['contractTerm']?.touched 
+                                    || probationContractInforForm.controls['contractTerm']?.dirty)">
+                                    <option value="">{{'contract.modal.select_contract_term' | translate}}</option>
+                                    <option *ngFor="let status of listContract"
+                                            [selected]="status.value == status"
+                                            value="{{status.value}}">{{status.key | translate}}</option>
+                                </select>
+                                <div *ngIf="(probationContractInforForm.controls['contractTerm']?.touched
+                                || probationContractInforForm.controls['contractTerm']?.dirty) 
+                                && probationContractInforForm.controls['contractTerm'].errors?.required">
+                                    <small class="text-danger">{{'contract.modal.required_contract_term' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" *ngIf="isShow">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.end_date' | translate}}<span *ngIf="isRequire('endDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="endDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text" (blur)="onBlur('endDate')"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(probationContractInforForm.controls['endDate']?.dirty 
+                                            || probationContractInforForm.controls['endDate']?.touched) 
+                                            && probationContractInforForm.controls['endDate']?.invalid">
+                                        <div *ngIf="(probationContractInforForm.controls['endDate']?.dirty 
+                                        || probationContractInforForm.controls['endDate']?.touched) 
+                                        && probationContractInforForm.controls['endDate']?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_end_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="probationContractInforForm.controls['endDate'].errors?.maxDate">{{'contract.modal.end_date_current_date' | translate}}</div>            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.probational_salary' | translate}}<span *ngIf="isRequire('probationalSalary')" class="text-danger">*</span></label>
+                                <input class="form-control" input-currency type="text" (blur)="onBlur('probationalSalary')" maxlength="13"
+                                    [class.is-invalid]="(probationContractInforForm.controls['probationalSalary']?.dirty 
+                                    || probationContractInforForm.controls['probationalSalary']?.touched)  
+                                    && probationContractInforForm.controls['probationalSalary']?.invalid"
+                                    placeholder="{{'contract.modal.input_probational_salary' | translate}}"
+                                    formControlName="probationalSalary">
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['probationalSalary']?.dirty 
+                                    || probationContractInforForm.controls['probationalSalary']?.touched)  
+                                    && probationContractInforForm.controls['probationalSalary']?.errors?.required">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.required_probational_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['probationalSalary']?.dirty 
+                                    || probationContractInforForm.controls['probationalSalary']?.touched)  
+                                    && probationContractInforForm.controls['probationalSalary']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger">{{'contract.modal.maxlength_probational_salary' | translate}} </small>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.official_salary' | translate}}<span *ngIf="isRequire('officialSalary')" class="text-danger">*</span></label>
+                                <input class="form-control" input-currency type="text" (blur)="onBlur('officialSalary')" maxlength="13"
+                                    [class.is-invalid]="(probationContractInforForm.controls['officialSalary']?.dirty 
+                                    || probationContractInforForm.controls['officialSalary']?.touched)  
+                                    && probationContractInforForm.controls['officialSalary']?.invalid"
+                                    placeholder="{{'contract.modal.input_official_salary' | translate}}"
+                                    formControlName="officialSalary">
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['officialSalary']?.dirty 
+                                    || probationContractInforForm.controls['officialSalary']?.touched)  
+                                    && probationContractInforForm.controls['officialSalary']?.errors?.required">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.required_official_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['officialSalary']?.dirty 
+                                    || probationContractInforForm.controls['officialSalary']?.touched)  
+                                    && probationContractInforForm.controls['officialSalary']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger">{{'contract.modal.maxlength_official_salary' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['officialSalary']?.dirty 
+                                    || probationContractInforForm.controls['officialSalary']?.touched)  
+                                    && probationContractInforForm.controls['officialSalary']?.errors?.pattern">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.text_number_official_salary' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isShowTerminateDate" class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.termination_date' | translate}}<span *ngIf="isRequire('contractTerminationDate')" class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input formControlName="contractTerminationDate" class="form-control datetimepicker" type="text" bsDatepicker
+                                        type="text"
+                                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY',  returnFocusToInput: true, isAnimated: true }"
+                                        value="05/06/1985" placeholder="DD/MM/YYYY"
+                                        [class.is-invalid]="(probationContractInforForm.controls['contractTerminationDate']?.dirty 
+                                            || probationContractInforForm.controls['contractTerminationDate']?.touched) 
+                                            && probationContractInforForm.controls['contractTerminationDate']?.invalid">
+                                        <div *ngIf="(probationContractInforForm.controls['contractTerminationDate']?.dirty 
+                                        || probationContractInforForm.controls['contractTerminationDate']?.touched) 
+                                        && probationContractInforForm.controls['contractTerminationDate']?.errors?.required" 
+                                        class="text-danger error-info">{{'contract.modal.required_termination_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="probationContractInforForm.controls['contractTerminationDate'].errors?.maxDate">{{'contract.modal.termination_date_current_date' | translate}}</div>
+                                        <div class="text-danger error-info" *ngIf="probationContractInforForm.errors?.fromToDate">{{'contract.modal.termination_date_created_date' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.upload_file' | translate}}<span *ngIf="isRequire('laborContractPath')" class="text-danger">*</span></label>
+                                <div class="position-relative fileuploadcustom">
+                                    <span class="form-control fileupload w-100" type="text"
+                                    [class.is-disabled]="getDisabledFile(probationContractInforForm)"
+                                    [class.is-invalid]="(probationContractInforForm.controls['laborContractPath']?.touched 
+                                || probationContractInforForm.controls['laborContractPath']?.dirty) 
+                                && probationContractInforForm.controls['laborContractPath']?.invalid">
+                                <span *ngIf="probationContractInforForm.controls['laborContractPath']?.value">
+                                    {{ probationContractInforForm.controls['laborContractPath']?.value?.name | substr:maxLength }}
+                                </span>
+                                <div *ngIf="!probationContractInforForm.controls['laborContractPath']?.value">
+                                    <a [href]="imageUrl + value?.laborContractPath" target="_blank" rel="">{{fileUploadName}}</a>
+                                </div>
+                                </span>
+                                    <span class="position-absolute file-upload-custom">
+                                        <input single-file class="form-control w-100 h-100 p-0" formControlName="laborContractPath" type="file">
+                                    </span>
+                                </div>
+                                <div *ngIf="(probationContractInforForm.controls['laborContractPath']?.touched 
+                                || probationContractInforForm.controls['laborContractPath']?.dirty)">
+                                    <div *ngIf="probationContractInforForm.controls['laborContractPath']?.errors?.required">
+                                        <small class="text-danger">{{'contract.modal.required_upload_file' | translate}}</small>
+                                    </div>
+                                    <div *ngIf="probationContractInforForm.controls['laborContractPath']?.errors?.messageMaxSize">
+                                        <small class="text-danger">{{probationContractInforForm.controls['laborContractPath'].errors.messageMaxSize}}</small>
+                                    </div>
+                                    <div *ngIf="probationContractInforForm.controls['laborContractPath']?.errors?.messageType">
+                                        <small class="text-danger">{{'contract.modal.pdf_file' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label" class="col-form-label">{{'contract.modal.result_evaluation' | translate}}<span *ngIf="isRequire('resultEvaluation')" class="text-danger">*</span></label>
+                                <textarea class="form-control" type="text" (blur)="onBlur('resultEvaluation')" maxlength="500"
+                                    [class.is-invalid]="(probationContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || probationContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && probationContractInforForm.controls['resultEvaluation']?.invalid"
+                                    placeholder="{{'contract.modal.input_result_evaluation' | translate}}"
+                                    formControlName="resultEvaluation">
+                                    </textarea>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || probationContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && probationContractInforForm.controls['resultEvaluation']?.errors?.required">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.required_result_evaluation' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || probationContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && probationContractInforForm.controls['resultEvaluation']?.errors?.maxlength">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.maxlength_result_evaluation' | translate}}</small>
+                                </div>
+                                <div
+                                    *ngIf="(probationContractInforForm.controls['resultEvaluation']?.dirty 
+                                    || probationContractInforForm.controls['resultEvaluation']?.touched)  
+                                    && probationContractInforForm.controls['resultEvaluation']?.errors?.pattern">
+                                    <small
+                                        class="text-danger"> {{'contract.modal.text_number_result_evaluation' | translate}} </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="'EXPIRED' != value?.laborContractStatus" class="submit-section d-flex justify-content-end p-3">
+                <button  *ngIf="!value && canEditContractInfo()" class="btn btn-secondary btnSave m-r-5" type="button" (click)="onClickButtonSave()">{{'contract.btn.save' | translate}}</button>
+                <button  *ngIf="isShowTerminateDate && canEditContractInfo()" class="btn btn-secondary btnSave m-r-5" type="button" (click)="onClickButtonSave()">{{'contract.btn.save' | translate}}</button>
+                <button  *ngIf="((value?.laborContractStatus == 'PENDING') && value?.laborContractStatus != 'WAITING_APPROVE') && canEditContractInfo()" class="btn btn-secondary m-r-5" type="button" (click)="onClickButtonSave()">{{'contract.btn.save' | translate}}</button>
+                <button  *ngIf="((value?.laborContractStatus == 'PENDING' ) && value?.laborContractStatus != 'WAITING_APPROVE') && canSendApprovalContract()" class="btn btn-primary btnSave" type="button" (click)="onClickButtonSendApprove()">{{'contract.btn.save_and_send_approve' | translate}}</button>
+                <button  *ngIf="value?.laborContractStatus == 'UNAPPROVE' && canSendApprovalContract()" class="btn btn-primary btnSave" type="button" (click)="onClickButtonSendApprove()">{{'contract.btn.save_and_send_approve' | translate}}</button>
+
+                <button *ngIf="(value?.laborContractStatus == 'WAITING_APPROVE') && canCancelApprovalContract()" class="btn btn-secondary m-r-5" type="button" (click)="onClickReject()">{{'contract.btn.reject' | translate}}</button>
+                <button *ngIf="(value?.laborContractStatus == 'WAITING_APPROVE') && canApprovalContract()" class="btn btn-primary btnSave" type="button" (click)="onClickButtonApprove()">{{'contract.btn.approve' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Contract Modal -->
+
+<!-- REJECT modal -->
+<div id='reject_contract_approve_modal' style="background: rgba(37, 41, 41, 0.7);" class="modal custom-modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{'contract.modal.reject_approve' | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="rejectForm" novalidate>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="col-form-label">{{'contract.modal.reject_reason' | translate}} <span class="text-danger">*</span></label>
+                                <textarea
+                                [class.is-invalid]="(rejectForm.controls['note']?.dirty 
+                                || rejectForm.controls['note']?.touched) && 
+                                rejectForm.controls['note']?.invalid"
+                                maxlength="500" (blur)="onBlurRejectApprove()"
+                                placeholder="Nhập lý do từ chối" 
+                                formControlName="note" 
+                                class="form-control w-100" rows="3"></textarea>
+                                <div *ngIf="(rejectForm.controls['note']?.dirty 
+                                || rejectForm.controls['note']?.touched) && 
+                                rejectForm.controls['note']?.errors?.required">
+                                    <small class="text-danger">{{'contract.modal.required_reject_reason' | translate}}</small>
+                                </div>
+                                <div *ngIf="rejectForm.controls['note']?.errors?.maxlength">
+                                    <small class="text-danger">{{'contract.modal.maxlength_reject_reason' | translate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section m-3 d-flex justify-content-end">
+                <button class="btn btn-secondary submit-btn btnCancel" type="button" (click)="cancelRejectApprove()">{{'contract.btn.cancel' | translate}}</button>
+                <button class="btn btn-primary submit-btn btnSave" type="button" (click)="onClickSubmitReject()">{{'contract.btn.send' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

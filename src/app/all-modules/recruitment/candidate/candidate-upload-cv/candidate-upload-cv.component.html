@@ -1,0 +1,48 @@
+<div class="content">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'candidate.title.upload_cv' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/layout/recruitment/candidate">{{'candidate.title.management' | translate}}</a></li>
+                    <li class="breadcrumb-item active">{{'candidate.title.upload_cv' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="box-u">
+        <div class="row" *ngFor="let candidate of candidateForms; let i = index">
+            <div class="col-3">
+                <form [formGroup]="candidateForms[i]">
+                    <formly-form [model]="candidateModels[i]" [fields]="candidateFields[i]" [form]="candidateForms[i]"></formly-form>
+                </form>
+            </div>
+            <div class="col-8" *ngIf="candidateModels.length>1">
+                <app-candidate-file [fileCVs]="fileCVCandidates[i]" [keyIndexCandidate]="i" (onChangeFile)="onChangeFile($event)" ></app-candidate-file>
+            </div>
+            <div class="col-1 cursor-pointer text-center icon-delete mt-2" *ngIf="candidateModels.length>1">
+                <img src="assets/img/icon/icon-delete.png" height="20" (click)="onRemoveCandidate(i)"/>
+            </div>
+            <div class="col-9" *ngIf="candidateModels.length<=1">
+                <app-candidate-file [fileCVs]="fileCVCandidates[i]" [keyIndexCandidate]="i" (onChangeFile)="onChangeFile($event)" ></app-candidate-file>
+            </div>
+        </div>
+        <div class="row" *ngIf="checkExistAddCandidate()">
+            <div class="col-3">
+                <a class="cursor-pointer text-blue" (click)="onAddCandidate()">+ {{'candidate.upload_cv.candidate_add' | translate}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 row filter-row">
+        <ng-container>
+            <div class="align-right">
+                <button class="btn btnCancel btn-primary submit-btn" (click)="comeBackCandidateList()">
+                    {{'candidate.btn.come_back' | translate}}
+                </button>
+                <button class="btn btnSave btn-primary submit-btn" (click)="updateCVCandidate()">
+                    {{'candidate.btn.upload_cv' | translate}}
+                </button>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            Từ chối phê duyêt
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll" [formGroup]="rejectForm">
+        <label class="col-form-label">Lý do từ chối<span class="text-danger">*</span></label>
+        <textarea class="w-100 form-control"
+                  placeholder="Nhập lý do từ chối phê duyệt"
+                  type="text" maxlength="500"
+                  formControlName="reason"
+                  (blur)="blurLeaveReason()"
+                  [(ngModel)]="reason"
+        ></textarea>
+        <div *ngIf="rejectForm.controls['reason'].invalid &&
+             (rejectForm.controls['reason'].dirty || rejectForm.controls['reason'].touched)"
+             class="text-danger">
+            <small *ngIf="rejectForm.controls['reason'].errors.required">
+                {{'workingOnleave.list.rejectReasonRequired' | translate}}
+            </small>
+        </div>
+        <div *ngIf="rejectForm.controls['reason'].invalid &&
+             (rejectForm.controls['reason'].dirty || rejectForm.controls['reason'].touched)"
+             class="text-danger">
+            <small *ngIf="rejectForm.controls['reason'].hasError('maxlength')">
+                {{'workingOnleave.list.rejectReasonMaxlength' | translate}}
+            </small>
+        </div>
+    </div>
+    <!--    Footer-->
+    <div class="footer">
+        <div class="float-end">
+            <button class="btn btnSave" (click)="confirm()">Xác nhận</button>
+        </div>
+        <div class="float-end">
+            <button class="btn btnCancel" (click)="closeModal()">Huỷ</button>
+        </div>
+    </div>
+</div>

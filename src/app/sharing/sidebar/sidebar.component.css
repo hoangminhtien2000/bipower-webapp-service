@@ -1,0 +1,35 @@
+.submenu-slidedown {
+    display: block;
+    transition: display 2s ease-out;
+}
+
+.submenu-slideup {
+    display: none;
+}
+
+.frame-menu {
+    display: none;
+    transform-origin: left top;
+    animation: all .3s ease-in-out;
+    animation-timing-function: ease-in-out;
+    /*transition: all .3s ease-in-out;*/
+}
+
+.frame-menu-show {
+    display: block;
+    animation-timing-function: ease-in-out;
+    animation-name: menu-slide-down;
+}
+
+@keyframes menu-slide-down {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+}

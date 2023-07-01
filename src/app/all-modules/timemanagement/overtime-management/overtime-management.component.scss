@@ -1,0 +1,103 @@
+.content {
+  padding: 30px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.employee-text-left {
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.alg-center {
+  text-align: center;
+}
+
+@media only screen and (min-width: 767.98px) {
+  .btnOT {
+    height: 100%;
+    padding-top: 15%;
+  }
+
+  .add-btn-ot {
+    margin-left: 32px;
+  }
+}
+
+@media only screen and (min-width: 1238.98px) {
+  .btnOT {
+    height: none;
+    padding-top: 12px;
+  }
+
+  .add-btn-ot {
+    margin-left: unset;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .pb-16 {
+    padding-bottom: 8px;
+  }
+}

@@ -1,0 +1,71 @@
+
+
+.modal-body{
+    height: 480px;
+    overflow-y: scroll  ;
+}
+
+#reject_contract_approve_modal .modal-body{
+    height: 200px;
+}
+
+.file-upload-custom{
+    width: 25px;
+    height: 25px;
+    top: 20%;
+    right: 2%;
+    background-image: url(/assets/img/icons/image.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.file-upload-custom > input[type=file]{
+    opacity: 0;
+}
+/* public upload block */
+.uploadfile-block{
+    position: relative;
+    width: 85px;
+    height: 85px;
+    background-color: gainsboro;
+}
+.uploadfile-block > span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.uploadfile-block > span{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.uploadfile-block > span > input{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.uploadfile-block > span::before{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    font-size: 47px;
+}
+.uploadfile-block > span > img{
+    width: 100%;
+    height: 100%;
+}
+.uploadfile-block > button{
+    width: 100%;
+    height: 100%;
+}
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+}
+.is-disabled{
+    background: #e9ecef;
+}
+.btnSave{
+    margin-bottom: 0;
+}

@@ -1,0 +1,90 @@
+.content {
+  padding: 30px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.width-201 {
+  width: 201px;
+}
+
+.h-74 {
+  height: 74px;
+  padding: 13%;
+}
+
+.history-box {
+  padding: unset !important;
+}
+
+:host ::ng-deep .presence-box {
+  .content.container-fluid.p-4 {
+    padding: unset !important;
+  }
+}
+
+.pb-unset {
+  padding-bottom: unset;
+}
+
+.container-fluid {
+  padding: unset;
+}

@@ -1,0 +1,83 @@
+<div class="modal-header header-bg">
+    <div class="header-content content-header">
+        {{'TEAM.TITLE.EMPLOYEE_INFO' | translate}}
+    </div>
+    <span (click)="closeDialog()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+</div>
+<div class="modal-body form-scroll">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="employee-avatar"></div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-md-6">
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.EMPLOYEE_CODE' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.employeeCode}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.EMPLOYEE_NAME' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.lastName}} {{employeeInfo?.firstName}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.GENDER' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.gender}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.BIRTH_DATE' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.birthday}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.FILE.FILE_CV' | translate}}</label>
+                </div>
+                <div class="col-6">
+                    <a [href]="employeeInfo?.cvEnLink || employeeInfo?.cvViLink">{{cvFile}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.PHONE' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.phone}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.EMAIL_COMPANY' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.companyEmail}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.POSITION' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.role}}</div>
+            </div>
+            <div class="row dotted-row">
+                <div class="col-6">
+                    <label>{{'TEAM.TITLE.YEAR_EXP' | translate}}</label>
+                </div>
+                <div class="col-6">{{employeeInfo?.numberOfMonthStackExperience}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary hightlight-focus" (click)="closeDialog()">
+        {{'TEAM.BUTTON.CLOSE' |translate}}
+    </button>
+</div>

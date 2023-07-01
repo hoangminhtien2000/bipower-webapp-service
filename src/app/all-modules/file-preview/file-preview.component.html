@@ -1,0 +1,11 @@
+<div *ngIf="!isFlag" style="position: relative;">
+      <pdf-viewer [autoresize]="true" [src]="pdfSrc" [original-size]="true"
+          [render-text]='false' [show-all]="true" style="display: block;position: relative"
+          [fit-to-page]="true">
+      </pdf-viewer>
+      <button class="btn btn-primary" style="position: fixed; right: 10px; bottom: 10px;" (click)="download()">Download PDF</button>
+</div>
+<div *ngIf="isFlag" style="position: relative;" class="image-view">
+    <img [src]="imageSrc" style="width: 50%;">
+    <button class="btn btn-primary" style="position: fixed; right: 10px; bottom: 10px;" (click)="downloadImage()">Download Image</button>
+</div>

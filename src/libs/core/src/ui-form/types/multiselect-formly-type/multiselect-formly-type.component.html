@@ -1,0 +1,20 @@
+<label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+<p-multiSelect remove-wrapper #multiSelect [options]="to.options" [formControl]="formControl" [formlyAttributes]="field"
+  defaultLabel="Select"
+  optionLabel="label" [(ngModel)]="selectedItem" [panelStyle]="{minWidth:'12em'}" (onPanelHide)="onHide()" (onPanelShow)="onOpen(multiSelect)" (onChange)="onChangeSelected($event)"  (focus)="onFocus($event)" (blur)="onBlur($event)">
+  <ng-template let-selectedValues pTemplate="selectedItems">
+    <div *ngIf="isArray(selectedValues); else defaultLabelCustom">
+      <div *ngFor="let val of selectedValues; let i=index">
+        <div class="ui-multiselected-item-token ui-corner-all">
+          <span >{{val.label}}</span>
+          <span *ngIf="formControl.enabled" class="btn-icon" (click)="deleteSelected(val,$event)">
+            <i class="p-multiselect-token-icon pi pi-times-circle ng-tns-c54-1 ng-star-inserted"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <ng-template #defaultLabelCustom>
+      <div class="customPlaceholder">{{to.placeholder}}</div>
+    </ng-template>
+  </ng-template>
+</p-multiSelect>

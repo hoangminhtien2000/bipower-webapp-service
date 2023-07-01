@@ -1,0 +1,20 @@
+<div class="plr-30 row">
+    <div class=" pt-1 float-left col-8"></div>
+    <div class="row d-flex mb-3 col">
+        <div class="col"></div>
+        <div class="col d-flex">
+            <div class="col">
+                <button class="btn add-btn w-100" tabindex="0" [disabled]="disableCheckinButton()"
+                        (click)="checkIn()">Check-in
+                </button>
+            </div>
+            <div class="col pl-16">
+                <button class="btn add-btn w-100" tabindex="0" [disabled]="disableCheckOutButton()"
+                        (click)="checkOut()">Check-out
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

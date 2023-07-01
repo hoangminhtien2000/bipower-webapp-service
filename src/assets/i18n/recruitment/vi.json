@@ -1,0 +1,48 @@
+{
+  "recruitment": {
+    "title": {
+      "management": "Quản lý tuyển dụng",
+      "confirm_remove_cv_reviewer_title": "Xác nhận xoá người đánh giá CV",
+      "confirm_remove_cv_reviewer_message": "Bạn có chắc chắn muốn xoá người đánh giá CV này không?",
+      "assign_cv_reviewer_title": "Phân công đánh giá CV",
+      "step_review_cv": "Vòng 1: Đánh giá CV"
+    },
+    "add_evaluation_criteria": {
+      "title": "Thêm mới tiêu chí",
+      "criteria": "Tiêu chí",
+      "criteria_placeholder": "Chọn tiêu chí"
+    },
+    "interview": {
+      "step_title": "Vòng 2: Phỏng vấn",
+      "profestional_evaluation": "Đánh giá chuyên môn",
+      "cultural_suitability": "Sự phù hợp của văn hóa",
+      "income": "Thu nhập",
+      "common_infomation": "Thông tin chung",
+      "other_evaluation": "Khác"
+    },
+    "notify": {
+      "assign_hr_success": "",
+      "assign_cv_reviewer_success": "Thêm người đánh giá thành công.",
+      "remove_assign_cv_reviewer_success": "Xóa người đánh giá CV thành công.",
+      "save_cv_review_success": "Đánh giá CV thành công.",
+      "save_interview_contact_success": "Lưu thông tin liên hệ phỏng vấn thành công.",
+      "update_interview_schedule_success": "Cập nhật thông tin lịch phỏng vấn thành công.",
+      "update_interview_evaluation_success": "Cập nhật thông tin đánh giá chuyên môn thành công.",
+      "update_interview_hr_evaluation_success": "Cập nhật thông tin đánh giá HR thành công.",
+      "create_recruitment_proposal_success":"Lập quyết định tuyển dụng thành công.",
+      "approve_recruitment_proposal_success":"Xác nhận quyết định tuyển dụng thành công.",
+      "reject_recruitment_proposal_success":"Từ chối quyết định tuyển dụng thành công.",
+      "create_recruitment_proposal_success2":"Lập quyết định tuyển dụng thành công."
+    },
+    "button": {
+      "cancel": "Huỷ",
+      "ok": "Đồng ý"
+    },
+    "enum": {
+      "review_result": {
+        "pass": "Đạt",
+        "failure": "Không đạt"
+      }
+    }
+  }
+}

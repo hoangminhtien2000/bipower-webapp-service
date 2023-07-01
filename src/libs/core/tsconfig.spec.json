@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc/libs/core",
+        "types": [
+            "jasmine",
+            "node"
+        ]
+    },
+    "files": [
+      "test.ts",
+      "zone-flags.ts",
+      "polyfills.ts"
+    ],
+    "include": [
+        "**/*.spec.ts",
+        "**/*.d.ts",
+        "../../../apps/web/src/**/*.d.ts"
+    ]
+}

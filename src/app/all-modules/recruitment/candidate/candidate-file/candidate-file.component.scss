@@ -1,0 +1,19 @@
+.col-1-img {
+  flex: 0 0 auto;
+  width: 3%;
+}
+.uploadfilecontainer {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  font-family: sans-serif;
+  height: 100%;
+}
+.uploadfilecontainer.highlight {
+  border-color: purple;
+}
+
+.text-file {
+  margin-bottom: unset;
+  padding: 8px;
+}
+

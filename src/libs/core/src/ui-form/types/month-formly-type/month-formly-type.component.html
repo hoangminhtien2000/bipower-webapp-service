@@ -1,0 +1,18 @@
+<div class="datePicker {{to.removeFormlyFieldTag? field.className: ''}}" remove-wrapper>
+    <label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+    <div class="cal-icon">
+    <i *ngIf="to.nextMonth && field.key == 'fromDate'" class="fas fa fa-chevron-left left-arrow"
+        (click)="onDecreaseMonth()"></i>
+    <i *ngIf="to.nextDay && field.key == 'fromDate'" class="fas fa fa-chevron-left left-arrow"
+        (click)="onDecreaseDay()"></i>
+    <input placement="bottom" container="" autocomplete="off" type="text" bsDatepicker [isOpen]="isOpen"
+        [formControl]="formControl" placeholder="{{to.placeholder}}"
+        [bsConfig]="{ dateInputFormat: 'MM/YYYY', showWeekNumbers:false, adaptivePosition: true, returnFocusToInput: true, isAnimated: true, minMode: 'month' }"
+        [formlyAttributes]="field" class="form-control" (focus)="onFocus($event)"
+        (blur)="onBlur($event)" >
+    <i *ngIf="to.nextMonth && field.key == 'toDate'" class="fas fa fa-chevron-right right-arrow"
+        (click)="onIncreaseMonth()"></i>
+    <i *ngIf="to.nextDay && field.key == 'toDate'" class="fas fa fa-chevron-right right-arrow"
+        (click)="onIncreaseDay()"></i>
+    </div>
+</div>

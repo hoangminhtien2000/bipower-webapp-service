@@ -1,0 +1,109 @@
+// input text
+.p-inputtext {
+  border: 1px solid #e3e3e3;
+}
+.p-inputtext:enabled:not(.ng-invalid):hover {
+  border: 1px solid #e3e3e3;
+}
+.p-inputtext:enabled:focus{
+  box-shadow: none;
+}
+.p-inputtext.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+
+// dropdown
+.p-dropdown {
+  border: 1px solid #e3e3e3;
+}
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: none;
+}
+.p-dropdown:hover {
+  border: 1px solid #e3e3e3;
+}
+p-dropdown.ng-touched.ng-invalid > .p-dropdown {
+  border-color: red;
+}
+
+
+// multi select
+.p-multiselect:enabled {
+  border: 1px solid #e3e3e3;
+}
+
+.p-inputwrapper-focus .p-focus{
+  box-shadow: none;
+}
+
+p-multiselect.ng-touched.ng-invalid > .p-multiselect {
+  border-color: red;
+}
+
+.other-option-wrap {
+  button {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: none;
+    outline: none;
+    text-align: left;
+    background: transparent;
+  }
+  button:hover {
+    background: #1b2e4b;
+  }
+}
+
+.multiselect-chip {
+  display: inline;
+  background-color: #efdc27;
+  border-radius: .2rem;
+  padding: .2rem .3rem .2rem .3rem;
+  margin-right: .2rem;
+}
+
+.bi-hidden {
+  display: none;
+}
+
+.w-l-70 {
+  float: left;
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// calendar
+.p-datepicker table td {
+  padding: 0;
+}
+
+.p-datepicker table td span {
+  margin: 0;
+}
+
+$inputBorder: 1px solid #e3e3e3;
+$inputFocusBorderColor: #e3e3e3;
+
+//.p-disabled {
+//  background-color: lightgrey;
+//  opacity: 1;
+//}
+
+.p-disabled:not(.p-datepicker-group-container .p-disabled) {
+  background-color: lightgrey;
+  opacity: 1;
+}
+
+
+input[disabled] {
+  background-color: lightgrey;
+}
+
+
+.p-overlaypanel-content {
+  padding: 0!important;
+}

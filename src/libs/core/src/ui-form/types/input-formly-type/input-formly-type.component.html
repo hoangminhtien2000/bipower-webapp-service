@@ -1,0 +1,41 @@
+<div
+  class="{{isReadOnly?'typeReadonly': ''}} {{to.removeFormlyFieldTag? field.className: ''}} {{(to.suffixText || to.tickValid) ? 'input-group': ''}}"
+  remove-wrapper>
+  <label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+  <input [class.is-invalid]="(formControl.dirty || formControl.touched) && formControl.invalid"
+         (blur)="onBlur($event)"
+         (change)="onChange($event.target.value)"
+         (focus)="onFocus($event)"
+         *ngIf="!to.mask"
+         [formControl]="formControl"
+         [formlyAttributes]="field"
+         [maxLength]="to.maxLength ? to.maxLength : to.fixlength ? to.fixlength : 50"
+         [ngStyle]="to.style"
+         [readonly]="isReadOnly"
+         [tabindex]="to.tabindex || 0"
+         autocomplete="off"
+         class="form-control {{to.class? to.class: ''}}"
+         placeholder="{{to.placeholder}}" type="input">
+
+  <input (blur)="onBlur($event)"
+         (change)="onChange($event.target.value)"
+         (focus)="onFocus($event)"
+         *ngIf="to.mask"
+         [formControl]="formControl"
+         [formlyAttributes]="field" [mask]="to.mask"
+         [maxLength]="to.maxLength ? to.maxLength : to.fixlength ? to.fixlength : 50"
+         [ngStyle]="to.style"
+         [readonly]="isReadOnly"
+         [tabindex]="to.tabindex || 0"
+         autocomplete="off"
+         [class.is-invalid]="(formControl.dirty || formControl.touched) && formControl.invalid"
+         class="form-control {{to.class? to.class: ''}}"
+         placeholder="{{to.placeholder}}" type="input">
+
+  <div *ngIf="to.suffixText" class="input-group-append">
+    <span class="input-group-text">{{to.suffixText}}</span>
+  </div>
+  <div *ngIf="to.tickValid && formControl && formControl.touched && formControl.valid" class="input-group-append">
+    <i class="input-group-text fas fa-check-circle text-success tick-valid"></i>
+  </div>
+</div>

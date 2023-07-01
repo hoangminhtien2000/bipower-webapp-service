@@ -1,0 +1,18 @@
+<label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+<div class="{{class}} " remove-wrapper>
+    <div *ngFor="let element of to.options; let i = index">
+        <input type="radio" [id]="rnd + key + i" [name]="key" [formControl]="formControl" [formlyAttributes]="field"
+            [disabled]="to.disabled" [value]="element.value" [(ngModel)]="formControl.value" />
+        <ng-container *ngIf="!to.isDisplayFlag">
+            <label for="{{ rnd + key + i }}"> {{ element.label | translate }} </label>
+        </ng-container>
+        <ng-container *ngIf="to.isDisplayFlag">
+            <label for="{{ rnd + key + i }}" class="d-flex float-left pl-10 label-language-web">
+                <img class="img-language-web" style="margin-right: 5px; height: 18px;" src="assets/i18n/{{ element.value }}.svg" />
+                <div style="min-width: 30px;text-align: right;margin-right: 5px;">
+                    <strong>{{ element.label | translate | uppercase }}</strong>
+                </div>
+            </label>
+        </ng-container>
+    </div>
+</div>

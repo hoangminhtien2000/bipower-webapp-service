@@ -1,0 +1,35 @@
+
+.btn {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.btn-outline-primary {
+    border: 1px solid #dbc700;
+    color: black;
+    background: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+    background: #dbc700;
+    color: white;
+}
+
+.require-label:after {
+    content: ' *';
+    color: red;
+}
+
+.p-component:disabled {
+    opacity: 1;
+}
+
+.p-disabled, .p-component:disabled {
+    opacity: 1!important;
+}
+
+.readonly-block {
+    /*padding: .5rem;*/
+    /*border-bottom: 1px dashed;*/
+}

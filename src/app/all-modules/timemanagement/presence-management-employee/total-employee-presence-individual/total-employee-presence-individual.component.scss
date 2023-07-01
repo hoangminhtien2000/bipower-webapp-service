@@ -1,0 +1,64 @@
+.pd-none {
+  padding: unset;
+}
+
+.pl-0 {
+  padding-left: unset;
+}
+
+.pr-0 {
+  padding-right: unset;
+}
+
+.box-total-onleave {
+  .font-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    align-items: center;
+    color: #252929;
+  }
+
+  .font-number {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 120%;
+    align-items: center;
+    color: #252929;
+  }
+}
+
+.p-24 {
+  padding: 24px;
+}
+
+.border-right-vetical {
+  border-right: 1px solid #CFD1D1;
+}
+
+.col-half-offset {
+  margin-left: 4.166666667%
+}
+
+.card-box {
+  border: 1px solid #ededed;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+}
+
+.h-65 {
+  height: 45px;
+}
+
+.mlr-box {
+  margin: 0 16px 0 16px;
+}
+
+.br-vertical-text-box {
+  border-right: 1px solid #ff851a;
+}

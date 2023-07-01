@@ -1,0 +1,50 @@
+.content {
+    padding: 30px;
+}
+
+.width-auto {
+    width: auto;
+}
+
+.dataTables_info {
+    padding-top: 0.85rem;
+}
+
+.text-error {
+    color: #dc3545;
+    font-size: 16px;
+}
+
+.error-fullname {
+    margin-top: -10px;
+}
+
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error {
+    font-size: 14px;
+}
+
+.bp-btn-width-search {
+    width: 180px;
+    height: 44px;
+}
+
+@media only screen and (min-width: 767.98px) {
+    .add-btn-ot {
+        margin-left: 32px;
+    }
+}
+
+@media only screen and (min-width: 1238.98px) {
+    .add-btn-ot {
+        margin-left: unset;
+    }
+}
+
+@media only screen and (max-width: 767.98px) {
+    .pb-16{
+        padding-bottom: 8px;
+    }
+}

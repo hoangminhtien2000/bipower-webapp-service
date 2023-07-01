@@ -1,0 +1,112 @@
+{
+  "workingOvertime": {
+    "btn": {
+      "sendApprove": "Gửi phê duyệt",
+      "approve": "Phê duyệt",
+      "reject": "Từ chối",
+      "cancel": "Hủy",
+      "save": "Lưu",
+      "search": "Tìm kiếm",
+      "confirm": "Xác nhận",
+      "summaryTable": "Bảng tổng hợp",
+      "send": "Gửi",
+      "register": "Đăng ký",
+      "saveAndSendApprove": "Lưu & gửi phê duyệt"
+    },
+    "management": {
+      "overtimeManagement": "Quản lý làm ngoài giờ",
+      "timekeepingManagement": "Quản lý chấm công",
+      "totalOvertime": "Tổng thời gian làm ngoài giờ là",
+      "registerCode": "Mã phiếu đăng ký",
+      "team": "Nhóm",
+      "requestCode": "Mã phiếu yêu cầu",
+      "projectName": "Tên dự án",
+      "employeeName": "Họ tên nhân viên",
+      "registerDate": "Ngày đăng ký",
+      "overtimeWorkingHours": "Thời gian làm ngoài giờ",
+      "status": "Trạng thái",
+      "recordNotFound": "Không tìm thấy kết quả"
+    },
+    "addOrEdit": {
+      "fromTime": "Từ giờ",
+      "toTime": "Đến giờ",
+      "detailRegisterOvertime": "Chi tiết đăng ký làm ngoài giờ",
+      "registerOvertime": "Đăng ký làm ngoài giờ",
+      "requestCode": "Mã phiếu yêu cầu",
+      "phRequestCode": "Nhập mã phiếu yêu cầu",
+      "requestCodeRequired": "Mã phiếu yêu cầu không được để trống",
+      "requestCodeMaxlength": "Mã phiếu yêu cầu không cho phép nhập quá 20 ký tự",
+      "requestCodeTypeTextNumber": "Mã phiếu yêu cầu chỉ cho phép nhập chữ và số",
+      "projectName": "Tên dự án",
+      "phProjectName": "Nhập tên dự án",
+      "projectNameRequired": "Tên dự án không được để trống",
+      "projectNameMaxlength": "Tên dự án không cho phép nhập quá 200 ký tự",
+      "overtimeReason": "Lý do làm ngoài giờ ",
+      "phOvertimeReason": "Nhập lý do làm ngoài giờ",
+      "overtimeReasonRequired": "Lý do làm ngoài giờ không được để trống",
+      "overtimeReasonTypeTextNumber": "Lý do làm ngoài giờ không được quá 500 ký tự",
+      "startTime": "Thời gian bắt đầu ",
+      "startTimeRequired": "Thời gian bắt đầu không được để trống",
+      "startTimeValid": "Thời gian bắt đầu không được nhỏ hơn 7 ngày và phải ở trong tháng này",
+      "endTime": "Thời gian kết thúc",
+      "endTimeRequired": "Thời gian kết thúc không được để trống",
+      "endTimeValid": "Thời gian bắt đầu không được nhỏ hơn 7 ngày và phải ở trong tháng này",
+      "endTimeStartTime": "Thời gian kết thúc phải lớn hơn thời gian bắt đầu",
+      "validateOT": "Thời gian đăng ký phải trong ngày và nằm trong khoảng 17:31 - 23:59",
+      "biggestSevenDays": "Thời gian đăng ký không được vượt quá 7 ngày so với ngày hiện tại.",
+      "smallThanSevenDays": " Thời gian đăng ký không được nhỏ hơn 7 ngày so với ngày hiện tại.",
+      "blank": "Thời gian từ giờ không được để trống.",
+      "holidayTimeRule": "Giá trị giờ từ giờ đến giờ phải nằm ngoài giờ hành chính (8:00-17:30).",
+      "startSmallThanEnd": "Giá trị từ giờ không được vượt quá giá trị đến giờ.",
+      "noPass1": "Giá trị từ giờ đến giờ không ít hơn 1 giờ.",
+      "noPass3": "Giá trị từ giờ đến giờ không được vượt quá 3 giờ.",
+      "noPass8": "Giá trị từ giờ đến giờ không được vượt quá 8 giờ."
+    },
+    "approveForm": {
+      "confirmApproveInfo": "Xác nhận phê duyệt thông tin làm ngoài giờ",
+      "approveFor": "Bạn có chắc chắn phê duyệt thông tin cho ",
+      "registerFormOvertime": " phiếu đăng ký làm ngoài giờ không?"
+    },
+    "rejectForm": {
+      "rejectApproveOvertimeInfo": "Từ chối phê duyệt thông tin làm ngoài giờ",
+      "rejectReason": "Lý do từ chối",
+      "rejectReasonRequired": "Lý do từ chối không được để trống",
+      "rejectReasonMaxlength": "Lý do từ chối chỉ được nhập tối đa 500 ký tự"
+    },
+    "searchForm": {
+      "team": "Nhóm",
+      "phTeam": "Chọn nhóm",
+      "requestCode": "Mã phiếu yêu cầu",
+      "phRequestCode": "Nhập mã phiếu yêu cầu",
+      "requestCodeMaxlength": "Mã phiếu yêu cầu không cho phép nhập quá 20 ký tự",
+      "projectName": "Tên dự án",
+      "phProjectName": "Nhập tên dự án",
+      "projectNameMaxlength": "Tên dự án không được nhập quá 100 ký tự",
+      "employeeName": "Họ tên nhân viên",
+      "phEmployeeName": "Nhập họ và tên nhân viên",
+      "employeeNameMaxlength": "Họ tên nhân viên không được nhập quá 100 ký tự",
+      "registerDate": "Ngày đăng ký",
+      "status": "Trạng thái",
+      "selectStatus": "Chọn trạng thái",
+      "create": "Tạo mới",
+      "sendRequest": "Đã gửi yêu cầu",
+      "leaderApprove": "Trưởng nhóm đã phê duyệt",
+      "approved": "Được phê duyệt",
+      "rejected": "Từ chối phê duyệt"
+    },
+    "paging": {
+      "display": "Hiển thị",
+      "total": "trên tổng số",
+      "record": "Bản ghi"
+    },
+    "table": {
+      "title": "Bảng tổng hợp làm ngoài giờ",
+      "code": "Mã nhân viên",
+      "fullName": "Họ tên",
+      "totalDayWoringOvertime": "Tổng số buổi làm ngoài giờ",
+      "totalHoursWoringOvertime": "Tổng số giờ làm ngoài giờ",
+      "requiredYear": "Bắt buộc chọn năm",
+      "emptyData": "Không có dữ liệu"
+    }
+  }
+}

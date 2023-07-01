@@ -1,0 +1,209 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{"workingOnleave.editAddOnleave.registerOnleave" | translate}}
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll">
+        <form [formGroup]="updateLeaveForm" novalidate>
+            <div class="col-sm-12" *ngIf="!canSeeSaveAndSendApproval()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"timeManager.add_onleave_management.choose_employee" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <ng-select2
+                            [data]="employees"
+                            [value]="employeeId"
+                            (valueChanged)="searchByEmployee($event)"
+                            [width]="'100%'">
+                    </ng-select2>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"workingOnleave.editAddOnleave.onleaveType" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <select class="form-select"
+                            [(ngModel)]="leave.leaveType"
+                            (ngModelChange)="selectLeaveType($event)"
+                            formControlName="leaveType">
+                        <option *ngFor="let leaveType of leaveTypes"
+                                [selected]="leave.leaveType === leaveType.leaveType"
+                                value="{{leaveType.leaveType}}">{{leaveType.leaveTypeName | translate}}
+                            </option>
+                    </select>
+                    <div *ngIf="updateLeaveForm.controls['leaveType'].invalid && (updateLeaveForm.controls['leaveType'].dirty || updateLeaveForm.controls['leaveType'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateLeaveForm.controls['leaveType'].errors.required">
+                            {{"workingOnleave.editAddOnleave.onleaveTypeRequired" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"workingOnleave.editAddOnleave.onleaveTime" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input type="text"
+                               ngxDaterangepickerMd
+                               [minDate]="this.today"
+                               [timePicker]="true"
+                               [autoApply]="false"
+                               [locale]="{applyLabel: 'Xác nhận', format: 'DD/MM/YYYY, HH:mm'}"
+                               [timePickerSeconds]="false"
+                               [timePickerIncrement]="5"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="leave.leaveTime"
+                               (change)="onDateRangePickerChanged()"
+                               formControlName="leaveTime"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="updateLeaveForm.controls['leaveTime'].invalid && (updateLeaveForm.controls['leaveTime'].dirty || updateLeaveForm.controls['leaveTime'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.endLessThanStart">
+                            {{"workingOnleave.editAddOnleave.fromDateToDate" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.startLessThanStartWorkingDay">
+                            {{"workingOnleave.editAddOnleave.fromDateToStartWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.endBiggerThanEndWorkingDay">
+                            {{"workingOnleave.editAddOnleave.toDateToEndWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.required">
+                            {{"workingOnleave.editAddOnleave.onleaveTimeRequired" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.startInLunchTime">
+                            {{"workingOnleave.editAddOnleave.fromDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.endInLunchTime">
+                            {{"workingOnleave.editAddOnleave.toDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.startIsNoWorkingDay">
+                            {{"workingOnleave.editAddOnleave.fromDateToNoWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['leaveTime'].errors.endIsNoWorkingDay">
+                            {{"workingOnleave.editAddOnleave.toDateToNoWorkingDay" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="showTimeRemainingInput()">
+                <div class="form-group">
+                    <label class="col-form-label"
+                           *ngIf="currentLeaveType.leaveType != 'COMPENSATORY_LEAVE'">{{'workingOnleave.editAddOnleave.numberOfDayLeft' | translate}}</label>
+                    <label class="col-form-label"
+                           *ngIf="currentLeaveType.leaveType === 'COMPENSATORY_LEAVE'">{{'workingOnleave.editAddOnleave.numberOfHoursLeft' | translate}}</label>
+                    <input class="form-control"
+                           type="text"
+                           [value]="renderTimeRemaining()"
+                           disabled
+                    />
+                    <input class="form-control"
+                           formControlName="timeRemaining"
+                           type="text"
+                           [(ngModel)]="currentLeaveType.timeRemaining"
+                           [value]="currentLeaveType.timeRemaining"
+                           hidden
+                    />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label"
+                           *ngIf="currentLeaveType.leaveType != 'COMPENSATORY_LEAVE'">{{'workingOnleave.editAddOnleave.numberOfDayOff' | translate}}</label>
+                    <label class="col-form-label"
+                           *ngIf="currentLeaveType.leaveType === 'COMPENSATORY_LEAVE'">{{'workingOnleave.editAddOnleave.numberOfHoursOff' | translate}}</label>
+                    <input class="form-control"
+                           type="text"
+                           value="{{leave.leaveHour}}"
+                           formControlName="leaveHour"
+                           [(ngModel)]="leave.leaveHour"
+                           hidden
+                    />
+                    <input class="form-control"
+                           type="text"
+                           value="{{renderLeaveTime()}}"
+                           disabled
+                    />
+                    <div *ngIf="updateLeaveForm.controls['leaveHour'].invalid"
+                         class="text-danger">
+                        <small *ngIf="updateLeaveForm.controls['leaveHour'].errors.noLeave">
+                            {{'workingOnleave.editAddOnleave.invalidDayOff' | translate}}
+                        </small>
+                    </div>
+                    <div *ngIf="leaveHoursLessThanTimeRemaining(currentLeaveType.timeRemaining)"
+                         class="text-danger">
+                        <small *ngIf="currentLeaveType.leaveType == 'COMPENSATORY_LEAVE'">
+                            {{'workingOnleave.editAddOnleave.invalidHoursOff' | translate}}
+                        </small>
+                        <small *ngIf="currentLeaveType.leaveType != 'COMPENSATORY_LEAVE'">
+                            {{'workingOnleave.editAddOnleave.invalidDayOff' | translate}}
+                        </small>
+                    </div>
+                    <!--                    <div *ngIf="leave.leaveHour == 0 || getDaysByHours() == 0"-->
+                    <!--                         class="text-danger">-->
+                    <!--                        <small>-->
+                    <!--                            {{'workingOnleave.editAddOnleave.invalidDayOff' | translate}}-->
+                    <!--                        </small>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"workingOnleave.editAddOnleave.onleaveReason" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            value="{{leave.reason}}"
+                            [class.is-invalid]="updateLeaveForm.controls['reason']?.invalid
+                            && (updateLeaveForm.controls['reason']?.touched || updateLeaveForm.controls['reason']?.dirty)"
+                            placeholder="{{'workingOnleave.editAddOnleave.phOnleaveReason' | translate}}"
+                            (blur)="blurLeaveReason()"
+                            formControlName="reason"
+                            [(ngModel)]="leave.reason"></textarea>
+                    <div *ngIf="updateLeaveForm.controls['reason'].invalid && (updateLeaveForm.controls['reason'].dirty || updateLeaveForm.controls['reason'].touched)"
+                         class="text-danger">
+                        <small *ngIf="updateLeaveForm.controls['reason'].errors.required">
+                            {{"workingOnleave.editAddOnleave.onleaveReasonRequired" | translate}}
+                        </small>
+                        <small *ngIf="updateLeaveForm.controls['reason'].hasError('maxlength')">
+                            {{"workingOnleave.editAddOnleave.onleaveReasonMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--    Footer-->
+    <div class="row footer justify-content-end pb-3">
+        <div class="col-md-4 m-0 p-16">
+            <button class="btn btnCancel col-md-12 w-100 btnOT" type="button"
+                    (click)="closeModal()">{{"workingOnleave.btn.cancel" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16">
+            <button class="btn btnSave col-md-12 w-100 btnOT" type="button"
+                    (click)="saveLeave()">{{"workingOnleave.btn.save" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16" *ngIf="canSeeSaveAndSendApproval()">
+            <button class="btn btnSave col-md-12 w-100 add-btn-ot" type="button"
+                    (click)="onSaveAndApprove()">
+                {{"workingOnleave.btn.saveAndSendApprove" | translate}}
+            </button>
+        </div>
+    </div>
+</div>

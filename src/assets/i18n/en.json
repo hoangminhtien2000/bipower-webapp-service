@@ -1,0 +1,47 @@
+{
+    "candidate": {
+        "view": "view",
+        "title": {
+            "add": "Thêm mới ứng viên",
+            "list": "Danh sách ứng viên",
+            "detail": "Chi tiết ứng viên"
+        },
+        "box": {
+            "work_experience": "Kinh nghiệm làm việc"
+        },
+        "model": {
+            "candidate_code": "Mã ứng viên",
+            "candidate_code_placeholder": "Nhập mã ứng viên",
+            "create_time": "Ngày tạo",
+            "create_user": "Người tạo",
+            "hr_in_charge": "HR phụ trách",
+            "status": "Trạng thái",
+            "level": "Level",
+            "level_placeholder": "Chọn level",
+            "TEAM_FEATURE": {
+                "FIELDS": {
+                    "TEAM_NAME": "Team name",
+                    "TEAM_TYPE": "Team type",
+                    "TECH": "Technology",
+                    "DOMAIN": "Domain"
+                },
+                "BUTTONS": {
+                    "SEARCH": "Search",
+                    "CREATE_NEW": "Create"
+                }
+            }
+        },
+        "TEAM_FEATURE": {
+            "FIELDS": {
+                "TEAM_NAME": "Team name",
+                "TEAM_TYPE": "Team type",
+                "TECH": "Technology",
+                "DOMAIN": "Domain"
+            },
+            "BUTTONS": {
+                "SEARCH": "Search",
+                "CREATE_NEW": "Create"
+            }
+        }
+    }
+}

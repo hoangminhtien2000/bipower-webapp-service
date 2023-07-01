@@ -1,0 +1,757 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">{{'employees.title.list' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            routerLink="/layout/employees/employeelist">{{'employees.title.list' | translate}}</a></li>
+                    <li class="breadcrumb-item active"> {{'employees.title.edit_list' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="card mb-0">
+        <div class="card-body">
+            <div class="row profile-employee-custom">
+                <div class="col-md-12">
+                    <div class="profile-view">
+                        <div class="profile-img-wrap">
+                            <div class="profile-img">
+                                <!-- <a><img alt="img" src="assets/img/profiles/avatar-2.jpg" [src]="getCatalogStoredsByCatalog('avatarFile') ? avatarDefault : 'assets/img/profiles/avatar-2.jpg'"></a> -->
+                                <a><img alt="img" [src]="avatarDefault"></a>
+                            </div>
+                        </div>
+                        <div class="profile-basic">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="">
+                                        <h3 class="user-name m-t-0 mb-0">{{employeeInfo?.lastName}} {{employeeInfo?.firstName}}
+                                            - {{employeeInfo?.employeeCode}}</h3>
+                                        <h6 class="text-muted">{{getPositionName(employeeInfo?.position)}}</h6>
+                                        <h6 *ngIf="isDisplay"
+                                            class="text-muted">{{getTechName(employeeInfo?.stackTech)}}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <ul class="personal-info row">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-edit"><a *ngIf="isShow && isShowNormal" (click)="editProfile()"
+                                                 data-bs-toggle="modal" class="edit-icon"><img
+                                src="/assets/img/icon/edit-icon.svg" alt=""></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-0 m-0 row container-fluid employee-customer-public-info">
+                <div class="p-0 w-45">
+                    <ul class="p-0 personal-info">
+                        <li class="">
+                            <div class="title">{{'employees.modal.start_working_date_at_BiPlus' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.onboardDate}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.contract_type' | translate}}:</div>
+                            <div class="text"><a>{{employeeInfo?.laborContractType}}</a></div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.number_of_month_work_in_company' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.numberOfMonthWorkInCompany}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.working_status' | translate}}:</div>
+                            <div class="text">{{getStatus(employeeInfo?.status) | translate}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.working_time_from' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.workingTimeFrom}}</div>
+                        </li>
+                        <li *ngIf="isDisplay" class="">
+                            <div class="title">{{'employees.modal.working_time_with_stack_from' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.workingTimeWithStackFrom}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.number_of_years_working' | translate}}:</div>
+                            <div class="text">{{ employeeInfo?.numberOfMonthWorkExperience | yearWorking }}</div>
+                        </li>
+                        <li *ngIf="isDisplay" class="">
+                            <div class="title">{{'employees.modal.number_of_month_stack_experience' | translate}}:</div>
+                            <div class="text">{{ employeeInfo?.numberOfMonthStackExperience | yearWorking }}</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-0 w-50">
+                    <ul class="personal-info number2 row m-0 p-0">
+                        <li class="">
+                            <div class="title">{{'employees.modal.phone_number' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.phone}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.individual_email' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.individualEmail}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.company_email' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.companyEmail}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.birthday' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.birthday}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.gender' | translate}}:</div>
+                            <div class="text">{{ gender | translate }}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.address' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.employeeContact?.currentAddress}}</div>
+                        </li>
+                        <li class="">
+                            <div class="title">{{'employees.modal.last_working_date_at_BiPlus' | translate}}:</div>
+                            <div class="text">{{employeeInfo?.lastWorkingDate}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="card tab-box">
+        <div class="row user-tabs">
+            <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
+                <ul class="nav nav-tabs nav-tabs-bottom">
+                    <li class="nav-item"><a href="#emp_profile" data-bs-toggle="tab" class="nav-link active">Profile</a>
+                    </li>
+                    <li class="nav-item"><a href="#emp_projects" data-bs-toggle="tab" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="#bank_statutory" data-bs-toggle="tab" class="nav-link">Bank & Statutory
+                            <small class="text-danger">(Admin Only)</small></a></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="tab-content">
+
+        <!-- Profile Info Tab -->
+        <div id="emp_profile" class="pro-overview tab-pane fade show active">
+            <div class="d-flex justify-content-between">
+                <!-- LEFT -->
+                <div class="w-45">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                {{'employees.profile.address_information' | translate}}
+                                <a class="edit-icon" *ngIf="isShow && isShowNormal"
+                                   (click)="onClickShowModal(address_info_modal)"><img
+                                        src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                            </h3>
+                            <ul class="personal-info row">
+                                <li>
+                                    <ul class="list-unstyled w-100 p-0 row">
+                                        <li class="w-100">
+                                            <div class="title font-weight-light-bold m-0 col-4">
+                                                {{'employees.profile.nationality' | translate}}
+                                            </div>
+                                            <div class="text col-8">
+                                                {{ !employeeInfo?.employeeContact?.nationality || employeeInfo?.employeeContact?.nationality == COUNTRY_DEFAULT ? 'VIỆT NAM' : employeeInfo?.employeeContact?.nationality }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="employeeInfo?.employeeContact?.nationality != COUNTRY_DEFAULT">
+                                    <ul class="list-unstyled w-100 p-0 row">
+                                        <span class="font-weight-light-bold w-100"
+                                              style="padding-top: 1rem">{{'employees.profile.residence' | translate}}</span>
+                                        <li class="w-100" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.detail_address' | translate}}
+                                            </div>
+                                            <div class="text col-8">
+                                                {{employeeInfo?.employeeContact?.currentAddress}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="employeeInfo?.employeeContact?.nationality == COUNTRY_DEFAULT">
+                                    <ul class="list-unstyled w-100 p-0 row">
+                                        <span class="font-weight-light-bold"
+                                              style="padding-top: 1rem">{{'employees.profile.domicile' | translate}}</span>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.district' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.originDistrict}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.province' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.originProvince}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="employeeInfo?.employeeContact?.nationality == COUNTRY_DEFAULT">
+                                    <ul class="list-unstyled w-100 p-0 row">
+                                        <span class="font-weight-light-bold"
+                                              style="padding-top: 1rem">{{'employees.profile.permanent_residence' | translate}}</span>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.detail_address' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{employeeInfo?.employeeContact?.permanentResidenceAdrress}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.district' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.permanentResidenceDistrict}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.province' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.permanentResidenceProvince}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="employeeInfo?.employeeContact?.nationality == COUNTRY_DEFAULT">
+                                    <ul class="list-unstyled w-100 p-0 row">
+                                        <span class="font-weight-light-bold"
+                                              style="padding-top: 1rem">{{'employees.profile.residence' | translate}}</span>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.detail_address' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{employeeInfo?.employeeContact?.currentAddress}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.ward' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.currentWard}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.district' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.currentDistrict}}
+                                            </div>
+                                        </li>
+                                        <li class="w-100 unset-margin" style="padding: 0.25rem 12px 0.25rem 12px">
+                                            <div class="title text col-4" style="margin: unset;padding-left: 26px">
+                                                {{'employees.profile.province' | translate}}:
+                                            </div>
+                                            <div class="text col-8">
+                                                {{addressInfo?.currentProvince}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngIf="hasRoleCbAndCoo()" class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{'employees.profile.social_insurance_information' | translate}}</span>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btnHistory" *ngIf="isShowHistory" (click)="onClickBtnHistory(social_insurance_history_modal)"><small>{{'candidate.message.insurance.history_changed' | translate}}</small></a>
+                                        <a class="edit-icon" *ngIf="isShow && isShowSocial"
+                                        (click)="onClickSocialInsurance()"><img src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </h3>
+                            <ul class="personal-info row">
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{'employees.profile.social_insurance_number' | translate}}</div>
+                                    <div class="text" [class.text-danger]="socialInsuranceChangeStatus['socialInsuranceNo']">{{socialInsurance?.socialInsuranceNo}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{'employees.profile.start_time_at_BiPlus' | translate}}</div>
+                                    <div class="text" [class.text-danger]="socialInsuranceChangeStatus['startTimeAt']">{{getMonthYearFromText(socialInsurance?.startTimeAt)}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{'employees.profile.end_time_at_BiPlus' | translate}}</div>
+                                    <div class="text" [class.text-danger]="socialInsuranceChangeStatus['endTimeAt']">{{getMonthYearFromText(socialInsurance?.endTimeAt)}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{'employees.profile.current_status' | translate}}</div>
+                                    <div class="text" [class.text-danger]="socialInsuranceChangeStatus['endTimeAt']">{{socialInsurance?.endTimeAt ? 'Đã dừng' : (socialInsurance?.socialInsuranceNo ? 'Đang đóng' : '')}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{'employees.profile.salary_for_social_insurance' | translate}}</div>
+                                    <div class="text" [class.text-danger]="socialInsuranceChangeStatus['salaryForSocialInsurance']">{{socialInsurance?.salaryForSocialInsurance | customCurrency }}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{"EmployeeProfile.fileUpload.title" | translate}}
+                                <a class="edit-icon" *ngIf="isShow && isShowNormal"
+                                   (click)="onClickShowModal(storage_profile_modal)"><img
+                                        src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                            </h3>
+                            <ul class="personal-info row">
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.profile" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('profileFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('profileFile')">{{getFileName('profileFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('profileFile')"
+                                         class="text invisible">{{getFileName('profileFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.cv" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('cvFile')" class="text"><a class="text-info"
+                                                                                                      target="_blank"
+                                                                                                      [href]="baseUrl + getCatalogStoredsByCatalog('cvFile')">{{getFileName('cvFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('cvFile')"
+                                         class="text invisible">{{getFileName('cvFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.cvEnligsh" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('cvEnFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('cvEnFile')">{{getFileName('cvEnFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('cvEnFile')"
+                                         class="text invisible">{{getFileName('cvEnFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.syls" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('sylsFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('sylsFile')">{{getFileName('sylsFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('sylsFile')"
+                                         class="text invisible">{{getFileName('sylsFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.graduaDegree" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('graduateDegreeFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('graduateDegreeFile')">{{getFileName('graduateDegreeFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('graduateDegreeFile')"
+                                         class="text invisible">{{getFileName('graduateDegreeFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.identityBefore" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('identityFrontSideFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('identityFrontSideFile')">{{getFileName('identityFrontSideFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('identityFrontSideFile')"
+                                         class="text invisible">{{getFileName('identityFrontSideFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.identityAfter" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('identityBackSideFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('identityBackSideFile')">{{getFileName('identityBackSideFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('identityBackSideFile')"
+                                         class="text invisible">{{getFileName('identityBackSideFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.certificate" | translate}}
+                                    </div>
+                                    <div class="text">
+                                        <ng-container *ngFor="let catalog of getListFile('certificateFile')">
+                                            <div *ngIf="catalog?.fileName" class="text"><a class="text-info"
+                                                                                           target="_blank"
+                                                                                           [href]="baseUrl + getCatalogStoredsByCatalog(catalog?.filePath)">{{catalog?.fileName | substr: maxlength}}</a>
+                                            </div>
+                                            <div *ngIf="!catalog?.fileName"
+                                                 class="text invisible">{{catalog?.fileName | substr: maxlength}}</div>
+                                        </ng-container>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.socialInsurance" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('socialInsuranceFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('socialInsuranceFile')">{{getFileName('socialInsuranceFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('socialInsuranceFile')"
+                                         class="text invisible">{{getFileName('socialInsuranceFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.avatarImage" | translate}}
+                                    </div>
+                                    <div *ngIf="getCatalogStoredsByCatalog('avatarFile')" class="text"><a
+                                            class="text-info" target="_blank"
+                                            [href]="baseUrl + getCatalogStoredsByCatalog('avatarFile')">{{getFileName('avatarFile') | substr: maxlength}}</a>
+                                    </div>
+                                    <div *ngIf="!getCatalogStoredsByCatalog('avatarFile')"
+                                         class="text invisible">{{getFileName('avatarFile') | substr: maxlength}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.fileUpload.profileDepency" | translate}}
+                                    </div>
+                                    <div class="text">
+                                        <ng-container *ngFor="let catalog of getListFile('dependentPersonFile')">
+                                            <div *ngIf="catalog?.fileName" class="text"><a class="text-info"
+                                                                                           target="_blank"
+                                                                                           [href]="baseUrl + getCatalogStoredsByCatalog(catalog?.filePath)">{{catalog?.fileName | substr: maxlength}}</a>
+                                            </div>
+                                            <div *ngIf="!catalog?.fileName"
+                                                 class="text invisible">{{catalog?.fileName | substr: maxlength}}</div>
+                                        </ng-container>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngIf="showPerformanceEmployee()" class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ 'EmployeeProfile.teamAndRole.performanceInfo' | translate }}</span>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btnHistory" *ngIf="isShowHistory" (click)="onClickBtnHistory(performance_history_modal)"><small>{{'candidate.message.insurance.history_changed' | translate}}</small></a>
+                                        <a class="edit-icon" *ngIf="isEditPerformance && (isShowSocial || isEditTeamRole)" (click)="onClickShowModal(performance_info_modal)"><img src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </h3>
+                            <ul class="personal-info row">
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{ 'EmployeeProfile.teamAndRole.netInfo' | translate }}</div>
+                                    <div class="text" [class.text-danger]="employeeSalaryChangeStatus?.netSalary">{{employeeSalary?.netSalary | customCurrency }}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{ 'EmployeeProfile.teamAndRole.performanceInfoDetail' | translate }}
+                                        (MM):
+                                    </div>
+                                    <div class="text">{{employeeSalary?.effort ? employeeSalary?.effort + "MM" : "" }}</div>
+                                </li>
+                                <li *ngIf="!isEmployee">
+                                    <div class="title font-weight-light-bold w-50">{{ 'EmployeeProfile.teamAndRole.totalPayment' | translate }}</div>
+                                    <div class="text" [class.text-danger]="employeeSalaryChangeStatus?.fullSalary">{{employeeSalary?.fullSalary | customCurrency }}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END LEFT -->
+                <!-- RIGHT -->
+                <div class="w-49">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{"EmployeeProfile.identityCard.title" | translate}} <a
+                                    *ngIf="isShow && isShowNormal" class="edit-icon"
+                                    (click)="onClickIdentityInfor()"><img src="/assets/img/icon/edit-icon.svg"
+                                                                          alt=""></a></h3>
+                            <table class="table table-striped table-hover custom-table datatable">
+                                <thead>
+                                <tr>
+                                    <th>{{"EmployeeProfile.identityCard.type" | translate}}</th>
+                                    <th>{{"EmployeeProfile.identityCard.code" | translate}}</th>
+                                    <th>{{"EmployeeProfile.identityCard.dateIssue" | translate}}</th>
+                                    <th>{{"EmployeeProfile.identityCard.placeIssue" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let row of data?.identityInfos;let i = index">
+                                    <td>{{row?.identityCardType}}</td>
+                                    <td>{{row?.identityCard}}</td>
+                                    <td>{{row?.identityCardValidDate}}</td>
+                                    <td>{{row?.identityCardPlace}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{"EmployeeProfile.bank.title" | translate}}<a
+                                    *ngIf="isShow && isShowNormal" class="edit-icon"
+                                    (click)="onClickEditBankInfor()"><img src="/assets/img/icon/edit-icon.svg"
+                                                                          alt=""></a></h3>
+                            <table class="table table-striped table-hover custom-table datatable">
+                                <thead>
+                                <tr>
+                                    <th>{{"EmployeeProfile.bank.name" | translate}}</th>
+                                    <th>{{"EmployeeProfile.bank.accountNumber" | translate}}</th>
+                                    <th>{{"EmployeeProfile.bank.branchName" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let bank of data?.bankInfos;let i = index">
+                                    <td class="">{{bank?.bankName}}</td>
+                                    <td>{{bank?.accountNo}}</td>
+                                    <td>{{bank?.branchName}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="hasRoleCbAndCoo()" class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{"EmployeeProfile.personalTax.title" | translate}}</span>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btnHistory" *ngIf="isShowHistory" (click)="onClickBtnHistory(taxinfo_history_modal)"><small>{{'candidate.message.insurance.history_changed' | translate}}</small></a>
+                                        <a class="edit-icon" *ngIf="isShow && isShowTaxInfo" (click)="onClickPersonalTax()"><img
+                                            src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </h3>
+                            <ul class="personal-info row">
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.personalTax.taxCode" | translate}}</div>
+                                    <div class="text" [class.text-danger]="taxInfoChangeStatus['taxCode']">{{taxInfo?.taxCode}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.personalTax.startTimeAt" | translate}}</div>
+                                    <div class="text" [class.text-danger]="taxInfoChangeStatus['startTimeAt']">{{getMonthYearFromText(taxInfo?.startTimeAt)}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.personalTax.endTimeAt" | translate}}</div>
+                                    <div class="text" [class.text-danger]="taxInfoChangeStatus['endTimeAt']">{{getMonthYearFromText(taxInfo?.endTimeAt)}}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.personalTax.taxCurrentStatus" | translate}}</div>
+                                    <div class="text" [class.text-danger]="taxInfoChangeStatus['endTimeAt']">{{taxInfo?.endTimeAt ?  this.translate.instant( "candidate.message.insurance.end") : (taxInfo?.taxCode ?  this.translate.instant("candidate.message.insurance.is_closing")  : '') }}</div>
+                                </li>
+                                <li>
+                                    <div class="title font-weight-light-bold w-50">{{"EmployeeProfile.personalTax.salaryToTax" | translate}}</div>
+                                    <div class="text" [class.text-danger]="taxInfoChangeStatus['salaryToTax']">{{taxInfo?.salaryToTax | customCurrency}}</div>
+                                </li>
+                                <li>
+                                    <div class="text w-100">
+                                        <h4 class="card-title font-weight-light-bold">{{"EmployeeProfile.personDepencency.list" | translate}}</h4>
+                                        <table class="table table-striped table-hover custom-table datatable">
+                                            <thead>
+                                            <tr>
+                                                <th>{{"EmployeeProfile.personDepencency.fullName" | translate}}</th>
+                                                <th>{{"EmployeeProfile.personDepencency.relationship" | translate}}</th>
+                                                <th>{{"EmployeeProfile.personDepencency.birthday" | translate}}</th>
+                                                <th>{{"EmployeeProfile.personDepencency.gender" | translate}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let item of data?.taxInfoResp?.dependentPersons;let i = index">
+                                                <td>{{ item?.name }}</td>
+                                                <td>{{ getRelationship(item?.relationship) | translate }}</td>
+                                                <td>{{ item?.birthday | customFormatDate }}</td>
+                                                <td>{{ getGender(item?.gender) | translate }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{"EmployeeProfile.personDepencency.title" | translate}}
+                                <a class="edit-icon" *ngIf="isShow && isShowNormal"
+                                   (click)="onClickShowModal(social_family_information_modal)"><img
+                                        src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                            </h3>
+                            <table class="table table-striped table-hover custom-table datatable">
+                                <thead>
+                                <tr>
+                                    <th>{{"EmployeeProfile.personDepencency.fullName" | translate}}</th>
+                                    <th>{{"EmployeeProfile.personDepencency.relationship" | translate}}</th>
+                                    <th>{{"EmployeeProfile.personDepencency.birthday" | translate}}</th>
+                                    <th>{{"EmployeeProfile.personDepencency.gender" | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let contact of data?.familyContacts;let i = index">
+                                    <td class="">{{contact?.name}}</td>
+                                    <td>{{getRelationship(contact?.relationship) | translate}}</td>
+                                    <td>{{contact?.birthday}}</td>
+                                    <td>{{getGender(contact?.gender) | translate}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="showStatusTeamRole" class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{'EmployeeProfile.teamAndRole.teamRoleInfo' | translate}}
+                                <a class="edit-icon" *ngIf="isEditTeamRole" (click)="onClickShowModal(team_role_modal_edit_id)"><img src="/assets/img/icon/edit-icon.svg" alt=""></a>
+                            </h3>
+                            <ul class="personal-info row">
+                                <ng-container *ngFor="let team of teamData;">
+                                    <li>
+                                        <div class="title font-weight-light-bold w-50">{{'EmployeeProfile.teamAndRole.team' | translate}}</div>
+                                        <div class="text">{{team?.teamName}}</div>
+                                    </li>
+                                    <li>
+                                        <div class="title font-weight-light-bold w-50">{{'EmployeeProfile.teamAndRole.role' | translate}}</div>
+                                        <div class="text">{{team?.roles}}</div>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END RIGHT -->
+            </div>
+            <div class="row justify-content-end">
+                <button *ngIf="isSendAppove" (click)="onClickSendApprove()"
+                        class="btn btn-primary w-25">{{'employees.btn.send_approve' | translate}}</button>
+                <button *ngIf="signableNewContract && isAddNewContract" (click)="onClickAddNewContract(contract_modal)"
+                        class="btn btn-primary w-25 m-l-5">{{'employees.btn.add_contract' | translate}}</button>
+
+                <button *ngIf="isShowRejectApprove" (click)="onClickRejectApprove()"
+                        class="btn btn-secondary w-25 m-r-5">{{'employees.btn.reject' | translate}}</button>
+                <button *ngIf="isShowRejectApprove" (click)="onClickAcceptApprove()"
+                        class="btn btn-primary w-25">{{'employees.btn.approve' | translate}}</button>
+            </div>
+        </div>
+        <!-- /Profile Info Tab -->
+
+    </div>
+</div>
+<!-- /Page Content -->
+
+<!-- reject employee approve -->
+
+<!-- REJECT modal -->
+<div id='reject_employee_approve_modal' style="background: rgba(37, 41, 41, 0.7);" class="modal custom-modal fade"
+     data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Từ chối phê duyệt</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form [formGroup]="rejectEmployeeForm" novalidate>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Lý do từ chối <span class="text-danger">*</span></label>
+                                <textarea
+                                        [class.is-invalid]="(rejectEmployeeForm.controls['note']?.dirty
+                                || rejectEmployeeForm.controls['note']?.touched) && 
+                                rejectEmployeeForm.controls['note']?.invalid"
+                                        maxlength="500" (blur)="onBlurRejectApprove()"
+                                        placeholder="Nhập lý do từ chối"
+                                        formControlName="note"
+                                        class="form-control w-100" rows="3"></textarea>
+                                <div *ngIf="(rejectEmployeeForm.controls['note']?.dirty 
+                                || rejectEmployeeForm.controls['note']?.touched) && 
+                                rejectEmployeeForm.controls['note']?.errors?.required">
+                                    <small class="text-danger">Lý do từ chối không được để trống</small>
+                                </div>
+                                <div *ngIf="rejectEmployeeForm.controls['note']?.errors?.maxlength">
+                                    <small class="text-danger">Lý do từ chối chỉ được nhập tối đa 500 ký tự</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-section m-3 d-flex justify-content-end">
+                <button *ngIf="canCancelRejectApprove()" class="btn btn-secondary submit-btn btnCancel" type="button"
+                        (click)="cancelRejectApprove()">Huỷ
+                </button>
+                <button *ngIf="canSendRejectApprove()" class="btn btn-primary submit-btn btnSave" type="button"
+                        (click)="onClickSendRejectApprove()">Gửi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-employee-confirm-approve-modal [idModal]="employee_confirm_approve_modal_id"
+                                    [title]="'EmployeeProfile.confirmApproveModal.title' | translate"
+                                    [content]="'EmployeeProfile.confirmApproveModal.content' | translate"
+                                    (onSubmit)="onCbAccept($event, employee_confirm_approve_modal_id)"
+>
+</app-employee-confirm-approve-modal>
+<app-team-role-modal
+        (onSubmit)="onCooAccept($event, team_role_modal_id)"
+        [teams]="teams" [oauthRoles]="oauthRoles" [idModal]="team_role_modal_id">
+</app-team-role-modal>
+
+<app-team-role-modal
+        (onSubmit)="onCooAcceptUpdateTeam($event, team_role_modal_edit_id)" [teamsSelected]="teamsSelected"
+        [teams]="teams" [oauthRoles]="oauthRoles" [idModal]="team_role_modal_edit_id">
+</app-team-role-modal>
+
+<!-- modal thong tin chung nhan vien -->
+<app-employee-modal [idModal]="edit_employee_id"
+                    [TECHNOLOGY]="TECHNOLOGY"
+                    [EMPLOYEE_POSITION]="EMPLOYEE_POSITION"
+                    [GENDER]="GENDER"
+                    [value]="employeeInfo" [data]="data" (onSubmit)="onSaveAddNew($event)"></app-employee-modal>
+<!-- modal thong tin ngan hang -->
+<app-bank-information-modal [idModal]="bank_information_modal" [value]="data?.bankInfos"
+                            (onSubmit)="onSubmitBankInfo($event)"></app-bank-information-modal>
+<!-- modal Thong tin can cuoc cong dan -->
+<app-identity-information-modal [idModal]="identity_information_modal" [EMPLOYEE_IDENTITY_TYPE]="EMPLOYEE_IDENTITY_TYPE"
+                                [value]="data?.identityInfos"
+                                (onSubmit)="onSubmitIdentity($event)"></app-identity-information-modal>
+<!-- Modal Thong tin thue thu nhap ca nhan  -->
+<app-personal-tax-information-modal [EMPLOYEE_RELATIONSHIP]="EMPLOYEE_RELATIONSHIP" [GENDER]="GENDER"
+                                    [idModal]="personal_tax_information_modal" [value]="data"
+                                    (onSubmit)="onSubmitPersonalTax($event)"></app-personal-tax-information-modal>
+<!-- Modal thong tin BHXH -->
+<app-social-insurance-information-modal [idModal]="social_insurance_information_modal" [value]="socialInsurance"
+                                        (onSubmit)="onSubmitSocialInsurance($event)"></app-social-insurance-information-modal>
+
+<!-- Modal thong tin gia dinh  -->
+<app-family-information-modal
+        [EMPLOYEE_RELATIONSHIP]="EMPLOYEE_RELATIONSHIP"
+        [GENDER]="GENDER"
+        [idModal]="social_family_information_modal" [value]="data?.familyContacts"
+        (onSubmit)="onSubmitFamily($event)"></app-family-information-modal>
+<!-- Danh sách hồ sơ lưu trữ -->
+<app-storage-profile-modal [idModal]="storage_profile_modal" [value]="data?.catalogStoreds"
+                           (onSubmit)="onSubmitStorageProfile($event)"></app-storage-profile-modal>
+<!-- modal thông tin dia chi -->
+<app-address-information-modal [value]="employeeInfo?.employeeContact" [idModal]="address_info_modal"
+                               (onSubmit)="onSubmitAddressInfo($event)"></app-address-information-modal>
+<!-- Thong tin hop dong -->
+<app-contract-modal *ngIf="isAddNewContract" [idModal]="contract_modal" (onSubmit)="onAddNewContract($event)"
+                    [employeeId]="employeeInfo?.id" [data]="dataEmployee"></app-contract-modal>
+<app-performance-info-modal [idModal]="performance_info_modal" [employeeId]="employeeInfo?.id" [value]="employeeSalary" (onSubmit)="onSavePerformanceInfo($event)"></app-performance-info-modal>
+
+<app-social-insurance-history-modal [idModal]="social_insurance_history_modal" [history]="data?.socialInsurances"></app-social-insurance-history-modal>
+<app-personal-tax-information-history-modal [idModal]="taxinfo_history_modal" [history]="data?.taxInfoResp?.taxInfo"></app-personal-tax-information-history-modal>
+<app-performance-history-modal [idModal]="performance_history_modal" [history]="data?.employeeSalaries"></app-performance-history-modal>

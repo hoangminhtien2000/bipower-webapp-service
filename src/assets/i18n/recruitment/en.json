@@ -1,0 +1,45 @@
+{
+  "recruitment": {
+    "title": {
+      "management": "Recruitment Management",
+      "confirm_remove_cv_reviewer_title": "Confirm remove CV reviewer",
+      "confirm_remove_cv_reviewer_message": "Do you want remove this CV reviewer?",
+      "assign_cv_reviewer_title": "Assign CV reviewer",
+      "step_review_cv": "Round 1: CV review"
+    },
+    "add_evaluation_criteria": {
+      "title": "Add new criteria",
+      "criteria": "Criteria",
+      "criteria_placeholder": "Select criteria"
+    },
+    "interview": {
+      "step_title": "Round 2: Interview",
+      "profestional_evaluation": "Professional assessment",
+      "cultural_suitability": "Cultural suitability",
+      "income": "Icome",
+      "common_infomation": "Common infomation",
+      "other_evaluation": "Other"
+    },
+    "notify": {
+      "assign_hr_success": "",
+      "assign_cv_reviewer_success": "Added reviewer successfully.",
+      "remove_assign_cv_reviewer_success": "Remove CV reviewer successful.",
+      "save_cv_review_success": "Successful CV review.",
+      "save_interview_contact_success": "Successfully saved interview contact information.",
+      "update_interview_schedule_success": "Updated interview schedule information successfully.",
+      "update_interview_evaluation_success": "Update professional assessment information successfully.",
+      "update_interview_hr_evaluation_success": "Update HR assessment information successfully.",
+      "create_recruitment_proposal_success":"Successful hiring decision making."
+    },
+    "button": {
+      "cancel": "Cancel",
+      "ok": "Yes"
+    },
+    "enum": {
+      "review_result": {
+        "pass": "Pass",
+        "failure": "Failure"
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            Chi tiết làm việc
+        </div>
+        <span class="pointer-event" (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll">
+        <ul class="list-group">
+            <li class="list-group-item {{i == value.length - 1 ? 'item-end' : ''}}"
+                *ngFor="let item of value, let i = index">
+                <div class="presence-time"><i
+                        class='presence-status-{{renderIconType(item.workType)}} fa fa-square'></i> {{renderTime(item.checkinTime)}}
+                    - {{renderTime(item.checkoutTime)}}
+                    <div class="collapsed-icon" (click)="clickCollapsed(item.workTimeId)"><img
+                            [src]="isCollapsed[item.workTimeId] ? '../../../../../../assets/img/icons/plus.png' : '../../../../../../assets/img/icons/minus.png'">
+                    </div>
+                </div>
+                <div [collapse]="isCollapsed[item.workTimeId]">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Hình thức làm việc</div>
+                                <div class="col-md-8 p-0">: {{renderWorkTypeName(item.workType)}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="renderLink(item.workType, item.workTimeId)">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Đơn đăng ký</div>
+                                <div class="col-md-8 p-0">: <a class="a-link" target="_blank"
+                                                               href="{{renderLink(item.workType, item.workTimeId).url}}">{{renderLink(item.workType, item.workTimeId).name}}</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.requestCode">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Mã phiếu yêu cầu</div>
+                                <div class="col-md-8 p-0">: {{item.requestCode}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.workingLocation">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Địa điểm</div>
+                                <div class="col-md-8 p-0">: {{item.workingLocation}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.projectName">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Dự án</div>
+                                <div class="col-md-8 p-0">: {{item.projectName}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.reason">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Lý do</div>
+                                <div class="col-md-8 p-0">: {{item.reason}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.status">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Trạng thái</div>
+                                <div class="col-md-8 p-0 {{renderStatusName(item.status) ? renderStatusName(item.status).class : ''}}">
+                                    : {{renderStatusName(item.status) ? renderStatusName(item.status).name : ''}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.rejectReason">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Lý do từ chối</div>
+                                <div class="col-md-8 p-0">: {{item.rejectReason}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" *ngIf="item.confirmedBy">
+                            <div class="col-md-12 row p-0">
+                                <div class="col-md-4 p-0">Người phê duyệt</div>
+                                <div class="col-md-8 p-0">: {{item.confirmedBy}}</div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <!--    Footer-->
+    <div class="row footer">
+    </div>
+</div>

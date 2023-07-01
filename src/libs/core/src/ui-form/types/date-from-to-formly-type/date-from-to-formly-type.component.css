@@ -1,0 +1,26 @@
+:host {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.date-ft {
+    padding-right: 15px !important;
+}
+
+.date-ft:nth-child(2) {
+    padding-left: 15px !important;
+    padding-right: 0 !important;
+}
+
+.date-picker input {
+    /*background: url(../../) no-repeat;*/
+    background-position: right 7px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+}

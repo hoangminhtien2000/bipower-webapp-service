@@ -1,0 +1,91 @@
+<!-- Header -->
+<div class="header">
+
+    <!-- Logo -->
+    <div class="header-left logo">
+        <a routerLink="/layout/dashboard/admin" class="logo">
+            <img src="assets/img/biplus-logo.png" height="40" alt="">
+        </a>
+        <div class="logo" id="logo-name" *ngIf="layoutService.sidebarOpen$ | async">
+            <h3>BiPower</h3>
+        </div>
+    </div>
+    <!-- /Logo -->
+
+    <a id="toggle_btn" (click)="toggleSidebar()">
+        <span class="bar-icon cursor-pointer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </a>
+    <!-- Header Title -->
+    <a id="mobile_btn" class="mobile_btn" href="javascript:"><i class="fa fa-bars"></i></a>
+
+    <div class="row">
+        <div class="col-1"
+             style="position: sticky ; top:16px; padding: 5px; min-width: fit-content">
+            <button style="background-color: white" class="btn add-btn "
+                    tabindex="0" [disabled]="disableCheckinButton()"
+                    id = "check-in-btn"
+                    (click)="checkIn()">Check in
+            </button>
+        </div>
+        <div class="col-1" style="position: sticky ; top:16px; padding: 5px; min-width: fit-content">
+            <button style=" background-color: white;"
+                    class="btn add-btn "
+                    tabindex="0" [disabled]="disableCheckOutButton()"
+                    id="check-out-btn"
+                    (click)="checkOut()">Check out
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Menu -->
+    <ul class="nav user-menu" >
+        <!-- Flag -->
+        <li class="nav-item dropdown has-arrow flag-nav"
+            style=" position: fixed; right: 180px; top: 3px;">
+            <a href="javascript:" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img src="assets/img/language/{{languageStorage.getKeyLanguage().toLowerCase()}}.png" height="20"/> {{'language.'+languageStorage.getKeyLanguage().toLowerCase() | translate}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-left">
+                <div *ngFor="let item of languageList;" class="menu-item">
+                    <a class="dropdown-item" (click)="this.onChangeLanguage(item)">
+                        <img src="assets/img/language/{{item.toLowerCase()}}.png" alt="" height="20" > {{'language.'+item.toLowerCase() | translate}}
+                    </a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown has-arrow main-drop"
+            style=" position: fixed; right: 30px; top: 3px;">
+            <a href="javascript:" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                <span><b>{{this.userStorage.getUserInfo()?.fullName}}</b></span>
+            </a>
+            <div class="dropdown-menu">
+                <div class="menu-item">
+                    <a class="dropdown-item" routerLink="/layout/employees/my-profile"><img src="assets/img/icon/icon-my-profile.png" alt="" height="20"> &ensp;&ensp; {{'user.title.my_account' | translate}}</a>
+                </div>
+                <div class="menu-item">
+                    <a class="dropdown-item" (click)="logout()"><img src="assets/img/icon/icon-logout.png" alt="" height="20"> &ensp;&ensp; {{'user.title.logout'| translate}}</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <!-- /Header Menu -->
+
+    <!-- Mobile Menu -->
+    <div class="dropdown mobile-user-menu">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                class="fa fa-ellipsis-v"></i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" routerLink="/layout/employees/my-profile"><img src="assets/img/icon/icon-my-profile.png" alt="" height="20">{{'user.title.my_account' | translate}}</a>
+            <a class="dropdown-item" href="javascript:">Settings</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+    </div>
+    <!-- /Mobile Menu -->
+
+</div>
+<!-- /Header -->

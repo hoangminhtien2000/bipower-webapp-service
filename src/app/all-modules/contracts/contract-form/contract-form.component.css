@@ -1,0 +1,15 @@
+.content {
+	padding: 30px;
+}
+#education_info .text-danger.error-info, #experience_info .text-danger.error-info{
+	margin-top: -15px;
+	margin-bottom: 10px;
+}
+
+#education_info input, #experience_info input{
+	padding-right: 28px;
+}
+.scroll-body-dialog{
+	height: 70vh;
+	overflow-y: scroll;
+}

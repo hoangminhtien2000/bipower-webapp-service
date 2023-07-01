@@ -1,0 +1,22 @@
+{
+    "ENUM": {
+        "GENDER": {
+            "MALE": "Nam",
+            "FEMALE": "Nữ",
+            "OTHER": "Khác"
+        },
+        "RELATIONSHIP": {
+            "GrandFather":  "Ông",
+            "GrandMother":  "Bà",
+            "Father":  "Bố",
+            "Mother":  "Mẹ",
+            "Brother":  "Anh em",
+            "Sister":  "Chị em"
+        },
+        "IDENTITY_CARD_TYPE":{
+            "CMT": "CMT",
+            "CCCD": "CCCD",
+            "PASSPORT": "Hộ chiếu"
+        }
+    }
+}

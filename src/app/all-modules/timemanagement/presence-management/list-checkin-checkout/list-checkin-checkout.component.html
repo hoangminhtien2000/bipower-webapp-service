@@ -1,0 +1,188 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg modal-header-sticky">
+        <div class="header-content content-header">
+            {{'timeManager.list_checkin_checkout.Follow_and_adjust_check-in_check-out_time' | translate}} 
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll">
+        <div class="col-md-12 row m-0">
+            <div class="col-sm-4" *ngIf="canSearchByTeams() && teams.length > 0">
+                <label>{{'timeManager.list_checkin_checkout.table.team' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <select class="form-select form-control"
+                                (keypress)="onKeypress($event)"
+                                [(ngModel)]="teamId">
+                            <option [value]="null" [selected]="teamId == null">{{'timeManager.list_checkin_checkout.table.choose_group' | translate}}</option>
+                            <option *ngFor="let team of teams" [value]="team.id"
+                                    [selected]="teamId == team.id">{{team.teamName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" *ngIf="canSearchByName()">
+                <label>{{'timeManager.list_checkin_checkout.table.employee_name' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <input [(ngModel)]="employeeName" type="text" class="form-control"
+                               (blur)="blurName()"
+                               (keypress)="onKeypress($event)"
+                               placeholder="{{'timeManager.list_checkin_checkout.placeholder.input_employee_name' | translate}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" *ngIf="canSearchByCode()">
+                <label>{{'timeManager.list_checkin_checkout.table.employee_code' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <input [(ngModel)]="employeeCode" type="text" class="form-control"
+                               (blur)="blurCode()"
+                               (keypress)="onKeypress($event)"
+                               placeholder="{{'timeManager.list_checkin_checkout.placeholder.input_employee_code' | translate}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label>{{'timeManager.list_checkin_checkout.table.tuning_date' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <input type="text"
+                               ngxDaterangepickerMd
+                               [autoApply]="true"
+                               [placeholder]="'DD/MM/YYYY - DD/MM/YYYY'"
+                               [locale]="{format: 'DD/MM/YYYY'}"
+                               [timePickerSeconds]="false"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="timeRangepicker"
+                               (keypress)="onKeypress($event)"
+                               (change)="onDateRangePickerChanged($event)"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label>{{'timeManager.list_checkin_checkout.table.status' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="input-group">
+                        <select class="form-select form-control" [(ngModel)]="presenceStatus"
+                                (keypress)="onKeypress($event)">
+                            <option [value]="null" [selected]="presenceStatus == null">{{'timeManager.list_checkin_checkout.table.choose_status' | translate}}</option>
+                            <option *ngFor="let status of statusArray" [value]="status.statusCode"
+                                    [selected]="presenceStatus == status.statusCode">{{status.statusName | translate}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 p-2">
+            <div class="col-md-2 offset-md-10">
+                <button class="btn btn-outline-warning w-100" (click)="onSearchPresences()">{{'timeManager.list_checkin_checkout.table.search' | translate}}</button>
+            </div>
+        </div>
+        <div class="col-md-12 p-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover custom-table datatable dataTable text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-left" *ngIf="canApproval()">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" (click)="checkedManyCheckbox($event)"
+                                       [checked]="checkedPresenceIds.length > 0">
+                            </div>
+                        </th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.register_form' | translate}}</th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.team' | translate}}</th>
+                        <th class="text-left" *ngIf="canSearchByName()">{{'timeManager.list_checkin_checkout.table.employee' | translate}}</th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.time_old' | translate}}</th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.adjustment_time' | translate}}</th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.adjustment_reason' | translate}}</th>
+                        <th class="text-left">{{'timeManager.list_checkin_checkout.table.status' | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngIf=" presences && presences.length == 0">
+                        <td colspan="8" class="text-center">{{'timeManager.list_checkin_checkout.table.result_not_found' | translate}}</td>
+                    </tr>
+                    <tr *ngFor="let presence of presences">
+                        <td class="text-left" *ngIf="canApproval()">
+                            <div class="form-check">
+                                <input class="form-check-input {{isDisableCheckbox(presence) ? 'disable-bg' : ''}}"
+                                       type="checkbox" (click)="checkedOneCheckbox($event, presence)"
+                                       [checked]="isCheckedCheckbox(presence)" [disabled]="isDisableCheckbox(presence)">
+                            </div>
+                        </td>
+                        <td class="text-left text-info pointer" (click)="showPresenceDetailModal(presence)">{{'timeManager.list_checkin_checkout.table.register_form' | translate}} {{presence.id}}</td>
+                        <td class="text-left">{{presence.teamName}}</td>
+                        <td class="text-left">{{presence.employeeCode}} - {{presence.fullname}}</td>
+                        <td class="text-left">{{renderTimeOld(presence.checkinTime, presence.checkoutTime)}}</td>
+                        <td class="text-left">{{renderTimeEdit(presence.checkinTimeEdit, presence.checkoutTimeEdit)}}</td>
+                        <td class="text-left">{{presence.reason}}</td>
+                        <td class="text-left"
+                            [class]="getStatus(presence.status).class">{{getStatus(presence.status).statusName | translate}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="presences && presences.length > 0" class="d-flex justify-content-between mt-3">
+                    <ngb-pagination
+                            [(page)]="pageIndex"
+                            [boundaryLinks]="true"
+                            [maxSize]="5"
+                            [rotate]="true"
+                            [pageSize]="pageSize"
+                            [collectionSize]="totalElements"
+                            (pageChange)="changePageNumber($event)"></ngb-pagination>
+                    <div class="dataTables_length mb-2 width-auto">
+                        <div class="d-flex justify-content-around">
+                            <div>
+                                <label class="d-flex align-items-center font-weight-normal">
+                                    <label *ngIf="totalElements > 0" class="font-weight-normal">
+                                        {{'workingOnleave.list.display' | translate}} {{ ((numberOfElements <= totalElements) ? numberOfElements : totalElements) }}  {{'workingOnleave.list.total' | translate}} {{totalElements}}
+                                        <span> {{'timeManager.list_checkin_checkout.table.record' | translate}}</span>
+                                    </label>
+                                    <select [(ngModel)]="size" id="dataTables_select_option"
+                                            (change)="changePageSize($event.target.value)"
+                                            class="custom-select width-auto custom-select-sm form-control form-control-sm m-1">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="1000">{{'timeManager.list_checkin_checkout.table.all' | translate}}</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    Footer-->
+    <div class="modal-footer modal-footer-sticky" *ngIf="presences && presences.length > 0">
+        <div class="col-md-4 offset-md-8 row">
+            <div class="col-md-6 text-center p-2 {{disableApprovalAndRejectButton() ? 'cursor-not-allowed' : ''}}"
+                 *ngIf="canReject()">
+                <button class="btn btnCancel w-100" [disabled]="disableApprovalAndRejectButton() ? 'disabled': null"
+                        (click)="reject()">{{'timeManager.list_checkin_checkout.table.reject' | translate}}
+                </button>
+            </div>
+            <div class="col-md-6 text-center p-2 {{disableApprovalAndRejectButton() ? 'cursor-not-allowed' : ''}}"
+                 *ngIf="canApproval()">
+                <button class="btn btnSave w-100" [disabled]="disableApprovalAndRejectButton() ? 'disabled': null"
+                        (click)="approval()">{{'timeManager.list_checkin_checkout.table.approval' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

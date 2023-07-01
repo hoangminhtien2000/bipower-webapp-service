@@ -1,0 +1,45 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+    <div class="account-content">
+        <div class="container">
+            <div class="account-box">
+                <div class="account-wrapper">
+                    <img src="assets/img/icon/icon-back.png" class="img-back cursor-pointer" routerLink="/login/forgot"/>
+                    <h3 class="account-title">{{'user.title.confirm_otp' | translate}}</h3>
+                    <form [formGroup]="form" (ngSubmit)="submit()">
+                        <div class="form-group text-center">
+                            <label>{{'user.otp.description' | translate}} </label> <br/>
+                            <label><b>{{userStorage.getRequestOTPEmail()}}</b></label>
+                            <input class="form-control" type="text" formControlName="otp" id="otp"
+                                   (blur)="onBlurOtp()"
+                                   maxlength="6"
+                                   pattern="[0-9.]+"
+                                   [ngClass]="{'is-invalid': f['otp'].touched && f['otp'].invalid}"
+                                   placeholder="{{'user.otp.placeholder' | translate}}"/>
+                            <div *ngIf="f['otp'].touched && f['otp'].invalid" class="text-danger text-start">
+                                <div *ngIf="f['otp'].errors && f['otp'].errors['required']">
+                                    {{translate.instant('validations.required', {field: translate.instant('user.model.otp')})}}
+                                </div>
+                                <div *ngIf="f['otp'].errors && f['otp'].errors['pattern']">
+                                    {{translate.instant('validations.onlyNumber', {field: translate.instant('user.model.otp')})}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label *ngIf="timeLeft > 0">{{'user.otp.question' | translate}} {{'user.otp.resend_late' | translate}} ({{timeLeft}})s</label>
+                                    <label *ngIf="timeLeft <= 0">{{'user.otp.question' | translate}} <a class="cursor-pointer" (click)="resenOTP()" #reSendOTP >{{'user.otp.resend' | translate}}</a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary account-btn" type="submit">{{'user.btn.confirm' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Main Wrapper -->

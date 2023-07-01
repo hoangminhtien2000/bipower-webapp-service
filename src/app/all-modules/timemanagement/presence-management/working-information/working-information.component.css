@@ -1,0 +1,321 @@
+.p-40 {
+    padding: 40px;
+}
+
+.padding-top-3 {
+    padding-top: 3px;
+}
+
+.border-vertical {
+    border-top: 1px solid #CFD1D1
+}
+
+.border-vertical-dash {
+    border-bottom: 1px dashed #CFD1D1;
+}
+
+.text-team-title {
+    font-family: 'Segoe UI', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    align-items: center;
+    font-feature-settings: 'liga' off;
+    color: #252929;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.number-text {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.boxBlue {
+    width: 20px;
+    height: 20px;
+    background: #1B8FC3;
+    border-radius: 4px;
+}
+
+.boxGreen {
+    width: 20px;
+    height: 20px;
+    background: #85AA75;
+    border-radius: 4px;
+}
+
+.boxOrange {
+    width: 20px;
+    height: 20px;
+    background: #DFB002;
+    border-radius: 4px;
+}
+
+.boxPurple {
+    width: 20px;
+    height: 20px;
+    background: #d1a2e8;
+    border-radius: 4px;
+}
+
+.boxRed {
+    width: 20px;
+    height: 20px;
+    background: #DF5245;
+    border-radius: 4px;
+}
+
+.boxBlueToolTip {
+    width: 14px;
+    height: 14px;
+    background: #1B8FC3;
+    border-radius: 4px;
+}
+
+.boxGreenToolTip {
+    width: 14px;
+    height: 14px;
+    background: #85AA75;
+    border-radius: 4px;
+}
+
+.boxOrangeToolTip {
+    width: 14px;
+    height: 14px;
+    background: #DFB002;
+    border-radius: 4px;
+}
+
+.boxPurpleToolTip {
+    width: 14px;
+    height: 14px;
+    background: #8E18C6;
+    border-radius: 4px;
+}
+
+.boxRedToolTip {
+    width: 14px;
+    height: 14px;
+    background: #DF5245;
+    border-radius: 4px;
+}
+
+.tooltip-light {
+    padding: 11.5px;
+}
+
+.pl-8 {
+    padding-left: 8px;
+}
+
+.margin-b-10 {
+    margin-bottom: 10px;
+}
+
+.custom-box-color {
+    width: 330px;
+    position: absolute;
+    right: 55px;
+}
+
+.w-65 {
+    width: 65px;
+}
+
+@media only screen and (max-width: 710px) {
+    .custom-box-color {
+        display: none !important;
+    }
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #FFFFFF !important;
+    color: black !important;
+}
+
+.accordion-button:focus {
+    border-color: #EFC427 !important;
+}
+
+.card-body {
+    padding: 12px 12px 12px 0px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    align-items: center;
+    color: #515454;
+}
+
+.full-name-text {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #252929
+}
+
+.mb-unset {
+    margin-bottom: unset;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.img-fluid {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+
+.pr-unset {
+    padding-right: unset;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.custom-text-tooltip {
+    text-align: left;
+    margin-bottom: unset;
+}
+
+.card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 123px;
+}
+
+@media only screen and (max-width: 1545px) {
+    .card-text {
+        min-width: 24px;
+    }
+}
+
+@media only screen and (max-width: 1589px) {
+    .gone {
+        display: none;
+    }
+
+    .pl-10-text {
+        padding-left: 10px;
+    }
+}
+
+
+.h-90 {
+    height: 90px;
+}
+
+.custom-card {
+    height: 90px;
+    background-color: #CEDDC8;
+    border-radius: 8px;
+}
+
+::ng-deep .custom-tooltip {
+    padding: 11.5px !important;
+    min-height: 90px !important;
+    box-shadow: 4px 6px 5px gray !important;
+    /*border: 2px solid black !important;*/
+    width: 170px !important;
+}
+
+.green:hover {
+    border: 2px solid #85AA75;
+}
+
+.blue:hover {
+    border: 2px solid #1B8FC3;
+}
+
+.red:hover {
+    border: 2px solid #DF5245;
+}
+
+.yellow:hover {
+    border: 2px solid #DFB002;
+}
+
+.green {
+    background-color: #CEDDC8;
+}
+
+.blue {
+    background-color: #A4D2E7;
+}
+
+.red {
+    background-color: #F2BAB5;
+}
+
+.yellow {
+    background-color: #F2DF9A;
+}
+
+.purple {
+    background-color: #8E18C6;
+}
+
+.float-left {
+    float: left;
+}
+
+.presence-status-onsite {
+    color: #DFB002;
+}
+
+.presence-status-remote {
+    color: #1B8FC3;
+}
+
+.presence-status-ot {
+    color: #8E18C6;
+}
+
+.presence-status-leave {
+    color: #DF5245;
+}
+
+.presence-status-attendance {
+    color: #85AA75;
+}
+
+

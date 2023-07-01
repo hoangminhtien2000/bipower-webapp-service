@@ -1,0 +1,29 @@
+<div class="modal-body form-scroll">
+    <div class="row bg-white py-3 filter-row">
+        <div class="col">
+            <label class="focus-label">{{"timeManager.list_in_modal.employee" | translate}}</label>
+            <div class="form-group focused">
+                <input (keyup)="searchingFullName($event)" type="text" name="fullName" class="form-control"
+                placeholder="{{ 'employees.search.ph_employee_name' | translate }}" id="text-focus" maxlength="50">
+            </div>
+        </div>
+        <div class="col">
+            <label class="focus-label">{{"employees.modal.working_status" | translate}}</label>
+            <div class="form-group select-focus">
+                <select class="h-46 form-select form-control h-46" name="status"
+                        (change)="selectedStatus($event)"
+                        [ngModelOptions]="{standalone: true}" ngDefaultControl
+                        [(ngModel)]="totalEmployeeWorkingStatusChild">
+                    <option *ngFor="let status of workingStatus"
+                            [selected]="status.code === totalEmployeeWorkingStatusChild"
+                            [value]="status.code">{{ status.workingStatusName | translate }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,23 @@
+<div>
+    <div class="modal-header">
+        <strong>{{candidateContactHistoryTitle}}</strong>
+        <div class="sidebar-act-icon pull-right">
+            <span aria-label="Close" (click)="closeModal()">
+                <i class="fa fa-times cursor-pointer" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="candidateContactHistoryForm">
+            <formly-form [model]="candidateContactHistoryModel" [fields]="candidateContactHistoryFields"
+                         [form]="candidateContactHistoryForm"></formly-form>
+        </form>
+    </div>
+    <div class="modal-footer btn-div">
+        <button type="button" class="btn btnCancel btn-primary submit-btn"
+                (click)="cancelSupportHistory()">{{'candidate.btn.cancel' | translate}}</button>
+        <button type="button" class="btn btnSave btn-primary submit-btn"
+                (click)="saveSupportHistory()">{{'candidate.btn.save' | translate}}</button>
+    </div>
+</div>

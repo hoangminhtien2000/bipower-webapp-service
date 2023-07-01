@@ -1,0 +1,194 @@
+<div class="popUpTable" [ngClass]="getClassOS()">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{"present.registerOnsiteRemote.registerOnsiteRemote" | translate}}
+        </div>
+        <span (click)="closeModal()" style="cursor: pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="custom-modal-body">
+        <form [formGroup]="registerOnsiteRemotePresentForm" novalidate>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.onOnsiteRemoteType" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <select class="form-select form-control" name="workType"
+                            [(ngModel)]="onsiteRemote.workType" (ngModelChange)="onChangeWorkType()"
+                            [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let workTypeOnsiteRemote of workTypesOnsiteRemote"
+                                [selected]="onsiteRemote.workType == workTypeOnsiteRemote.value"
+                                value="{{workTypeOnsiteRemote.value}}">{{workTypeOnsiteRemote.desc | translate}}</option>
+                    </select>
+                    <div *ngIf="registerOnsiteRemotePresentForm.controls['workType'].invalid && (registerOnsiteRemotePresentForm.controls['workType'].dirty || registerOnsiteRemotePresentForm.controls['workType'].touched)"
+                         class="text-danger">
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['workType'].errors.required">
+                            {{"present.registerOnsiteRemote.onworkingTypeRequired" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.onOnsiteRemoteTime" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group modal-onsite-remote">
+                        <input type="text"
+                               ngxDaterangepickerMd
+                               [minDate]="this.today"
+                               [maxDate]="this.maxDate"
+                               [timePicker]="true"
+                               [autoApply]="false"
+                               [locale]="{applyLabel: 'Xác nhận', format: 'DD/MM/YYYY, HH:mm'}"
+                               [timePickerSeconds]="false"
+                               [timePickerIncrement]="5"
+                               [timePicker24Hour]="true"
+                               [isInvalidDate]=""
+                               [(ngModel)]="onsiteRemote.timeRegister"
+                               (change)="onDateRangePickerChanged()"
+                               formControlName="timeRegister"
+                               class="form-control"/>
+                        <span class="d-flex justify-content-center input-group-text input-icon">
+                            <i class="fa fa-calendar icon"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].invalid && (registerOnsiteRemotePresentForm.controls['timeRegister'].dirty || registerOnsiteRemotePresentForm.controls['timeRegister'].touched)"
+                         class="text-danger">
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.endLessThanStart">
+                            {{"present.registerOnsiteRemote.fromDateToDate" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.startLessThanStartWorkingDay">
+                            {{"present.registerOnsiteRemote.fromDateToStartWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.endBiggerThanEndWorkingDay">
+                            Thời gian đăng ký phải từ 8:00 - 17:30
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.required">
+                            {{"present.registerOnsiteRemote.ontimeRegisterRequired" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.startInLunchTime">
+                            {{"present.registerOnsiteRemote.fromDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.endInLunchTime">
+                            {{"present.registerOnsiteRemote.toDateToLunchTime" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.startIsNoWorkingDay">
+                            {{"present.registerOnsiteRemote.fromDateToNoWorkingDay" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['timeRegister'].errors.endIsNoWorkingDay">
+                            {{"present.registerOnsiteRemote.toDateToNoWorkingDay" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="canShowAddressProject()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.addressOnsite" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.workingLocation}}"
+                            [class.is-invalid]="registerOnsiteRemotePresentForm.controls['workingLocation']?.invalid
+                            && (registerOnsiteRemotePresentForm.controls['workingLocation']?.touched || registerOnsiteRemotePresentForm.controls['workingLocation']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phAddressOnsite' | translate}}"
+                            (blur)="blurAddress()"
+                            formControlName="workingLocation"
+                            [(ngModel)]="onsiteRemote.workingLocation"></textarea>
+                    <div *ngIf="registerOnsiteRemotePresentForm.controls['workingLocation'].invalid && (registerOnsiteRemotePresentForm.controls['workingLocation'].dirty || registerOnsiteRemotePresentForm.controls['workingLocation'].touched)"
+                         class="text-danger">
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['workingLocation'].errors.required">
+                            {{"present.registerOnsiteRemote.addressOnsiteRequired" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['workingLocation'].hasError('maxlength')">
+                            {{"present.registerOnsiteRemote.addressOnsiteMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="canShowAddressProject()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.projectOnsite" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.projectName}}"
+                            [class.is-invalid]="registerOnsiteRemotePresentForm.controls['projectName']?.invalid
+                            && (registerOnsiteRemotePresentForm.controls['project']?.touched || registerOnsiteRemotePresentForm.controls['projectName']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phProjectOnsite' | translate}}"
+                            (blur)="blurProject()"
+                            formControlName="projectName"
+                            [(ngModel)]="onsiteRemote.projectName"></textarea>
+                    <div *ngIf="registerOnsiteRemotePresentForm.controls['projectName'].invalid && (registerOnsiteRemotePresentForm.controls['projectName'].dirty || registerOnsiteRemotePresentForm.controls['projectName'].touched)"
+                         class="text-danger">
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['projectName'].errors.required">
+                            {{"present.registerOnsiteRemote.projectNameOnsiteRequired" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['projectName'].hasError('maxlength')">
+                            {{"present.registerOnsiteRemote.projectOnsiteMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12" *ngIf="canShowReason()">
+                <div class="form-group">
+                    <label class="col-form-label">{{"present.registerOnsiteRemote.reason" | translate}}<span
+                            class="text-danger">*</span></label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            maxlength="500"
+                            required
+                            value="{{onsiteRemote.reason}}"
+                            [class.is-invalid]="registerOnsiteRemotePresentForm.controls['reason']?.invalid
+                            && (registerOnsiteRemotePresentForm.controls['reason']?.touched || registerOnsiteRemotePresentForm.controls['reason']?.dirty)"
+                            placeholder="{{'present.registerOnsiteRemote.phReason' | translate}}"
+                            (blur)="blurReason()"
+                            formControlName="reason"
+                            [(ngModel)]="onsiteRemote.reason"></textarea>
+                    <div *ngIf="registerOnsiteRemotePresentForm.controls['reason'].invalid && (registerOnsiteRemotePresentForm.controls['reason'].dirty || registerOnsiteRemotePresentForm.controls['reason'].touched)"
+                         class="text-danger">
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['reason'].errors.required">
+                            {{"present.registerOnsiteRemote.reasonRequired" | translate}}
+                        </small>
+                        <small *ngIf="registerOnsiteRemotePresentForm.controls['reason'].hasError('maxlength')">
+                            {{"present.registerOnsiteRemote.reasonMaxlength" | translate}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--    Footer-->
+    <div class="row footer justify-content-end pb-3">
+        <div class="col-md-4 m-0 p-16">
+            <button class="btn btnCancel col-md-12 w-100 btnOT" type="button"
+                    (click)="closeModal()">{{"present.btn.cancel" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16">
+            <button class="btn btnSave col-md-12 w-100 btnOT" type="button"
+                    (click)="saveOnsiteRemote()">{{"present.btn.save" | translate}}
+            </button>
+        </div>
+        <div class="col-md-4 m-0 p-16 btnSavenApprove" [hidden]="isHidden">
+            <button class="btn btnSave col-md-12 w-100 add-btn-ot" id="btnSave" type="button"
+                    *ngIf="canSeeSaveAndSendApproval()"
+                    (click)="onSaveAndApprove()">
+                {{"present.btn.saveAndSendApprove" | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+

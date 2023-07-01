@@ -1,0 +1,92 @@
+.modal-header{
+    background: #FAF5E1;
+}
+
+.modal-title{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #252929;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.head-text{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #252929;
+    padding: 5px;
+}
+
+.cus-margin{
+    margin-left: 20px;
+}
+
+.item{
+    float: left;
+    padding: 10px;
+    border: none;
+    justify-content: space-between;
+}
+.form-group.contact-date{
+
+}
+
+.form-control.notes{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 100px;
+    background: #FFFFFF;
+    border: 1px solid #D0D2D3;
+    border-radius: 4px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+
+
+.title-body{
+    color: #0ba408;
+}
+
+.body{
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.red-container{
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 3px;
+    margin: 1px 0 0 5%;
+}
+
+.grey-container{
+    width: 15px;
+    height: 15px;
+    background-color: #cdcdcd;
+    border-radius: 3px;
+    margin: 1px 0 0 2%;
+}
+
+th{
+    white-space: normal !important;
+    min-width: 4rem;
+    text-align: center !important;
+}
+
+

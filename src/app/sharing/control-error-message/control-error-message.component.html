@@ -1,0 +1,6 @@
+<div *ngIf="showError && errors" class="text-danger">
+    <span *ngFor="let error of convertError">
+        {{ (field +  ' '  + (error.key | translate : error.params)) | upperFirst }}
+    </span>
+
+</div>

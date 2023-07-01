@@ -1,0 +1,47 @@
+.content {
+	padding: 30px;
+}
+.profile-employee-custom{
+	height: 130px;
+}
+.w-49{
+	width: 49%;
+}
+.w-45{
+	width: 45%;
+}
+.employee-customer-public-info{
+    column-count: 2;
+    column-gap: 5%;
+    column-fill: auto;
+}
+
+.padding-address{
+	padding-left: 15px;
+}
+
+.user-name{
+	font-style: normal;
+	font-weight: 700;
+	font-size: 32px;
+	color: #252929;
+}
+
+.text-muted{
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	color: #A8A9A9!important;
+}
+
+.unset-margin{
+	margin: unset;
+}
+
+.btnHistory{
+	font-size: 16px;
+	margin-right: 10px;
+	text-decoration: underline;
+	color: #1B8FC3;
+	cursor: pointer;
+}

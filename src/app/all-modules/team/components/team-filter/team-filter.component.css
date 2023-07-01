@@ -1,0 +1,23 @@
+
+
+.btn {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-weight: bold;
+}
+
+.btn-outline-primary {
+    border: 1px solid #dbc700;
+    color: black;
+    background: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+    background: #dbc700;
+    color: white;
+}
+
+.w-full {
+    width: 100%;
+}

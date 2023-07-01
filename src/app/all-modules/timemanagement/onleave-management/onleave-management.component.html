@@ -1,0 +1,72 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'workingOnleave.management.manageOnleave' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item ">{{'workingOnleave.management.timeKeeping' | translate}}</li>
+                    <li class="breadcrumb-item active customBold"> {{'workingOnleave.management.manageOnleave' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!--    Màn hiển thị-->
+    <div class="">
+        <div class="row">
+            <div class="col-md-4 pl-0 box-total-onleave">
+                <div class="card">
+                    <div class="pd-24">
+                        <div class="col-md-12 text-center">
+                            <span class="font-text"> {{'workingOnleave.management.totalAnnualLeave' | translate}}</span>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <span class="font-number">{{renderAnnualLeave()}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 box-total-onleave">
+                <div class="card">
+                    <div class="pd-24">
+                        <div class="col-md-12 text-center">
+                            <span class="font-text">{{'workingOnleave.management.annualLeaveLeftDays' | translate}}</span>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <span class="font-number">{{renderAnnualLeaveRemaining()}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pr-0 box-total-onleave">
+                <div class="card">
+                    <div class="pd-24">
+                        <div class="col-md-12 text-center">
+                            <span class="font-text">{{'workingOnleave.management.compensatoryLeaveLeftHour' | translate}}</span>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <span class="font-number">{{renderCompensatoryLeaveRemaining()}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Màn hiển thị-->
+
+    <!-- Search Filter -->
+    <app-onleave-search-form (searchEvent)="searchListLeave($event)"
+                             [changePageSize]="changePageSize"
+                             [changePage]="changePage"></app-onleave-search-form>
+    <!-- /Search Filter -->
+    <app-list-leave-management [listLeave]="listLeave" [paginationInfor]="paginationInfor"
+                               (pageEvent)="pageEventChange($event)"
+                               (pageChangeEvent)="pageChangeEventChange($event)"
+    ></app-list-leave-management>
+
+</div>
+<!-- /Page Content -->

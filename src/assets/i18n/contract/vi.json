@@ -1,0 +1,164 @@
+{
+  "contract": {
+    "title": {
+      "management": "Quản lý hợp đồng",
+      "list": "Danh sách hợp đồng",
+      "contract_details": "Chi tiết hợp đồng",
+      "contract_add": "Thêm mới hợp đồng"
+    },
+    "search": {
+      "employee_code": "Mã nhân viên",
+      "ph_employee_code": "Nhập mã nhân viên",
+      "maxlength_employee_code": "Mã nhân viên chỉ cho phép nhập tối đa 50 ký tự",
+      "employee_name": "Họ tên nhân viên",
+      "ph_employee_name": "Nhập họ và tên nhân viên",
+      "maxlength_employee_name": "Họ tên chỉ cho phép nhập tối đa 50 ký tự",
+      "contract_code": "Số hợp đồng",
+      "ph_contract_code": "Nhập số hợp đồng",
+      "maxlength_contract_code": "Số hợp đồng chỉ cho phép nhập tối đa 30 ký tự",
+      "contract_type": "Loại hợp đồng",
+      "select_contract_type": "Chọn loại hợp đồng",
+      "required_data_field": "Trường dữ liệu không được để trống",
+      "formal_contract": "Hợp đồng chính thức",
+      "probation_contract": "Hợp đồng thử việc",
+      "collaborators_contract": "Hợp đồng thời vụ",
+      "contract_status": "Trạng thái hợp đồng",
+      "select_contract_status": "Chọn trạng thái hợp đồng",
+      "created_date": "Ngày ký hợp đồng",
+      "end_date": "Ngày kết thúc hợp đồng",
+      "end_date_created_date": "Ngày kết thúc không được nhỏ hơn ngày bắt đầu",
+      "termination_date": "Ngày chấm dứt hợp đồng thực tế",
+      "create": "Tạo mới",
+      "waitingApprove": "Chờ phê duyệt",
+      "unapprove": "Từ chối phê duyệt",
+      "effect": "Hiệu lực",
+      "expired": "Hết hiệu lực"
+    },
+    "btn": {
+      "search": "Tìm kiếm",
+      "add": "Thêm mới",
+      "save": "Lưu",
+      "save_and_send_approve": "Lưu và gửi phê duyệt",
+      "reject": "Từ chối",
+      "approve": "Phê duyệt",
+      "cancel": "Hủy",
+      "send": "Gửi"
+    },
+    "list": {
+      "employee_name": "Họ tên nhân viên",
+      "contract_code": "Số hợp đồng",
+      "contract_term": "Thời hạn hợp đồng (Tháng)",
+      "contract_status": "Trạng thái hợp đồng",
+      "created_date": "Ngày ký hợp đồng",
+      "end_date": "Ngày kết thúc hợp đồng",
+      "termination_date": "Ngày chấm dứt hợp đồng thực tế",
+      "record_not_found": "Không tìm thấy kết quả"
+    },
+    "paging": {
+      "display": "Hiển thị",
+      "total": "trên tổng số",
+      "record": "Bản ghi"
+    },
+    "modal": {
+      "contract_type": "Loại hợp đồng",
+      "formal_contract": "Hợp đồng chính thức",
+      "probation_contract": "Hợp đồng thử việc",
+      "collaborators_contract": "Hợp đồng thời vụ",
+
+      "employees": "Nhân viên",
+      "ph_employees": "Chọn nhân viên",
+      "required_employee": "Nhân viên không được để trống",
+
+      "contract_code": "Số hợp đồng",
+      "ph_contract_code": "Nhập số hợp đồng",
+      "required_contract_code": "Số hợp đồng không được để trống",
+      "incorrect_format_contract_code": "Số hợp đồng không đúng định dạng",
+      "maxlength_contract_code": "Số hợp đồng chỉ cho phép nhập tối đa 100 ký tự",
+
+      "created_date": "Ngày ký hợp đồng",
+      "required_created_date": "Ngày ký hợp đồng không được để trống",
+      "start_date_current_date": "Ngày bắt đầu không được vượt quá ngày hiện tại",
+      
+      "contract_term": "Thời hạn hợp đồng (Tháng)",
+      "select_contract_term": "Chọn thời hạn hợp đồng",
+      "month": "tháng",
+      "required_contract_term": "Thời hạn hợp đồng không được để trống",
+
+      "end_date": "Ngày kết thúc hợp đồng",
+      "required_end_date": "Ngày kết thúc hợp đồng không được để trống",
+      "end_date_current_date": "Ngày kết thúc không được vượt quá ngày hiện tại",
+
+      "negotiable_salary": "Mức lương thỏa thuận",
+      "input_negotiable_salary": "Nhập mức lương thỏa thuận",
+      "required_negotiable_salary": "Mức lương thỏa thuận không được để trống",
+      "maxlength_negotiable_salary": "Mức lương thỏa thuận chỉ được nhập tối đa 10 ký tự",
+      "number_negotiable_salary": "Mức lương thỏa thuận chỉ được nhập ký tự số",
+
+      "contract_salary": "Mức lương đề nghị ký HĐ",
+      "input_contract_salary": "Nhập mức lương đề nghị ký HĐ",
+      "required_contract_salary": "Mức lương đề nghị ký HĐ không được để trống",
+      "maxlength_contract_salary": "Mức lương đề nghị ký HĐ chỉ được nhập tối đa 20 ký tự",
+      "text_number_contract_salary": "Mức lương đề nghị ký HĐ chỉ chứa ký tự số và chữ, không chứa ký tự đặc biệt như !@#$%^*",
+
+      "termination_date":"Ngày chấm dứt hợp đồng thực tế",
+      "required_termination_date": "Ngày chấm dứt hợp đồng thực tế không được để trống",
+      "termination_date_current_date": "Ngày chấm dứt hợp đồng thực tế không được vượt quá ngày hiện tại",
+      "termination_date_created_date": "Ngày chấm dứt hợp đồng thực tế không được nhỏ hơn ngày ký hợp đồng",
+
+      "upload_file": "Tải file HĐ",
+      "required_upload_file": "Bắt buộc upload file",
+      "pdf_file": "Tập tin tải lên phải có định dạng .PDF",
+
+      "result_evaluation": "Kết quả đánh giá",
+      "input_result_evaluation": "Nhập kết quả đánh giá",
+      "required_result_evaluation": " Kết quả đánh giá không được để trống",
+      "maxlength_result_evaluation": " Kết quả đánh giá chỉ được nhập tối đa 20 ký tự",
+      "text_number_result_evaluation": " Kết quả đánh giá chỉ chứa ký tự số và chữ, không chứa ký tự đặc biệt như !@#$%^*",
+
+      "insurance_salary": "Mức lương đóng bảo hiểm (VND)",
+      "input_insurance_salary": "Nhập mức lương đóng bảo hiểm",
+      "required_insurance_salary": "Mức lương đóng bảo hiểm không được để trống",
+      "maxlength_insurance_salary": "Mức lương đóng bảo hiểm chỉ được nhập tối đa 10 ký tự",
+      "text_number_insurance_salary": "Mức lương đóng bảo hiểm chỉ chứa ký tự số và chữ",
+
+      "net_salary": "Mức lương net (VND)",
+      "input_net_salary": "Nhập mức lương net",
+      "required_net_salary": "Mức lương net không được để trống",
+      "maxlength_net_salary": "Mức lương net chỉ được nhập tối đa 10 ký tự",
+
+      "gross_salary": "Mức lương gross (VND)",
+      "input_gross_salary": "Nhập mức lương gross",
+      "required_gross_salary": "Mức lương gross không được để trống",
+      "maxlength_gross_salary": "Mức lương gross chỉ được nhập tối đa 10 ký tự",
+      "text_number_gross_salary": "Mức lương gross chỉ chứa ký tự số và chữ, không chứa ký tự đặc biệt như !@#$%^*",
+
+      "probational_salary": "Mức lương thử việc",
+      "input_probational_salary": "Nhập mức lương thử việc",
+      "required_probational_salary": "Mức lương thử việc không được để trống",
+      "maxlength_probational_salary": "Mức lương thử việc chỉ được nhập tối đa 10 ký tự",
+
+      "official_salary": "Mức lương đề nghị ký HĐLĐ chính thức",
+      "input_official_salary": "Nhập mức lương đề nghị ký HĐLĐ chính thức",
+      "required_official_salary": " Mức lương đề nghị ký HĐLĐ chính thức không được để trống",
+      "maxlength_official_salary": " Mức lương đề nghị ký HĐLĐ chính thức chỉ được nhập tối đa 20 ký tự",
+      "text_number_official_salary": " Mức lương đề nghị ký HĐLĐ chính thức chỉ chứa ký tự số và chữ, không chứa ký tự đặc biệt như !@#$%^*",
+
+      "reject_approve": "Từ chối phê duyệt",
+
+      "reject_reason": "Lý do từ chối",
+      "required_reject_reason": " Lý do từ chối không được để trống",
+      "maxlength_reject_reason": " Lý do từ chối chỉ được nhập tối đa 500 ký tự"
+
+    },
+    "month": {
+      "1_month": "1 tháng",
+      "2_month": "2 tháng",
+      "3_month": "3 tháng",
+      "6_month": "6 tháng",
+      "12_month": "12 tháng",
+      "24_month": "24 tháng",
+      "36_month": "36 tháng",
+      "60_month": "60 tháng"
+    }
+  }
+}

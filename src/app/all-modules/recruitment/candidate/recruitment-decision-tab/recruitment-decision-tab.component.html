@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title my-0">{{'candidate.interview.hiring_decisions' | translate}}</h5>
+            <button class="btn btn-warning"
+                    *ngIf="canMakeRecruitmentDecision"
+                    [disabled]="proposals?.length == 0 || existRecruitmentDecision"
+                    (click)="makeRecruitmentDecision()">{{'candidate.interview.make_recruitment_decision' | translate}}
+            </button>
+        </div>
+        <div *ngFor="let recruitmentDecision of recruitmentDecisions; let i = index;">
+            <div class="row">
+                <div class="col-9">
+                    <label>{{'candidate.interview.time' | translate}} {{i+1}} </label>
+                </div>
+                <div class="col-3 required-mark">
+                    <b *ngIf="recruitmentDecision.statusItem && recruitmentDecision.statusItem.name"><i>{{'candidate.model.status' | translate}}: </i></b>
+                    <i *ngIf="recruitmentDecision.statusItem && recruitmentDecision.statusItem.name">{{recruitmentDecision.statusItem.name}}</i>
+                </div>
+                <form [formGroup]="recruitmentDecisionBeginFormEs[i]">
+                    <formly-form [model]="recruitmentDecisionBeginModelEs[i]" [fields]="recruitmentDecisionBeginFieldEs[i]"
+                                 [form]="recruitmentDecisionBeginFormEs[i]"></formly-form>
+                </form>
+                <form [formGroup]="recruitmentDecisionSalaryFormEs[i]">
+                    <formly-form [model]="recruitmentDecisionSalaryModelEs[i]" [fields]="recruitmentDecisionSalaryFieldEs[i]"
+                                 [form]="recruitmentDecisionSalaryFormEs[i]"></formly-form>
+                </form>
+                <form [formGroup]="recruitmentDecisionEndFormEs[i]">
+                    <formly-form [model]="recruitmentDecisionEndModelEs[i]" [fields]="recruitmentDecisionEndFieldEs[i]"
+                                 [form]="recruitmentDecisionEndFormEs[i]"></formly-form>
+                </form>
+            </div>
+
+            <div class="clearfix" *ngIf="recruitmentDecisions.length == (i+1)">
+                <div class="float-end">
+                    <button *ngIf="canApprovalDecision && checkStatusRecruitmentDecisionApprove(recruitmentDecision)" class="btn btnSave btn-primary  mb-3"
+                        (click)="rejectRecruitmentDecision(i)">{{'candidate.interview.refuse' | translate}}
+                        </button>
+                        <button *ngIf="canApprovalDecision && checkStatusRecruitmentDecisionApprove(recruitmentDecision)" class="btn btnSave btn-primary mb-3"
+                                (click)="approveRecruitmentDecision(i)">{{'candidate.interview.approve' | translate}}
+                        </button>
+                    <button *ngIf="canMakeRecruitmentDecision && checkStatusRecruitmentDecisionEdit(recruitmentDecision)" class="btn btnSave btn-primary float-end mb-3"
+                    (click)="saveRecruitmentDecision(i)">{{'candidate.btn.save' | translate}}
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="mt-3">
+                <label>{{'candidate.interview.candidate_feedback' | translate}} </label>
+                <form [formGroup]="onboardStatusFormEs[i]">
+                    <formly-form [model]="onboardStatusModelEs[i]" [fields]="onboardStatusFieldEs[i]"
+                                 [form]="onboardStatusFormEs[i]"></formly-form>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <div class="clearfix" *ngIf="recruitmentDecisions.length == (i+1)">
+                    <button class="btn btnSave btn-primary mb-3"
+                            (click)="exportRecruitmentDecision(i)"
+                    >{{'candidate.btn.export' | translate}}
+                    </button>
+                </div>
+                <div class="clearfix">
+                    <button *ngIf="canMakeRecruitmentDecision && !candidateStatusOnboard" class="btn btnSave btn-primary mb-3"
+                            (click)="saveOnboardStatus(i)"
+                    >{{'candidate.btn.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

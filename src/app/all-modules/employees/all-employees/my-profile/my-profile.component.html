@@ -1,0 +1,133 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">{{'user.title.my_account' | translate}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div id="emp_profile" class="pro-overview tab-pane fade show active">
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body" style="margin-top: 25px">
+                            <ul class="personal-info row">
+                                <li class="line">
+                                    <label class="title-profile col-3">{{'user.model.full_name' | translate}}:</label>
+                                    <label class="text-profile col-9">{{userStorage.getUserInfo()?.fullName}}</label>
+                                </li>
+                                <li class="line">
+                                    <label class="title-profile col-3">{{'user.model.phone' | translate}}:</label>
+                                    <label class="text-profile col-9">{{userStorage.getUserInfo()?.phone}}</label>
+                                </li>
+                                <li class="line">
+                                    <label class="title-profile col-3">{{'user.model.email' | translate}}:</label>
+                                    <label class="text-profile col-9">{{userStorage.getUserInfo()?.email}}</label>
+                                </li>
+                                <li class="line">
+                                    <label class="title-profile col-3">{{'user.model.roles' | translate}}:</label>
+                                    <label class="text-profile col-9">{{userRoles}}</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="card profile-box flex-fill">
+                        <div class="card-body">
+                            <h3 class="card-title">{{'user.title.change_password' | translate}} </h3>
+                            <form [formGroup]="form" (ngSubmit)="changePassword()">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>{{'user.model.old_password' | translate}} <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative">
+                                        <input placeholder="{{'user.model.old_password_placeholder' | translate}}"
+                                               class="form-control" [type]="toggleOldPassword ? 'password' : 'text'"
+                                               formControlName="oldPassword" id="oldPassword"
+                                               maxlength="50"
+                                               [ngClass]="{'is-invalid': f['oldPassword'].touched && f['oldPassword'].invalid}"/>
+                                        <span [ngClass]="toggleOldPassword ? 'fa toggle-password fa-eye' : 'fa toggle-password fa-eye-slash'" (click)="iconLogleOldPassword()"></span>
+                                        <div *ngIf="f['oldPassword'].touched && f['oldPassword'].invalid" class="text-danger">
+                                            <div *ngIf="f['oldPassword'].errors && f['oldPassword'].errors['required']">
+                                                {{translate.instant('validations.required', {field: translate.instant('user.model.old_password')})}}
+                                            </div>
+                                            <div *ngIf="f['oldPassword'].errors && f['oldPassword'].errors['oldPassword']">
+                                                {{translate.instant('validations.maxLength', {field: translate.instant('user.model.old_password')})}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>{{'user.model.new_password' | translate}} <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative">
+                                        <input placeholder="{{'user.model.new_password_placeholder' | translate}}"
+                                               class="form-control" [type]="togglePassword ? 'password' : 'text'"
+                                               formControlName="password" id="password"
+                                               maxlength="50"
+                                               [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}"/>
+                                        <span [ngClass]="togglePassword ? 'fa toggle-password fa-eye' : 'fa toggle-password fa-eye-slash'" (click)="iconLoglePassword()"></span>
+                                        <div *ngIf="f['password'].touched && f['password'].invalid" class="text-danger">
+                                            <div *ngIf="f['password'].errors && f['password'].errors['required']">
+                                                {{translate.instant('validations.required', {field: translate.instant('user.model.new_password')})}}
+                                            </div>
+                                            <div *ngIf="f['password'].errors && f['password'].errors['maxLength']">
+                                                {{translate.instant('validations.maxLength', {field: translate.instant('user.model.new_password')})}}
+                                            </div>
+                                            <div *ngIf="f['password'].errors && f['password'].errors['pattern']">
+                                                {{translate.instant('validations.password_pattern', {field: translate.instant('user.model.new_password')})}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>{{'user.model.re_new_password' | translate}} <span class="text-danger">*</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="position-relative">
+                                            <input placeholder="{{'user.model.re_new_password_placeholder' | translate}}"
+                                                   class="form-control" [type]="toggleRePassword ? 'password' : 'text'"
+                                                   formControlName="rePassword" id="rePassword"
+                                                   maxlength="50"
+                                                   [ngClass]="{'is-invalid': f['rePassword'].touched && f['rePassword'].invalid}"/>
+                                            <span [ngClass]="toggleRePassword ? 'fa toggle-password fa-eye' : 'fa toggl' +'' + 'e-password fa-eye-slash'"
+                                                  (click)="iconLogleRePassword()"></span>
+                                            <div *ngIf="f['rePassword'].touched && f['rePassword'].invalid" class="text-danger">
+                                                <div *ngIf="f['rePassword'].errors && f['rePassword'].errors['required']">
+                                                    {{translate.instant('validations.required', {field: translate.instant('user.model.re_new_password')})}}
+                                                </div>
+                                                <div *ngIf="f['rePassword'].errors && f['rePassword'].errors['rePassword']">
+                                                    {{translate.instant('validations.maxLength', {field: translate.instant('user.model.re_new_password')})}}
+                                                </div>
+                                                <div *ngIf="f['rePassword'].errors && f['rePassword'].errors['pattern']">
+                                                    {{translate.instant('validations.password_pattern', {field: translate.instant('user.model.re_new_password')})}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary account-btn"  type="submit">
+                                        {{'user.btn.save' | translate}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

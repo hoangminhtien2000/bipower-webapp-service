@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <div class="unit-col h-col">
+        <label>H</label>
+        <span *ngFor="let h of hourRange" class="{{'valH' + h}}"
+              [class.disabled]="h < minHour"
+              [class.active]="h == hour" (click)="h >= minHour && emitChange(h, minute)">
+            {{h}}
+        </span>
+    </div>
+    <div class="unit-col m-col">
+        <label>M</label>
+        <span *ngFor="let m of minuteRange" class="{{'valM' + m}}"
+              [class.disabled]="hour <= minHour && m < minMinute"
+              [class.active]="m == minute"
+              (click)="hour >= minHour && m >= minMinute && emitChange(hour, m)">
+            {{m}}
+        </span>
+    </div>
+</div>

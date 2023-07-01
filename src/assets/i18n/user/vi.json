@@ -1,0 +1,42 @@
+{
+  "user": {
+    "btn": {
+      "save": "Lưu",
+      "confirm": "Xác nhận"
+    },
+    "title": {
+      "my_account": "Thông tin tài khoản",
+      "change_password": "Đổi mật khẩu",
+      "forgot_password": "Quên mật khẩu",
+      "confirm_otp": "Xác nhận OTP",
+      "login": "Đăng nhập",
+      "logout": "Đăng xuất"
+    },
+    "model": {
+      "full_name": "Họ tên",
+      "otp": "Mã OTP",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "email_placeholder": "Nhập email",
+      "roles": "Vai trò",
+      "password": "Mật khẩu",
+      "password_placeholder": "Nhập mật khẩu",
+      "old_password": "Mật khẩu hiện tại",
+      "old_password_placeholder": "Nhập mật khẩu hiện tại",
+      "new_password": "Mật khẩu mới",
+      "new_password_placeholder": "Nhập mật khẩu mới",
+      "re_new_password": "Nhập lại mật khẩu mới",
+      "re_new_password_placeholder": "Nhập lại mật khẩu mới"
+    },
+    "otp": {
+      "placeholder": "Nhập mã OTP",
+      "question": "Bạn chưa nhận được OTP?",
+      "description": "Nhập mã gồm 6 chữ số đã được gửi đến email",
+      "resend_late": "Gửi lại mã sau",
+      "resend": "Gửi lại mã"
+    },
+    "message": {
+      "login": "Sai tên đăng nhập hoặc mật khẩu không đúng."
+    }
+  }
+}

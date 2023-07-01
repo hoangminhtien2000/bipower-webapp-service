@@ -1,0 +1,92 @@
+<div remove-wrapper ngbDropdown #myDrop="ngbDropdown">
+    <div class="position-relative">
+        <input class="form-control" #textSearch autocomplete="off" type="text" (keydown)="onKeyDown($event)"
+               [(ngModel)]="textSearchModel" (focus)="myDrop.open()" [disabled]="disableSearch">
+        <a class="fu_remove" href="javascript:void(0)" (click)="reset()"
+           *ngIf="disableSearch">{{'button.delete'|translate}}</a>
+    </div>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual" class="p-0 w-100">
+        <div *ngIf="!to.horizoneTable">
+            <table class="table-result table table-borderless">
+                <thead>
+                <tr>
+                    <th *ngFor="let head of to.columns">{{head.label | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngIf="!isSearching && datas && datas?.length>0">
+                    <tr *ngFor="let data of datas" [ngClass]="{'xfocus':data.focus}" (click)="clickRow(data)">
+                        <td *ngFor="let col of to.columns">{{getDisplay(data, col)}}</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!isSearching && datas?.length==0">
+                    <tr>
+                        <td [colSpan]="to.columns.length">{{to.noDataText | translate}}</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="isSearching">
+                    Đang tìm kiếm...
+                </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-result table-borderless w-100" *ngIf="to.horizoneTable">
+            <div class="box-auto-complete" tabindex="2">
+                <!--<div *ngIf="isLoading">-->
+                <!--{{'fixedLineRequest.loading' | translate }}-->
+                <!--</div>-->
+                <div style="max-height: 200px; overflow-y: auto">
+                    <!--<ng-container *ngIf="!resultsSearch || !resultsSearch.length>0">-->
+                    <!--<div style="border-radius: 6px 6px 0 0; padding: 8px">-->
+                    <!--{{'fixedLineRequest.koKetQua' | translate }}-->
+                    <!--</div>-->
+                    <!--<div (click)="selectAddNew()" *ngIf="inputText.value" class="bg-primary" id="{{'item__0'}}"-->
+                    <!--style="cursor: pointer; border-radius:0 0 6px 6px; padding: 8px; color: white;">-->
+                    <!--<svg width="11" height="12" viewBox="0 0 11 12" fill="none"-->
+                    <!--xmlns="http://www.w3.org/2000/svg">-->
+                    <!--<path-->
+                    <!--d="M5.5 0.546875C6.44531 0.546875 7.34766 0.804688 8.16406 1.27734C8.98047 1.75 9.625 2.39453 10.0977 3.21094C10.5703 4.02734 10.8281 4.92969 10.8281 5.875C10.8281 6.8418 10.5703 7.72266 10.0977 8.53906C9.625 9.35547 8.98047 10.0215 8.16406 10.4941C7.34766 10.9668 6.44531 11.2031 5.5 11.2031C4.5332 11.2031 3.65234 10.9668 2.83594 10.4941C2.01953 10.0215 1.35352 9.35547 0.880859 8.53906C0.408203 7.72266 0.171875 6.8418 0.171875 5.875C0.171875 4.92969 0.408203 4.02734 0.880859 3.21094C1.35352 2.39453 2.01953 1.75 2.83594 1.27734C3.65234 0.804688 4.5332 0.546875 5.5 0.546875ZM8.59375 6.47656V5.27344C8.59375 5.20898 8.55078 5.14453 8.50781 5.10156C8.46484 5.05859 8.40039 5.01562 8.33594 5.01562H6.35938V3.03906C6.35938 2.97461 6.31641 2.91016 6.27344 2.86719C6.23047 2.82422 6.16602 2.78125 6.10156 2.78125H4.89844C4.8125 2.78125 4.74805 2.82422 4.70508 2.86719C4.66211 2.91016 4.64062 2.97461 4.64062 3.03906V5.01562H2.66406C2.57812 5.01562 2.51367 5.05859 2.4707 5.10156C2.42773 5.14453 2.40625 5.20898 2.40625 5.27344V6.47656C2.40625 6.5625 2.42773 6.62695 2.4707 6.66992C2.51367 6.71289 2.57812 6.73438 2.66406 6.73438H4.64062V8.71094C4.64062 8.79688 4.66211 8.86133 4.70508 8.9043C4.74805 8.94727 4.8125 8.96875 4.89844 8.96875H6.10156C6.16602 8.96875 6.23047 8.94727 6.27344 8.9043C6.31641 8.86133 6.35938 8.79688 6.35938 8.71094V6.73438H8.33594C8.40039 6.73438 8.46484 6.71289 8.50781 6.66992C8.55078 6.62695 8.59375 6.5625 8.59375 6.47656Z"-->
+                    <!--fill="white"/>-->
+                    <!--</svg>-->
+                    <!--{{'fixedLineRequest.addNew' | translate }} "{{inputText.value}}"-->
+                    <!--</div>-->
+                    <!--</ng-container>-->
+                    <ng-container *ngFor="let data of datas; let i = index;">
+                        <div class="item" id="{{'item__'+i}}" [ngClass]="{'xfocus':data.focus}"
+                             (click)="clickRow(data)">
+                            <div class="row m-0">
+                                <ng-container *ngFor="let col of to.columns">
+                                    <div class="col-12 col-md-4 font-weight-bold p-0">
+                                        <span>{{col.label | translate}}</span></div>
+                                    <div class="col-12 col-md-8 data_t1 p-0">{{getDisplay(data, col)}}</div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="item" *ngIf="datas.length<1">
+                        {{to.noDataText | translate}}
+                    </div>
+                    <div *ngIf="datas.length<1"
+                         (click)="selectNewItem()"
+                         style="color: white;background: #4674EB;padding: 5px; display: flex;align-items: center; cursor: pointer;">
+                        <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                    d="M5.5 0.546875C6.44531 0.546875 7.34766 0.804688 8.16406 1.27734C8.98047 1.75 9.625 2.39453 10.0977 3.21094C10.5703 4.02734 10.8281 4.92969 10.8281 5.875C10.8281 6.8418 10.5703 7.72266 10.0977 8.53906C9.625 9.35547 8.98047 10.0215 8.16406 10.4941C7.34766 10.9668 6.44531 11.2031 5.5 11.2031C4.5332 11.2031 3.65234 10.9668 2.83594 10.4941C2.01953 10.0215 1.35352 9.35547 0.880859 8.53906C0.408203 7.72266 0.171875 6.8418 0.171875 5.875C0.171875 4.92969 0.408203 4.02734 0.880859 3.21094C1.35352 2.39453 2.01953 1.75 2.83594 1.27734C3.65234 0.804688 4.5332 0.546875 5.5 0.546875ZM8.59375 6.47656V5.27344C8.59375 5.20898 8.55078 5.14453 8.50781 5.10156C8.46484 5.05859 8.40039 5.01562 8.33594 5.01562H6.35938V3.03906C6.35938 2.97461 6.31641 2.91016 6.27344 2.86719C6.23047 2.82422 6.16602 2.78125 6.10156 2.78125H4.89844C4.8125 2.78125 4.74805 2.82422 4.70508 2.86719C4.66211 2.91016 4.64062 2.97461 4.64062 3.03906V5.01562H2.66406C2.57812 5.01562 2.51367 5.05859 2.4707 5.10156C2.42773 5.14453 2.40625 5.20898 2.40625 5.27344V6.47656C2.40625 6.5625 2.42773 6.62695 2.4707 6.66992C2.51367 6.71289 2.57812 6.73438 2.66406 6.73438H4.64062V8.71094C4.64062 8.79688 4.66211 8.86133 4.70508 8.9043C4.74805 8.94727 4.8125 8.96875 4.89844 8.96875H6.10156C6.16602 8.96875 6.23047 8.94727 6.27344 8.9043C6.31641 8.86133 6.35938 8.79688 6.35938 8.71094V6.73438H8.33594C8.40039 6.73438 8.46484 6.71289 8.50781 6.66992C8.55078 6.62695 8.59375 6.5625 8.59375 6.47656Z"
+                                    fill="white"/>
+                        </svg>
+                        <span class="new_daunoi ml-3">{{'fixedLineRequest.addNew' | translate }} "{{textSearchModel}}"</span>
+                    </div>
+                </div>
+                <div class="new-line-item">
+
+                </div>
+            </div>
+        </div>
+        <!--    <ng-select [items]="to.options" bindLabel="{{!to.ouputSelectedAsObject ? 'label':''}}"-->
+        <!--               bindValue="{{!to.ouputSelectedAsObject ?'value':''}}" [(ngModel)]="selectedId" placeholder="{{to.placeholder | translate}}"-->
+        <!--               [typeahead]="search$" [formControl]="formControl" [formlyAttributes]="field"-->
+        <!--               notFoundText="{{ 'autocomplete.notfoundtext'| translate}}" #myautocomplete>-->
+        <!--    </ng-select>-->
+
+    </div>
+</div>

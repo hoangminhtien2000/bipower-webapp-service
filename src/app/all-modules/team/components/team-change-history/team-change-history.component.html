@@ -1,0 +1,129 @@
+<div class="modal-header header-bg">
+    <div class="header-content content-header">
+        {{'TEAM.TITLE.HISTORY_TEAM_CHANGE' |translate}}
+    </div>
+    <span (click)="onClose()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+</div>
+<div id="history_content" class="modal-body">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div>
+                    <label>{{'TEAM.TITLE.CHANGED_DATE' |translate}}</label>
+                    <div>
+                        <p-calendar
+                                placeholder="DD/MM/YYYY - DD/MM/YYYY"
+                                selectionMode="range"
+                                [style]="{width: '100%'}"
+                                appendTo="body"
+                                baseZIndex="1000"
+                                [(ngModel)]="dateRange"
+                                [ngModelOptions]="{standalone: true}"
+                                [maxDate]="maxDate"
+                                [dateFormat]="'dd/mm/yy'"
+                                (focusout)="checkDate()"
+                        ></p-calendar>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-primary hightlight-focus" type="button" (click)="search()">
+                        {{'TEAM.BUTTON.SEARCH' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    {{'TEAM.TITLE.LIST_CHANGE' | translate}}
+                </h4>
+                <table class="table table-bordered table-striped table-hover datatable">
+                    <thead>
+                    <tr>
+                        <th class="text-center align-middle">
+                            {{ 'TEAM.TITLE.USER_CHANGE' | translate}}
+                        </th>
+                        <th class="text-center align-middle">
+                            {{'TEAM.TITLE.CHANGED_DATE' |translate}}
+                        </th>
+                        <th class="text-center align-middle">
+                            {{ 'TEAM.TITLE.ACTION' |translate}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngIf="!teamHistoryPage || teamHistoryPage?.items.length == 0">
+                        <td align="center" colspan="4">
+                            {{'TEAM.TITLE.NO_DATA' | translate}}
+                        </td>
+                    </tr>
+                    <tr *ngFor="let change of teamHistoryPage?.items; let i = index"
+                        (click)="selectedHistory = change">
+                        <td>{{change.action_user.full_name}}</td>
+                        <td class="text-center">{{change.action_time | date : 'dd/MM/yyyy HH:mm:ss' :'GMT'}}</td>
+                        <td class="text-center">
+                        <a href="javascript:void(0)" (click)="showDetail(change)">{{change.action_name}}</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <app-ta-paginator
+                        [page]="pageMeta.pageNumber + 1"
+                        [pageSize]="pageMeta.pageSize"
+                        [totalElements]="pageMeta.totals"
+                        (onPageChange)="changePage($event - 1, pageMeta.pageSize)"
+                        (onPageSizeChange)="changePage(pageMeta.pageNumber, $event)"
+                ></app-ta-paginator>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 #detailTable class="card-title">
+                {{'TEAM.TITLE.CHANGE_DETAIL' | translate}}
+            </h4>
+            <table class="table table-bordered table-striped table-hover datatable">
+                <thead>
+                <tr>
+                    <th class="text-center align-middle">
+                        {{'TEAM.TITLE.CHANGE_CONTENT' | translate}}
+                    </th>
+                    <th class="text-center align-middle">
+                        {{'TEAM.TITLE.OLD_VALUE' | translate}}
+                    </th>
+                    <th class="text-center align-middle">
+                        {{'TEAM.TITLE.NEW_VALUE' | translate}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody *ngIf="selectedHistory && selectedHistory.details">
+                <tr *ngIf="!selectedHistory || !selectedHistory.details || selectedHistory?.details.length == 0">
+                    <td align="center" colspan="3">
+                        {{'TEAM.TITLE.NO_DATA' | translate}}
+                    </td>
+                </tr>
+                <tr *ngFor="let detail of selectedHistory.details; let i = index">
+                    <td>{{detail.column_name}}</td>
+                    <td>{{detail.old_value || 'N/A'}}</td>
+                    <td>{{detail.new_value}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary hightlight-focus" (click)="onClose()">
+        {{'TEAM.BUTTON.CLOSE' | translate}}
+    </button>
+</div>

@@ -1,0 +1,23 @@
+<ng-template #template>
+    <div [ngClass]="dataDisp.styleClass">
+        <div class="modal-header box-header" [ngClass]="'header-' + dataDisp.styleClass">
+            <h5 class="modal-title font-weight-bold pull-left">{{dataDisp.title| translate}}</h5>
+            <div class="close pull-right" aria-label="Close" (click)="decline()">
+                <span class="icon-close" aria-hidden="true">&times;</span>
+            </div>
+        </div>
+        <div class="box-body px-3">
+<!--            <div class="icon-left">-->
+<!--                <img src="./assets/common-box/{{dataDisp.icon}}" height="72" width="72"/>-->
+<!--            </div>-->
+            <div *ngIf="!dataDisp.messageParams" [innerHTML]="dataDisp.message | translate " class="py-3"></div>
+            <div *ngIf="dataDisp.messageParams" [innerHTML]="dataDisp.message  | translate: dataDisp.messageParams " class="py-3">{{dataDisp.message | translate:dataDisp.messageParams }}</div>
+        </div>
+        <div class="modal-footer box-footer">
+            <button type="button" class="outline btn btn-{{dataDisp.styleClass}}-cancel"
+                    (click)="decline()">{{dataDisp.btnClosed | translate }}</button>
+            <button *ngIf="dataDisp.btnConfirm" type="button" class="btn btn-{{dataDisp.styleClass}}-continue"
+                    (click)="confirm($event)">{{dataDisp.btnConfirm | translate }}</button>
+        </div>
+    </div>
+</ng-template>

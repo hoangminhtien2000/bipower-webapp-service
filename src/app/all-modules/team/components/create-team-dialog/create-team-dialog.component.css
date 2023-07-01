@@ -1,0 +1,54 @@
+.btn {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.btn-outline-primary {
+    border: 1px solid #dbc700;
+    color: black;
+    background: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+    background: #dbc700;
+    color: white;
+}
+
+/*.modal-header {*/
+/*    padding: .5rem;*/
+/*    background-color: #d4ce8f;*/
+/*}*/
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+label {
+    font-weight: bold;
+}
+
+.close {
+}
+
+
+.require-label:after {
+    content: ' *';
+    color: red;
+}
+
+
+.header-bg {
+    background-color: #FAF5E1;
+    height: 60px;
+}
+
+.content-header {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    padding: 19px 0px 14px 0px;
+}

@@ -1,0 +1,61 @@
+<div class="content container-fluid">
+    <!--    Page Header-->
+    <app-breadcrumb-presence></app-breadcrumb-presence>
+    <!--    Page Header-->
+    <div>
+        <nav *ngIf="canSeeTabsManager()">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link {{active == 'tabEmployee' ? 'show active' : ''}} text-title-tabs"
+                        id="nav-home-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home"
+                        (click)="clickTab('tabEmployee')"
+                        [attr.aria-selected]="active == 'tabEmployee'"> 
+                        {{ "timeManager.manage_label.personal" | translate }}
+                </button>
+                <button class="nav-link text-title-tabs {{active == 'tabManager' ? 'show active' : ''}}"
+                        id="nav-profile-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-profile"
+                        type="button" role="tab" aria-controls="nav-profile"
+                        (click)="clickTab('tabManager')"
+                        [attr.aria-selected]="active == 'tabManager'">
+                        {{ "timeManager.manage_label.manage" | translate }}
+                </button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade {{active == 'tabEmployee' ? 'show active' : ''}}" id="nav-home" role="tabpanel"
+                 aria-labelledby="nav-home-tab">
+                <app-presence-management-employee></app-presence-management-employee>
+            </div>
+            <div class="tab-pane fade {{active == 'tabManager' ? 'show active' : ''}}" id="nav-profile" role="tabpanel"
+                 aria-labelledby="nav-profile-tab">
+                <app-total-employee-presence></app-total-employee-presence>
+                <!--    <app-check-in-check-out (checkInCheckOutRealTime)="catchTimeCheckInCheckOut($event)"></app-check-in-check-out>-->
+
+                <!-- START BTN -->
+                <div class="content container-fluid bg-white">
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-sm-12 col-md-3" >
+                            <a class="btn btn-success w-100" tabindex="0" (click)="showModalListOnsiteRemote()"
+                            > {{"timeManager.totalEmployee.follow_register_onsite_remote" | translate}}</a>
+                        </div>
+                        <div class="col-sm-12 col-md-4" *ngIf="canShowListCheckinCheckoutModal()">
+                            <a class="btn btn-success w-100" tabindex="0" (click)="showListCheckinCheckoutModal()"
+                            >{{"timeManager.list_checkin_checkout.Follow_and_adjust_check-in_check-out_time"|translate}}</a>
+                        </div>
+                        <div class="col-sm-12 col-md-2" *ngIf="canShowHistory()">
+                            <a class="btn btn-success w-100" tabindex="0" (click)="goToHistory()">{{ "timeManager.totalEmployee.history" | translate }}</a>
+                        </div>
+                        <div class="col-sm-12 col-md-2" *ngIf="canSeeSummaryPage()">
+                            <a class="btn btn-success w-100" tabindex="0" (click)="goToSummaryPage()"
+                            >{{ "timeManager.totalEmployee.summary_table" | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END BTN -->
+                <app-working-information [checkInOutData]="messageData"></app-working-information>
+            </div>
+        </div>
+    </div>
+</div>

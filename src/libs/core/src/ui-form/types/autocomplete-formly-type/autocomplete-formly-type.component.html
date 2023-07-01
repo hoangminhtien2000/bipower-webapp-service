@@ -1,0 +1,15 @@
+<div remove-wrapper>
+  <label class="form-control-label control-label">{{to.label | translate}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+  <ng-select [items]="field.templateOptions.options"
+    bindLabel="label"
+    bindValue="{{!field.templateOptions.ouputSelectedAsObject ?'value':''}}" [(ngModel)]="selectedId"
+    placeholder="{{field.templateOptions.placeholder | translate}}" [typeahead]="search$" [formControl]="formControl"
+    [formlyAttributes]="field" notFoundText="{{ 'common.notfoundtext'| translate}}" #myautocomplete
+    (focus)="onFocus($event)" (blur)="onBlur($event)">
+    <ng-template ng-option-tmp let-item="item">
+      <span class="ng-option-label" title="{{item.label}}">
+        {{item.label}}
+      </span>
+    </ng-template>
+  </ng-select>
+</div>

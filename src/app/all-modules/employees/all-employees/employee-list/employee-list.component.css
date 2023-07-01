@@ -1,0 +1,49 @@
+.content {
+	padding: 30px;
+}
+.width-auto{
+	width: auto;
+}
+.dataTables_info{
+	padding-top: 0.85rem;
+}
+.text-error{
+	color: #dc3545;
+	font-size: 16px;
+}
+.error-fullname{
+	margin-top: -10px;
+}
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error{
+	font-size: 14px;
+}
+
+.employee-status-aprroved{
+    color: #85AA75!important;
+}
+.employee-status-pending{
+    color: #DFB002!important;
+}
+.font-weight-normal{
+	font-weight: 400;
+}
+.employee-text-left{
+	text-align: left;
+}
+.text-left{
+	text-align: left;
+}
+.pointer{
+	cursor: pointer;
+}
+
+
+table.dataTable thead > tr > th.sorting_asc:before, 
+table.dataTable thead > tr > th.sorting_desc:after, 
+table.dataTable thead > tr > td.sorting_asc:before, 
+table.dataTable thead > tr > td.sorting_desc:after {
+	font-size: 25px;
+}

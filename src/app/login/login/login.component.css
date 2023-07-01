@@ -1,0 +1,45 @@
+.img-locate {
+    width: 30px;
+    float: right;
+}
+
+.account-title {
+    font-weight: bold;
+    font-family: 'Segoe UI';
+}
+
+a:link {
+    text-decoration: underline;
+}
+
+a:focus {
+    border: 1px solid purple;
+}
+
+.choose-language {
+    float:right;
+    margin-top: -12%;
+}
+
+
+.dropdown-item {
+    padding: 1rem 1rem !important;
+}
+
+.menu-item {
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #EFC427;
+}
+
+
+.menu-item:focus {
+    background-color: #EFC427;
+}
+
+.menu-item:hover {
+    background-color: #EFC427;
+}

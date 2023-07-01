@@ -1,0 +1,236 @@
+.modal-header{
+    background: #FAF5E1;
+}
+
+.modal-title{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #252929;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#btn_cancel_his {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 160px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #EFC427;
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#btn_save_his {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px;
+    gap: 10px;
+    width: 160px;
+    height: 44px;
+    background: #EFC427;
+    border-radius: 4px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.head-text{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #252929;
+    padding: 5px;
+}
+
+.cus-margin{
+    margin-left: 20px;
+}
+
+.item{
+    float: left;
+    padding: 10px;
+    border: none;
+    justify-content: space-between;
+}
+.form-group.contact-date{
+
+}
+
+.modal-footer.btn-div{
+    clear: both;
+}
+
+.form-control.notes{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 100px;
+    background: #FFFFFF;
+    border: 1px solid #D0D2D3;
+    border-radius: 4px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+
+
+.title-body{
+    color: #0ba408;
+}
+
+.title-header{
+    margin: 20px 20px 0 20px;
+}
+
+.body{
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.red-container{
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 3px;
+    margin: 1px 0 0 5%;
+}
+
+.grey-container{
+    width: 15px;
+    height: 15px;
+    background-color: #cdcdcd;
+    border-radius: 3px;
+    margin: 1px 0 0 2%;
+}
+
+th{
+    white-space: normal !important;
+    min-width: 4rem;
+    text-align: center !important;
+}
+
+:host {
+    .modal-header {
+        position: relative;
+        padding-top: 18px;
+
+        .btn-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            cursor: default;
+        }
+
+        .close-custom {
+            justify-content: flex-end;
+            cursor: pointer;
+
+            & :hover {
+                background: none !important;
+            }
+        }
+
+        .sidebar-act-icon {
+            display: flex;
+            color: #707070;
+
+            .sidebar-close {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+
+            .sidebar-expand {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                margin-right: 1em;
+            }
+        }
+    }
+
+    .modal-body {
+        padding-top: 18px;
+        padding-right: 25px;
+        .task-list {
+            table {
+                tbody {
+                    height: 245px;
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+
+    .modal-footer {
+        padding-right: 25px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #fff;
+        width: 100%;
+        border-top: 1px solid #dee2e6 !important;
+
+        .btn {
+            margin-left: 10px;
+        }
+    }
+}
+
+::ng-deep {
+    #serial-detail-prod {
+        text-align: right;
+
+        .item-wrapper:first-child {
+            text-align: left;
+        }
+
+        .item-wrapper {
+            .content {
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+        }
+    }
+
+    .bold-text {
+        font-weight: 700;
+    }
+    .limited-item-table {
+        height: 61vh;
+        //border-right: 1px solid #E8E8E8;
+    }
+
+    .limited-item-table th {
+        position: sticky;
+        top: -1px;
+    }
+
+}
+
+.modal-body {
+    min-height: 400px;
+}
+

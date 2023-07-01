@@ -1,0 +1,31 @@
+<label class="form-control-label control-label">{{'candidate.model.file_cv' | translate}} <span *ngIf="requiredFileCV" class="required-mark">*</span> </label>
+  <div class="row border">
+  <div class="col-5">
+    <div *ngFor="let fileInfo of fileCVs; let i = index" class="row">
+      <div class="col-1-img cursor-pointer">
+        <img src="/assets/img/icon/icon-delete.png" (click)="onRemoveFile(i)" title="{{'candidate.title.delete' | translate}}" />
+      </div>
+      <div class="col-11">
+        <a *ngIf="fileInfo.fileId > 0" (click)="onDownloadFile(i)" class="cursor-pointer text-blue">{{fileInfo.fileName}}</a>
+        <a *ngIf="!fileInfo.fileId || fileInfo.fileId == 0" class="text-black">{{fileInfo.fileName}}</a>
+      </div>
+    </div>
+
+    <div *ngIf="!isExistFile()" >
+      <input [(ngModel)]="serialByFile" readonly aria-label="Search"
+             class="form-control mr-sm-2"
+             id="inputFile"
+             placeholder="{{'candidate.model.file_cv_placeholder' | translate}}" type="text" (click)="fileInput.click()"/>
+    </div>
+  </div>
+  <div class="col-6">
+    <div appDragDrop (onFileDropped)="dragDropFile($event)" class="uploadfilecontainer" >
+      <p class="text-center text-file">{{'candidate.model.file_cv_drop' | translate}}</p>
+    </div>
+  </div>
+  <div class="col-1">
+    <div class="col-1-img cursor-pointer"><img src="/assets/img/icon/icon-upload.png" (click)="fileInput.click()" width="30px" /></div>
+  </div>
+
+  <input #fileInput (change)="onFileUpload($event)" style="display: none;" type="file" multiple>
+</div>

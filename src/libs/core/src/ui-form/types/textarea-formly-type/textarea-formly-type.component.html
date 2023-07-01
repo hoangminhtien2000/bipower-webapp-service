@@ -1,0 +1,7 @@
+<div remove-wrapper>
+  <label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+  <textarea [cols]="to.cols" [rows]="to.rows" class="form-control" [formControl]="formControl"
+    [formlyAttributes]="field" [readonly]="to.readonly" [tabindex]="to.tabindex || 0" placeholder="{{to.placeholder | translate}}"
+    class="form-control"  (focus)="onFocus($event)" (blur)="onBlur($event)" [maxLength]="to.maxLength || 100">
+</textarea>
+</div>

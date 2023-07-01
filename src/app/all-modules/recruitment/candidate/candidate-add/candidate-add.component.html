@@ -1,0 +1,89 @@
+<!-- Page Content -->
+<div class="content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'candidate.title.add' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/layout/recruitment/candidate">{{'candidate.title.management' | translate}}</a></li>
+                    <li class="breadcrumb-item active">{{'candidate.title.add' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="box-u">
+        <div class="row">
+            <form [formGroup]="candidateStatusForm">
+                <formly-form [model]="statusModel" [fields]="canidateStatusFields" [form]="candidateStatusForm"></formly-form>
+            </form>
+        </div>
+        <div class="row">
+                <p class="row-title">{{'candidate.box.candidate_info' | translate}}</p>
+            <form [formGroup]="candidateInfoForm">
+                <formly-form [model]="candidateInfoModel" [fields]="candidateInfoFields" [form]="candidateInfoForm"></formly-form>
+            </form>
+        </div>
+
+        <div *ngFor="let contact of canidateContactForms; let i = index">
+            <form [formGroup]="canidateContactForms[i]">
+                <formly-form [model]="canidateContactModels[i]" [fields]="canidateContactFields[i]" [form]="canidateContactForms[i]"></formly-form>
+            </form>
+        </div>
+        <div class="row" *ngIf="checkExistAddContactChannel()">
+            <div class="col-3">
+                <a class="cursor-pointer text-blue" (click)="onAddCandidateContact()">+ {{'candidate.title.contact_add' | translate}}</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <app-candidate-file [fileCVs]="fileCVs" [requiredFileCV]="requiredFileCV" (onChangeFile)="onChangeFile($event)"></app-candidate-file>
+        </div>
+    </div>
+    <div class="mt-4 box-u">
+        <div class="row">
+            <p class="row-title">{{'candidate.box.work_experience' | translate}}</p>
+            <form [formGroup]="candidateWorkingExperienceForm">
+                <formly-form [model]="workingExperienceModel" [fields]="candidateWorkingExperienceFields" [form]="candidateWorkingExperienceForm"></formly-form>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4 box-u">
+        <div class="row">
+            <p class="row-title">{{'candidate.box.educational_information' | translate}}</p>
+            <form [formGroup]="educationalInformationForm">
+                <formly-form [model]="educationalInformationModel" [fields]="educationalInformationFields" [form]="educationalInformationForm"></formly-form>
+            </form>
+        </div>
+    </div>
+    <div class="mt-4 box-u">
+        <div class="row">
+            <p class="row-title">{{'candidate.box.school_historys' | translate}}</p>
+            <div *ngFor="let history of trainingHistoryForms; let i = index">
+                <form [formGroup]="trainingHistoryForms[i]">
+                    <formly-form [model]="trainingHistoryModels[i]" [fields]="trainingHistoryFields[i]" [form]="trainingHistoryForms[i]"></formly-form>
+                </form>
+            </div>
+        </div>
+        <div class="row" *ngIf="checkExistAddTrainingHistory()">
+            <div class="col-3">
+                <a class="cursor-pointer text-blue" (click)="onAddTrainingHistory()">+ {{'candidate.title.schools_add' | translate}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 mb-4 row filter-row align-right button-right">
+        <ng-container>
+            <div>
+                <button class="btn btnCancel btn-primary submit-btn" (click)="comeBackCandidateList()">
+                    {{'candidate.btn.come_back' | translate}}
+                </button>
+                <button class="btn btnSave btn-primary submit-btn" (click)="addCandidate()">
+                    {{'candidate.btn.save' | translate}}
+                </button>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<app-common-dialog #confirmDialog (confirmAction)="acceptComeback()"></app-common-dialog>

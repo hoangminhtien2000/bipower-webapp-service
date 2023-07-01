@@ -1,0 +1,347 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center" style="padding-bottom: 13px">
+            <h5 class="card-title my-0">{{'candidate.interview.interview_info' | translate}}</h5>
+            <button class="btn btn-warning"
+                    *ngIf="canAddInterviewSchedule"
+                    [disabled]="!candidateViewAddNewScheduleInterview || proposals?.length > 0"
+                    (click)="openAddNewInterviewSchedule()">{{'candidate.interview.more_interview_schedule' | translate}}
+            </button>
+        </div>
+        <div *ngIf="!interviewSchedules || interviewSchedules.length === 0" class="flex justify-center items-center">
+            <p class="text-center">{{'candidate.interview.no_data_yet' | translate}}</p>
+        </div>
+        <div class="body-border p-13" *ngFor="let interviewSchedule of interviewSchedules; let i = index">
+            <div class="row">
+                <div class="col-11">
+                    <label class="h3"><i>{{interviewSchedule?.title}}</i></label>
+                </div>
+                <div class="col-1">
+<!--                    {{!candidateViewAddNewScheduleInterview}}-->
+                    <button class="btn float-end"
+                            [disabled]="interviewSchedules[i]?.isJoined == false || !(canEditSchedule || isInchargeHr) ||
+                            interviewSchedule.interviewResults?.length > 0 || i != interviewSchedules.length - 1"
+                            (click)="openUpdateInterviewSchedule(interviewSchedule)">
+                        <img src="assets/img/icon/icon-edit.png" height="20"
+                             [title]="'candidate.box.contact_history_update' | translate"/>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-5">
+                    <b><i>{{'candidate.interview.interview_time' | translate}}:</i></b>
+                    {{getDisplayInterviewTime(interviewSchedule?.interviewFromTime, interviewSchedule?.interviewToTime)}}
+                </div>
+
+                <div class="col-4">
+                    <b><i>{{'candidate.interview.interview_location' | translate}}: </i></b>
+                    <i>{{getInterviewPlace(interviewSchedule?.placeId)}}</i>
+                </div>
+                <div class="col-3 text-end">
+                    <b><i>{{'candidate.interview.interview_form' | translate}}: </i></b>
+                    <i>{{interviewTypeMap[interviewSchedule.interviewTypeId]?.name}}</i>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-5">
+                    <b><i>{{'candidate.interview.HR_participated_in_interview' | translate}}: </i></b>
+                    <i>{{interviewSchedule?.hrInfo?.user_code}} - {{interviewSchedule?.hrInfo?.full_name}}</i>
+                </div>
+
+                <div class="col-7">
+                    <b><i>{{'candidate.interview.expert_reviewers' | translate}}: </i></b>
+                    <i *ngFor="let interview of interviewSchedule?.interviewerInfo; let i = index">
+                        <div> - {{interview?.employeeCode}} - {{interview?.fullName}}</div>
+                    </i>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <b><i>{{'candidate.interview.interview_link' | translate}}: </i></b>
+                    <i>{{interviewSchedule?.interviewLink}}</i>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <b><i>{{'candidate.interview.description_info' | translate}}: </i></b>
+                    <i>{{interviewSchedule?.description}}</i>
+                </div>
+            </div>
+
+            <div class="mt-5" style="border-top: 1px dashed lightgrey">
+
+                <div class="mt-5">
+                    <label>{{'candidate.interview.pre_interview_assessment' | translate}} </label>
+                    <form [formGroup]="preInterviewAssessmentForms[i]">
+                        <formly-form [model]="preInterviewAssessmentModels[i]"
+                                     [fields]="preInterviewAssessmentFieldEs[i]"
+                                     [form]="preInterviewAssessmentForms[i]"></formly-form>
+                    </form>
+                </div>
+                <div class="clearfix" *ngIf="interviewSchedules.length == (i+1)">
+                    <button *ngIf="canAddInterviewSchedule" [disabled]="!this.checkCanSaveInterviewSchedule(i)"
+                            class="btn btnSave btn-primary float-end mb-3"
+                            (click)="saveInterviewSchedule(i)">{{'candidate.btn.save' | translate}}
+                    </button>
+                </div>
+                <div class="mt-3" *ngIf="canInterviewEvaluation && interviewSchedule.isJoined == true">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <label class="row-title">{{'recruitment.interview.profestional_evaluation' | translate}}</label>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div *ngIf="!hasInterviewResultInterviewer[i] && !isInterviewer || interviewSchedule.isJoined == false"
+                                 class="flex justify-center items-center">
+                                <p class="text-center">{{'candidate.interview.no_data_yet' | translate}}</p>
+                            </div>
+                            <table class="table custom-table"
+                                   *ngIf="isInterviewer && interviewSchedule.isJoined != false || hasInterviewResultInterviewer[i]">
+                                <thead>
+                                <tr>
+                                    <th class="w-50">{{'candidate.interview.evaluation_criteria' | translate}}</th>
+                                    <th class="w-50">{{'candidate.interview.result_of_evaluation' | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <b>1. {{'recruitment.interview.profestional_evaluation' | translate}}</b>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr *ngFor="let contact of profestionalEvaluationFormEs[i]; let j = index"
+                                    class="td-border">
+                                    <td class="align-top">
+                                        <div class="bullet-point p-2"
+                                             [innerHTML]=profestionalEvaluationModelEs[i][j].criteriaName></div>
+                                    </td>
+                                    <td class="align-top">
+                                        <textarea type="text" #filter pInputText [style]="{width: '100%'}" maxlength="5000"
+                                               class="input-border"
+                                               placeholder="{{'candidate.interview.import_content' | translate}}"
+                                               [formControl]="profestionalEvaluationFormEs[i][j]"
+                                                  [disabled]="profestionalEvaluationModelEs[i][j].disable"></textarea>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="isInterviewer">
+                                    <td>
+                                        <a class="cursor-pointer text-blue"
+                                           (click)="openAddNewProfestionalEvaluation(i)"
+                                        >+ {{'candidate.interview.more_criteria' | translate}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3"
+                                 *ngIf="isInterviewer && interviewSchedule.isJoined != false || hasInterviewResultInterviewer[i]">
+                                <label>{{'candidate.interview.result_of_evaluation' | translate}}</label>
+                                <form>
+                                    <formly-form [model]="interviewResultModelEs[i]"
+                                                 [fields]="interviewResultFieldEs[i]"
+                                                 [form]="interviewResultFormEs[i]"></formly-form>
+                                </form>
+                            </div>
+                            <div class="clearfix" *ngIf="interviewSchedules.length == (i+1)">
+                                <button *ngIf="isInterviewer" class="btn btnSave btn-primary float-end mb-3"
+                                        (click)="saveInterviewEvaluationInterview(i)">{{'candidate.btn.save' | translate}}
+                                </button>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+
+                <div class="mt-3" *ngIf="canInterviewEvaluationHR && interviewSchedule.isJoined">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <label class="row-title">{{'candidate.interview.review_by_hr' | translate}} </label>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div *ngIf="!hasInterviewResultHr[i] && !isHrJoinInterview">
+                                <p class="text-center">{{'candidate.interview.no_data_yet' | translate}}</p>
+                            </div>
+                            <div *ngIf="hasInterviewResultHr[i] || isHrJoinInterview">
+                                <table class="table custom-table" *ngIf="hasInterviewResultHr || isHrJoinInterview">
+                                    <thead>
+                                    <tr>
+                                        <th class="w-50">{{'candidate.interview.evaluation_criteria' | translate}}</th>
+                                        <th class="w-50">{{'candidate.interview.result_of_evaluation' | translate}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>1. {{'recruitment.interview.cultural_suitability' | translate}}</b>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr *ngFor="let contact of culturalSuitabilityEvaluationModelEs[i]; let j = index"
+                                        class="td-border">
+                                        <td class="align-top">
+                                            <div class="bullet-point p-2"
+                                                 [innerText]="culturalSuitabilityEvaluationModelEs[i][j].criteriaName"></div>
+                                        </td>
+                                        <td>
+                                            <textarea type="text" #filter pInputText [style]="{width: '100%'}"
+                                                   class="input-border" [disabled]="true" placeholder="{{'candidate.interview.import_content' | translate}}"
+                                                      [formControl]="culturalSuitabilityEvaluationFormEs[i][j]"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a class="cursor-pointer text-blue"
+                                               (click)="openAddNewCulturalSuitabilityEvaluation(i)"
+                                            >+ {{'candidate.interview.more_criteria' | translate}}</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>2. {{'recruitment.interview.income' | translate }}</b>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr *ngFor="let contact of incomeEvaluationModelEs[i]; let j = index"
+                                        class="td-border">
+                                        <td class="align-top">
+                                            <p class="bullet-point">{{incomeEvaluationModelEs[i][j].criteriaName}}</p>
+                                        </td>
+                                        <td>
+                                            <input class="input-border" type="number" #filter pInputText
+                                                   [style]="{width: '100%'}"
+                                                   placeholder="{{'candidate.interview.import_content' | translate}}"
+                                                   (keypress)="numberOnly($event)"
+                                                   class="input-border" id="numberField"
+                                                   [formControl]="incomeEvaluationFormEs[i][j]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>3. {{'recruitment.interview.common_infomation' | translate }}</b>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr *ngFor="let contact of commonInfomationEvaluationModelEs[i]; let j = index"
+                                        class="td-border">
+                                        <td class="align-top">
+                                            <p class="bullet-point p-2">{{commonInfomationEvaluationModelEs[i][j].criteriaName}}</p>
+                                        </td>
+                                        <td>
+                                            <textarea type="text" #filter pInputText [style]="{width: '100%'}"
+                                                   class="input-border" placeholder="{{'candidate.interview.import_content' | translate}}"
+                                                      [formControl]="commonInfomationEvaluationFormEs[i][j]"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a class="cursor-pointer text-blue"
+                                               (click)="openAddNewCommonInfomationEvaluation(i)"
+                                            >+ {{'candidate.interview.more_criteria' | translate}}</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>3. {{'candidate.interview.other' | translate}}</b>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr *ngFor="let contact of otherEvaluationModelEs[i]; let j = index"
+                                        class="td-border">
+                                        <td class="align-top">
+                                            <p class="bullet-point p-2">{{otherEvaluationModelEs[i][j].criteriaName}}</p>
+                                        </td>
+                                        <td>
+                                            <textarea type="text" #filter pInputText [style]="{width: '100%'}"
+                                                   class="input-border" placeholder="{{'candidate.interview.import_content' | translate}}"
+                                                      [formControl]="otherEvaluationFormEs[i][j]"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a class="cursor-pointer text-blue" (click)="openAddNewOtherEvaluation(i)"
+                                            >+ {{'candidate.interview.more_criteria' | translate}}</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="mt-3" *ngIf="hasInterviewResultHr[i] || isHrJoinInterview">
+                                    <label class="row-title">{{'candidate.interview.interview_conclusion' | translate}} </label>
+                                    <form [formGroup]="interviewResultHRFormEs[i]">
+                                        <formly-form [model]="interviewResultHRModelEs[i]"
+                                                     [fields]="interviewResultHRFieldEs[i]"
+                                                     [form]="interviewResultHRFormEs[i]"></formly-form>
+                                    </form>
+                                </div>
+                                <div class="clearfix" *ngIf="interviewSchedules.length == (i+1)">
+                                    <button *ngIf="isHrJoinInterview" class="btn btnSave btn-primary float-end mb-3"
+                                            (click)="saveInterviewEvaluationHR(i)">{{'candidate.btn.save' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="clearfix">
+            <div class="d-flex justify-content-between align-items-center ">
+                <h2 class="card-title my-0">{{'candidate.interview.recruitment_proposal' | translate}}</h2>
+                <button *ngIf="canAddRecruitmentProposal" class="btn btnSave btn-primary float-end mb-3"
+                        [disabled]="!isPassInterview || lastProposalApproved()" style="margin-right: unset"
+                        (click)="addRecruitmentProposal()">{{'candidate.interview.make_recruitment_roposal' | translate}}
+                </button>
+            </div>
+        </div>
+        <div *ngIf="!proposals || proposals.length === 0" class="flex justify-center items-center">
+            <p class="text-center">{{'candidate.interview.no_data_yet' | translate}}</p>
+        </div>
+        <div *ngFor="let proposal of proposals; let i = index;">
+            <div class="row">
+                <div class="col-9">
+                    <label class="h3">{{'candidate.interview.time' | translate}} {{i + 1}}</label>
+                </div>
+                <div *ngIf="proposal && proposal.status" class="col-3 required-mark">
+                    <b><i>{{'candidate.model.status' | translate}}: </i></b>
+                    <i>{{proposal?.status?.name}}</i>
+                </div>
+            </div>
+            <form [formGroup]="recruitmentProposalFormEs[i]">
+                <formly-form [model]="recruitmentProposalModelEs[i]" [fields]="recruitmentProposalFieldEs[i]"
+                             [form]="recruitmentProposalFormEs[i]"></formly-form>
+            </form>
+
+            <div class="mt-3" *ngIf="proposals.length == (i+1)">
+                <div class="float-end">
+                    <button *ngIf="canApproveRecruitmentProposal && checkStatusRecruitmentProposalApprove(proposal)"
+                            class="btn btnSave btn-primary  mb-3"
+                            (click)="rejectRecruitmentProposal(i)">{{'candidate.interview.refuse' | translate}}
+                    </button>
+                    <button *ngIf="canApproveRecruitmentProposal && checkStatusRecruitmentProposalApprove(proposal)"
+                            class="btn btnSave btn-primary mb-3"
+                            (click)="approveRecruitmentProposal(i)">{{'candidate.interview.approve' | translate}}
+                    </button>
+                    <button *ngIf="canMakeRecruitmentProposal && checkStatusRecruitmentProposalEdit(proposal)"
+                            class="btn btnSave btn-primary mb-3"
+                            (click)="makeRecruitmentProposal(i)">{{'candidate.btn.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-common-dialog #confirmDialog (confirmAction)="acceptComeback()"></app-common-dialog>

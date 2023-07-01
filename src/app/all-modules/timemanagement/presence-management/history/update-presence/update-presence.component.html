@@ -1,0 +1,88 @@
+<div class="popUpTable">
+    <!--    Header-->
+    <div class="modal-header header-bg">
+        <div class="header-content content-header">
+            {{ "timeManager.summary.register_change" | translate }} 
+        </div>
+        <span (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </span>
+    </div>
+    <!--    Body-->
+    <div class="modal-body form-scroll" [formGroup]="updatePresenceForm" novalidate>
+        <div class="form-group">
+            <label><i>{{ "timeManager.list_checkin_checkout.day" | translate }}: {{renderStartDay()}}</i></label>
+        </div>
+        <div class="form-group">
+            <label>{{ "timeManager.modal_list.time_checkin" | translate}}<span
+                    class="text-danger">*</span></label>
+            <input type="time" formControlName="checkinTime" class="form-control" value="{{checkinTime}}" [(ngModel)]="checkinTime">
+            <div *ngIf="updatePresenceForm.controls['checkinTime'].invalid &&
+             (updatePresenceForm.controls['checkinTime'].dirty || updatePresenceForm.controls['checkinTime'].touched)"
+                 class="text-danger">
+                <small *ngIf="updatePresenceForm.controls['checkinTime'].errors.required">
+                    {{"timeManager.list_checkin_checkout.time_checkint_not_null" | translate}}
+                </small>
+            </div>
+            <div *ngIf="checkinTimeBiggerThanCheckoutTime()"
+                 class="text-danger">
+                <small>
+                    {{"timeManager.list_checkin_checkout.time_checkint_smaller_checkout_time" | translate}}
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ "timeManager.modal_list.time_checkout" | translate}}<span
+                    class="text-danger">*</span></label>
+            <input type="time" formControlName="checkoutTime" class="form-control" value="{{checkoutTime}}" [(ngModel)]="checkoutTime">
+            <div *ngIf="updatePresenceForm.controls['checkoutTime'].invalid &&
+             (updatePresenceForm.controls['checkoutTime'].dirty || updatePresenceForm.controls['checkoutTime'].touched)"
+                 class="text-danger">
+                <small *ngIf="updatePresenceForm.controls['checkoutTime'].errors.required">
+                    {{ "timeManager.modal_list.time_checkout_not_null" | translate }}
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ "timeManager.list_checkin_checkout.adjustment_reason" | translate}}<span
+                    class="text-danger">*</span></label>
+                    <textarea type="time" formControlName="reason" [placeholder]="'timeManager.list_checkin_checkout.place_holder_adjustment_reason' | translate "class="form-control"(blur)="blurReason()" [(ngModel)]="reason"></textarea>
+            <div *ngIf="updatePresenceForm.controls['reason'].invalid &&
+             (updatePresenceForm.controls['reason'].dirty || updatePresenceForm.controls['reason'].touched)"
+                 class="text-danger">
+                <small *ngIf="updatePresenceForm.controls['reason'].errors.required">
+                    {{ "timeManager.list_checkin_checkout.reason_not_null" | translate }}
+                </small>
+            </div>
+            <div *ngIf="updatePresenceForm.controls['reason'].invalid &&
+             (updatePresenceForm.controls['reason'].dirty || updatePresenceForm.controls['reason'].touched)"
+                 class="text-danger">
+                <small *ngIf="updatePresenceForm.controls['reason'].hasError('maxlength')">
+                    {{ "timeManager.list_checkin_checkout.reason_not_over_500_characters" | translate }}
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="text-warning"><i class="fa fa-warning"></i>
+                {{"workingOnleave.validate.numberOfUpdatePresence" | translate}}</label>
+        </div>
+    </div>
+    <!--    Footer-->
+    <div class="footer">
+        <div class="row justify-content-end w-100 p-2">
+            <div class="col-4 p-2" tabindex="0">
+                <button class="btn btnCancel w-100" type="button" (click)="savePresence()">
+                    {{"timeManager.list_checkin_checkout.save_button" | translate }}
+                </button>
+            </div>
+            <div class="col-4 p-2" tabindex="0" *ngIf="canSendApprovalPresence()">
+                <button class="btn btnSave w-100" type="button" (click)="sendApprovalPresence()">
+                    {{ "timeManager.list_checkin_checkout.save_and_send_for_approve" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

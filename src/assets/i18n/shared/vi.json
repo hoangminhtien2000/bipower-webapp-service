@@ -1,0 +1,35 @@
+{
+  "shared": {
+    "common-dialog": {
+      "error": {
+        "btn-closed": "Đóng",
+        "btn-confirm": "Thử lại",
+        "title": "Thông báo lỗi"
+      },
+      "info": {
+        "btn-closed": "Đóng",
+        "btn-confirm": "",
+        "title": "Thông tin"
+      },
+      "success": {
+        "btn-closed": "Đóng",
+        "title": "Thành công"
+      },
+      "warning": {
+        "btn-active": "Kích hoạt",
+        "btn-closed": "Hủy bỏ",
+        "btn-confirm": "Tiếp tục",
+        "title": "Cảnh báo"
+      }
+    },
+    "dashboard": "Trang chủ",
+    "pageNotFound": "Không tồn tại trang này. Quay về",
+    "permissionDenied": "Không có quyền truy cập",
+    "validation": {
+      "notGreaterThan": "không được lớn hơn",
+      "notGreaterThanPresent": "không được lớn hơn ngày hiện tại",
+      "notLessThan": "không được bé hơn",
+      "notGreterThan30Day": "Khoảng thời gian không được lớn hơn 30 ngày"
+    }
+  }
+}

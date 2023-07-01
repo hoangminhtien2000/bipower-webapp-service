@@ -1,0 +1,72 @@
+:host ::ng-deep .ui-multiselected-item-token {
+    background: #efc427;
+    color: black;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin: 0 0.286em 0 0;
+    display: inline-block;
+    border-radius: 3px;
+    vertical-align: super;
+    height: 1.857em;
+    float: left;
+}
+:host ::ng-deep .ui-multiselect-trigger-icon {
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 15px;
+    color: #838383;
+}
+:host ::ng-deep .ui-multiselect {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 32px;
+    padding: 0;
+    border: 1px solid #ced4da;
+    margin-bottom: -5px;
+}
+:host ::ng-deep .ui-multiselect .ui-multiselect-label-container {
+    margin-bottom: -10px !important;
+    height: 32px;
+}
+:host ::ng-deep .ui-multiselect .ui-multiselect-label {
+    padding: 4px;
+}
+:host ::ng-deep .ui-chkbox .ui-chkbox-box {
+    line-height: 0.125em;
+}
+.ui-multiselect-label {
+    background: #fff;
+}
+:host ::ng-deep .p-multiselect-label {
+    display: flex;
+}
+.btn-icon {
+    margin-left: 10px;
+}
+.ui-corner-all {
+    font-size: 12px;
+}
+.ui-multiselect-label>div {
+    display: inline-block;
+}
+:host ::ng-deep .ng-invalid.ng-touched>.ui-multiselect {
+    border-color: #dc3545;
+}
+:host ::ng-deep .ui-multiselect:not(.ui-state-disabled):hover {
+    border-color: #ced4da;
+}
+:host ::ng-deep .ui-multiselect:not(.ui-state-disabled):focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    color: #000000;
+}
+.customPlaceholder {
+    color: black;
+    padding-left: 5px;
+    width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

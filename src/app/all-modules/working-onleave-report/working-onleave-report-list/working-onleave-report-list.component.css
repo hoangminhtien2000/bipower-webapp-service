@@ -1,0 +1,70 @@
+.content {
+	padding: 30px;
+}
+.width-auto{
+	width: auto;
+}
+.dataTables_info{
+	padding-top: 0.85rem;
+}
+.text-error{
+	color: #dc3545;
+	font-size: 16px;
+}
+.error-fullname{
+	margin-top: -10px;
+}
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error{
+	font-size: 14px;
+}
+.white-space-wrap{
+	white-space: pre-wrap;
+}
+.scroll-body-dialog{
+	height: 60vh;
+	overflow-y: scroll;
+}
+
+.contract-status-aprroved {
+	color: #FF9153 !important;
+}
+
+.contract-status-unaprroved {
+	color: #DF5245 !important;
+}
+
+.contract-status-effect {
+	color: #85AA75 !important;
+}
+
+.contract-status-expired {
+	color: #DFB002 !important;
+}
+
+.contract-status-pending {
+	color: #1B8FC3 !important;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.text-left{
+	text-align: left;
+}
+
+
+.bg-primary{
+	background-color: #FAF5E1!important;
+}
+
+.bl{
+	border-left: 1px solid #3D3D3D !important;
+}
+
+.bl-s{
+	border-left: 2px solid #dadddd !important;
+}

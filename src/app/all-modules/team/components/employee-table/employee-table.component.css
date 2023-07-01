@@ -1,0 +1,9 @@
+.table {
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    overflow: hidden;
+}
+
+/*.table th {*/
+/*    background-color: #efc427;*/
+/*}*/

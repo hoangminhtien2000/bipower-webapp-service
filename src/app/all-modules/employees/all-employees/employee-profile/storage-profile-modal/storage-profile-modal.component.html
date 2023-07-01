@@ -1,0 +1,421 @@
+<div [id]="idModal" class="modal custom-modal fade" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"EmployeeProfile.fileUpload.title" | translate}}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body form-scroll">
+                <form (ngSubmit)="onClickButtonSave()" [formGroup]="storageProfileForm" novalidate>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.profile" | translate}} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['profileFile']?.touched 
+                                        || storageProfileForm.controls['profileFile']?.dirty) 
+                                        && storageProfileForm.controls['profileFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['profileFile']?.value">
+                                            {{ storageProfileForm.controls['profileFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['profileFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('profileFile')" target="_blank" rel="">{{getFileName('profileFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="profileFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['profileFile']?.touched 
+                                        || storageProfileForm.controls['profileFile']?.dirty) 
+                                        && storageProfileForm.controls['profileFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['profileFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.required" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['profileFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['profileFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['profileFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['profileFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">CV <span
+                                                class="text-danger">*</span></label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['cvFile']?.touched 
+                                        || storageProfileForm.controls['cvFile']?.dirty) 
+                                        && storageProfileForm.controls['cvFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['cvFile']?.value">
+                                            {{ storageProfileForm.controls['cvFile']?.value?.name | substr:maxLength  }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['cvFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('cvFile')" target="_blank" rel="">{{getFileName('cvFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="cvFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['cvFile']?.touched 
+                                        || storageProfileForm.controls['cvFile']?.dirty) 
+                                        && storageProfileForm.controls['cvFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['cvFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requiredCv" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['cvFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['cvFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['cvFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['cvFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.identityBefore" | translate}}<span class="text-danger">*</span></label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['identityFrontSideFile']?.touched 
+                                        || storageProfileForm.controls['identityFrontSideFile']?.dirty) 
+                                        && storageProfileForm.controls['identityFrontSideFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['identityFrontSideFile']?.value">
+                                            {{ storageProfileForm.controls['identityFrontSideFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['identityFrontSideFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('identityFrontSideFile')" target="_blank" rel="">{{getFileName('identityFrontSideFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="identityFrontSideFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['identityFrontSideFile']?.touched 
+                                        || storageProfileForm.controls['identityFrontSideFile']?.dirty) 
+                                        && storageProfileForm.controls['identityFrontSideFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['identityFrontSideFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireFrontSide" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['identityFrontSideFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['identityFrontSideFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['identityFrontSideFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['identityFrontSideFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.identityAfter" | translate}}<span class="text-danger">*</span></label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['identityBackSideFile']?.touched 
+                                        || storageProfileForm.controls['identityBackSideFile']?.dirty) 
+                                        && storageProfileForm.controls['identityBackSideFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['identityBackSideFile']?.value">
+                                            {{ storageProfileForm.controls['identityBackSideFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['identityBackSideFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('identityBackSideFile')" target="_blank" rel="">{{getFileName('identityBackSideFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="identityBackSideFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['identityBackSideFile']?.touched 
+                                        || storageProfileForm.controls['identityBackSideFile']?.dirty) 
+                                        && storageProfileForm.controls['identityBackSideFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['identityBackSideFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireBackSide" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['identityBackSideFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['identityBackSideFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['identityBackSideFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['identityBackSideFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.avatarImage" | translate}}  <span
+                                                class="text-danger">*</span></label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['avatarFile']?.touched 
+                                        || storageProfileForm.controls['avatarFile']?.dirty) 
+                                        && storageProfileForm.controls['avatarFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['avatarFile']?.value">
+                                            {{ storageProfileForm.controls['avatarFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['avatarFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('avatarFile')" target="_blank" rel="">{{getFileName('avatarFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="avatarFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['avatarFile']?.touched 
+                                        || storageProfileForm.controls['avatarFile']?.dirty) 
+                                        && storageProfileForm.controls['avatarFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['avatarFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireAvatar" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['avatarFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['avatarFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['avatarFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['avatarFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.cvEnligsh" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['cvEnFile']?.touched 
+                                        || storageProfileForm.controls['cvEnFile']?.dirty) 
+                                        && storageProfileForm.controls['cvEnFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['cvEnFile']?.value">
+                                            {{ storageProfileForm.controls['cvEnFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['cvEnFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('cvEnFile')" target="_blank" rel="">{{getFileName('cvEnFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="cvEnFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['cvEnFile']?.touched 
+                                        || storageProfileForm.controls['cvEnFile']?.dirty) 
+                                        && storageProfileForm.controls['cvEnFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['cvEnFile']?.errors?.required">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireCvEnFile" | translate}}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['cvEnFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['cvEnFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['cvEnFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['cvEnFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.syls" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['sylsFile']?.touched 
+                                        || storageProfileForm.controls['sylsFile']?.dirty) 
+                                        && storageProfileForm.controls['sylsFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['sylsFile']?.value">
+                                            {{ storageProfileForm.controls['sylsFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['sylsFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('sylsFile')" target="_blank" rel="">{{getFileName('sylsFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="sylsFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['sylsFile']?.touched 
+                                        || storageProfileForm.controls['sylsFile']?.dirty) 
+                                        && storageProfileForm.controls['sylsFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['sylsFile']?.errors?.required">
+                                                <small class="text-danger">Bắt buộc upload phiếu thông tin cá nhân</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['sylsFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['sylsFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['sylsFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['sylsFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.graduaDegree" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['graduateDegreeFile']?.touched 
+                                        || storageProfileForm.controls['graduateDegreeFile']?.dirty) 
+                                        && storageProfileForm.controls['graduateDegreeFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['graduateDegreeFile']?.value">
+                                            {{ storageProfileForm.controls['graduateDegreeFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['graduateDegreeFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('graduateDegreeFile')" target="_blank" rel="">{{getFileName('graduateDegreeFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="graduateDegreeFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['graduateDegreeFile']?.touched 
+                                        || storageProfileForm.controls['graduateDegreeFile']?.dirty) 
+                                        && storageProfileForm.controls['graduateDegreeFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['graduateDegreeFile']?.errors?.required">
+                                                <small class="text-danger">Bắt buộc upload phiếu thông tin cá nhân</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['graduateDegreeFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['graduateDegreeFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['graduateDegreeFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['graduateDegreeFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.certificate" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['certificateFile']?.touched 
+                                        || storageProfileForm.controls['certificateFile']?.dirty) 
+                                        && storageProfileForm.controls['certificateFile']?.invalid">
+                                        <div *ngIf="!storageProfileForm.controls['certificateFile']?.value">
+                                            <!-- <a [href]="domainUrl + getFilePath('certificateFile')" target="_blank" rel="">{{getFileName('certificateFile')}}</a> -->
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input multiple-file class="form-control w-100 h-100 p-0" formControlName="certificateFile" type="file" multiple>
+                                            </span>
+                                        </div>
+                                        <ng-container *ngFor="let certificate of getListFile('certificateFile')">
+                                            <div>{{ certificate?.fileName | substr:maxLength }} <i (click)="removeFileAt(certificate.id)" class="fa fa-trash text-danger"></i></div>
+                                        </ng-container>
+                                        <span *ngIf="storageProfileForm.controls['certificateFile']?.value">
+                                            <ng-container *ngFor="let certificate of storageProfileForm.controls['certificateFile']?.value; let i = index;">
+                                                <div class="text-info">{{ certificate?.name | substr:maxLength }} <i (click)="removeFileAt(i, 'certificateFile')" class="fa fa-trash text-danger"></i></div>
+                                            </ng-container>
+                                        </span>
+                                        <div *ngIf="(storageProfileForm.controls['certificateFile']?.touched 
+                                        || storageProfileForm.controls['certificateFile']?.dirty) 
+                                        && storageProfileForm.controls['certificateFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['certificateFile']?.errors?.required">
+                                                <small class="text-danger">Bắt buộc upload phiếu thông tin cá nhân</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['certificateFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['certificateFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['certificateFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['certificateFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.socialInsurance" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['socialInsuranceFile']?.touched 
+                                        || storageProfileForm.controls['socialInsuranceFile']?.dirty) 
+                                        && storageProfileForm.controls['socialInsuranceFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['socialInsuranceFile']?.value">
+                                            {{ storageProfileForm.controls['socialInsuranceFile']?.value?.name | substr:maxLength }}
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['socialInsuranceFile']?.value">
+                                            <a [href]="domainUrl + getFilePath('socialInsuranceFile')" target="_blank" rel="">{{getFileName('socialInsuranceFile')}}</a>
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input single-file class="form-control w-100 h-100 p-0" formControlName="socialInsuranceFile" type="file">
+                                            </span>
+                                        </div>
+                                        <div *ngIf="(storageProfileForm.controls['socialInsuranceFile']?.touched 
+                                        || storageProfileForm.controls['socialInsuranceFile']?.dirty) 
+                                        && storageProfileForm.controls['socialInsuranceFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['socialInsuranceFile']?.errors?.required">
+                                                <small class="text-danger">Bắt buộc upload phiếu thông tin cá nhân</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['socialInsuranceFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['socialInsuranceFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['socialInsuranceFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['socialInsuranceFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{"EmployeeProfile.fileUpload.dependencyPerson" | translate}}</label>
+                                        <div class="position-relative fileuploadcustom">
+                                            <span class="form-control fileupload w-100" type="text"
+                                            [class.is-invalid]="(storageProfileForm.controls['dependentPersonFile']?.touched 
+                                        || storageProfileForm.controls['dependentPersonFile']?.dirty) 
+                                        && storageProfileForm.controls['dependentPersonFile']?.invalid">
+                                        <span *ngIf="storageProfileForm.controls['dependentPersonFile']?.value">
+                                            <ng-container *ngFor="let dependent of storageProfileForm.controls['dependentPersonFile']?.value">
+                                                <!-- {{ dependent?.name | substr:maxLength }} -->
+                                            </ng-container>
+                                        </span>
+                                        <div *ngIf="!storageProfileForm.controls['dependentPersonFile']?.value">
+                                            <!-- <a [href]="domainUrl + getFilePath('dependentPersonFile')" target="_blank" rel="">{{getFileName('dependentPersonFile')}}</a> -->
+                                        </div>
+                                        </span>
+                                            <span class="position-absolute file-upload-custom">
+                                                <input multiple-file class="form-control w-100 h-100 p-0" formControlName="dependentPersonFile" type="file" multiple>
+                                            </span>
+                                        </div>
+                                        <ng-container *ngFor="let dependent of getListFile('dependentPersonFile')">
+                                            <div>{{ dependent?.fileName | substr:maxLength }} <i (click)="removeFileAt(dependent.id)" class="fa fa-trash text-danger"></i></div>
+                                        </ng-container>
+                                        <span *ngIf="storageProfileForm.controls['dependentPersonFile']?.value">
+                                            <ng-container *ngFor="let dependent of storageProfileForm.controls['dependentPersonFile']?.value; let i = index;">
+                                                <div class="text-info">{{ dependent?.name | substr:maxLength }} <i (click)="removeFileAt(i, 'dependentPersonFile')" class="fa fa-trash text-danger"></i></div>
+                                            </ng-container>
+                                        </span>
+                                        <div *ngIf="(storageProfileForm.controls['dependentPersonFile']?.touched 
+                                        || storageProfileForm.controls['dependentPersonFile']?.dirty) 
+                                        && storageProfileForm.controls['dependentPersonFile']?.invalid">
+                                            <div *ngIf="storageProfileForm.controls['dependentPersonFile']?.errors?.required">
+                                                <small class="text-danger">Bắt buộc upload phiếu thông tin cá nhân</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['dependentPersonFile']?.errors?.messageMaxSize">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireMaxSize" | translate: {value: storageProfileForm.controls['dependentPersonFile']?.errors?.maxSize } }}</small>
+                                            </div>
+                                            <div *ngIf="storageProfileForm.controls['dependentPersonFile']?.errors?.messageType">
+                                                <small class="text-danger">{{"EmployeeProfile.fileUpload.requireTypeFile" | translate: {value: storageProfileForm.controls['dependentPersonFile']?.errors?.types } }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section mb-3 d-flex justify-content-end">
+                        <button class="btn btn-secondary submit-btn btnCancel" type="button"
+                            (click)="onCancel()">{{"EmployeeProfile.cancel" | translate}}</button>
+                        <button class="btn btn-primary submit-btn btnSave" type="button"
+                            (click)="onClickButtonSave()">{{"EmployeeProfile.save" | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->

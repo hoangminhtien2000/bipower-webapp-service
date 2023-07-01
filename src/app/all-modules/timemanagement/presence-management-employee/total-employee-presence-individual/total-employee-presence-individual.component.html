@@ -1,0 +1,76 @@
+<div class="row mg-totalbox">
+    <div class="col card mlr-box d-flex h-100" style="min-height: 80px; justify-content: center">
+        <div class="row box-total-onleave p-box-text">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{'timeManager.totalEmployee.total_working_days_at_the_company' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4 d-flex" style="justify-content: center; align-items: center">
+                <div class="text-center">
+                    <span class="font-number"
+                          *ngIf="this.workingStatus">{{this.workingStatus.ATTENDANCE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box d-flex h-100" style="min-height: 80px; justify-content: center">
+        <div class="row box-total-onleave p-box-text">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{'timeManager.totalEmployee.Total_remote_working_days' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4 d-flex" style="justify-content: center; align-items: center">
+                <div class="text-center">
+                    <span class="font-number" *ngIf="this.workingStatus">{{this.workingStatus.REMOTE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box d-flex h-100" style="min-height: 80px; justify-content: center">
+        <div class="row box-total-onleave p-box-text">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{'timeManager.totalEmployee.Total_onsite_working_days' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4 d-flex" style="justify-content: center; align-items: center">
+                <div class="text-center">
+                    <span class="font-number" *ngIf="this.workingStatus">{{this.workingStatus.ONSITE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col card mlr-box d-flex h-100" style="min-height: 80px; justify-content: center">
+        <div class="row box-total-onleave p-box-text">
+            <div class="col-8 br-vertical-text-box d-flex items-center">
+                <div>
+                    <span class="font-text">{{'timeManager.totalEmployee.Total_days_off' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4 d-flex " style="justify-content: center; align-items: center">
+                <div class="text-center">
+                    <span class="font-number" *ngIf="this.workingStatus">{{this.workingStatus.LEAVE}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col mlr-box card d-flex h-100" style="min-height: 80px; justify-content: center">
+        <div class="row box-total-onleave p-box-text">
+            <div class="col-8 br-vertical-text-box">
+                <div>
+                    <span class="font-text">{{'timeManager.totalEmployee.Total_overtime_hours' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-4 d-flex" style="justify-content: center; align-items: center">
+                <div class="text-center">
+                    <span class="font-number" *ngIf="this.workingStatus">{{this.workingStatus.OVERTIME}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

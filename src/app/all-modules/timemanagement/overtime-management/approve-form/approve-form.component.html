@@ -1,0 +1,21 @@
+<div>
+    <div class="modal-header">
+        <div *ngIf="this.title" class="header-content">
+           {{this.title}}
+        </div>
+        <div *ngIf="!this.title" class="header-content">
+            {{'workingOvertime.approveForm.confirmApproveInfo' | translate}}
+        </div>
+        <button type="button" class="close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        {{ viewContent ? viewContent : ('workingOvertime.approveForm.approveFor' | translate) + (value ? value : " ") + ('workingOvertime.approveForm.registerFormOvertime' | translate)}}
+    </div>
+    <div class="submit-section d-flex justify-content-end p-3">
+        <button class="btn btn-secondary btnCancel m-r-5" type="button" (click)="closeModal()">{{'workingOvertime.btn.cancel' | translate}}</button>
+        <button class="btn btn-secondary btnSave m-r-5" type="button" (click)="onSave()">{{'workingOvertime.btn.confirm' | translate}}</button>
+    </div>
+</div>

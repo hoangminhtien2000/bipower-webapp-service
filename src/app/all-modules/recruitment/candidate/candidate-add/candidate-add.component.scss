@@ -1,0 +1,67 @@
+@import "~src/style/kit/color";
+@import "../styles/common";
+
+.content {
+  padding: 30px;
+}
+.width-auto{
+  width: auto;
+}
+.dataTables_info{
+  padding-top: 0.85rem;
+}
+.text-error{
+  color: #dc3545;
+  font-size: 16px;
+}
+.error-fullname{
+  margin-top: -10px;
+}
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error{
+  font-size: 14px;
+}
+.white-space-wrap{
+  white-space: pre-wrap;
+}
+.scroll-body-dialog{
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.delete-candidate {
+  position: relative;
+  transform: translateY(40%);
+}
+
+:host ::ng-deep .p-multiselect {
+  width: 100%;
+}
+
+
+.btnCancel {
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #EFC427;
+  color: #535453;
+  margin-right: 8px;
+}
+
+.btnSave {
+  background: #EFC427;
+  border-radius: 4px;
+  color: #535453;
+}
+
+.btnCancel:focus {
+	background: #EFC427;
+}
+.btnCancel:hover {
+	background: #EFC427;
+}
+
+.row-title {
+  color: black;
+}

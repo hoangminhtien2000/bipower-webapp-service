@@ -1,0 +1,199 @@
+.content {
+  padding: 30px;
+}
+
+.pt-32 {
+  padding-top: 32px;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.dataTables_info {
+  padding-top: 0.85rem;
+}
+
+.text-error {
+  color: #dc3545;
+  font-size: 16px;
+}
+
+.error-fullname {
+  margin-top: -10px;
+}
+
+/* #candidateList tr.odd td.dataTables_empty{
+	display: none!important;
+} */
+.text-error {
+  font-size: 14px;
+}
+
+.employee-status-aprroved {
+  color: #85AA75 !important;
+}
+
+.employee-status-pending {
+  color: #DFB002 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.employee-text-left {
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.customBold {
+  color: #252929;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-style: none !important;
+}
+
+tr.mat-header-row.cdk-header-row {
+  background-color: #EFC427 !important;
+}
+
+.alg-center {
+  text-align: center;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pd-24 {
+  padding: 24px;
+}
+
+.width-201 {
+  width: 201px;
+}
+
+.h-74 {
+  height: 74px;
+  padding: 13%;
+}
+
+.pt-30 {
+  padding-top: 30px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.pt-1 {
+  padding-top: 1%;
+}
+
+.float-left {
+  float: left;
+}
+
+.pr-24 {
+  padding-right: 24px;
+}
+
+.boxBlue {
+  width: 20px;
+  height: 20px;
+  background: #1B8FC3;
+  border-radius: 4px;
+}
+
+.boxGreen {
+  width: 20px;
+  height: 20px;
+  background: #85AA75;
+  border-radius: 4px;
+}
+
+.boxOrange {
+  width: 20px;
+  height: 20px;
+  background: #DFB002;
+  border-radius: 4px;
+}
+
+.boxRed {
+  width: 20px;
+  height: 20px;
+  background: #DF5245;
+  border-radius: 4px;
+}
+
+.pr-8 {
+  padding-right: 8px;
+}
+
+.pl-16 {
+  padding-left: 16px;
+}
+
+.ptd-42 {
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+
+.text-title-tabs {
+  font-size: 20px;
+}
+
+.nav-link {
+  color: #252929;
+}
+
+:host ::ng-deep .nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #efc427 !important;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom-color: #efc427 !important;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #efc427 !important;
+}
+
+.presence-status-onsite {
+  color: #DFB002;
+}
+
+.presence-status-remote {
+  color: #1B8FC3;
+}
+
+.presence-status-ot {
+  color: #8E18C6;
+}
+
+.presence-status-leave {
+  color: #DF5245;
+}
+
+.presence-status-attendance {
+  color: #85AA75;
+}

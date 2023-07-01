@@ -1,0 +1,119 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'workingOvertime.table.title' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">{{'workingOvertime.table.title' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row bg-white mt-3 py-3">
+            <div class="col-sm-2" [formGroup]="searchForm">
+                <div class="form-group">
+                    <label></label>
+                    <div class="cal-icon">
+                        <input formControlName="year" [class.is-invalid]="(searchForm.controls['year']?.touched
+            || searchForm.controls['year']?.dirty) && searchForm.controls['year']?.invalid"
+                               (bsValueChange)="onChangeYear($event)"
+                               (keypress)="onKeypressYear($event)"
+                               (blur)="onBlurSearch('year')" class="form-control datetimepicker" type="text"
+                               bsDatepicker type="text" placeholder="YYYY" [bsConfig]="{ dateInputFormat: 'YYYY',
+                returnFocusToInput: true, 
+                minMode: 'year', 
+                isAnimated: true }">
+                        <div *ngIf="(searchForm.controls['year']?.touched
+            || searchForm.controls['year']?.dirty) && searchForm.controls['year']?.errors?.required"
+                             class="text-danger">
+                            {{'workingOvertime.table.requiredYear' | translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive-md text-center">
+                    <table id="workingOvertimeReportList"
+                           class="table table-striped table-hover custom-table dataTable mb-0 ">
+                        <thead>
+                        <tr>
+                            <th class="text-center">STT</th>
+                            <th class="text-left t-code">{{ "workingOvertime.table.code" | translate}}</th>
+                            <th class="text-left t-name">{{ "workingOvertime.table.fullName" | translate}}</th>
+                            <th class="text-center">T1</th>
+                            <th class="text-center">T2</th>
+                            <th class="text-center">T3</th>
+                            <th class="text-center">T4</th>
+                            <th class="text-center">T5</th>
+                            <th class="text-center">T6</th>
+                            <th class="text-center">T7</th>
+                            <th class="text-center">T8</th>
+                            <th class="text-center">T9</th>
+                            <th class="text-center">T10</th>
+                            <th class="text-center">T11</th>
+                            <th class="text-center">T12</th>
+                            <th class="t-hour">{{ "workingOvertime.table.totalHoursWoringOvertime" | translate }}</th>
+                            <th class="t-day">{{ "workingOvertime.table.totalDayWoringOvertime" | translate }}</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="listData.length == 0">
+                        <tr>
+                            <td colspan="17" class="text-center">{{'workingOvertime.table.emptyData' |translate}}</td>
+                        </tr>
+                        </tbody>
+                        <tbody *ngIf="listData.length > 0">
+                        <tr *ngFor="let item of listData;let i = index;">
+                            <td class="text-center">{{ (pageIndex > 1 ? pageIndex - 1 : 0) * pageSize + 1 + i }}</td>
+                            <td class="text-left t-code">{{item?.employeeCode}}</td>
+                            <td class="text-left t-name">{{item?.fullName}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 1)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 2)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 3)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 4)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 5)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 6)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 7)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 8)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 9)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 10)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 11)}}</td>
+                            <td class="text-center bg-primary">{{getTime(item, 12)}}</td>
+                            <td class="text-left t-hour">{{item?.totalHourInYear}}</td>
+                            <td class="text-left t-day">{{item?.totalDayInYear}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="listData.length > 0" class="d-flex justify-content-between pt-3">
+                        <ngb-pagination [(page)]="pageIndex" [boundaryLinks]="true" [maxSize]="5" [rotate]="true"
+                                        [pageSize]="pageSize" [collectionSize]="totalElements"
+                                        (pageChange)="pageChange($event)"></ngb-pagination>
+                        <div class="dataTables_length mb-2 width-auto">
+                            <div class="d-flex justify-content-around">
+                                <label *ngIf="isHidden" class="dataTables_info font-weight-normal bp-min-width-200-px"
+                                       id="pagination" for="">
+                                    {{'workingOvertime.paging.display' | translate}} {{ ((pageSize <= totalElements) ? pageSize : totalElements)
+                                    }} {{'workingOvertime.paging.total' | translate}} {{ totalElements }} </label>
+                                <div class="w-50 pt-2 m-l-5">
+                                    <label class="d-flex align-items-center font-weight-normal"
+                                           style="padding-top: 1px;">
+                                        <select [(ngModel)]="pageSize" id="dataTables_select_option"
+                                                (change)="onChangePageSize($event.target.value)"
+                                                class="custom-select width-auto custom-select-sm form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        <span>&nbsp; {{'workingOvertime.paging.record' | translate}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

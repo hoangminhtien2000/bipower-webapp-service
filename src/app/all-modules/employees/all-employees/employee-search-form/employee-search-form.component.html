@@ -1,0 +1,85 @@
+<div class="row bg-white py-5 mb-3 filter-row" [formGroup]="searchEmployeeForm" (keyup.enter)="keyupEnter($event)">
+    <div class="col-sm col-md">
+        <label class="focus-label">{{'employees.search.employee_code' | translate}}</label>
+        <div class="form-group focused">
+            <input type="text" class="form-control" (blur)="onBlurSearch('employeeCode')" autofocus
+                   formControlName="employeeCode" placeholder="{{'employees.search.ph_employee_code' | translate}}"
+                   maxlength="20"
+                   [class.invalid]="(searchEmployeeForm.controls['employeeCode'].dirty || searchEmployeeForm.controls['employeeCode'].touched) &&
+                searchEmployeeForm.controls['employeeCode'].invalid">
+        </div>
+        <div *ngIf="searchEmployeeForm.controls['employeeCode']?.errors?.maxlength">
+            <small class="text-danger">{{'employees.search.maxlength_employee_code' | translate}}</small>
+        </div>
+    </div>
+    <div class="col-sm col-md">
+        <label class="focus-label">{{'employees.search.employee_name' | translate}}</label>
+        <div class="form-group focused">
+            <input type="text" class="form-control" (blur)="onBlurSearch('fullName')" autofocus
+                   formControlName="fullName" placeholder="{{'employees.search.ph_employee_name' | translate}}"
+                   maxlength="200"
+                   [class.invalid]="(searchEmployeeForm.controls['fullName'].dirty || searchEmployeeForm.controls['fullName'].touched) &&
+            searchEmployeeForm.controls['fullName'].invalid">
+        </div>
+        <div *ngIf="searchEmployeeForm.controls['fullName']?.errors?.maxlength">
+            <small class="text-danger">{{ "employees.search.maxlength_employee_name" | translate}}</small>
+        </div>
+    </div>
+    <div class="col-sm col-md">
+        <label class="focus-label">{{'employees.search.company_email' | translate}}</label>
+        <div class="form-group focused">
+            <input type="text" class="form-control" (blur)="onBlurSearch('companyEmail')" autofocus
+                   formControlName="companyEmail" placeholder="{{'employees.search.ph_company_email' | translate}}"
+                   maxlength="100"
+                   [class.invalid]="(searchEmployeeForm.controls['companyEmail'].dirty || searchEmployeeForm.controls['companyEmail'].touched) &&
+            searchEmployeeForm.controls['companyEmail'].invalid">
+        </div>
+        <div *ngIf="searchEmployeeForm.controls['companyEmail']?.errors?.maxlength">
+            <small class="text-danger">{{'employees.search.maxlength_company_email' | translate}}</small>
+        </div>
+    </div>
+    <div class="col-sm col-md">
+        <label class="focus-label">Team</label>
+        <div class="form-group select-focus">
+            <select class="form-select form-control"
+                    formControlName="teamId" (keypress)="onKeypress($event)">
+                <option value="">{{'employees.search.select_team' | translate}}</option>
+                <option [value]="team.id" *ngFor="let team of teams;let i = index;">{{team.teamName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm col-md">
+        <label class="focus-label">{{'employees.search.position' | translate}}</label>
+        <div class="form-group select-focus">
+            <select class="form-select form-control"
+                    formControlName="position" (keypress)="onKeypress($event)">
+                <option value="">{{'employees.search.select_position' | translate}}</option>
+                <option [value]="position.code" *ngFor="let position of positionList;let i = index;">{{position.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm col-md">
+        <label class="focus-label">{{'employees.search.status' | translate}}</label>
+        <div class="form-group select-focus">
+            <select class="form-select form-control"
+                    formControlName="status" (keypress)="onKeypress($event)">
+                <option value="">{{'employees.search.select_status' | translate}}</option>
+                <option [value]="status.code"
+                        *ngFor="let status of EMPLOYEE_STATUS;let i = index;">{{status.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-end mb-3">
+        <div class="col-sm-12 col-md-2 pb-16">
+            <button class="btn btn-success w-100 btnOT" tabindex="0"
+               (click)="onClickBtnSearch()">{{'employees.btn.search' | translate}}</button>
+        </div>
+        <div class="col-sm-12 col-md-2 pb-16" *ngIf="canExportEmployee()">
+            <a class="btn btn-success w-100" tabindex="0"
+               (click)="onClickExport()">Export </a>
+        </div>
+        <div class="col-sm-12 col-md-2 add-btn-ot" *ngIf="canImportEmployee()">
+            <a class="btn add-btn w-100 btnOT" tabindex="0" (click)="onClickImport()">Import</a>
+        </div>
+    </div>
+</div>

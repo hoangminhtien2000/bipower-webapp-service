@@ -1,0 +1,107 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+#deploy folder
+
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/web/dist
+
+
+
+# dependencies
+node_modules
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+/node_modules
+node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.directory
+
+# Optional npm cache directory
+.npm
+
+#yarn
+yarn.lock
+
+# Optional eslint cache
+.eslintcache
+
+# deploy
+/deploy/web
+deploy/web
+
+# history
+.history
+/bccs3-web-app.iml
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+/.angular/
+
+/bin
+/dev
+/etc
+/home
+/lib
+/lib64
+/opt
+/proc
+/root
+/run
+/sbin
+/sys
+/usr
+/var
+
+
+
+#angular
+.angular/*
+package-lock.json
+
+/src/environments/*

@@ -1,0 +1,9 @@
+<div>
+    <div class="bi-loading-wrap" *ngIf="loading" [style.z-index]="zIndex">
+        <div class="bi-loading-overlay">
+            <p-progressSpinner
+                    *ngIf="loading"></p-progressSpinner>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,281 @@
+<div [formGroup]="formTeam">
+
+    <div class="page-header">
+        <h3 class="page-title">{{'TEAM.TITLE.TEAM_MANAGEMENT' | translate}}</h3>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a routerLink="../">{{'TEAM.TITLE.LIST_TEAM' | translate}}</a>
+            </li>
+            <li class="breadcrumb-item active">{{'TEAM.TITLE.INFO_TEAM' | translate}}</li>
+        </ul>
+    </div>
+
+    <div class="card" *ngIf="canEdit">
+        <div class="row card-body">
+            <div class="col-12 col-md-6 mb-3">
+                <label class="require-label">
+                    {{'TEAM.TITLE.NAME' | translate}}
+                </label>
+                <div>
+                    <input type="text"
+                           formControlName="name"
+                           pInputText style="width: 100%">
+                    <app-control-error-message
+                            [showError]="formTeam.get('name').invalid && formTeam.get('name').touched"
+                            [errors]="formTeam.get('name').errors"
+                            [field]="'TEAM.TITLE.LIST_TEAM' | translate"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+                <label class="require-label">
+                    {{'TEAM.TITLE.TYPE' | translate}}
+                </label>
+                <div>
+                    <p-dropdown [style]="{width: '100%'}"
+                                formControlName="type"
+                                [placeholder]="'TEAM.PLACEHOLDER.INPUT_TYPE' | translate"
+                                [options]="teamTypeOption"
+                                optionLabel="name"
+                                [showClear]="false"
+                    ></p-dropdown>
+                    <app-control-error-message
+                            [showError]="formTeam.get('type').invalid && formTeam.get('type').touched"
+                            [errors]="formTeam.get('type').errors"
+                            [field]="'TEAM.TITLE.TYPE' | translate"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3" *ngIf="isProduction">
+                <label class="require-label">
+                    {{'TEAM.TITLE.PO' | translate}}
+                </label>
+                <div>
+                    <p-dropdown [style]="{width: '100%'}"
+                                [options]="POOptions"
+                                [showClear]="false"
+                                [filter]="true"
+                                optionLabel="display"
+                                [placeholder]="'TEAM.PLACEHOLDER.INPUT_PO' | translate"
+                                formControlName="po"
+                    ></p-dropdown>
+                    <app-control-error-message
+                            [showError]="formTeam.get('po').invalid && formTeam.get('po').touched"
+                            [errors]="formTeam.get('po').errors"
+                            field="PO"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+                <label class="require-label">
+                    {{'TEAM.TITLE.TEAM_LEAD' | translate}}
+                </label>
+                <div>
+                    <p-dropdown [style]="{width: '100%'}"
+                                [options]="teamLeadOptions"
+                                [showClear]="false"
+                                [filter]="true"
+                                optionLabel="display"
+                                [placeholder]="'TEAM.PLACEHOLDER.INPUT_TEAM_LEAD' | translate"
+                                formControlName="teamLead">
+                    </p-dropdown>
+                    <app-control-error-message
+                            [showError]="formTeam.get('teamLead').invalid && formTeam.get('teamLead').touched"
+                            [errors]="formTeam.get('teamLead').errors"
+                            [field]="'TEAM.TITLE.TEAM_LEAD' | translate"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3" *ngIf="isProduction">
+                <label class="require-label">
+                    {{'TEAM.TITLE.DOMAIN' | translate}}
+                </label>
+                <div>
+                    <p-multiSelect
+                        #domainSelect
+                        appChipSelectItem
+                        [style]="{width: '100%'}"
+                        [options]="domainOptions"
+                        [showToggleAll]="false"
+                        optionLabel="name"
+                        formControlName="domain"
+                        (onPanelHide)="groupDomain()"
+                        [placeholder]="'TEAM.PLACEHOLDER.INPUT_DOMAIN' | translate">
+                        <ng-template pTemplate="selectedItems" let-data>
+                            <div *ngFor="let option of data" class="multiselect-chip">
+                                {{option.name}}
+                            </div>
+                            <div *ngIf="!data || data.length == 0">
+                                {{domainSelect.placeholder}}
+                            </div>
+                        </ng-template>
+                        <p-footer>
+                            <div class="p-multiselect-items">
+                                <div class="p-multiselect-item" (click)="openCreateTechDialog('CANDIDATE_DOMAIN')">
+                                    {{'TEAM.TITLE.OTHER' | translate}}
+                                </div>
+                            </div>
+                        </p-footer>
+                    </p-multiSelect>
+                    <app-control-error-message
+                            [field]="'TEAM.TITLE.DOMAIN' | translate"
+                            [errors]="formTeam.get('domain').errors"
+                            [showError]="formTeam.get('domain').invalid && formTeam.get('domain').touched"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3" *ngIf="isProduction">
+                <label class="require-label">
+                    {{'TEAM.TITLE.TECH' | translate}}
+                </label>
+                <div>
+                    <p-multiSelect
+                        #techSelect
+                        appChipSelectItem
+                        [style]="{width: '100%'}"
+                        [options]="techOptions"
+                        [showToggleAll]="false"
+                        optionLabel="name"
+                        [placeholder]="'TEAM.PLACEHOLDER.INPUT_TECH' | translate"
+                        (onPanelHide)="groupTech()"
+                        formControlName="tech">
+                        <ng-template pTemplate="selectedItems" let-data>
+                            <div *ngFor="let option of data" class="multiselect-chip">
+                                {{option.name}}
+                            </div>
+                            <div *ngIf="!data || data.length == 0">
+                                {{techSelect.placeholder}}
+                            </div>
+                        </ng-template>
+                        <p-footer>
+                            <div class="p-multiselect-items">
+                                <div class="p-multiselect-item" (click)="openCreateTechDialog('TECHNOLOGY')">
+                                    {{'TEAM.TITLE.OTHER' | translate}}
+                                </div>
+                            </div>
+                        </p-footer>
+                    </p-multiSelect>
+                    <app-control-error-message
+                            [field]="'TEAM.TITLE.TECH' | translate"
+                            [errors]="formTeam.get('tech').errors"
+                            [showError]="formTeam.get('tech').invalid && formTeam.get('tech').touched"
+                    ></app-control-error-message>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.PROJECT' | translate}}</label>
+                <div>
+                        <textarea pInputTextarea class="form-control"
+                                  maxlength="500"
+                                  [placeholder]="'TEAM.PLACEHOLDER.INPUT_PROJECT' | translate"
+                                  formControlName="project"></textarea>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.CUSTOMER' | translate}}</label>
+                <div>
+                        <textarea pInputTextarea class="form-control"
+                                  maxlength="500"
+                                  [placeholder]="'TEAM.PLACEHOLDER.INPUT_CUSTOMER' | translate"
+                                  formControlName="customer"></textarea>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <label>{{'TEAM.TITLE.DESCRIPTION' | translate}}</label>
+                <div>
+                    <textarea pInputTextarea formControlName="description"
+                              [style]="{width: '100%'}"
+                              [maxLength]="500"
+                              [placeholder]="'TEAM.PLACEHOLDER.INPUT_DESCRIPTION' | translate"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="!canEdit"><!--read only template-->
+        <div class="row card-body">
+            <div class="col-12 col-md-4 mb-3">
+                <label>{{'TEAM.TITLE.NAME' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('name').value}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <label>{{'TEAM.TITLE.TYPE' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('type').value?.name}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.PROJECT' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('project').value}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.PO' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('po').value?.display}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <label>{{'TEAM.TITLE.TEAM_LEAD' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('teamLead').value?.display}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.CUSTOMER' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('customer').value}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.DOMAIN' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{serializeItemArrayData(formTeam.get('domain').value)}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3" *ngIf="isProduction">
+                <label>{{'TEAM.TITLE.TECH' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{serializeItemArrayData(formTeam.get('tech').value)}}</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <label>{{'TEAM.TITLE.DESCRIPTION' | translate}}</label>
+                <div>
+                    <div class="readonly-block">{{formTeam.get('description').value}}</div>
+                </div>
+            </div>
+        </div>
+    </div><!--read only template-->
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title my-0">
+                {{'TEAM.TITLE.LIST_MEMBER' | translate}}
+            </h5>
+            <app-employee-table
+                    [po]="poSelected"
+                    [editable]="canEdit"
+                    [roleList]="roleList"
+                    [employeeList]="employeeList"
+                    (showEmployeeInfo)="openEmployeeInfoDialog($event)"
+            ></app-employee-table>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-primary hightlight-focus" routerLink="../">
+            {{'TEAM.BUTTON.CANCEL' | translate}}
+        </button>
+        <button class="btn btn-outline-primary mx-2 hightlight-focus" (click)="openHistoryDialog()">
+            {{'TEAM.BUTTON.HISTORY' |translate}}
+        </button>
+        <button *ngIf="canEdit" class="btn btn-primary hightlight-focus" (click)="openConfirmSave()">
+            {{'TEAM.BUTTON.SAVE' | translate}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+.selector-wrap {
+    display: flex;
+    flex-direction: row;
+}

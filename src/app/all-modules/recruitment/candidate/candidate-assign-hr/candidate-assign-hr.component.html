@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <strong>{{'candidate.assign_hr.title' | translate}}</strong>
+    <div class="sidebar-act-icon pull-right">
+        <span aria-label="Close" (click)="closeModal()">
+            <i class="fa fa-times cursor-pointer" aria-hidden="true"></i>
+        </span>
+    </div>
+</div>
+
+<div class="modal-body">
+    <label class="form-control-label control-label">{{'candidate.assign_hr.choose' | translate}}</label>
+    <strong class="form-control-label control-label"> {{numberHR}} </strong>
+    <label class="form-control-label control-label">{{'candidate.title.candidate' | translate}}</label>
+    <div class="mt-3">
+        <form [formGroup]="assignHRForm">
+            <formly-form [model]="assignHRModel" [fields]="assignHRFields" [form]="assignHRForm"></formly-form>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btnCancel btn-primary submit-btn"
+            (click)="cancelAssignHR()">{{'candidate.btn.cancel' | translate}}</button>
+    <button type="button" class="btn btnSave btn-primary submit-btn"
+            (click)="saveAssignHR()">{{'candidate.btn.confirm' | translate}}</button>
+</div>
+
+<app-common-dialog #confirmDialog (confirmAction)="acceptSave()"></app-common-dialog>

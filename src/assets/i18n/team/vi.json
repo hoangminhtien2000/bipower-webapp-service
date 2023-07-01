@@ -1,0 +1,119 @@
+{
+  "TEAM": {
+    "TITLE": {
+      "OTHER": "Khác",
+      "LIST_TEAM": "Danh sách nhóm",
+      "INFO_TEAM": "Thông tin nhóm",
+      "TEAM_MANAGEMENT": "Quản lý nhóm",
+      "NAME": "Tên nhóm",
+      "TYPE": "Loại nhóm",
+      "TECH": "Công nghệ",
+      "DOMAIN": "Domain",
+      "PO": "PO",
+      "TEAM_LEAD": "Team lead",
+      "PROJECT": "Dự án",
+      "CREATE_NEW_TEAM": "Thêm nhóm mới",
+      "DESCRIPTION": "Mô tả",
+      "CUSTOMER": "Khách hàng",
+      "TOTAL_EMPLOYEE": "Tổng nhân viên",
+      "TOTAL_SALARY": "Tổng chi phí lương",
+      "TOTAL_PRODUCTIVITY": "Tổng năng suất",
+      "AVG_PRODUCTIVITY": "Năng suất trung bình tháng",
+      "NO_DATA": "Không có dữ liệu",
+      "LIST_MEMBER": "Danh sách thành viên",
+      "CONFIRM_NAVIGATE": "Xác nhận chuyển hướng",
+      "CONFIRM_EDIT": "Xác nhận sửa thông tin",
+      "CONFIRM_EDIT_CONTENT": "Bạn có chắc chắn muốn sửa thông tin nhóm không?",
+      "CONFIRM_DELETE": "Xác nhận xoá",
+      "CONFIRM_DELETE_CONTENT": "Bạn có chắc chắn muốn xoá nhóm không?",
+      "CONFIRM_NAVIGATE_CONTENT": "Thông tin nhóm chưa được lưu. Bạn có muốn quay lại màn hình tìm kiếm danh sách nhóm không?",
+      "ADD_OTHER_TECH": "Thêm công nghệ khác",
+      "OTHER_TECH": "Công nghệ khác",
+      "ADD_OTHER_DOMAIN": "Thêm domain khác",
+      "OTHER_DOMAIN": "Domain khác",
+      "EMPLOYEE_INFO": "Thông tin nhân viên",
+      "EMPLOYEE_CODE": "Mã nhân viên",
+      "EMPLOYEE_NAME": "Họ tên nhân viên",
+      "GENDER": "Giới tính",
+      "BIRTH_DATE": "Ngày sinh",
+      "PHONE": "Điện thoại",
+      "EMAIL_COMPANY": "Email công ty",
+      "POSITION": "Vị trí",
+      "YEAR_EXP": "Số năm kinh nghiệm",
+      "HISTORY_TEAM_CHANGE": "Lịch sử thay đổi thông tin nhóm",
+      "CHANGED_DATE": "Ngày thay đổi",
+      "LIST_CHANGE": "Danh sách thay đổi",
+      "USER_CHANGE": "Người thay đổi",
+      "ACTION": "Hành động",
+      "CHANGE_DETAIL": "Chi tiết thay đổi",
+      "CHANGE_CONTENT": "Nội dung thay đổi",
+      "OLD_VALUE": "Giá trị cũ",
+      "NEW_VALUE": "Giá trị mới"
+    },
+    "UNIT": {
+      "PERSON": "Người",
+      "VND": "VND",
+      "MM_SPRINT": "MM/Sprint",
+      "MM_MONTH": "MM/Tháng",
+      "MM_PERSON": "MM/Người"
+    },
+    "PLACEHOLDER": {
+      "INPUT_PO": "Chọn PO",
+      "INPUT_NAME": "Nhập tên nhóm",
+      "INPUT_TYPE": "Chọn loại nhóm",
+      "INPUT_TECH": "Chọn công nghệ",
+      "INPUT_DOMAIN": "Chọn domain",
+      "INPUT_PROJECT": "Nhập dự án",
+      "INPUT_CUSTOMER": "Nhập khách hàng",
+      "INPUT_TEAM_LEAD": "Chọn team lead",
+      "INPUT_DESCRIPTION": "Nhập mô tả giới thiệu về team từ link Wiki",
+      "OTHER_DOMAIN": "Nhập domain",
+      "OTHER_TECH": "Nhập công nghệ",
+      "INPUT_ROLE": "Chọn vai trò"
+    },
+    "BUTTON": {
+      "SEARCH": "Tìm kiếm",
+      "ADD_NEW": "Thêm mới",
+      "SAVE": "Lưu",
+      "DELETE": "Xoá",
+      "CANCEL": "Huỷ",
+      "HISTORY": "Lịch sử",
+      "YES": "Đồng ý",
+      "CLOSE": "Đóng"
+    },
+    "TABLE": {
+      "STT": "STT",
+      "TEAM": "Tên nhóm",
+      "TYPE": "Loại nhóm",
+      "TECH": "Công nghệ",
+      "DOMAIN": "Domain",
+      "SUM_SALARY": "Tổng chi phí lương\n(VND)",
+      "SUM_PRODUCTIVITY": "Tổng năng suất\n(MM/Tháng)",
+      "SUM_EMPLOYEE": "Tổng số nhân viên",
+      "AVG_PRODUCTIVITY": "Năng suất bình quân\n(MM/Tháng)",
+      "EMPLOYEE_CODE": "Mã nhân viên",
+      "EMPLOYEE_NAME": "Tên nhân viên",
+      "ROLE": "Vai trò",
+      "EFFORT": "Nỗ lực (%)",
+      "PRODUCTIVITY": "Năng suất\n(MM/Tháng)",
+      "ACTION": "Hành động"
+    },
+    "VALIDATE": {
+      "required": "không được để trống.",
+      "maxlength": "không được vượt quá {{requiredLength}} ký tự."
+    },
+    "TOOLTIP": {
+      "DELETE": "Xoá",
+      "CANNOT_DELETE_PO": "Không thể xoá PO"
+    },
+    "MESSAGE": {
+      "EMPLOYEE_EXISTED": "Nhân viên đã tồn tại"
+    },
+    "DATA": {
+      "NO_DATA": "Không có dữ liệu"
+    },
+    "FILE": {
+      "FILE_CV": "FILE CV"
+    }
+  }
+}

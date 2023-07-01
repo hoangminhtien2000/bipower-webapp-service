@@ -1,0 +1,123 @@
+{
+  "workingOvertime": {
+    "btn": {
+      "sendApprove": "Send approve",
+      "approve": "Approve",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "save": "Save",
+      "search": "Search",
+      "confirm": "Confirm",
+      "summaryTable": "Summary table",
+      "send": "Send",
+      "register": "Register",
+      "saveAndSendApprove": "Save and send approve"
+    },
+    "management":{
+      "overtimeManagement": "Overtime management",
+      "timekeepingManagement": "Timekeeping management",
+      "totalOvertime": "Total overtime is",
+      "registerCode": "Register code",
+      "team": "Team",
+      "requestCode": "Request code",
+      "projectName": "Project name",
+      "employeeName": "Employee name",
+      "registerDate": "Register date",
+      "overtimeWorkingHours": "Overtime working hours",
+      "status": "Status",
+      "recordNotFound": "Record not found"
+    },
+    "addOrEdit": {
+      "fromTime": "From Time",
+      "toTime": "To Time",
+
+      "detailRegisterOvertime": "Detail of register to work overtime",
+      "registerOvertime":"Register to work overtime",
+      "requestCode": "Request code",
+      "phRequestCode": "Enter request code",
+      "requestCodeRequired": "Request code cannot be empty",
+      "requestCodeMaxlength": "Request code cannot be enter more than 20 characters",
+      "requestCodeTypeTextNumber": "Request code can allows alphanumeric",
+
+      "projectName": "Project name",
+      "phProjectName": "Enter project name",
+      "projectNameRequired": "Project name cannot be empty",
+      "projectNameMaxlength": "Project name cannot be enter more than 200 characters",
+
+      "overtimeReason": "Overtime reason",
+      "phOvertimeReason": "Enter overtime reason",
+      "overtimeReasonRequired": "Overtime reason cannot be empty",
+      "overtimeReasonTypeTextNumber": "Overtime reason cannot be enter more than 500 characters",
+
+      "startTime": "Start time",
+      "startTimeRequired": "Start time cannot be empty",
+      "startTimeValid": "Start time must not be less than 7 days and must be in this month",
+
+      "endTime": "End time",
+      "endTimeRequired": "End time cannot be empty",
+      "endTimeValid": "End time must not be less than 7 days and must be in this month",
+      "endTimeStartTime": "End time must be longer than start time",
+      "validateOT": "Register OT only from 17h30 to 8h tomorrow",
+
+      "biggestSevenDays": "The registration period should not exceed 7 days from the current date.",
+      "smallThanSevenDays": "The registration period should not be less than 7 days from the current date.",
+      "blank": "Time from now cannot be left blank.",
+      "holidayTimeRule": "Hourly value from now to now must be outside office hours (8:00-17:30).",
+      "startSmallThanEnd": "The value from now on must not exceed the value up to now.",
+      "noPass1": "The value from now to now is not less than 1 hour.",
+      "noPass3": "The value between now and now should not exceed 3 hours.",
+      "noPass8": "The value between now and now should not exceed 8 hours."
+
+    },
+    "approveForm": {
+      "confirmApproveInfo": "Confirm approve overtime work infomation",
+      "approveFor": "Are you sure approve the information for ",
+      "registerFormOvertime": " overtime register form"
+    },
+    "rejectForm": {
+      "rejectApproveOvertimeInfo": "Reject approve overtime work information",
+      "rejectReason": "Reject reason",
+      "rejectReasonRequired": "Reject reason cannot be empty",
+      "rejectReasonMaxlength": "Reject reason cannot be enter more than 500 characters"
+    },
+    "searchForm": {
+      "team": "Team",
+      "phTeam": "Select team",
+
+      "requestCode": "Request code",
+      "phRequestCode": "Enter request code",
+      "requestCodeMaxlength": "Request code cannot be enter more than 20 characters",
+
+      "projectName" : "Project name",
+      "phProjectName": "Enter project name",
+      "projectNameMaxlength": "Project name cannot be enter more than 200 characters",
+
+      "employeeName": "Employee name",
+      "phEmployeeName": "Enter employee name",
+      "employeeNameMaxlength": "Employee name cannot be enter more than 100 characters",
+      "registerDate":"Register date",
+
+      "status":"Status",
+      "selectStatus": "Select status",
+      "create": "Create",
+      "sendRequest": "Send request",
+      "leaderApprove": "Leader approve",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "paging": {
+      "display": "Display",
+      "total": "total",
+      "record": "Record"
+    },
+    "table": {
+      "title": "Table report working overtime",
+      "code": "Employee Code",
+      "fullName": "Full name",
+      "totalDayWoringOvertime": "Total days working overtime",
+      "totalHoursWoringOvertime": "Total hours working overtime",
+      "requiredYear": "Year cannot be empty",
+      "emptyData": "Empty data"
+    }
+  }
+}

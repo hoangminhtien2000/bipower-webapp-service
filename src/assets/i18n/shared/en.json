@@ -1,0 +1,69 @@
+{
+  "shared": {
+    "common-dialog": {
+      "error": {
+        "btn-closed": "Close",
+        "btn-confirm": "Try again",
+        "title": "Notice of error"
+      },
+      "info": {
+        "btn-closed": "Close",
+        "btn-confirm": "",
+        "title": "Inform"
+      },
+      "success": {
+        "btn-closed": "Ok",
+        "title": "Success"
+      },
+      "warning": {
+        "btn-active": "Activate",
+        "btn-closed": "Cancel",
+        "btn-confirm": "Continue",
+        "title": "Warning"
+      }
+    },
+    "dashboard": "Dashboard",
+    "pageNotFound": "Page not found. Back",
+    "permissionDenied": "Permission denied",
+    "validation": {
+      "notGreaterThan": "can not be greater then",
+      "notGreaterThanPresent": "can not be greater then present",
+      "notLessThan": "can not be less then",
+      "notGreterThan30Day": "Duration entered should not be > 30 days"
+    },
+    "stockType": {
+      "shop": "Shop",
+      "staff": "Staff"
+    },
+    "stockStatus": {
+      "sold": "Sold",
+      "instock": "In stock",
+      "waitImport": "Waiting import stock",
+      "connected": "Connected",
+      "locked": "Locked",
+      "available": "Available",
+      "waitImportConfirm": "Wait import confirm"
+    },
+    "connectionStatus": {
+      "connected": "Connected"
+    },
+    "transactionStatus": {
+      "exported": "Exported",
+      "imported": "Imported"
+    },
+    "cardLoadedStatus": {
+      "loaded": "Loaded",
+      "notLoaded": "Not loaded"
+    },
+    "stateCard": {
+      "available": "Available",
+      "locked": "Locked",
+      "loaded": "Loaded",
+      "inactive": "Inactive"
+    },
+    "errorMessage": {
+      "invalidPattern": "{{field}} has invalid pattern",
+      "maxlengthExceeded": "{{field}} only accept max length of {{number}} character"
+    }
+  }
+}

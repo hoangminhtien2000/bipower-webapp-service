@@ -1,0 +1,8 @@
+:host ::ng-deep ng-select.ng-invalid.ng-touched .ng-select-container {
+    border-color: #dc3545;
+}
+
+:host ::ng-deep .ng-select .ng-select-container .ng-value-container .ng-input>input {
+    padding: 0;
+    height: auto;
+}

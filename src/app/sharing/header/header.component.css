@@ -1,0 +1,33 @@
+.dropdown-item {
+    padding: 1rem 1rem !important;
+}
+
+.menu-item {
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #EFC427;
+}
+
+
+.menu-item:focus {
+    background-color: #EFC427;
+}
+
+.menu-item:hover {
+    background-color: #EFC427;
+}
+
+.logo-none {
+    display: none !important;
+}
+
+.add-btn:hover,
+.add-btn:focus,
+.add-btn:active {
+    background-color: white;
+    border: 1px solid #ff851a;
+    color: #000000;
+}

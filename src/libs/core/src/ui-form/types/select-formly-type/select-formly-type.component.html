@@ -1,0 +1,6 @@
+<label class="form-control-label control-label">{{to.label}} <span *ngIf="to.required" span class="required-mark">*</span> </label>
+<select [class.is-invalid]="(formControl.dirty || formControl.touched) && formControl.invalid"
+        [compareWith]="compareFn" remove-wrapper class="form-control form-select {{to.class? to.class: ''}}" [formlyAttributes]="field" [formControl]="formControl" [tabindex]="to.tabindex || 0" (focus)="onFocus($event)" (blur)="onBlur($event)"   >
+  <option [ngValue]="null" selected>--{{ (to.noSelectText || 'common.select' | translate) }}--</option>
+  <option *ngFor="let item of to.options" [ngValue]="item.value">{{item.label}}</option>
+</select>

@@ -1,0 +1,7 @@
+{
+  "pagination": {
+    "display": "display",
+    "total": "total",
+    "record": "record"
+  }
+}

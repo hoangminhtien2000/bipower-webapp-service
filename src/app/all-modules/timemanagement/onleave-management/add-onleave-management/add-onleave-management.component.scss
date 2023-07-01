@@ -1,0 +1,123 @@
+//.form-scroll {
+//  height: 60vh;
+//}
+
+.header-bg {
+  background-color: #FAF5E1;
+  //width: 640px;
+  height: 60px;
+}
+
+.content-header {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  padding: 19px 0px 14px 0px;
+}
+
+.pb-32 {
+  padding-bottom: 32px;
+}
+
+.popUpTable {
+  // width: 640px;
+  //height: 612px;
+  background-color: #FFFFFF;
+}
+
+.pb-24 {
+  padding-bottom: 24px;
+}
+
+//.btn {
+//  padding: unset !important;
+//}
+
+
+.header-bg {
+  background-color: #FAF5E1;
+  /* width: 640px; */
+  height: 60px;
+}
+
+.content-header {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  padding: 19px 0px 14px 0px;
+}
+
+.pb-32 {
+  padding-bottom: 32px;
+}
+
+.popUpTable {
+  /* width: 640px; */
+  /* height: 612px; */
+  min-height: 612px;
+  background-color: #FFFFFF;
+}
+
+.modal-header {
+  background-color: #faf5e1;
+
+  button {
+    border-width: 0;
+    background: #faf5e1;
+    font-size: 20px;
+  }
+}
+
+.footer {
+  width: 100%;
+  margin: 0px !important;
+}
+
+.p-16 {
+  padding: 16px !important;
+}
+
+.w-100 {
+  width: 100% !important;
+  margin: 0px !important;
+}
+
+@media only screen and (min-width: 767.98px) {
+  .btnOT {
+    height: 100%;
+    //padding-top: 15%;
+  }
+  .add-btn-ot {
+    margin-left: 32px;
+  }
+}
+
+@media only screen and (min-width: 1238.98px) {
+  .btnOT {
+    height: none;
+    //padding-top: 12px;
+  }
+  .add-btn-ot {
+    margin-left: unset;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .pb-16 {
+    padding-bottom: 8px;
+  }
+}
+
+::ng-deep {
+  ngx-daterangepicker-material {
+    & {
+      .md-drppicker {
+        top: 50px !important;
+      }
+    }
+  }
+}

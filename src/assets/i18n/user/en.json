@@ -1,0 +1,42 @@
+{
+  "user": {
+    "btn": {
+      "save": "Save",
+      "confirm": "Confirm"
+    },
+    "title": {
+      "my_account": "Account Information",
+      "change_password": "Change password",
+      "forgot_password": "Forgot password",
+      "confirm_otp": "Confirm OTP",
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "model": {
+      "full_name": "Full name",
+      "otp": "OTP",
+      "phone": "Phone number",
+      "email": "Email",
+      "email_placeholder": "Enter email",
+      "password": "Password",
+      "password_placeholder": "Enter password",
+      "roles": "Roles",
+      "old_password": "Current password",
+      "old_password_placeholder": "Enter current password",
+      "new_password": "New password",
+      "new_password_placeholder": "Enter a new password",
+      "re_new_password": "Confirm new password",
+      "re_new_password_placeholder": "Enter confirm new password"
+    },
+    "otp": {
+      "placeholder": "Enter OTP",
+      "question": "Haven't received the OTP yet?",
+      "description": "Enter the 6-digit code sent to your email",
+      "resend_late": "Resend code later",
+      "resend": "Resend code"
+    },
+    "message": {
+      "login": "Incorrect username or password."
+    }
+  }
+}

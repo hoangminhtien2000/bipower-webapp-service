@@ -1,0 +1,70 @@
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <perfect-scrollbar [scrollIndicators]="false">
+            <div id="sidebar-menu" class="sidebar-menu">
+
+                <ul *ngIf="sidebarMenus.default">
+
+<!--                    <li class="menu-title">-->
+<!--                        <span>Main</span>-->
+<!--                    </li>-->
+<!--                    <li-->
+<!--                            class="submenu"-->
+<!--                            [ngClass]="{ active: urlComplete.mainUrl === 'dashboard' }"-->
+<!--                    >-->
+<!--                        <a-->
+<!--                                href="javascript:"-->
+<!--                                [ngClass]="{ subdrop: urlComplete.mainUrl === 'dashboard' }"-->
+<!--                        >-->
+<!--                            <i class="la la-dashboard"></i>-->
+<!--                            <span>Dashboard</span>-->
+<!--                            <span class="menu-arrow"></span>-->
+<!--                        </a>-->
+<!--                        <ul-->
+<!--                                style="display: none"-->
+<!--                                [ngStyle]="{-->
+<!--                display: urlComplete.mainUrl === 'dashboard' ? 'block' : 'none'-->
+<!--              }"-->
+<!--                        >-->
+<!--                            <li routerLink="/layout/dashboard/admin">-->
+<!--                                <a-->
+<!--                                        [ngClass]="{ active: urlComplete.subUrl === 'admin' }"-->
+<!--                                        href="javascript:"-->
+<!--                                >Admin Dashboard</a-->
+<!--                                >-->
+<!--                            </li>-->
+<!--                            <li routerLink="/layout/dashboard/employee">-->
+<!--                                <a-->
+<!--                                        [ngClass]="{ active: urlComplete.subUrl === 'employee' }"-->
+<!--                                        href="javascript:"-->
+<!--                                >Employee Dashboard</a-->
+<!--                                >-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+                    <ng-container *ngFor="let item of menu">
+                        <li class="submenu" [ngClass]="{ active: url.includes(item.url) || opening == item.objectId }">
+                            <a href="javascript:void(0)" (click)="toggleMenu(item.objectId)">
+                                <i class="{{item.iconUrl}}"></i>
+                                <span>{{item.name | translate}}</span>
+                                <span class="menu-arrow" [ngClass]="{'rotate-90': opening == item.objectId}"></span>
+                            </a>
+                            <ul [ngClass]="submenuClass(item.objectId)">
+                                <ng-container *ngFor="let childObject of item.childObjects">
+                                    <li routerLink="{{childObject.url}}">
+                                        <a [ngClass]="{ active: url.includes(childObject.url) }" href="javascript:">
+                                            {{childObject.name | translate}}
+                                        </a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </li>
+                    </ng-container>
+
+                </ul>
+            </div>
+        </perfect-scrollbar>
+    </div>
+</div>
+<!-- /Sidebar -->

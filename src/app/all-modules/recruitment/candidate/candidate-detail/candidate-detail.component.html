@@ -1,0 +1,42 @@
+<!-- Page Content -->
+<div class="content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'candidate.title.detail' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            routerLink="/layout/recruitment/candidate">{{'candidate.title.management' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'candidate.title.detail' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-header mb-3">
+        <div class="tab-step" [ngClass]="{'step-active': currentTab == 1}"
+             (click)="changeTab(1)">{{'recruitment.interview.common_infomation' | translate}}</div>
+        <div class="tab-step" [ngClass]="{'step-active': currentTab == 2}"
+             (click)="changeTab(2)">{{'recruitment.title.step_review_cv' | translate}}</div>
+        <div class="tab-step" [ngClass]="{'step-active': currentTab == 3}"
+             (click)="changeTab(3)">{{'recruitment.interview.step_title' | translate}}</div>
+        <div class="tab-step" [ngClass]="{'step-active': currentTab == 4}"
+             (click)="changeTab(4)">{{'candidate.interview.hiring_decisions' | translate}}</div>
+    </div>
+
+    <div *ngIf="currentTab == 1">
+        <app-general-info></app-general-info>
+    </div>
+    <div *ngIf="currentTab == 2">
+        <app-review-cv-tab [candidateInfo]="candidateInfo"></app-review-cv-tab>
+    </div>
+    <div *ngIf="currentTab == 3">
+        <app-interview-candidate-tab [candidateInfo]="candidateInfo"></app-interview-candidate-tab>
+    </div>
+    <div *ngIf="currentTab == 4">
+        <app-recruitment-decision-tab [candidateInfo]="candidateInfo"></app-recruitment-decision-tab>
+    </div>
+</div>
+

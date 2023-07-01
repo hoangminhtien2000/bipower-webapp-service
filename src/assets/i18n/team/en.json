@@ -1,0 +1,121 @@
+{
+  "TEAM": {
+    "TITLE": {
+      "OTHER": "Other",
+      "LIST_TEAM": "List team",
+      "INFO_TEAM": "Team info",
+      "TEAM_MANAGEMENT": "Team management",
+      "NAME": "Team name",
+      "TYPE": "Team type",
+      "TECH": "Technology",
+      "DOMAIN": "Domain",
+      "PO": "PO",
+      "TEAM_LEAD": "Team lead",
+      "PROJECT": "Project",
+      "CREATE_NEW_TEAM": "Add new team",
+      "DESCRIPTION": "Description",
+      "CUSTOMER": "Customer",
+      "TOTAL_EMPLOYEE": "Total employee",
+      "TOTAL_SALARY": "Total salary costs",
+      "TOTAL_PRODUCTIVITY": "Total productivity",
+      "AVG_PRODUCTIVITY": "Avg productivity of month",
+      "NO_DATA": "No data",
+      "LIST_MEMBER": "List member",
+      "CONFIRM_NAVIGATE": "Confirm navigate",
+      "CONFIRM_EDIT": "Confirm edit information",
+      "CONFIRM_EDIT_CONTENT": "Do you want to update team info?",
+      "CONFIRM_DELETE": "Confirm delete",
+      "CONFIRM_DELETE_CONTENT": "Do you want to delete team?",
+      "CONFIRM_NAVIGATE_CONTENT": "Team info not saved. Do you wan back to search team screen?",
+      "ADD_OTHER_TECH": "Add other technology",
+      "OTHER_TECH": "Other technology",
+      "ADD_OTHER_DOMAIN": "Add other domain",
+      "OTHER_DOMAIN": "Other domain",
+      "EMPLOYEE_INFO": "Employee info",
+      "EMPLOYEE_CODE": "Employee code",
+      "EMPLOYEE_NAME": "Full name",
+      "GENDER": "Gender",
+      "BIRTH_DATE": "Birthdate",
+      "PHONE": "Phone",
+      "EMAIL_COMPANY": "Company email",
+      "POSITION": "Position",
+      "YEAR_EXP": "Number of years of experience",
+      "HISTORY_TEAM_CHANGE": "Team change history",
+      "CHANGED_DATE": "Change date",
+      "LIST_CHANGE": "Change list",
+      "USER_CHANGE": "Changed user",
+      "ACTION": "Action",
+      "CHANGE_DETAIL": "Change detail",
+      "CHANGE_CONTENT": "Change content",
+      "OLD_VALUE": "Old value",
+      "NEW_VALUE": "New value"
+    },
+    "UNIT": {
+      "PERSON": "Person",
+      "VND": "VND",
+      "MM_SPRINT": "MM/Sprint",
+      "MM_MONTH": "MM/Month",
+      "MM_PERSON": "MM/Person"
+    },
+    "PLACEHOLDER": {
+      "INPUT_PO": "Input PO",
+      "INPUT_NAME": "Input team name",
+      "INPUT_TYPE": "Select team type",
+      "INPUT_TECH": "Select technology",
+      "INPUT_DOMAIN": "Select domain",
+      "INPUT_PROJECT": "Input project",
+      "INPUT_CUSTOMER": "Input customer",
+      "INPUT_TEAM_LEAD": "Select team lead",
+      "INPUT_DESCRIPTION": "Input description about team from wiki",
+      "OTHER_DOMAIN": "Input domain",
+      "OTHER_TECH": "Input technology",
+      "INPUT_ROLE": "Select role"
+
+    },
+    "BUTTON": {
+      "SEARCH": "Search",
+      "ADD_NEW": "Add new",
+      "SAVE": "Save",
+      "DELETE": "Delete",
+      "CANCEL": "Cancel",
+      "HISTORY": "History",
+      "YES": "Yes",
+      "CLOSE": "Close"
+    },
+    "TABLE": {
+      "STT": "STT",
+      "TEAM": "Team name",
+      "TYPE": "Team type",
+      "TECH": "Technology",
+      "DOMAIN": "Domain",
+      "SUM_SALARY": "Sum salary\n(VND)",
+      "SUM_PRODUCTIVITY": "Sum productivity\n(MM/Month)",
+      "SUM_EMPLOYEE": "Sum employee",
+      "AVG_PRODUCTIVITY": "Avg productivity\n(MM/Month)",
+      "EMPLOYEE_CODE": "Employee code",
+      "EMPLOYEE_NAME": "Employee name",
+      "ROLE": "Role",
+      "EFFORT": "Effort (%)",
+      "PRODUCTIVITY": "Productivity\n(MM/Month)",
+      "ACTION": "Action"
+    },
+    "VALIDATE": {
+      "required": "not empty.",
+      "maxlength": "max length is {{requiredLength}}."
+    },
+    "TOOLTIP": {
+      "DELETE": "Delete",
+      "CANNOT_DELETE_PO": "Can not delete PO"
+    },
+    "MESSAGE": {
+      "EMPLOYEE_EXISTED": "Employee existed"
+    },
+    "DATA": {
+      "NO_DATA": "No data"
+    },
+    "FILE": {
+      "FILE_CV": "FILE CV"
+    }
+
+  }
+}

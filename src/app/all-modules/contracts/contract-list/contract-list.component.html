@@ -1,0 +1,400 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'contract.title.list' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">{{'contract.title.list' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Page Header -->
+
+        <!-- Search Filter -->
+        <div class="row bg-white py-3 filter-row" [formGroup]="searchForm" novalidate>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.employee_code' | translate}}</label>
+                        <div class="form-group focused">
+                            <input
+                                    type="text"
+                                    class="form-control floating"
+                                    (input)="searchName($event.target.value)"
+                                    maxlength="50"
+                                    (blur)="onBlurSearch('employeeCode')"
+                                    (keypress)="onKeypress($event)"
+                                    [class.is-invalid]="(searchForm.controls['employeeCode']?.dirty ||
+                  searchForm.controls['employeeCode']?.touched) &&
+                searchForm.controls['employeeCode']?.invalid"
+                                    formControlName="employeeCode"
+                                    autofocus
+                                    tabindex="0"
+                                    (focusout)="rerender()"
+                                    placeholder="{{'contract.search.ph_employee_code' | translate}}"
+                            />
+                        </div>
+                        <div
+                                *ngIf="searchForm.get('employeeCode')?.errors?.maxlength"
+                                class="text-danger error-fullname"
+                        >
+                            {{'contract.search.maxlength_employee_code' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.employee_name' | translate}}</label>
+                        <div class="form-group focused">
+                            <input
+                                    type="text"
+                                    class="form-control floating"
+                                    (input)="searchName($event.target.value)"
+                                    maxlength="50"
+                                    (blur)="onBlurSearch('employeeName')"
+                                    (keypress)="onKeypress($event)"
+                                    [class.is-invalid]="
+                (searchForm.controls['employeeName']?.dirty ||
+                  searchForm.controls['employeeName']?.touched) &&
+                searchForm.controls['employeeName']?.invalid
+              "
+                                    formControlName="employeeName"
+                                    autofocus
+                                    tabindex="0"
+                                    (focusout)="rerender()"
+                                    placeholder="{{'contract.search.ph_employee_name' | translate}}"
+                            />
+                        </div>
+                        <div
+                                *ngIf="searchForm.get('employeeName')?.errors?.maxlength"
+                                class="text-danger error-fullname"
+                        >
+                            {{'contract.search.maxlength_employee_name' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.contract_code' | translate}}</label>
+                        <div class="form-group focused">
+                            <input
+                                    type="text"
+                                    class="form-control floating"
+                                    (input)="searchName($event.target.value)"
+                                    maxlength="30"
+                                    (blur)="onBlurSearch('contractCode')"
+                                    (keypress)="onKeypress($event)"
+                                    [class.is-invalid]="
+                (searchForm.controls['contractCode']?.dirty ||
+                  searchForm.controls['contractCode']?.touched) &&
+                searchForm.controls['contractCode']?.invalid"
+                                    formControlName="contractCode"
+                                    autofocus
+                                    tabindex="0"
+                                    (focusout)="rerender()"
+                                    placeholder="{{'contract.search.ph_contract_code' | translate}}"
+                            />
+                        </div>
+                        <div
+                                *ngIf="searchForm.get('contractCode')?.errors?.maxlength"
+                                class="text-danger error-fullname"
+                        >
+                            {{'contract.search.maxlength_contract_code' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.contract_type' | translate}}</label>
+                        <div class="form-group focused">
+                            <select
+                                    formControlName="contractType"
+                                    class="form-select form-control"
+                                    [class.is-invalid]="
+                (addContractForm.controls['contractType']?.dirty ||
+                  addContractForm.controls['contractType']?.touched) &&
+                addContractForm.controls['contractType']?.invalid">
+                                <option value="">{{'contract.search.select_contract_type' | translate}}</option>
+                                <option value="HDLD">{{'contract.search.formal_contract' | translate}}</option>
+                                <option value="HDTV">{{'contract.search.probation_contract' | translate}}</option>
+                                <option value="HDDV">{{'contract.search.collaborators_contract' | translate}}</option>
+                            </select>
+                            <div
+                                    *ngIf="
+                (addContractForm.controls['contractType']?.dirty ||
+                  addContractForm.controls['contractType']?.touched) &&
+                addContractForm.controls['contractType']?.errors?.required
+              "
+                                    class="text-danger error-info"
+                            >
+                                {{'contract.search.required_data_field' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.contract_status' | translate}}</label>
+                        <div class="form-group focused">
+                            <select
+                                    formControlName="status"
+                                    class="form-select form-control"
+                                    [class.is-invalid]="
+                (addContractForm.controls['status']?.dirty ||
+                  addContractForm.controls['status']?.touched) &&
+                addContractForm.controls['status']?.invalid
+              "
+                            >
+                                <option value="">{{'contract.search.select_contract_status' | translate}}</option>
+                                <option *ngFor="let item of contractStatuses"
+                                        [value]="item.value">{{item.key | translate}}</option>
+                            </select>
+                            <div
+                                    *ngIf="
+                (addContractForm.controls['status']?.dirty ||
+                  addContractForm.controls['status']?.touched) &&
+                addContractForm.controls['status']?.errors?.required
+              "
+                                    class="text-danger error-info"
+                            >
+                                {{'contract.search.required_data_field' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.created_date' | translate}}</label>
+                        <div class="form-group focused">
+                            <div class="cal-icon">
+                                <input
+                                        type="text"
+                                        class="form-control datetimepicker"
+                                        (blur)="onBlurSearch('createdDate')"
+                                        tabindex="0"
+                                        (keypress)="onKeypress($event)"
+                                        formControlName="createdDate"
+                                        placeholder="DD/MM/YYYY - DD/MM/YYYY"
+                                        [class.is-invalid]="(searchForm.controls['createdDate']?.touched ||
+                    searchForm.controls['createdDate']?.dirty) &&
+                  searchForm.controls['createdDate']?.invalid"
+                                        bsDaterangepicker
+                                        [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY',
+                  rangeInputFormat: 'DD/MM/YYYY',
+                  isAnimated: true,
+                  returnFocusToInput: true
+                }"
+                                />
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('createdDate')?.invalid"
+                            >
+                                {{ searchForm.get("createdDate").errors?.message }}
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('createdDate').errors?.rangeDate"
+                            >
+                                {{'contract.search.end_date_created_date' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.end_date' | translate}}</label>
+                        <div class="form-group focused">
+                            <div class="cal-icon">
+                                <input
+                                        type="text"
+                                        class="form-control datetimepicker"
+                                        (blur)="onBlurSearch('endDate')"
+                                        tabindex="0"
+                                        (keypress)="onKeypress($event)"
+                                        formControlName="endDate"
+                                        placeholder="DD/MM/YYYY - DD/MM/YYYY"
+                                        [class.is-invalid]="
+                  (searchForm.controls['endDate']?.touched ||
+                    searchForm.controls['endDate']?.dirty) &&
+                  searchForm.controls['endDate']?.invalid
+                "
+                                        bsDaterangepicker
+                                        [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY',
+                  rangeInputFormat: 'DD/MM/YYYY',
+                  isAnimated: true,
+                  returnFocusToInput: true
+                }"
+                                />
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('endDate')?.invalid"
+                            >
+                                {{ searchForm.get("endDate").errors?.message }}
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('endDate').errors?.rangeDate"
+                            >
+                                {{'contract.search.end_date_created_date' | translate}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{'contract.search.termination_date' | translate}}</label>
+                        <div class="form-group focused">
+                            <div class="cal-icon">
+                                <input
+                                        type="text"
+                                        class="form-control datetimepicker"
+                                        (blur)="onBlurSearch('terminationDate')"
+                                        tabindex="0"
+                                        (keypress)="onKeypress($event)"
+                                        formControlName="terminationDate"
+                                        placeholder="DD/MM/YYYY - DD/MM/YYYY"
+                                        [class.is-invalid]="
+                  (searchForm.controls['terminationDate']?.touched ||
+                    searchForm.controls['terminationDate']?.dirty) &&
+                  searchForm.controls['terminationDate']?.invalid
+                "
+                                        bsDaterangepicker
+                                        [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY',
+                  rangeInputFormat: 'DD/MM/YYYY',
+                  isAnimated: true,
+                  returnFocusToInput: true
+                }"
+                                />
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('terminationDate')?.invalid"
+                            >
+                                {{ searchForm.get("terminationDate").errors?.message }}
+                            </div>
+                            <div
+                                    class="text-error mt-1"
+                                    *ngIf="searchForm.get('terminationDate').errors?.rangeDate"
+                            >
+                                {{'contract.search.end_date_created_date' | translate}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end mb-3">
+                <div class="col-sm-12 col-md-2 " *ngIf="canSearchContract()">
+                    <a
+                            tabindex="0"
+                            class="btn btn-success w-100"
+                            (click)="onClickBtnSearch()"
+                    >
+                        {{'contract.btn.search' | translate}}
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-2 " *ngIf="canAddNewContract()">
+                    <a
+                            href="#"
+                            (click)="onClickShowModal(social_contract_modal)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add_contract"
+                            class="btn add-btn w-100"
+                    >{{'contract.btn.add' | translate}}
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="row bg-white mt-3 py-3">
+            <div class="col-md-12">
+                <h3>{{'contract.title.list' | translate}}</h3>
+                <div class="table-responsive-md text-center">
+                    <table id="contractList"
+                           class="table table-striped table-hover custom-table dataTable mb-0 "
+                    >
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th (click)="clickSortIcon(0)" [class]="getClassSort(0)"
+                                class="sorting text-left">{{'contract.list.employee_name' | translate}}</th>
+                            <th (click)="clickSortIcon(1)" [class]="getClassSort(1)"
+                                class="sorting text-left">{{'contract.list.contract_code' | translate}}</th>
+                            <th (click)="clickSortIcon(2)" [class]="getClassSort(2)"
+                                class="sorting text-left">{{'contract.list.created_date' | translate}}</th>
+                            <th (click)="clickSortIcon(3)" [class]="getClassSort(3)"
+                                class="sorting">{{'contract.list.contract_term' | translate}}</th>
+                            <th (click)="clickSortIcon(4)" [class]="getClassSort(4)"
+                                class="sorting">{{'contract.list.end_date' | translate}}</th>
+                            <th (click)="clickSortIcon(5)" [class]="getClassSort(5)"
+                                class="sorting">{{'contract.list.termination_date' | translate}}</th>
+                            <th (click)="clickSortIcon(6)" [class]="getClassSort(6)"
+                                class="sorting">{{'contract.list.contract_status' | translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngIf="lstContract?.length == 0">
+                            <td colspan="8" class="text-center">{{'contract.list.record_not_found' | translate}}</td>
+                        </tr>
+                        <tr *ngFor="let item of lstContract; let i = index">
+                            <td class="">
+                                {{ (pageIndex > 1 ? pageIndex - 1 : 0) * pageSize + 1 + i }}
+                            </td>
+                            <td class="text-left">
+                                {{item.employeeCode}} - {{item.employeeName}}
+                            </td>
+                            <td class="text-center">
+                                <span class="text-info pointer"
+                                      (click)="canSeeContractDetail() ? onClickEditShowModal(item.id, social_contract_modal) : false">{{ item.contractCode }}</span>
+                            </td>
+                            <td class="">
+                                {{item.startDate}}
+                            </td>
+                            <td class="">
+                                {{ item.contractTerm }}
+                            </td>
+                            <td class="">
+                                {{ item.endDate }}
+                            </td>
+                            <td class="">
+                                {{ item.contractTerminationDate }}
+                            </td>
+                            <td [class.contract-status-aprroved]="item.status == 'WAITING_APPROVE'"
+                                [class.contract-status-unaprroved]="item.status == 'UNAPPROVE'"
+                                [class.contract-status-effect]="item.status == 'EFFECT'"
+                                [class.contract-status-expired]="item.status == 'EXPIRED'"
+                                [class.contract-status-pending]="item.status == 'PENDING'">
+                                {{ getContractStatus(item.status) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="lstContract?.length > 0" class="d-flex justify-content-between pt-3">
+                        <ngb-pagination
+                                [(page)]="pageIndex"
+                                [boundaryLinks]="true"
+                                [maxSize]="5"
+                                [rotate]="true"
+                                [pageSize]="pageSize"
+                                [collectionSize]="totalElements" (pageChange)="pageChange($event)">
+                        </ngb-pagination>
+                        <div class="dataTables_length mb-2 width-auto">
+                            <div class="d-flex justify-content-around">
+                                <label *ngIf="isHidden" class="dataTables_info font-weight-normal bp-min-width-200-px" id="contractList_info" for="">
+                                    {{'contract.paging.display' | translate}} {{ ((pageSize <= totalElements) ? pageSize : totalElements) }}  {{'contract.paging.total' | translate}} {{ totalElements }}
+                                </label>
+                                <div class="w-50 pt-2 m-l-5">
+                                    <label class="d-flex align-items-center font-weight-normal"
+                                           style="padding-top: 1px;">
+                                        <select [(ngModel)]="pageSize" id="dataTables_select_option"
+                                                (change)="onChangePageSize($event.target.value)"
+                                                class="custom-select width-auto custom-select-sm form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        <span>&nbsp; {{'contract.paging.record' | translate}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-contract-modal [idModal]="social_contract_modal" [value]="selectedContract"
+                                [employeeCode]="selectedContract?.employeeCode" (onSubmit)="onSubmitContract($event)"
+                                (onApprove)="onApproveContract($event)"></app-contract-modal>

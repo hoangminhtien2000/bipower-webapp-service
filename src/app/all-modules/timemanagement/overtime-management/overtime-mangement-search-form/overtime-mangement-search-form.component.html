@@ -1,0 +1,115 @@
+<div class="row bg-white py-3 filter-row mb-3" [formGroup]="searchOtTime">
+    <div class="col-sm-12">
+        <div class="row">
+            <!--    Nhóm-->
+            <div class="col-sm-3" *ngIf="canSeeSearchDays()">
+                <label class="focus-label">{{'workingOvertime.searchForm.team' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control" name="Department" formControlName="department" [ngModel]="department">
+                        <option value="">{{'workingOvertime.searchForm.phTeam' | translate}}</option>
+                        <option [value]="dep.id"
+                                *ngFor="let dep of departmentList">{{dep.teamName}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Mã phiếu -->
+            <div class="col-sm-3" *ngIf="canSeeSearchDays()">
+                <label class="focus-label">{{'workingOvertime.searchForm.requestCode' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" class="form-control" (blur)="onBlurSearch('requestCode')" autofocus (keypress)="onKeypress($event)"
+                           formControlName="requestCode" placeholder="{{'workingOvertime.searchForm.phRequestCode' | translate}}" maxlength="20"
+                           [class.invalid]="(searchOtTime.controls['requestCode'].dirty || searchOtTime.controls['requestCode'].touched) &&
+            searchOtTime.controls['requestCode'].invalid">
+                </div>
+                <div *ngIf="searchOtTime.controls['requestCode']?.errors?.maxlength">
+                    <small class="text-danger">{{'workingOvertime.searchForm.requestCodeMaxlength' | translate}}</small>
+                </div>
+            </div>
+            <!--    Tên dự án-->
+            <div class="col-sm-3" *ngIf="canSeeSearchDays()">
+                <label class="focus-label">{{'workingOvertime.searchForm.projectName' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" class="form-control" (blur)="onBlurSearch('projectName')" autofocus (keypress)="onKeypress($event)"
+
+                           formControlName="projectName" placeholder="{{'workingOvertime.searchForm.phProjectName' | translate}}" maxlength="500"
+                           [class.invalid]="(searchOtTime.controls['projectName'].dirty || searchOtTime.controls['projectName'].touched) &&
+            searchOtTime.controls['projectName'].invalid">
+                </div>
+                <div *ngIf="searchOtTime.controls['projectName']?.errors?.maxlength">
+                    <small class="text-danger">{{'workingOvertime.searchForm.projectNameMaxlength' | translate}}</small>
+                </div>
+            </div>
+            <!--    Họ và tên-->
+            <div class="col-sm-3" *ngIf="canSeeSearchDays()">
+                <label class="focus-label">{{'workingOvertime.searchForm.employeeName' | translate}}</label>
+                <div class="form-group focused">
+                    <input type="text" class="form-control" (blur)="onBlurSearch('fullNameSearch')" autofocus
+                           placeholder="{{'workingOvertime.searchForm.phEmployeeName' | translate}}" maxlength="50" formControlName="fullNameSearch"
+                           (keypress)="onKeypress($event)"
+                           [class.invalid]="(searchOtTime.controls['fullNameSearch'].dirty || searchOtTime.controls['fullNameSearch'].touched) &&
+            searchOtTime.controls['fullNameSearch'].invalid">
+                </div>
+                <div *ngIf="searchOtTime.controls['fullNameSearch']?.errors?.maxlength">
+                    <small class="text-danger">{{'workingOvertime.searchForm.employeeNameMaxlength' | translate}}</small>
+                </div>
+            </div>
+            <!--Ngày đăng ký-->
+            <div class="col-sm-3">
+                <label>{{'workingOvertime.searchForm.registerDate' | translate}}</label>
+                <div class="form-group focused">
+                    <div class="cal-icon">
+                        <input
+                                type="text"
+                                class="form-control datetimepicker"
+                                (blur)="onBlurSearch('datePicker')"
+                                tabindex="0"
+                                formControlName="datePicker"
+                                (keypress)="onKeypress($event)"
+                                placeholder="DD/MM/YYYY - DD/MM/YYYY"
+                                [class.is-invalid]="
+                  (searchOtTime.controls['datePicker']?.touched ||
+                    searchOtTime.controls['datePicker']?.dirty) &&
+                  searchOtTime.controls['datePicker']?.invalid
+                "
+                                bsDaterangepicker
+                                [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY',
+                  rangeInputFormat: 'DD/MM/YYYY',
+                  isAnimated: true,
+                  returnFocusToInput: true
+                }"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!--    Trạng thái -->
+            <div class="col-sm-3">
+                <label class="focus-label">{{'workingOvertime.searchForm.status' | translate}}</label>
+                <div class="form-group select-focus">
+                    <select class="form-select form-control" name="status" formControlName="status"
+                            (ngModelChange)="onChangeStatus()" [(ngModel)]="status">
+                        <option *ngFor="let sta of overtimeStatuses" [selected]="sta.value == sta"
+                                value="{{sta.value}}">{{sta.key |translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--            div blank create space-->
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <!--BTN-->
+    <div class="row d-flex justify-content-end mb-3">
+        <div class="col-sm-12 col-md-2 pb-16">
+            <a class="btn btn-success w-100 btnOT" tabindex="0" (click)="onClickBtnSearch()">{{'workingOvertime.btn.search' | translate}}</a>
+        </div>
+        <div class="col-sm-12 col-md-2 pb-16" *ngIf="canSeeSummaryTable()">
+            <a class="btn btn-success w-100" tabindex="0"
+               (click)="onClickTable()">{{'workingOvertime.btn.summaryTable' | translate}}</a>
+        </div>
+        <div class="col-sm-12 col-md-2 add-btn-ot pb-16">
+            <a class="btn add-btn w-100 btnOT" tabindex="0" (click)="onClickAdd()">{{'workingOvertime.btn.register' | translate}}</a>
+        </div>
+    </div>
+    <!--BTN-->
+</div>

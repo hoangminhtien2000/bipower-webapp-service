@@ -1,0 +1,38 @@
+<div>
+    <div class="modal-header">
+        <div class="header-content">
+            <h3>{{'workingOvertime.rejectForm.rejectApproveOvertimeInfo' | translate}}</h3>
+        </div>
+        <button type="button" class="close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="row" [formGroup]="form">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">{{'workingOvertime.rejectForm.rejectReason' | translate}}<span class="text-danger">*</span></label>
+                    <textarea class="form-control" formControlName="note" name="" id="" rows="5"
+                        [class.is-invalid]="(form.controls['note'].touched 
+                        || form.controls['note'].dirty) 
+                        && form.controls['note'].invalid"
+                        (blur)="onBlur()"
+                    ></textarea>
+                    <div *ngIf="(form.controls['note'].touched 
+                    || form.controls['note'].dirty) && form.controls['note']?.errors?.required" class="text-danger">
+                    {{'workingOvertime.rejectForm.rejectReasonRequired' | translate}}
+                    </div>
+                    <div *ngIf="(form.controls['note'].touched 
+                    || form.controls['note'].dirty) && form.controls['note']?.errors?.maxlength" class="text-danger">
+                    {{'workingOvertime.rejectForm.rejectReasonMaxlength' | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-section d-flex justify-content-end p-3">
+        <button class="btn btn-secondary btnCancel m-r-5" type="button" (click)="closeModal()">{{'workingOvertime.btn.cancel' | translate}}</button>
+        <button class="btn btn-secondary btnSave m-r-5" type="button" (click)="onSave()">{{'workingOvertime.btn.confirm' | translate}}</button>
+    </div>
+</div>

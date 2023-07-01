@@ -1,0 +1,75 @@
+.table-result {
+    thead {
+        background: #F6F6F6;
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+
+        color: #707070;
+
+        th {}
+    }
+
+    tbody {
+        tr {
+            box-shadow: 0px 1px 0px #E8E8E8;
+
+            &:hover {
+                background: #4674EB;
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+            &.xfocus {
+                background: #4674EB;
+                color: #ffffff;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+::ng-deep .fu_remove {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+    cursor: pointer;
+    color: #4674eb;
+}
+
+.box-auto-complete {
+    &:focus {
+        outline: 1px solid rgba(95, 138, 195, 0.51);
+    }
+
+    .item {
+        padding: 10px;
+
+        &:not(first-of-type) {
+            box-shadow: 0px 1px 0px #E8E8E8;
+        }
+
+        &.focus {
+            background: aliceblue;
+            outline: 1px solid rgba(95, 138, 195, 0.51);
+        }
+
+        &.selected {
+            background: aliceblue;
+        }
+
+        &:hover {
+            background: aliceblue;
+            cursor: pointer;
+        }
+    }
+}

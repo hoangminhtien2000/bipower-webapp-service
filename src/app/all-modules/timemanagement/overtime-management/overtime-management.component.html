@@ -1,0 +1,151 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">{{'workingOvertime.management.overtimeManagement' | translate}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item ">{{'workingOvertime.management.timekeepingManagement' | translate}}</li>
+                    <li class="breadcrumb-item active customBold"> {{'workingOvertime.management.overtimeManagement' | translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter -->
+    <app-overtime-mangement-search-form (onSubmit)="onSearch($event)"></app-overtime-mangement-search-form>
+    <!-- /Search Filter -->
+
+    <!--    Table-->
+    <div class="row py-3 bg-white">
+        <span>{{'workingOvertime.management.totalOvertime' | translate}}: <b>{{totalTimeOfBatch}}</b></span>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover custom-table datatable dataTable text-center">
+                    <thead>
+                    <tr>
+                        <th class="alg-center" style="width: 5%;">{{'timeManager.list_in_modal.stt' | translate}}</th>
+                        <th class="alg-center" style="width: 5%;"><input [(ngModel)]="checkAll"
+                                                                         (click)="onClickAllCheckBox($event)"
+                                                                         type="checkbox" id="checkAll"></th>
+                        <!--                        <th class="alg-center"-->
+                        <!--                            style="width: 10%;">{{'workingOvertime.management.registerCode' | translate}}</th>-->
+                        <th class="alg-center" *ngIf="roleColumnLen()"
+                            style="width: 10%;">{{'workingOvertime.management.team' | translate}}</th>
+                        <th class="alg-center"
+                            style="width: 10%;">{{'workingOvertime.management.requestCode' | translate}}</th>
+                        <th class="alg-left"
+                            style="width: 10%;">{{'workingOvertime.management.projectName' | translate}}</th>
+                        <th class="alg-center" *ngIf="roleColumnLen()"
+                            style="width: 10%;">{{'workingOvertime.management.employeeName' | translate}}</th>
+                        <th class="alg-center"
+                            style="width: 10%;">{{'workingOvertime.management.registerDate' | translate}}</th>
+                        <th class="alg-center"
+                            style="width: 10%;">{{'workingOvertime.management.overtimeWorkingHours' | translate}}</th>
+                        <th class="alg-center" style="width: 10%"
+                            class="text-left">{{'workingOvertime.management.status' | translate}}</th>
+                        <th class="alg-center" style="width: 10%">Hành Động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngIf="lstData.length == 0">
+                        <td  [attr.colspan]="columnLen" 
+                            class="text-center">{{'workingOvertime.management.recordNotFound' | translate}}</td>
+                    </tr>
+                    <tr *ngFor="let row of lstData;let i = index">
+                        <td class="">{{ ((pageIndex > 1 ? pageIndex - 1 : 0) * pageSize + 1) + i }}</td>
+                        <td class="alg-center"><input [attr.disabled]="row.isDisabled ? true : null"
+                                                      (click)="onClickCheckBox(row)" [checked]="row.checked"
+                                                      type="checkbox"></td>
+                        <!--                        <td><span (click)="openDialogAddEdit(row)" class="text-info pointer">Mã PĐK {{row.id}}</span>-->
+                        <!--                        </td>-->
+                        <td class="text-center" *ngIf="roleColumnLen()">{{row.team}}</td>
+                        <td><span (click)="openDialogAddEdit(row)" class="text-info pointer">{{row.requestCode}}</span>
+                        </td>
+                        <td class="text-left">{{row.projectName}}</td>
+                        <td *ngIf="roleColumnLen()" class="text-left">{{row.fullName}}</td>
+                        <td>{{row.overtimeFromAt}} - {{row.overtimeToAt}}</td>
+                        <td>{{row.totalTime}}</td>
+                        <td class="text-left">{{getOverTimeStatus(row.status)}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li class="pointer-event">
+                                        <a class="dropdown-item" (click)="showUnSubscribe(row)">
+                                            {{'workingOnleave.btn.cancelRegister' | translate}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="lstData.length > 0" class="d-flex justify-content-between pt-32">
+                    <ngb-pagination
+                            [(page)]="pageIndex"
+                            [boundaryLinks]="true"
+                            [maxSize]="5"
+                            [rotate]="true"
+                            [pageSize]="pageSize"
+                            [collectionSize]="totalElements" 
+                            (pageChange)="pageChange($event)">
+                    </ngb-pagination>
+                    <div class="dataTables_length mb-2 width-auto">
+                        <div class="d-flex justify-content-around">
+                            <div *ngIf="isHidden" class="dataTables_info"></div>
+                            <label *ngIf="isHidden" class="dataTables_info font-weight-normal">
+                                {{'workingOvertime.paging.display' | translate}} {{ ((pageSize <= totalElements) ? pageSize : totalElements) }} {{'workingOvertime.paging.total' | translate}} {{ totalElements }}
+                            </label>
+                            <div class="w-50 pt-2 m-l-5">
+                                <label class="d-flex align-items-center font-weight-normal" style="padding-top: 1px;">
+                                    <select [(ngModel)]="pageSize" id="dataTables_select_option"
+                                            (change)="onChangePageSize($event.target.value)"
+                                            class="custom-select width-auto custom-select-sm form-control form-control-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="1000">All</option>
+                                    </select>
+                                    <span>&nbsp; {{'workingOvertime.paging.record' | translate}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="row d-flex justify-content-end mb-3 pt-32" *ngIf="lstData && lstData.length > 0">
+            <div class="col-sm-12 col-md-2">
+                <a class="btn btn-success w-100 btnOT" tabindex="0" (click)="denied()"
+                   *ngIf="canSeeBtn()">{{'workingOvertime.btn.reject' | translate}}</a>
+            </div>
+            <div class="col-sm-12 col-md-2" *ngIf="canSeeBtn()">
+                <a class="btn btn-success w-100 btnOT {{isRolePRM ? 'add-btn' : 'btn-success'}}" tabindex="0"
+                   (click)="approve()" *ngIf="canSeeBtn()">{{'workingOvertime.btn.approve' | translate}}</a>
+            </div>
+            <div class="col-sm-12 col-md-2 add-btn-ot" *ngIf="!canSeeBtn2()">
+                <a class="btn add-btn w-100" tabindex="0"
+                   (click)="approved()">{{'workingOvertime.btn.sendApprove' | translate}}</a>
+            </div>
+        </div>
+        <!--    Button-->
+
+    </div>
+    <!--    Table-->
+
+</div>
+<!-- /Page Content -->
